@@ -4,6 +4,7 @@ import 'package:bumbutpital/VideoPage/MainVideo.dart';
 import 'Questionare/MainQuestion.dart';
 import 'package:bumbutpital/Forum/MainForumPage.dart';
 import 'package:flutter/material.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class MainPage extends StatelessWidget {
   @override
@@ -44,14 +45,14 @@ class _ButtonWidgetState extends State<ButtonWidget> {
             },
             child: const Text('ContentPage'),
           ),
-          const SizedBox(height: 10),
+          SizedBox(height: 20),
           ElevatedButton(
             style: style,
             onPressed: () {
               Navigator.push(context,
                   MaterialPageRoute(builder: (context) => MainQuestion()));
             },
-            child: const Text('PHQ-9'),
+            child: Text('PHQ-9'),
           ),
           const SizedBox(height: 10),
           ElevatedButton(
@@ -83,5 +84,14 @@ class _ButtonWidgetState extends State<ButtonWidget> {
         ],
       ),
     );
+  }
+
+  _launchURL() async {
+    const url = 'https://flutter.io';
+    if (await canLaunch(url)) {
+      await launch(url);
+    } else {
+      throw 'Could not launch $url';
+    }
   }
 }
