@@ -7,9 +7,6 @@ class SplashScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text("Splash"),
-      ),
       backgroundColor: Color(0XFFECF2FF),
       body: Center(
         child: ElevatedButton(
@@ -24,21 +21,13 @@ class SplashScreen extends StatelessWidget {
   }
 }
 
-class Updated {}
-
-class Home extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-        body: Container(
-      //MediaQuery methods in use
-      width: MediaQuery.of(context).size.width,
-      height: MediaQuery.of(context).size.height * 0.4,
-    ));
-  }
-}
 // int hexColor(String color) {
 //   String newColor = '0xff' + color;
+
+//   newColor = newColor.replaceAll('#', '');
+//   int finalColor = int.parse(newColor);
+//   return finalColor;
+// }
 
 //   newColor = newColor.replaceAll('#', '');
 //   int finalColor = int.parse(newColor);

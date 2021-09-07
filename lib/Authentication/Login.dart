@@ -1,9 +1,8 @@
 // import 'package:bumbutpital/Authentication/SignUp.dart';
-
+// import 'package:bumbutpital/MainPage.dart';
 // import 'package:bumbutpital/SplashScreen.dart';
 // import 'package:bumbutpital/mainPage.dart';
 // import 'package:bumbutpital/SplashScreen.dart';
-import 'package:bumbutpital/mainPage.dart';
 import 'package:flutter/material.dart';
 
 class LoginPage extends StatefulWidget {
@@ -88,10 +87,7 @@ class _LoginPageState extends State<LoginPage> {
                   ),
                   Container(),
                   ElevatedButton(
-                    onPressed: () {
-                      Navigator.push(context,
-                          MaterialPageRoute(builder: (context) => MainPage()));
-                    },
+                    onPressed: onSubmit,
                     child: Text("Login"),
                   )
                 ],
