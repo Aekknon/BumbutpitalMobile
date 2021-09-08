@@ -3,6 +3,8 @@
 // import 'package:bumbutpital/SplashScreen.dart';
 // import 'package:bumbutpital/mainPage.dart';
 // import 'package:bumbutpital/SplashScreen.dart';
+import 'package:bumbutpital/Authentication/SignUp.dart';
+import 'package:bumbutpital/mainPage.dart';
 import 'package:flutter/material.dart';
 
 class LoginPage extends StatefulWidget {
@@ -38,7 +40,7 @@ class _LoginPageState extends State<LoginPage> {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: [
-                  SizedBox(height: 84),
+                  SizedBox(height: 50),
                   Container(
                     child: Text(
                       'Sign In',
@@ -48,13 +50,13 @@ class _LoginPageState extends State<LoginPage> {
                     ),
                     alignment: Alignment.center,
                   ),
-                  SizedBox(height: 24),
+                  SizedBox(height: 44),
                   _textField(
                     _email,
                     "Email",
                     Icon(Icons.email),
                   ),
-                  SizedBox(height: 10),
+                  SizedBox(height: 44),
                   _textField(
                     _password,
                     "Password",
@@ -85,11 +87,79 @@ class _LoginPageState extends State<LoginPage> {
                       ],
                     ),
                   ),
-                  Container(),
+                  SizedBox(height: 16),
                   ElevatedButton(
-                    onPressed: onSubmit,
+                    onPressed: () {
+                      Navigator.push(context,
+                          MaterialPageRoute(builder: (context) => MainPage()));
+                    },
+                    style: ElevatedButton.styleFrom(
+                        primary: Color(0XFFFE7940), fixedSize: Size(350, 50)
+                        // padding: EdgeInsets.symmetric(
+                        //     horizontal: 165, vertical: 15)
+                        ),
                     child: Text("Login"),
-                  )
+                  ),
+                  SizedBox(
+                    height: 16,
+                  ),
+                  Container(
+                    child: Text("-OR-"),
+                  ),
+                  SizedBox(
+                    height: 16,
+                  ),
+                  Container(
+                    child: Text('Sign in with'),
+                  ),
+                  SizedBox(height: 24),
+                  Container(
+                      child: ElevatedButton.icon(
+                    icon: Icon(
+                      Icons.mail_outline,
+                      color: Color(0XFF6367EA),
+                      size: 24.0,
+                    ),
+                    label: Text(
+                      'Sign in with Google account',
+                      style: TextStyle(color: Colors.black),
+                    ),
+                    onPressed: () {
+                      print('Pressed');
+                    },
+                    style: ElevatedButton.styleFrom(
+                      primary: Colors.white,
+                      fixedSize: Size(350, 50),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(8.0),
+                      ),
+                    ),
+                  )),
+                  SizedBox(height: 16),
+                  Container(
+                      child: InkWell(
+                    onTap: () {
+                      Navigator.push(context,
+                          MaterialPageRoute(builder: (context) => SignUp()));
+                    },
+                    child: Text(
+                      'Sign Up',
+                    ),
+                  )),
+                  SizedBox(height: 16),
+                  Container(
+                    child: Text("Don't have an Account?"),
+                  ),
+                  // ElevatedButton(
+                  //   onPressed: onSubmit,
+                  //   style: ElevatedButton.styleFrom(
+                  //       primary: Color(0XFFFFFFFF),
+                  //       fixedSize: Size(350, 50)),
+                  //   child: Text(
+                  //     "Sign in with Google account",
+                  //     style: TextStyle(color: Colors.black.withOpacity(0.8)),
+                  //   ),
+                  // ),
                 ],
               ),
             ),
