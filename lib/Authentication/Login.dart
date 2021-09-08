@@ -1,8 +1,3 @@
-// import 'package:bumbutpital/Authentication/SignUp.dart';
-// import 'package:bumbutpital/MainPage.dart';
-// import 'package:bumbutpital/SplashScreen.dart';
-// import 'package:bumbutpital/mainPage.dart';
-// import 'package:bumbutpital/SplashScreen.dart';
 import 'package:bumbutpital/Authentication/SignUp.dart';
 import 'package:bumbutpital/mainPage.dart';
 import 'package:flutter/material.dart';
@@ -20,7 +15,7 @@ class _LoginPageState extends State<LoginPage> {
   var isRemember = true;
 
   void onSubmit() {
-    // access controller value buy using _email.text
+    // access controller value by using _email.text
     // bla bla
   }
 
