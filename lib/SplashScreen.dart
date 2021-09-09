@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'Authentication/Login.dart';
 
-class SplashScreen extends StatelessWidget {
-  get backgroundColor => null;
+class SplashScreen extends StatefulWidget {
+  SplashScreen({Key? key}) : super(key: key);
 
   @override
   _SplashScreenState createState() => _SplashScreenState();
@@ -32,6 +32,7 @@ class _SplashScreenState extends State<SplashScreen> {
             width: 100,
             color: Colors.pink,
           ),
+          SizedBox(height: 20),
           Container(
               child: Text(
             'BUMBUTPITAL',
@@ -42,28 +43,3 @@ class _SplashScreenState extends State<SplashScreen> {
     );
   }
 }
-
-// int hexColor(String color) {
-//   String newColor = '0xff' + color;
-
-//   newColor = newColor.replaceAll('#', '');
-//   int finalColor = int.parse(newColor);
-//   return finalColor;
-// }
-
-//   newColor = newColor.replaceAll('#', '');
-//   int finalColor = int.parse(newColor);
-//   return finalColor;
-// }
-
-// class Home extends StatelessWidget {
-//   @override
-//   Widget build(BuildContext context) {
-//     return Scaffold(
-//         body: Container(
-//       //MediaQuery methods in use
-//       width: MediaQuery.of(context).size.width,
-//       height: MediaQuery.of(context).size.height * 0.4,
-//     ));
-//   }
-// }
