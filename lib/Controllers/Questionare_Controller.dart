@@ -8,7 +8,13 @@ class QuestionController extends GetxController {
 //   late AnimationController _animationController;
 //   late Animation _animation;
 //   Animation get animation => this._animation;
-  List<Question> _questions =
-      sample_data.map((question) => Question(id: question['id'])).toList();
+  // List<Question> _questions =
+  //     sample_data.map(
+  //       (question) => Question(
+  //         id: question['id'],
+  //         question : question['question'],
+  //         options: question['option'],
+  //         score:question['score'];
 // @override
+
 }
