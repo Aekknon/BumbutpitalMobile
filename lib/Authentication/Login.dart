@@ -89,17 +89,17 @@ class _LoginPageState extends State<LoginPage> {
                           MaterialPageRoute(builder: (context) => MainPage()));
                     },
                     style: ElevatedButton.styleFrom(
-                        primary: Color(0XFFFE7940), fixedSize: Size(350, 50)
-                        // padding: EdgeInsets.symmetric(
-                        //     horizontal: 165, vertical: 15)
-                        ),
+                        primary: Color(0XFFFE7940), fixedSize: Size(350, 50)),
                     child: Text("Login"),
                   ),
                   SizedBox(
                     height: 16,
                   ),
                   Container(
-                    child: Text("-OR-"),
+                    child: Text(
+                      "-OR-",
+                      style: TextStyle(color: Color(0XFF6367EA)),
+                    ),
                   ),
                   SizedBox(
                     height: 16,
@@ -145,16 +145,6 @@ class _LoginPageState extends State<LoginPage> {
                   Container(
                     child: Text("Don't have an Account?"),
                   ),
-                  // ElevatedButton(
-                  //   onPressed: onSubmit,
-                  //   style: ElevatedButton.styleFrom(
-                  //       primary: Color(0XFFFFFFFF),
-                  //       fixedSize: Size(350, 50)),
-                  //   child: Text(
-                  //     "Sign in with Google account",
-                  //     style: TextStyle(color: Colors.black.withOpacity(0.8)),
-                  //   ),
-                  // ),
                 ],
               ),
             ),

@@ -1,6 +1,4 @@
-import 'package:bumbutpital/Authentication/SignUp.dart';
 import 'package:bumbutpital/Questionare/MainQuestion.dart';
-import 'package:bumbutpital/mainPage.dart';
 import 'package:flutter/material.dart';
 
 class SignUp extends StatefulWidget {
@@ -11,8 +9,8 @@ class SignUp extends StatefulWidget {
 class _SignUpPageState extends State<SignUp> {
   final _email = TextEditingController();
   final _password = TextEditingController();
-  final _FullName = TextEditingController();
-  final _SurName = TextEditingController();
+  final _fullName = TextEditingController();
+  final _surName = TextEditingController();
   var isPasswordHidden = true;
   var isRemember = true;
 
@@ -50,12 +48,12 @@ class _SignUpPageState extends State<SignUp> {
                         ),
                         SizedBox(height: 39),
                         _textField(
-                          _FullName,
+                          _fullName,
                           "Full Name",
                         ),
                         SizedBox(height: 39),
                         _textField(
-                          _SurName,
+                          _surName,
                           "Surname",
                         ),
                         SizedBox(height: 39),
@@ -82,6 +80,9 @@ class _SignUpPageState extends State<SignUp> {
                                     builder: (context) => MainQuestion()));
                           },
                           style: ElevatedButton.styleFrom(
+                              shape: new RoundedRectangleBorder(
+                                borderRadius: new BorderRadius.circular(8.0),
+                              ),
                               primary: Color(0XFFFE7940),
                               fixedSize: Size(350, 50)),
                           child: Text("REGISTER"),
