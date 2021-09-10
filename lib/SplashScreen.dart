@@ -30,14 +30,15 @@ class _SplashScreenState extends State<SplashScreen> {
           Container(
             height: 100,
             width: 100,
-            color: Colors.pink,
+            child: Image.asset('asset/image/Bumbutpital Logo.png'),
           ),
           SizedBox(height: 20),
           Container(
+              padding: EdgeInsets.fromLTRB(5, 0, 0, 0),
               child: Text(
-            'BUMBUTPITAL',
-            style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
-          )),
+                'BUMBUTPITAL',
+                style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+              )),
         ]),
       ),
     );
