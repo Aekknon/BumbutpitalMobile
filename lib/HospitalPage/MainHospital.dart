@@ -28,8 +28,6 @@ class __MainHospitalState extends State<MainHospital> {
               decoration: BoxDecoration(
                 color: Color(hexColor('#6367EA')),
                 borderRadius: BorderRadius.only(
-                    topLeft: Radius.circular(0),
-                    topRight: Radius.circular(0),
                     bottomLeft: Radius.circular(30),
                     bottomRight: Radius.circular(30)),
               ),
