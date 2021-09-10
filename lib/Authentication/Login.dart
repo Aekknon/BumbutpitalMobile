@@ -1,57 +1,194 @@
 import 'package:bumbutpital/Authentication/SignUp.dart';
-import 'package:bumbutpital/MainPage.dart';
+import 'package:bumbutpital/mainPage.dart';
 import 'package:flutter/material.dart';
 
-class LoginPage extends StatelessWidget {
+class LoginPage extends StatefulWidget {
+  @override
+  _LoginPageState createState() => _LoginPageState();
+}
+
+class _LoginPageState extends State<LoginPage> {
+  final _email = TextEditingController();
+  final _password = TextEditingController();
+
+  var isPasswordHidden = true;
+  var isRemember = true;
+
+  void onSubmit() {
+    // access controller value by using _email.text
+    // bla bla
+  }
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       title: "LoginPage",
       home: Scaffold(
-        appBar: AppBar(title: Text("LoginPage")),
-        body: const ButtonWidget(),
+        backgroundColor: Color(0XFFECF2FF),
+        body: SafeArea(
+          child: SingleChildScrollView(
+            child: Container(
+              height: MediaQuery.of(context).size.height,
+              padding: EdgeInsets.symmetric(
+                horizontal: 20,
+              ),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: [
+                  SizedBox(height: 50),
+                  Container(
+                    child: Text(
+                      'Sign In',
+                      style: TextStyle(
+                        fontSize: 24,
+                      ),
+                    ),
+                    alignment: Alignment.center,
+                  ),
+                  SizedBox(height: 44),
+                  _textField(
+                    _email,
+                    "Email",
+                    Icon(Icons.email),
+                  ),
+                  SizedBox(height: 44),
+                  _textField(
+                    _password,
+                    "Password",
+                    Icon(Icons.password),
+                  ),
+                  Container(
+                    child: Text(
+                      'Forget Password?',
+                      style: TextStyle(height: 2),
+                    ),
+                    alignment: Alignment.bottomRight,
+                  ),
+                  Container(
+                    alignment: Alignment.topLeft,
+                    child: Row(
+                      children: [
+                        Checkbox(
+                          value: isRemember,
+                          onChanged: (bool? value) {
+                            if (value != null) {
+                              setState(() {
+                                isRemember = value;
+                              });
+                            }
+                          },
+                        ),
+                        Text('Remember Me'),
+                      ],
+                    ),
+                  ),
+                  SizedBox(height: 16),
+                  ElevatedButton(
+                    onPressed: () {
+                      Navigator.push(context,
+                          MaterialPageRoute(builder: (context) => MainPage()));
+                    },
+                    style: ElevatedButton.styleFrom(
+                        primary: Color(0XFFFE7940), fixedSize: Size(350, 50)
+                        // padding: EdgeInsets.symmetric(
+                        //     horizontal: 165, vertical: 15)
+                        ),
+                    child: Text("Login"),
+                  ),
+                  SizedBox(
+                    height: 16,
+                  ),
+                  Container(
+                    child: Text("-OR-"),
+                  ),
+                  SizedBox(
+                    height: 16,
+                  ),
+                  Container(
+                    child: Text('Sign in with'),
+                  ),
+                  SizedBox(height: 24),
+                  Container(
+                      child: ElevatedButton.icon(
+                    icon: Icon(
+                      Icons.mail_outline,
+                      color: Color(0XFF6367EA),
+                      size: 24.0,
+                    ),
+                    label: Text(
+                      'Sign in with Google account',
+                      style: TextStyle(color: Colors.black),
+                    ),
+                    onPressed: () {
+                      print('Pressed');
+                    },
+                    style: ElevatedButton.styleFrom(
+                      primary: Colors.white,
+                      fixedSize: Size(350, 50),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(8.0),
+                      ),
+                    ),
+                  )),
+                  SizedBox(height: 16),
+                  Container(
+                      child: InkWell(
+                    onTap: () {
+                      Navigator.push(context,
+                          MaterialPageRoute(builder: (context) => SignUp()));
+                    },
+                    child: Text(
+                      'Sign Up',
+                    ),
+                  )),
+                  SizedBox(height: 16),
+                  Container(
+                    child: Text("Don't have an Account?"),
+                  ),
+                  // ElevatedButton(
+                  //   onPressed: onSubmit,
+                  //   style: ElevatedButton.styleFrom(
+                  //       primary: Color(0XFFFFFFFF),
+                  //       fixedSize: Size(350, 50)),
+                  //   child: Text(
+                  //     "Sign in with Google account",
+                  //     style: TextStyle(color: Colors.black.withOpacity(0.8)),
+                  //   ),
+                  // ),
+                ],
+              ),
+            ),
+          ),
+        ),
       ),
     );
   }
-}
 
-class ButtonWidget extends StatefulWidget {
-  const ButtonWidget({Key? key}) : super(key: key);
-
-  @override
-  State<ButtonWidget> createState() => _ButtonWidgetState();
-}
-
-/// This is the private State class that goes with MyStatefulWidget.
-class _ButtonWidgetState extends State<ButtonWidget> {
-  @override
-  Widget build(BuildContext context) {
-    final ButtonStyle style =
-        ElevatedButton.styleFrom(textStyle: const TextStyle(fontSize: 20));
-
-    return Center(
-      child: Column(
-        mainAxisSize: MainAxisSize.min,
-        children: <Widget>[
-          ElevatedButton(
-            style: style,
-            onPressed: () {
-              Navigator.push(
-                  context, MaterialPageRoute(builder: (context) => MainPage()));
-            },
-            child: const Text('MainPage'),
-          ),
-          const SizedBox(height: 30),
-          ElevatedButton(
-            style: style,
-            onPressed: () {
-              Navigator.push(
-                  context, MaterialPageRoute(builder: (context) => SignUp()));
-            },
-            child: const Text('SignUp'),
-          ),
-        ],
+  TextField _textField(TextEditingController cont, String label, Icon icon) {
+    return TextField(
+      controller: cont,
+      obscureText: label == "Password" ? isPasswordHidden : false,
+      decoration: InputDecoration(
+        border: OutlineInputBorder(),
+        labelText: label,
+        hintText: "Enter your ${label.toLowerCase()}",
+        prefixIcon: icon,
+        suffixIcon: label == "Password"
+            ? InkWell(
+                onTap: () {
+                  setState(() {
+                    isPasswordHidden = !isPasswordHidden;
+                  });
+                },
+                child: isPasswordHidden
+                    ? Icon(Icons.visibility_off)
+                    : Icon(Icons.visibility),
+              )
+            : null,
+        contentPadding: EdgeInsets.symmetric(vertical: 0),
       ),
+      keyboardType: TextInputType.visiblePassword,
+      autocorrect: true,
     );
   }
 }
