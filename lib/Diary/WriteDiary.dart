@@ -1,19 +1,20 @@
-import 'package:bumbutpital/mainPage.dart';
 import 'package:flutter/material.dart';
 
-class ContentDetail extends StatelessWidget {
+import 'DiaryDetail.dart';
+
+class WriteDiary extends StatelessWidget {
   @override
   Widget build(BuildContext contxt) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Content"),
+        title: Text("MainDiary"),
       ),
       body: Center(
         child: ElevatedButton(
             child: Text("MainPage"),
             onPressed: () {
-              Navigator.push(
-                  contxt, MaterialPageRoute(builder: (context) => MainPage()));
+              Navigator.push(contxt,
+                  MaterialPageRoute(builder: (context) => DiaryDetail()));
             }),
       ),
     );
