@@ -3,11 +3,24 @@ import 'package:bumbutpital/ContentPage/MainContent.dart';
 import 'package:bumbutpital/HospitalPage/MainHospital.dart';
 import 'package:bumbutpital/HospitalPage/PromotionPage.dart';
 import 'package:bumbutpital/Questionare/MainQuestion.dart';
-import 'package:bumbutpital/Questionare/QuestionScreen.dart';
+
 import 'package:bumbutpital/VideoPage/MainVideo.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/painting.dart';
 
-class MainPage extends StatelessWidget {
+class MainPage extends StatefulWidget {
+  @override
+  State<MainPage> createState() => _MainPageState();
+}
+
+class _MainPageState extends State<MainPage> {
+  final tab = [
+    Center(child: Text('Home')),
+    Center(child: Text('Question')),
+    Center(child: Text('Dairy')),
+    Center(child: Text('MOPH')),
+  ];
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -81,18 +94,34 @@ class MainPage extends StatelessWidget {
                 child: Stack(
                   children: [
                     Container(
+                      margin: EdgeInsets.fromLTRB(30, 0, 0, 0),
                       width: 350,
                       height: 149,
-                      color: Color(0xFFA9B0FF),
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.all(Radius.circular(8)),
+                        color: Color(0xFFA9B0FF),
+                      ),
                       padding: EdgeInsets.all(20),
                       child: Align(
                         alignment: Alignment.bottomLeft,
                         child: Text(
                           'Content',
-                          style: TextStyle(fontSize: 24),
+                          style: TextStyle(
+                              fontSize: 24,
+                              color: Colors.white,
+                              fontWeight: FontWeight.bold),
                         ),
                       ),
                     ),
+                    Container(
+                      transform: Matrix4.translationValues(-45, -10, 0.0),
+                      alignment: Alignment.bottomRight,
+                      child: Image.asset(
+                        'asset/image/DoctorMainPage.png',
+                        width: 165,
+                        height: 165,
+                      ),
+                    )
                   ],
                 ),
               ),
@@ -109,15 +138,19 @@ class MainPage extends StatelessWidget {
                     Container(
                       width: 350,
                       height: 35,
-                      color: Color(0xFFA9B0FF),
-                      padding: EdgeInsets.all(10),
-                      // decoration: BoxDecoration(
-                      // borderRadius: BorderRadius.all(Radius.circular(8))),
+
+                      // padding: EdgeInsets.all(0),
+                      decoration: BoxDecoration(
+                          borderRadius: BorderRadius.all(Radius.circular(8)),
+                          color: Color(0xFF7B8CE4)),
                       child: Align(
                         alignment: Alignment.center,
                         child: Text(
                           'Hospital ads.',
-                          style: TextStyle(fontSize: 12),
+                          style: TextStyle(
+                              fontSize: 12,
+                              color: Colors.white,
+                              fontWeight: FontWeight.bold),
                         ),
                       ),
                     ),
@@ -130,60 +163,103 @@ class MainPage extends StatelessWidget {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  InkWell(
-                    onTap: () {
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => MainQuestion()));
-                    },
-                    child: Stack(
-                      children: [
-                        Container(
-                          margin: EdgeInsets.fromLTRB(30, 0, 0, 0),
-                          width: 150,
-                          height: 80,
-                          color: Color(0xFFA9B0FF),
-                          padding: EdgeInsets.all(10),
-                          // decoration: BoxDecoration(
-                          // borderRadius: BorderRadius.all(Radius.circular(8))),
-                          child: Align(
-                            alignment: Alignment.center,
-                            child: Text(
-                              'PHQ-9',
-                              style: TextStyle(fontSize: 12),
+                  Container(
+                    child: InkWell(
+                      onTap: () {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => MainQuestion()));
+                      },
+                      child: Stack(
+                        children: [
+                          Container(
+                            margin: EdgeInsets.fromLTRB(30, 0, 0, 0),
+                            width: 150,
+                            height: 80,
+                            padding: EdgeInsets.all(10),
+                            decoration: BoxDecoration(
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(8)),
+                              color: Color(0xFFA9B0FF),
+                            ),
+                            child: Row(
+                              children: [
+                                Container(
+                                  child: Icon(
+                                    Icons.fact_check_outlined,
+                                    size: 50,
+                                    color: Colors.white,
+                                  ),
+                                  padding: EdgeInsets.all(6),
+                                ),
+                                Container(
+                                  margin: EdgeInsets.fromLTRB(5, 0, 0, 0),
+                                  child: Align(
+                                    alignment: Alignment.center,
+                                    child: Text(
+                                      'PHQ-9',
+                                      style: TextStyle(
+                                          fontSize: 14,
+                                          color: Colors.white,
+                                          fontWeight: FontWeight.bold),
+                                    ),
+                                  ),
+                                ),
+                              ],
                             ),
                           ),
-                        ),
-                      ],
+                        ],
+                      ),
                     ),
                   ),
-                  InkWell(
-                    onTap: () {
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => PromotionPage()));
-                    },
-                    child: Stack(
-                      children: [
-                        Container(
-                          margin: EdgeInsets.fromLTRB(30, 0, 30, 0),
-                          width: 150,
-                          height: 80,
-                          color: Color(0xFFA9B0FF),
-                          padding: EdgeInsets.all(10),
-                          // decoration: BoxDecoration(
-                          // borderRadius: BorderRadius.all(Radius.circular(8))),
-                          child: Align(
-                            alignment: Alignment.center,
-                            child: Text(
-                              'Promotion',
-                              style: TextStyle(fontSize: 12),
+                  Container(
+                    child: InkWell(
+                      onTap: () {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => PromotionPage()));
+                      },
+                      child: Stack(
+                        children: [
+                          Container(
+                            margin: EdgeInsets.fromLTRB(30, 0, 30, 0),
+                            width: 150,
+                            height: 80,
+                            decoration: BoxDecoration(
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(8)),
+                              color: Color(0xFFA9B0FF),
+                            ),
+                            child: Row(
+                              children: [
+                                Container(
+                                  child: Icon(
+                                    Icons.card_giftcard_outlined,
+                                    size: 50,
+                                    color: Colors.white,
+                                  ),
+                                  padding: EdgeInsets.all(7),
+                                ),
+                                Container(
+                                  margin: EdgeInsets.fromLTRB(5, 0, 0, 0),
+                                  child: Align(
+                                    alignment: Alignment.center,
+                                    child: Text(
+                                      'Promotion',
+                                      style: TextStyle(
+                                          fontSize: 14,
+                                          color: Colors.white,
+                                          fontWeight: FontWeight.bold),
+                                    ),
+                                  ),
+                                ),
+                              ],
                             ),
                           ),
-                        ),
-                      ],
+                        ],
+                      ),
                     ),
                   ),
                 ],
@@ -200,52 +276,46 @@ class MainPage extends StatelessWidget {
                     },
                     child: Stack(
                       children: [
-                        Container(
-                          margin: EdgeInsets.fromLTRB(30, 0, 0, 0),
-                          width: 350,
-                          height: 80,
-                          color: Color(0xFFA9B0FF),
-                          padding: EdgeInsets.all(20),
-                          // decoration: BoxDecoration(
-                          // borderRadius: BorderRadius.all(Radius.circular(8))),
-                          child: Align(
-                            alignment: Alignment.centerLeft,
-                            child: Text(
-                              'Department of mental Health',
-                              style: TextStyle(fontSize: 18),
+                        Row(
+                          children: [
+                            Container(
+                              margin: EdgeInsets.fromLTRB(30, 0, 0, 0),
+                              width: 350,
+                              height: 80,
+                              decoration: BoxDecoration(
+                                borderRadius:
+                                    BorderRadius.all(Radius.circular(8)),
+                                color: Color(0xFFA9B0FF),
+                              ),
+                              padding: EdgeInsets.all(20),
+                              child: Align(
+                                alignment: Alignment.centerLeft,
+                                child: Text(
+                                  'Department of mental Health',
+                                  style: TextStyle(
+                                      fontSize: 18,
+                                      color: Colors.white,
+                                      fontWeight: FontWeight.bold),
+                                ),
+                              ),
                             ),
-                          ),
+                            Container(
+                              transform: Matrix4.translationValues(-55, 0, 0),
+                              child: Icon(
+                                Icons.play_circle_fill,
+                                size: 30,
+                              ),
+                            )
+                          ],
                         ),
                       ],
                     ),
                   ),
                 ],
               ),
+              SizedBox(),
             ]),
           ),
-        ),
-        bottomNavigationBar: BottomNavigationBar(
-          type: BottomNavigationBarType.fixed,
-          currentIndex: 0,
-          items: [
-            BottomNavigationBarItem(
-              icon: Icon(Icons.home),
-              label: 'Home',
-            ),
-            BottomNavigationBarItem(
-              icon: Icon(Icons.help_outline_rounded),
-              label: 'Question',
-            ),
-            BottomNavigationBarItem(
-              icon: Icon(Icons.import_contacts),
-              label: 'Diary',
-            ),
-            BottomNavigationBarItem(
-              icon: ImageIcon(AssetImage(
-                  "asset/image/Ministry_of_Public_Health_of_Thailand.svg.png")),
-              label: 'MOPH',
-            ),
-          ],
         ),
       ),
     );
