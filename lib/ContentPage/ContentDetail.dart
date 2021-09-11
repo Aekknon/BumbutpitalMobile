@@ -1,4 +1,4 @@
-import 'package:bumbutpital/mainPage.dart';
+import 'package:bumbutpital/MainPage.dart';
 import 'package:flutter/material.dart';
 
 class ContentDetail extends StatelessWidget {

@@ -1,6 +1,6 @@
 // import 'package:bumbutpital/MainPage.dart';
 // import 'package:bumbutpital/VideoPage/MainVideo.dart';
-import 'package:bumbutpital/mainPage.dart';
+import 'package:bumbutpital/MainPage.dart';
 import 'package:flutter/material.dart';
 
 class VideoDetail extends StatelessWidget {
