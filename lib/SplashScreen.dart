@@ -30,7 +30,9 @@ class _SplashScreenState extends State<SplashScreen> {
           Container(
             height: 100,
             width: 100,
-            color: Colors.pink,
+            decoration: BoxDecoration(
+                image: DecorationImage(
+                    image: AssetImage('asset/image/Bumbutpital Logo.png'))),
           ),
           SizedBox(height: 20),
           Container(
