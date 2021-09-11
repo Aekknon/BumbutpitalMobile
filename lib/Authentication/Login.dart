@@ -99,7 +99,8 @@ class _LoginPageState extends State<LoginPage> {
                     height: 16,
                   ),
                   Container(
-                    child: Text("-OR-"),
+                    child: Text("-OR-",
+                        style: TextStyle(color: Color(0XFF6367EA))),
                   ),
                   SizedBox(
                     height: 16,
@@ -139,6 +140,7 @@ class _LoginPageState extends State<LoginPage> {
                     },
                     child: Text(
                       'Sign Up',
+                      style: TextStyle(fontWeight: FontWeight.bold),
                     ),
                   )),
                   SizedBox(height: 16),
