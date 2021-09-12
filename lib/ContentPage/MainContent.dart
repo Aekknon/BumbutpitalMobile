@@ -1,4 +1,4 @@
-import 'package:bumbutpital/MainPage.dart';
+import 'package:bumbutpital/Main_Screen.dart';
 import 'package:flutter/material.dart';
 import 'package:bumbutpital/ContentPage/ContentDetail.dart';
 
@@ -70,7 +70,7 @@ class MainContent extends StatelessWidget {
                 InkWell(
                   onTap: () {
                     Navigator.push(context,
-                        MaterialPageRoute(builder: (context) => MainPage()));
+                        MaterialPageRoute(builder: (context) => MainScreen()));
                   },
                   child: Container(
                     transform: Matrix4.translationValues(95, -25, 0.0),

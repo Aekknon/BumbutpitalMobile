@@ -1,4 +1,4 @@
-import 'package:bumbutpital/mainPage.dart';
+import 'package:bumbutpital/Main_Screen.dart';
 import 'package:flutter/material.dart';
 
 class QRCodePage extends StatefulWidget {
@@ -83,7 +83,7 @@ class _QRCodePageState extends State<QRCodePage> {
                 ),
                 onPressed: () {
                   Navigator.push(context,
-                      MaterialPageRoute(builder: (context) => MainPage()));
+                      MaterialPageRoute(builder: (context) => MainScreen()));
                 },
               ),
             ],

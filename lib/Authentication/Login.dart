@@ -1,5 +1,5 @@
 import 'package:bumbutpital/Authentication/SignUp.dart';
-import 'package:bumbutpital/mainPage.dart';
+import 'package:bumbutpital/Main_Screen.dart';
 import 'package:flutter/material.dart';
 
 class LoginPage extends StatefulWidget {
@@ -85,8 +85,10 @@ class _LoginPageState extends State<LoginPage> {
                   SizedBox(height: 16),
                   ElevatedButton(
                     onPressed: () {
-                      Navigator.push(context,
-                          MaterialPageRoute(builder: (context) => MainPage()));
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => MainScreen()));
                     },
                     style: ElevatedButton.styleFrom(
                       primary: Color(0XFFFE7940),

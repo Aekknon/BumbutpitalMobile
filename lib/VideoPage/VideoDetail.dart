@@ -1,6 +1,6 @@
 // import 'package:bumbutpital/MainPage.dart';
 // import 'package:bumbutpital/VideoPage/MainVideo.dart';
-import 'package:bumbutpital/mainPage.dart';
+import 'package:bumbutpital/Main_Screen.dart';
 import 'package:flutter/material.dart';
 
 class VideoDetail extends StatelessWidget {
@@ -14,8 +14,8 @@ class VideoDetail extends StatelessWidget {
         child: ElevatedButton(
             child: Text("MainPage"),
             onPressed: () {
-              Navigator.push(
-                  contxt, MaterialPageRoute(builder: (context) => MainPage()));
+              Navigator.push(contxt,
+                  MaterialPageRoute(builder: (context) => MainScreen()));
             }),
       ),
     );

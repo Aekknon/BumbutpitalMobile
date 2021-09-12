@@ -1,4 +1,4 @@
-import 'package:bumbutpital/mainPage.dart';
+import 'package:bumbutpital/ComponentMainScreen/BottomNavBar.dart';
 import 'package:flutter/material.dart';
 
 import '../QuestionScreen.dart';
@@ -15,7 +15,7 @@ class ButtonInCard extends StatelessWidget {
       child: ElevatedButton(
         onPressed: () {
           Navigator.push(
-              context, MaterialPageRoute(builder: (context) => MainPage()));
+              context, MaterialPageRoute(builder: (context) => BottomNavBar()));
         },
         style: ElevatedButton.styleFrom(
           shape: new RoundedRectangleBorder(

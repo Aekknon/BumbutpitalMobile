@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 
-import '../MainPage.dart';
-
 class ContentDetail extends StatelessWidget {
   @override
   Widget build(BuildContext context) {

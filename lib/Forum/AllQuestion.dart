@@ -1,4 +1,5 @@
-import 'package:bumbutpital/mainPage.dart';
+import 'package:bumbutpital/Main_Screen.dart';
+
 import 'package:flutter/material.dart';
 
 class AllQuestion extends StatelessWidget {
@@ -12,8 +13,8 @@ class AllQuestion extends StatelessWidget {
         child: ElevatedButton(
             child: Text("Go to MainPage"),
             onPressed: () {
-              Navigator.push(
-                  contxt, MaterialPageRoute(builder: (context) => MainPage()));
+              Navigator.push(contxt,
+                  MaterialPageRoute(builder: (context) => MainScreen()));
             }),
       ),
     );

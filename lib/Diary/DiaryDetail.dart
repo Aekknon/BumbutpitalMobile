@@ -11,8 +11,8 @@ class DiaryDetail extends StatelessWidget {
         child: ElevatedButton(
             child: Text("MainPage"),
             onPressed: () {
-              Navigator.push(
-                  contxt, MaterialPageRoute(builder: (context) => MainDiary()));
+              // Navigator.push(
+              //     contxt, MaterialPageRoute(builder: (context) => MainDiary()));
             }),
       ),
     );
