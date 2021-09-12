@@ -1,4 +1,3 @@
-import 'package:bumbutpital/Authentication/SignUp.dart';
 import 'package:bumbutpital/Questionare/MainQuestion.dart';
 import 'package:bumbutpital/mainPage.dart';
 import 'package:flutter/material.dart';
@@ -82,8 +81,10 @@ class _SignUpPageState extends State<SignUp> {
                                     builder: (context) => MainQuestion()));
                           },
                           style: ElevatedButton.styleFrom(
-                              primary: Color(0XFFFE7940),
-                              fixedSize: Size(350, 50)),
+                            primary: Color(0XFFFE7940),
+                            padding: EdgeInsets.symmetric(
+                                horizontal: 100, vertical: 15),
+                          ),
                           child: Text("REGISTER"),
                         ),
                       ]),

@@ -18,11 +18,12 @@ class ButtonInCard extends StatelessWidget {
               context, MaterialPageRoute(builder: (context) => MainPage()));
         },
         style: ElevatedButton.styleFrom(
-            shape: new RoundedRectangleBorder(
-              borderRadius: new BorderRadius.circular(8.0),
-            ),
-            primary: Color(0XFFFE7940),
-            fixedSize: Size(60, 36)),
+          shape: new RoundedRectangleBorder(
+            borderRadius: new BorderRadius.circular(8.0),
+          ),
+          primary: Color(0XFFFE7940),
+          padding: EdgeInsets.symmetric(horizontal: 100, vertical: 15),
+        ),
         child: Text("Next"),
       ),
     );
