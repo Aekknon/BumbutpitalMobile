@@ -7,7 +7,7 @@
 // import 'package:bumbutpital/VideoPage/MainVideo.dart';
 import 'package:bumbutpital/Diary/MainDiary.dart';
 import 'package:bumbutpital/Forum/MainForumPage.dart';
-import 'package:bumbutpital/Main_Screen.dart';
+import 'package:bumbutpital/MainPage.dart';
 import 'package:bumbutpital/MopHPage.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
@@ -18,7 +18,7 @@ class BottomNavBar extends StatefulWidget {
 }
 
 class _BottomNavBarState extends State<BottomNavBar> {
-  final tab = [MainScreen(), MainForumPage(), MainDiary(), MOPHScreen()];
+  final tab = [MainPage(), MainForumPage(), MainDiary(), MophPage()];
   int currentTabIndex = 0;
 
   @override
@@ -44,7 +44,7 @@ class _BottomNavBarState extends State<BottomNavBar> {
           ),
           BottomNavigationBarItem(
             icon: Icon(
-              Icons.auto_stories_rounded,
+              Icons.add,
             ),
             label: 'Diary',
           ),

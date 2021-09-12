@@ -1,6 +1,6 @@
 import 'package:bumbutpital/Authentication/SignUp.dart';
-import 'package:bumbutpital/mainPage.dart';
 import 'package:flutter/material.dart';
+import 'package:bumbutpital/ComponentMainScreen/bottomnavbar.dart';
 
 class LoginPage extends StatefulWidget {
   @override
@@ -86,7 +86,7 @@ class _LoginPageState extends State<LoginPage> {
                   ElevatedButton(
                     onPressed: () {
                       Navigator.push(context,
-                          MaterialPageRoute(builder: (context) => MainPage()));
+                          MaterialPageRoute(builder: (context) => BottomNavBar()));
                     },
                     style: ElevatedButton.styleFrom(
                       primary: Color(0XFFFE7940),

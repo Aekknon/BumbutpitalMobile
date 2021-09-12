@@ -1,4 +1,3 @@
-import 'package:bumbutpital/mainPage.dart';
 import 'package:flutter/material.dart';
 
 class AllQuestion extends StatelessWidget {

@@ -217,29 +217,7 @@ class _MainForumPageState extends State<MainForumPage> {
           },
           child: const Icon(Icons.add),
           backgroundColor: Color(hexColor('#6367EA'))),
-      bottomNavigationBar: BottomNavigationBar(
-        type: BottomNavigationBarType.fixed,
-        currentIndex: 0,
-        items: [
-          BottomNavigationBarItem(
-            icon: Icon(Icons.home),
-            label: 'Home',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.help_outline_rounded),
-            label: 'Question',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.import_contacts),
-            label: 'Diary',
-          ),
-          BottomNavigationBarItem(
-            icon: ImageIcon(AssetImage(
-                "asset/image/Ministry_of_Public_Health_of_Thailand.svg.png")),
-            label: 'MOPH',
-          ),
-        ],
-      ),
+      
     );
   }
 }

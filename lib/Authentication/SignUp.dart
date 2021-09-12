@@ -1,5 +1,4 @@
 import 'package:bumbutpital/Questionare/MainQuestion.dart';
-import 'package:bumbutpital/mainPage.dart';
 import 'package:flutter/material.dart';
 
 class SignUp extends StatefulWidget {
