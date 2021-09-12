@@ -1,4 +1,4 @@
-import 'package:bumbutpital/MainPage.dart';
+import 'package:bumbutpital/ComponentMainScreen/bottomnavbar.dart';
 import 'package:flutter/material.dart';
 import 'package:bumbutpital/ContentPage/ContentDetail.dart';
 
@@ -70,7 +70,7 @@ class MainContent extends StatelessWidget {
                 InkWell(
                   onTap: () {
                     Navigator.push(context,
-                        MaterialPageRoute(builder: (context) => MainPage()));
+                        MaterialPageRoute(builder: (context) => BottomNavBar()));
                   },
                   child: Container(
                     transform: Matrix4.translationValues(95, -25, 0.0),
@@ -79,7 +79,7 @@ class MainContent extends StatelessWidget {
                     child: Column(
                       children: [
                         Icon(
-                          Icons.health_and_safety,
+                          Icons.add,
                           size: 50,
                         ),
                         Text('Health')

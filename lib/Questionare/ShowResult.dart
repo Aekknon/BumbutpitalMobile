@@ -1,4 +1,4 @@
-import 'package:bumbutpital/mainPage.dart';
+import 'package:bumbutpital/ComponentMainScreen/bottomnavbar.dart';
 import 'package:flutter/material.dart';
 
 class ShowResult extends StatelessWidget {
@@ -13,7 +13,7 @@ class ShowResult extends StatelessWidget {
             child: Text("MainPage"),
             onPressed: () {
               Navigator.push(
-                  contxt, MaterialPageRoute(builder: (context) => MainPage()));
+                  contxt, MaterialPageRoute(builder: (context) => BottomNavBar()));
             }),
       ),
     );

@@ -1,15 +1,17 @@
 import 'package:flutter/material.dart';
 
-class SignUp extends StatelessWidget {
+class MophPage extends StatefulWidget {
+  MophPage({Key? key}) : super(key: key);
+
   @override
-  Widget build(BuildContext contxt) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text("Register Page"),
-      ),
-      body: Center(
-          child: ElevatedButton(
-              child: Text("Go to Questionare"), onPressed: () {})),
+  _MophPageState createState() => _MophPageState();
+}
+
+class _MophPageState extends State<MophPage> {
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+       child: null,
     );
   }
 }

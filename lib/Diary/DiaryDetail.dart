@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:bumbutpital/Diary/MainDiary.dart';
 
 class DiaryDetail extends StatelessWidget {
   @override
