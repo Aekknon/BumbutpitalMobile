@@ -55,7 +55,7 @@ class _LoginPageState extends State<LoginPage> {
                   _textField(
                     _password,
                     "Password",
-                    Icon(Icons.password),
+                    Icon(Icons.lock),
                   ),
                   Container(
                     child: Text(
@@ -89,18 +89,20 @@ class _LoginPageState extends State<LoginPage> {
                           MaterialPageRoute(builder: (context) => MainPage()));
                     },
                     style: ElevatedButton.styleFrom(
-                        primary: Color(0XFFFE7940), fixedSize: Size(350, 50)
-                        // padding: EdgeInsets.symmetric(
-                        //     horizontal: 165, vertical: 15)
-                        ),
+                      primary: Color(0XFFFE7940),
+                      padding:
+                          EdgeInsets.symmetric(horizontal: 100, vertical: 15),
+
+                      // padding: EdgeInsets.symmetric(
+                      //     horizontal: 165, vertical: 15)
+                    ),
                     child: Text("Login"),
                   ),
                   SizedBox(
                     height: 16,
                   ),
                   Container(
-                    child: Text("-OR-",
-                        style: TextStyle(color: Color(0XFF6367EA))),
+                    child: Text("-OR-"),
                   ),
                   SizedBox(
                     height: 16,
@@ -125,7 +127,7 @@ class _LoginPageState extends State<LoginPage> {
                     },
                     style: ElevatedButton.styleFrom(
                       primary: Colors.white,
-                      fixedSize: Size(350, 50),
+                      //fixedSize: Size(350, 50),
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(8.0),
                       ),
@@ -140,7 +142,6 @@ class _LoginPageState extends State<LoginPage> {
                     },
                     child: Text(
                       'Sign Up',
-                      style: TextStyle(fontWeight: FontWeight.bold),
                     ),
                   )),
                   SizedBox(height: 16),

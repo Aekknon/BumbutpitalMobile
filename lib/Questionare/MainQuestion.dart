@@ -67,11 +67,13 @@ class MainQuestion extends StatelessWidget {
                         MaterialPageRoute(builder: (context) => Question()));
                   },
                   style: ElevatedButton.styleFrom(
-                      shape: new RoundedRectangleBorder(
-                        borderRadius: new BorderRadius.circular(8.0),
-                      ),
-                      primary: Color(0XFFFE7940),
-                      fixedSize: Size(350, 50)),
+                    shape: new RoundedRectangleBorder(
+                      borderRadius: new BorderRadius.circular(8.0),
+                    ),
+                    primary: Color(0XFFFE7940),
+                    padding:
+                        EdgeInsets.symmetric(horizontal: 100, vertical: 15),
+                  ),
                   child: Text("GET STARTED"),
                 ),
               ])),
