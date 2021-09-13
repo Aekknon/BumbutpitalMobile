@@ -65,11 +65,11 @@ class __MainHospitalState extends State<MainHospital> {
                       EdgeInsets.only(top: 10, bottom: 5, left: 10, right: 10),
                   child: GridView.count(
                     scrollDirection: Axis.vertical,
-                    crossAxisCount: 2,
-                    crossAxisSpacing: 10.0,
-                    mainAxisSpacing: 10.0,
+                    crossAxisCount: 1,
+                    crossAxisSpacing: 20.0,
+                    mainAxisSpacing: 20.0,
                     shrinkWrap: true,
-                    childAspectRatio: 0.6,
+                    childAspectRatio: 2,
                     children: [
                       InkWell(
                         onTap: () {

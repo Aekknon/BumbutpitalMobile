@@ -42,7 +42,7 @@ class _PromotionPageState extends State<PromotionPage> {
                       padding: EdgeInsets.only(
                           top: 5, bottom: 10, left: 10, right: 10),
                       child: GridView.count(
-                        scrollDirection: Axis.horizontal,
+                        scrollDirection: Axis.vertical,
                         crossAxisCount: 1,
                         crossAxisSpacing: 20.0,
                         mainAxisSpacing: 20.0,
