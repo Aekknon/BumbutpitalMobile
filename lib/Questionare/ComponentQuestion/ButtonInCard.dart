@@ -3,29 +3,43 @@ import 'package:flutter/material.dart';
 
 import '../QuestionScreen.dart';
 
-class ButtonInCard extends StatelessWidget {
-  const ButtonInCard({
+class CardBarButton extends StatelessWidget {
+  final void Function() onNext;
+  final void Function() onPrev;
+  final bool havePrev;
+  final bool haveNext;
+
+  const CardBarButton({
     Key? key,
+    required this.onNext,
+    required this.onPrev,
+    required this.havePrev,
+    required this.haveNext,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      alignment: Alignment.bottomRight,
-      child: ElevatedButton(
-        onPressed: () {
-          Navigator.push(
-              context, MaterialPageRoute(builder: (context) => BottomNavBar()));
-        },
+    Widget _buildBtn(String title, void Function() onClick) {
+      return ElevatedButton(
+        onPressed: onClick,
         style: ElevatedButton.styleFrom(
           shape: new RoundedRectangleBorder(
             borderRadius: new BorderRadius.circular(8.0),
           ),
           primary: Color(0XFFFE7940),
-          padding: EdgeInsets.symmetric(horizontal: 100, vertical: 15),
+          padding: EdgeInsets.symmetric(horizontal: 24, vertical: 16),
         ),
-        child: Text("Next"),
-      ),
+        child: Text(title),
+      );
+    }
+
+    return Row(
+      mainAxisAlignment:
+          havePrev ? MainAxisAlignment.spaceBetween : MainAxisAlignment.end,
+      children: [
+        if (havePrev) _buildBtn("Prev", onPrev),
+        _buildBtn(haveNext ? "Next" : "Submit", onNext),
+      ],
     );
   }
 }
