@@ -163,7 +163,7 @@ class _MainForumPageState extends State<MainForumPage> {
                                   padding: const EdgeInsets.only(
                                       top: 10, bottom: 10, left: 30, right: 10),
                                   child: Text(
-                                    '  I am so stress. My friend tell me his girlfriend dead for 8 Years. It so sad for me',
+                                    '  I am so stress. My friend tell me his girlfriend dead for 9 Years. It so sad for me',
                                     style: TextStyle(
                                         fontSize: 12,
                                         color: Colors.black,
