@@ -7,11 +7,7 @@ packages:
       name: async
       url: "https://pub.dartlang.org"
     source: hosted
-<<<<<<< Updated upstream
-    version: "2.8.1"
-=======
     version: "2.5.0"
->>>>>>> Stashed changes
   boolean_selector:
     dependency: transitive
     description:
@@ -19,6 +15,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "2.1.0"
+  carousel_slider:
+    dependency: "direct main"
+    description:
+      name: carousel_slider
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "4.0.0"
   characters:
     dependency: transitive
     description:
@@ -32,7 +35,7 @@ packages:
       name: charcode
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "1.3.1"
+    version: "1.2.0"
   clock:
     dependency: transitive
     description:
@@ -126,7 +129,7 @@ packages:
       name: meta
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "1.7.0"
+    version: "1.3.0"
   path:
     dependency: transitive
     description:
@@ -208,11 +211,7 @@ packages:
       name: test_api
       url: "https://pub.dartlang.org"
     source: hosted
-<<<<<<< Updated upstream
-    version: "0.4.2"
-=======
     version: "0.2.19"
->>>>>>> Stashed changes
   typed_data:
     dependency: transitive
     description:
