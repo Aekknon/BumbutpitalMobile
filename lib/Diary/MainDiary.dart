@@ -69,7 +69,7 @@ class _MainDiaryState extends State<MainDiary> {
                     crossAxisSpacing: 20.0,
                     mainAxisSpacing: 20.0,
                     shrinkWrap: true,
-                    childAspectRatio: 1.8,
+                    childAspectRatio: 1.5,
                     children: [
                       InkWell(
                         onTap: () {
