@@ -100,6 +100,51 @@ class _MainDiaryState extends State<MainDiary> {
                                     "https://storage.thaipost.net/main/uploads/photos/big/20200127/image_big_5e2e947024c9f.jpg"),
                                 fit: BoxFit.cover,
                               )),
+                              child: Center(
+                                child: Column(children: [
+                                  Spacer(),
+                                  Row(
+                                    children: [
+                                     
+                                      Container(
+                                  height: 120,
+                                  width: 120,
+                                  
+                                   decoration: BoxDecoration(
+                                     color: Colors.white,
+                              boxShadow: [
+                                BoxShadow(
+                                  color: Colors.grey.withOpacity(0.5),
+                                  spreadRadius: 2,
+                                  blurRadius: 5,
+                                  offset: Offset(
+                                      0, 3), // changes position of shadow
+                                ),
+                              ],
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(10)),
+                              
+                              ),
+                              child: Column(children: [
+                                SizedBox(height: 25,),
+                                Text('Topic:',
+          style: TextStyle(
+              fontSize: 16,
+              color: Colors.black,
+              fontWeight: FontWeight.bold,
+              decoration: TextDecoration.none),),
+               Text('Market',
+          style: TextStyle(
+              fontSize: 16,
+              color: Colors.black,
+              
+              decoration: TextDecoration.none),),
+                              ],)
+                                ), Spacer()
+                                    ],
+                                  )
+                                ],)
+                              ),
                         ),
                       ),
                       InkWell(
@@ -131,6 +176,51 @@ class _MainDiaryState extends State<MainDiary> {
                                     "https://www.greatstarsdigital.com/wp-content/uploads/2018/04/%E0%B8%84%E0%B8%A3%E0%B8%AD%E0%B8%9A%E0%B8%84%E0%B8%A3%E0%B8%B1%E0%B8%A7%E0%B8%AD%E0%B8%9A%E0%B8%AD%E0%B8%B8%E0%B9%88%E0%B8%99_180413_0013.jpg"),
                                 fit: BoxFit.cover,
                               )),
+                              child: Center(
+                                child: Column(children: [
+                                  Spacer(),
+                                  Row(
+                                    children: [
+                                     
+                                      Container(
+                                  height: 120,
+                                  width: 120,
+                                  
+                                   decoration: BoxDecoration(
+                                     color: Colors.white,
+                              boxShadow: [
+                                BoxShadow(
+                                  color: Colors.grey.withOpacity(0.5),
+                                  spreadRadius: 2,
+                                  blurRadius: 5,
+                                  offset: Offset(
+                                      0, 3), // changes position of shadow
+                                ),
+                              ],
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(10)),
+                              
+                              ),
+                              child: Column(children: [
+                                SizedBox(height: 25,),
+                                Text('Topic:',
+          style: TextStyle(
+              fontSize: 16,
+              color: Colors.black,
+              fontWeight: FontWeight.bold,
+              decoration: TextDecoration.none),),
+               Text('Market',
+          style: TextStyle(
+              fontSize: 16,
+              color: Colors.black,
+              
+              decoration: TextDecoration.none),),
+                              ],)
+                                ), Spacer()
+                                    ],
+                                  )
+                                ],)
+                              ),
                         ),
                       ),
                       InkWell(
@@ -162,6 +252,51 @@ class _MainDiaryState extends State<MainDiary> {
                                     "https://entertain.teenee.com/gossip/img3/1852425.jpg"),
                                 fit: BoxFit.cover,
                               )),
+                              child: Center(
+                                child: Column(children: [
+                                  Spacer(),
+                                  Row(
+                                    children: [
+                                     
+                                      Container(
+                                  height: 120,
+                                  width: 120,
+                                  
+                                   decoration: BoxDecoration(
+                                     color: Colors.white,
+                              boxShadow: [
+                                BoxShadow(
+                                  color: Colors.grey.withOpacity(0.5),
+                                  spreadRadius: 2,
+                                  blurRadius: 5,
+                                  offset: Offset(
+                                      0, 3), // changes position of shadow
+                                ),
+                              ],
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(10)),
+                              
+                              ),
+                              child: Column(children: [
+                                SizedBox(height: 25,),
+                                Text('Topic:',
+          style: TextStyle(
+              fontSize: 16,
+              color: Colors.black,
+              fontWeight: FontWeight.bold,
+              decoration: TextDecoration.none),),
+               Text('Market',
+          style: TextStyle(
+              fontSize: 16,
+              color: Colors.black,
+              
+              decoration: TextDecoration.none),),
+                              ],)
+                                ), Spacer()
+                                    ],
+                                  )
+                                ],)
+                              ),
                         ),
                       ),
                       InkWell(
@@ -193,6 +328,51 @@ class _MainDiaryState extends State<MainDiary> {
                                     "https://news.kaazip.com/wp-content/uploads/2021/04/%E0%B8%81%E0%B8%B8%E0%B8%A5%E0%B9%81%E0%B8%88%E0%B8%8B%E0%B8%AD%E0%B8%A5-2.jpg"),
                                 fit: BoxFit.cover,
                               )),
+                              child: Center(
+                                child: Column(children: [
+                                  Spacer(),
+                                  Row(
+                                    children: [
+                                     
+                                      Container(
+                                  height: 120,
+                                  width: 120,
+                                  
+                                   decoration: BoxDecoration(
+                                     color: Colors.white,
+                              boxShadow: [
+                                BoxShadow(
+                                  color: Colors.grey.withOpacity(0.5),
+                                  spreadRadius: 2,
+                                  blurRadius: 5,
+                                  offset: Offset(
+                                      0, 3), // changes position of shadow
+                                ),
+                              ],
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(10)),
+                              
+                              ),
+                              child: Column(children: [
+                                SizedBox(height: 25,),
+                                Text('Topic:',
+          style: TextStyle(
+              fontSize: 16,
+              color: Colors.black,
+              fontWeight: FontWeight.bold,
+              decoration: TextDecoration.none),),
+               Text('Market',
+          style: TextStyle(
+              fontSize: 16,
+              color: Colors.black,
+              
+              decoration: TextDecoration.none),),
+                              ],)
+                                ), Spacer()
+                                    ],
+                                  )
+                                ],)
+                              ),
                         ),
                       ),
                       InkWell(
@@ -224,6 +404,51 @@ class _MainDiaryState extends State<MainDiary> {
                                     "https://www.princubon.com/wp-content/uploads/2021/01/%E0%B8%84%E0%B8%99%E0%B8%A5%E0%B8%B0%E0%B8%84%E0%B8%A3%E0%B8%B6%E0%B9%88%E0%B8%87_1040x1040px-768x768.png"),
                                 fit: BoxFit.cover,
                               )),
+                              child: Center(
+                                child: Column(children: [
+                                  Spacer(),
+                                  Row(
+                                    children: [
+                                     
+                                      Container(
+                                  height: 120,
+                                  width: 120,
+                                  
+                                   decoration: BoxDecoration(
+                                     color: Colors.white,
+                              boxShadow: [
+                                BoxShadow(
+                                  color: Colors.grey.withOpacity(0.5),
+                                  spreadRadius: 2,
+                                  blurRadius: 5,
+                                  offset: Offset(
+                                      0, 3), // changes position of shadow
+                                ),
+                              ],
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(10)),
+                              
+                              ),
+                              child: Column(children: [
+                                SizedBox(height: 25,),
+                                Text('Topic:',
+          style: TextStyle(
+              fontSize: 16,
+              color: Colors.black,
+              fontWeight: FontWeight.bold,
+              decoration: TextDecoration.none),),
+               Text('Market',
+          style: TextStyle(
+              fontSize: 16,
+              color: Colors.black,
+              
+              decoration: TextDecoration.none),),
+                              ],)
+                                ), Spacer()
+                                    ],
+                                  )
+                                ],)
+                              ),
                         ),
                       ),
                       InkWell(
@@ -255,6 +480,51 @@ class _MainDiaryState extends State<MainDiary> {
                                     "https://i0.wp.com/www.amarinbabyandkids.com/app/uploads/2017/01/shutterstock_124904711-e1483514453518.jpg"),
                                 fit: BoxFit.cover,
                               )),
+                              child: Center(
+                                child: Column(children: [
+                                  Spacer(),
+                                  Row(
+                                    children: [
+                                     
+                                      Container(
+                                  height: 120,
+                                  width: 120,
+                                  
+                                   decoration: BoxDecoration(
+                                     color: Colors.white,
+                              boxShadow: [
+                                BoxShadow(
+                                  color: Colors.grey.withOpacity(0.5),
+                                  spreadRadius: 2,
+                                  blurRadius: 5,
+                                  offset: Offset(
+                                      0, 3), // changes position of shadow
+                                ),
+                              ],
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(10)),
+                              
+                              ),
+                              child: Column(children: [
+                                SizedBox(height: 25,),
+                                Text('Topic:',
+          style: TextStyle(
+              fontSize: 16,
+              color: Colors.black,
+              fontWeight: FontWeight.bold,
+              decoration: TextDecoration.none),),
+               Text('Market',
+          style: TextStyle(
+              fontSize: 16,
+              color: Colors.black,
+              
+              decoration: TextDecoration.none),),
+                              ],)
+                                ), Spacer()
+                                    ],
+                                  )
+                                ],)
+                              ),
                         ),
                       ),
                       InkWell(
@@ -286,6 +556,51 @@ class _MainDiaryState extends State<MainDiary> {
                                     "https://line-mag.com/wp-content/uploads/2021/05/%E0%B8%95%E0%B8%B1%E0%B9%8A%E0%B8%81-%E0%B8%99%E0%B8%B8%E0%B9%89%E0%B8%A2.jpg"),
                                 fit: BoxFit.cover,
                               )),
+                              child: Center(
+                                child: Column(children: [
+                                  Spacer(),
+                                  Row(
+                                    children: [
+                                     
+                                      Container(
+                                  height: 120,
+                                  width: 120,
+                                  
+                                   decoration: BoxDecoration(
+                                     color: Colors.white,
+                              boxShadow: [
+                                BoxShadow(
+                                  color: Colors.grey.withOpacity(0.5),
+                                  spreadRadius: 2,
+                                  blurRadius: 5,
+                                  offset: Offset(
+                                      0, 3), // changes position of shadow
+                                ),
+                              ],
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(10)),
+                              
+                              ),
+                              child: Column(children: [
+                                SizedBox(height: 25,),
+                                Text('Topic:',
+          style: TextStyle(
+              fontSize: 16,
+              color: Colors.black,
+              fontWeight: FontWeight.bold,
+              decoration: TextDecoration.none),),
+               Text('Market',
+          style: TextStyle(
+              fontSize: 16,
+              color: Colors.black,
+              
+              decoration: TextDecoration.none),),
+                              ],)
+                                ), Spacer()
+                                    ],
+                                  )
+                                ],)
+                              ),
                         ),
                       ),
                     ],
