@@ -7,11 +7,7 @@ packages:
       name: async
       url: "https://pub.dartlang.org"
     source: hosted
-<<<<<<< Updated upstream
     version: "2.8.1"
-=======
-    version: "2.5.0"
->>>>>>> Stashed changes
   boolean_selector:
     dependency: transitive
     description:
@@ -155,6 +151,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.11.1"
+  percent_indicator:
+    dependency: "direct main"
+    description:
+      name: percent_indicator
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "3.0.1"
   petitparser:
     dependency: transitive
     description:
@@ -173,7 +176,7 @@ packages:
       name: source_span
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "1.8.0"
+    version: "1.8.1"
   stack_trace:
     dependency: transitive
     description:
@@ -208,11 +211,7 @@ packages:
       name: test_api
       url: "https://pub.dartlang.org"
     source: hosted
-<<<<<<< Updated upstream
     version: "0.4.2"
-=======
-    version: "0.2.19"
->>>>>>> Stashed changes
   typed_data:
     dependency: transitive
     description:
