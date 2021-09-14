@@ -121,7 +121,12 @@ class _MainContentState extends State<MainContent> {
                           Icons.psychology_rounded,
                           size: 50,
                         ),
-                        Text('Health')
+                        Text('Depression',
+                            style: TextStyle(
+                                fontSize: 12,
+                                color: Colors.black,
+                                decoration: TextDecoration.none),
+                          ),
                       ],
                     ),
                     decoration: BoxDecoration(
