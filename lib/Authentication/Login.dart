@@ -1,6 +1,6 @@
 import 'package:bumbutpital/Authentication/SignUp.dart';
-import 'package:bumbutpital/mainPage.dart';
 import 'package:flutter/material.dart';
+import 'package:bumbutpital/ComponentMainScreen/bottomnavbar.dart';
 
 class LoginPage extends StatefulWidget {
   @override
@@ -55,7 +55,7 @@ class _LoginPageState extends State<LoginPage> {
                   _textField(
                     _password,
                     "Password",
-                    Icon(Icons.password),
+                    Icon(Icons.lock),
                   ),
                   Container(
                     child: Text(
@@ -86,21 +86,23 @@ class _LoginPageState extends State<LoginPage> {
                   ElevatedButton(
                     onPressed: () {
                       Navigator.push(context,
-                          MaterialPageRoute(builder: (context) => MainPage()));
+                          MaterialPageRoute(builder: (context) => BottomNavBar()));
                     },
                     style: ElevatedButton.styleFrom(
-                        primary: Color(0XFFFE7940), fixedSize: Size(350, 50)
-                        // padding: EdgeInsets.symmetric(
-                        //     horizontal: 165, vertical: 15)
-                        ),
+                      primary: Color(0XFFFE7940),
+                      padding:
+                          EdgeInsets.symmetric(horizontal: 100, vertical: 15),
+
+                      // padding: EdgeInsets.symmetric(
+                      //     horizontal: 165, vertical: 15)
+                    ),
                     child: Text("Login"),
                   ),
                   SizedBox(
                     height: 16,
                   ),
                   Container(
-                    child: Text("-OR-",
-                        style: TextStyle(color: Color(0XFF6367EA))),
+                    child: Text("-OR-"),
                   ),
                   SizedBox(
                     height: 16,
@@ -125,7 +127,7 @@ class _LoginPageState extends State<LoginPage> {
                     },
                     style: ElevatedButton.styleFrom(
                       primary: Colors.white,
-                      fixedSize: Size(350, 50),
+                      //fixedSize: Size(350, 50),
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(8.0),
                       ),
@@ -140,7 +142,6 @@ class _LoginPageState extends State<LoginPage> {
                     },
                     child: Text(
                       'Sign Up',
-                      style: TextStyle(fontWeight: FontWeight.bold),
                     ),
                   )),
                   SizedBox(height: 16),

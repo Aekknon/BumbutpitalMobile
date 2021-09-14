@@ -3,23 +3,13 @@ import 'package:bumbutpital/ContentPage/MainContent.dart';
 import 'package:bumbutpital/HospitalPage/MainHospital.dart';
 import 'package:bumbutpital/HospitalPage/PromotionPage.dart';
 import 'package:bumbutpital/Questionare/MainQuestion.dart';
-
+import 'ComponentMainScreen/bottomnavbar.dart';
 import 'package:bumbutpital/VideoPage/MainVideo.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
 
-class MainPage extends StatefulWidget {
-  @override
-  State<MainPage> createState() => _MainPageState();
-}
-
-class _MainPageState extends State<MainPage> {
-  final tab = [
-    Center(child: Text('Home')),
-    Center(child: Text('Question')),
-    Center(child: Text('Dairy')),
-    Center(child: Text('MOPH')),
-  ];
+class MainPage extends StatelessWidget {
+ 
 
   @override
   Widget build(BuildContext context) {
@@ -304,6 +294,7 @@ class _MainPageState extends State<MainPage> {
                               child: Icon(
                                 Icons.play_circle_fill,
                                 size: 30,
+                                color: Colors.white
                               ),
                             )
                           ],
@@ -317,6 +308,7 @@ class _MainPageState extends State<MainPage> {
             ]),
           ),
         ),
+        
       ),
     );
   }

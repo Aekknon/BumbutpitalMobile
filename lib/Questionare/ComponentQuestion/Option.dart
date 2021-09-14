@@ -1,36 +1,57 @@
 import 'package:flutter/material.dart';
 
 class Option extends StatelessWidget {
-  const Option({
-    Key? key,
-  }) : super(key: key);
+  final Map<String, dynamic> option;
+  final void Function(int) onSelect;
+  final bool isSelected;
+
+  const Option(
+      {Key? key,
+      required this.option,
+      required this.onSelect,
+      required this.isSelected})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      margin: EdgeInsets.only(top: 20),
-      padding: EdgeInsets.all(20),
-      decoration: BoxDecoration(
-          border: Border.all(color: Color(0xFF979797)),
+    return GestureDetector(
+      onTap: () => onSelect(option["score"]),
+      child: Container(
+        margin: EdgeInsets.only(top: 20),
+        padding: EdgeInsets.symmetric(
+          horizontal: 24,
+          vertical: 20,
+        ),
+        decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(15),
-          color: Color(0XFFECF2FF)),
-      child: Row(
-        children: [
-          Container(
-            height: 26,
-            width: 26,
-            decoration: BoxDecoration(
+          color: isSelected ? Color(0XFF6367EA) : Color(0XFFECF2FF),
+        ),
+        child: Row(
+          children: [
+            Container(
+              height: 32,
+              width: 32,
+              decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(50),
-                border: Border.all(color: Color(0xFF979797))),
-          ),
-          Container(
-            width: 20,
-          ),
-          Text(
-            "1. Test",
-            style: TextStyle(color: Color(0xFF979797)),
-          ),
-        ],
+                color: isSelected ? Color(0xFF8BB0FF) : Color(0XFFECF2FF),
+              ),
+              child: Icon(
+                Icons.check,
+                size: 16,
+                color: Colors.white,
+              ),
+            ),
+            Container(
+              width: 20,
+            ),
+            Text(
+              option["text"],
+              style: TextStyle(
+                color: isSelected ? Colors.white : Color(0xFF979797),
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }
