@@ -127,13 +127,7 @@ class _MainContentState extends State<MainContent> {
                                 color: Colors.black,
                                 decoration: TextDecoration.none),
                           ),
-<<<<<<< Updated upstream
                       ],
-=======
-                          Expanded(child: conta)
-                        ],
-                      ),
->>>>>>> Stashed changes
                     ),
                     decoration: BoxDecoration(
                         color: Colors.white,
