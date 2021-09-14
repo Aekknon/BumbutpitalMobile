@@ -37,6 +37,7 @@ class _MophPageState extends State<MophPage> {
               fontSize: 24,
               color: Colors.black,
               decoration: TextDecoration.none),),),
+              SizedBox(height: 20,),
                 Container(
                   child: Text('Our Campaign ',
           style: TextStyle(
@@ -48,6 +49,7 @@ class _MophPageState extends State<MophPage> {
                 Center(
             child: CarouselSlider(
               options: CarouselOptions(
+                height: MediaQuery.of(context).size.height*0.2,
                 enlargeCenterPage: true,
                 enableInfiniteScroll: true,
                 autoPlay: true,
@@ -77,12 +79,12 @@ class _MophPageState extends State<MophPage> {
       ),
       SizedBox(height: 20,),
       Container(
-        height: MediaQuery.of(context).size.height*0.4,
-        width: MediaQuery.of(context).size.width*0.8,
+        height: MediaQuery.of(context).size.height*0.5,
+        width: MediaQuery.of(context).size.width*0.9,
         child: Expanded(
           child: GridView.count(
                         scrollDirection: Axis.vertical,
-                        crossAxisCount: 2,
+                        crossAxisCount: 1,
                         crossAxisSpacing: 20.0,
                         mainAxisSpacing: 20.0,
                         shrinkWrap: true,

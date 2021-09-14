@@ -294,6 +294,7 @@ class MainPage extends StatelessWidget {
                               child: Icon(
                                 Icons.play_circle_fill,
                                 size: 30,
+                                color: Colors.white
                               ),
                             )
                           ],

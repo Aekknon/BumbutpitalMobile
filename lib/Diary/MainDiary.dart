@@ -620,7 +620,7 @@ class _MainDiaryState extends State<MainDiary> {
                 context, MaterialPageRoute(builder: (context) => WriteDiary()));
           },
           child: const Icon(Icons.add),
-          backgroundColor: Color(hexColor('#6367EA'))),
+          backgroundColor: Color(0xFFA9B0FF),),
     );
   }
 }

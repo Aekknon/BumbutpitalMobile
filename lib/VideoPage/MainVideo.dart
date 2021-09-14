@@ -1,4 +1,4 @@
-import 'package:bumbutpital/VideoPage/VideoDetail.dart';
+import 'package:bumbutpital/widgets/VideoCard.dart';
 import 'package:flutter/material.dart';
 
 class MainVideo extends StatefulWidget {
@@ -7,6 +7,15 @@ class MainVideo extends StatefulWidget {
 }
 
 class _MainVideoState extends State<MainVideo> {
+   int _currentTabs = 0;
+
+  List<int> tabs = [1, 2, 3 ];
+
+  void _onChangeTab(int index) {
+    setState(() {
+      _currentTabs = index;
+    });
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -53,31 +62,33 @@ class _MainVideoState extends State<MainVideo> {
               ),
               Row(
                 children: [
-                  Container(
-                    transform: Matrix4.translationValues(50, -25, 0.0),
-                    height: 75,
-                    width: 75,
-                    child: Column(
-                      children: [
-                        Icon(
-                          Icons.visibility,
-                          size: 50,
-                          color: Color(0xff706A6A),
-                        ),
-                        Text('see all'),
-                      ],
-                    ),
-                    decoration: BoxDecoration(
-                        color: Colors.white,
-                        borderRadius: BorderRadius.circular(50)),
-                  ),
+                    SizedBox(width: MediaQuery.of(context).size.width*0.1,),
                   InkWell(
-                    onTap: () {
-                      Navigator.push(context,
-                          MaterialPageRoute(builder: (context) => MainVideo()));
-                    },
+                     onTap: () => _onChangeTab(0),
                     child: Container(
-                      transform: Matrix4.translationValues(95, -25, 0.0),
+                      transform: Matrix4.translationValues(0, -25, 0.0),
+                      height: 75,
+                      width: 75,
+                      child: Column(
+                        children: [
+                          Icon(
+                            Icons.visibility,
+                            size: 50,
+                            color: Color(0xff706A6A),
+                          ),
+                          Text('see all'),
+                        ],
+                      ),
+                      decoration: BoxDecoration(
+                          color: Colors.white,
+                          borderRadius: BorderRadius.circular(50)),
+                    ),
+                  ),
+                    SizedBox(width: MediaQuery.of(context).size.width*0.1,),
+                  InkWell(
+                  onTap: () => _onChangeTab(1),
+                    child: Container(
+                      transform: Matrix4.translationValues(0, -25, 0.0),
                       height: 75,
                       width: 75,
                       child: Column(
@@ -95,22 +106,14 @@ class _MainVideoState extends State<MainVideo> {
                           borderRadius: BorderRadius.circular(50)),
                     ),
                   ),
+                    SizedBox(width: MediaQuery.of(context).size.width*0.1,),
                   InkWell(
-                    onTap: () {
-                      Navigator.push(context,
-                          MaterialPageRoute(builder: (context) => MainVideo()));
-                    },
+                    onTap: () => _onChangeTab(2),
                     child: Container(
-                      transform: Matrix4.translationValues(140, -25, 0.0),
+                      transform: Matrix4.translationValues(0, -25, 0.0),
                       height: 75,
                       width: 75,
-                      child: InkWell(
-                        onTap: () {
-                          Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => MainVideo()));
-                        },
+                      
                         child: Column(
                           children: [
                             Icon(
@@ -118,10 +121,15 @@ class _MainVideoState extends State<MainVideo> {
                               size: 50,
                               color: Color(0xff706A6A),
                             ),
-                            Text('Depression')
+                           Text('Depression',
+                            style: TextStyle(
+                                fontSize: 12,
+                                color: Colors.black,
+                                decoration: TextDecoration.none),
+                          ),
                           ],
                         ),
-                      ),
+                      
                       decoration: BoxDecoration(
                           color: Colors.white,
                           borderRadius: BorderRadius.circular(50)),
@@ -130,321 +138,15 @@ class _MainVideoState extends State<MainVideo> {
                 ],
               ),
               Expanded(
-                  child: SingleChildScrollView(
-                      child: Container(
-                          width: MediaQuery.of(context).size.width,
-                          height: MediaQuery.of(context).size.height,
-                          decoration: BoxDecoration(
-                              color: Colors.white,
-                              borderRadius: BorderRadius.only(
-                                  topRight: Radius.circular(30),
-                                  topLeft: Radius.circular(30))),
-                          //box video clip
-                          child: Row(children: [
-                            Container(
-                                child: Column(children: [
-                              InkWell(
-                                onTap: () {
-                                  Navigator.push(
-                                      context,
-                                      MaterialPageRoute(
-                                          builder: (context) => VideoDetail()));
-                                },
-                                child: Column(
-                                  children: [
-                                    Stack(children: [
-                                      Row(
-                                        children: [
-                                          Container(
-                                              padding: EdgeInsets.all(30),
-                                              child: Image.network(
-                                                'https://i.ytimg.com/vi/akFQ7JgeEMk/maxresdefault.jpg',
-                                                height: 100,
-                                                width: 150,
-                                              )),
-                                          Container(
-                                            width: MediaQuery.of(context)
-                                                    .size
-                                                    .width *
-                                                0.4,
-                                            child: Column(
-                                              children: [
-                                                Container(
-                                                  width: MediaQuery.of(context)
-                                                          .size
-                                                          .width *
-                                                      0.4,
-
-                                                  // transform:
-                                                  //     Matrix4.translationValues(
-                                                  //         -20, -30, 0.0),
-                                                  child: Text(
-                                                    'Topic: โรคภัยใกล้ตัว โรคซึมเศร้า',
-                                                    style: TextStyle(
-                                                      fontWeight:
-                                                          FontWeight.bold,
-                                                    ),
-                                                  ),
-                                                ),
-                                                SizedBox(
-                                                  height: 20,
-                                                ),
-                                                Container(
-                                                  width: MediaQuery.of(context)
-                                                          .size
-                                                          .width *
-                                                      0.4,
-                                                  child: Icon(
-                                                      Icons.schedule_outlined),
-                                                  alignment: Alignment.topLeft,
-                                                ),
-                                                Container(
-                                                    transform: Matrix4
-                                                        .translationValues(
-                                                            -30, -20, 0.0),
-                                                    child: Text('20 min')),
-                                              ],
-                                            ),
-                                          ),
-                                        ],
-                                      ),
-                                    ]),
-                                  ],
-                                ),
-                              ),
-                              //box video clip
-                              Row(children: [
-                                Container(
-                                    child: Column(
-                                  children: [
-                                    InkWell(
-                                      onTap: () {
-                                        Navigator.push(
-                                            context,
-                                            MaterialPageRoute(
-                                                builder: (context) =>
-                                                    VideoDetail()));
-                                      },
-                                      child: Stack(children: [
-                                        Row(
-                                          children: [
-                                            Container(
-                                                padding: EdgeInsets.all(30),
-                                                child: Image.network(
-                                                  'https://i.ytimg.com/vi/akFQ7JgeEMk/maxresdefault.jpg',
-                                                  height: 100,
-                                                  width: 150,
-                                                )),
-                                            Container(
-                                              width: MediaQuery.of(context)
-                                                      .size
-                                                      .width *
-                                                  0.4,
-                                              child: Column(
-                                                children: [
-                                                  Container(
-                                                    width:
-                                                        MediaQuery.of(context)
-                                                                .size
-                                                                .width *
-                                                            0.4,
-
-                                                    // transform:
-                                                    //     Matrix4.translationValues(
-                                                    //         -20, -30, 0.0),
-                                                    child: Text(
-                                                      'Topic: โรคภัยใกล้ตัว โรคซึมเศร้า',
-                                                      style: TextStyle(
-                                                        fontWeight:
-                                                            FontWeight.bold,
-                                                      ),
-                                                    ),
-                                                  ),
-                                                  SizedBox(
-                                                    height: 20,
-                                                  ),
-                                                  Container(
-                                                    width:
-                                                        MediaQuery.of(context)
-                                                                .size
-                                                                .width *
-                                                            0.4,
-                                                    child: Icon(Icons
-                                                        .schedule_outlined),
-                                                    alignment:
-                                                        Alignment.topLeft,
-                                                  ),
-                                                  Container(
-                                                      transform: Matrix4
-                                                          .translationValues(
-                                                              -30, -20, 0.0),
-                                                      child: Text('20 min'))
-                                                ],
-                                              ),
-                                            ),
-                                          ],
-                                        ),
-                                      ]),
-                                    ),
-                                  ],
-                                ))
-                              ]),
-                              //Box video clip
-                              Row(children: [
-                                Container(
-                                    child: Column(
-                                  children: [
-                                    InkWell(
-                                      onTap: () {
-                                        Navigator.push(
-                                            context,
-                                            MaterialPageRoute(
-                                                builder: (context) =>
-                                                    VideoDetail()));
-                                      },
-                                      child: Stack(children: [
-                                        Row(
-                                          children: [
-                                            Container(
-                                                padding: EdgeInsets.all(30),
-                                                child: Image.network(
-                                                  'https://i.ytimg.com/vi/akFQ7JgeEMk/maxresdefault.jpg',
-                                                  height: 100,
-                                                  width: 150,
-                                                )),
-                                            Container(
-                                              width: MediaQuery.of(context)
-                                                      .size
-                                                      .width *
-                                                  0.4,
-                                              child: Column(
-                                                children: [
-                                                  Container(
-                                                    width:
-                                                        MediaQuery.of(context)
-                                                                .size
-                                                                .width *
-                                                            0.4,
-
-                                                    // transform:
-                                                    //     Matrix4.translationValues(
-                                                    //         -20, -30, 0.0),
-                                                    child: Text(
-                                                      'Topic: โรคภัยใกล้ตัว โรคซึมเศร้า',
-                                                      style: TextStyle(
-                                                        fontWeight:
-                                                            FontWeight.bold,
-                                                      ),
-                                                    ),
-                                                  ),
-                                                  SizedBox(
-                                                    height: 20,
-                                                  ),
-                                                  Container(
-                                                    width:
-                                                        MediaQuery.of(context)
-                                                                .size
-                                                                .width *
-                                                            0.4,
-                                                    child: Icon(Icons
-                                                        .schedule_outlined),
-                                                    alignment:
-                                                        Alignment.topLeft,
-                                                  ),
-                                                  Container(
-                                                      transform: Matrix4
-                                                          .translationValues(
-                                                              -30, -20, 0.0),
-                                                      child: Text('20 min'))
-                                                ],
-                                              ),
-                                            ),
-                                          ],
-                                        ),
-                                      ]),
-                                    ),
-                                  ],
-                                ))
-                              ]),
-                              //box video clip
-                              Row(children: [
-                                Container(
-                                    child: Column(
-                                  children: [
-                                    InkWell(
-                                      onTap: () {
-                                        Navigator.push(
-                                            context,
-                                            MaterialPageRoute(
-                                                builder: (context) =>
-                                                    VideoDetail()));
-                                      },
-                                      child: Stack(children: [
-                                        Row(
-                                          children: [
-                                            Container(
-                                                padding: EdgeInsets.all(30),
-                                                child: Image.network(
-                                                  'https://i.ytimg.com/vi/akFQ7JgeEMk/maxresdefault.jpg',
-                                                  height: 100,
-                                                  width: 150,
-                                                )),
-                                            Container(
-                                              width: MediaQuery.of(context)
-                                                      .size
-                                                      .width *
-                                                  0.4,
-                                              child: Column(
-                                                children: [
-                                                  Container(
-                                                    width:
-                                                        MediaQuery.of(context)
-                                                                .size
-                                                                .width *
-                                                            0.4,
-
-                                                    // transform:
-                                                    //     Matrix4.translationValues(
-                                                    //         -20, -30, 0.0),
-                                                    child: Text(
-                                                      'Topic: โรคภัยใกล้ตัว โรคซึมเศร้า',
-                                                      style: TextStyle(
-                                                        fontWeight:
-                                                            FontWeight.bold,
-                                                      ),
-                                                    ),
-                                                  ),
-                                                  SizedBox(
-                                                    height: 20,
-                                                  ),
-                                                  Container(
-                                                    width:
-                                                        MediaQuery.of(context)
-                                                                .size
-                                                                .width *
-                                                            0.4,
-                                                    child: Icon(Icons
-                                                        .schedule_outlined),
-                                                    alignment:
-                                                        Alignment.topLeft,
-                                                  ),
-                                                  Container(
-                                                      transform: Matrix4
-                                                          .translationValues(
-                                                              -30, -20, 0.0),
-                                                      child: Text('20 min'))
-                                                ],
-                                              ),
-                                            ),
-                                          ],
-                                        ),
-                                      ]),
-                                    ),
-                                  ],
-                                ))
-                              ]),
-                            ]))
-                          ]))))
+                  child: ListView.builder(
+                  itemCount: tabs[_currentTabs],
+                  itemBuilder: (ctx, index) {
+                    return Column(children: [
+                      ...List.generate(
+                          tabs[_currentTabs.bitLength], (index) => VideotCard())
+                    ]);
+                  },
+                ),)
             ])));
   }
 }
