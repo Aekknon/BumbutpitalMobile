@@ -21,6 +21,9 @@ class _QuestionState extends State<Question> {
   void onClickNextPage() {
     setState(() {
       _answerList[_currentPage - 1] = _currentAnswer;
+      if (_currentAnswer == -1) {
+        return;
+      }
       if (_currentPage == 9) {
         Navigator.of(context).pushNamed(ShowResult.routeName,
             arguments: _answerList.reduce((a, b) => a + b));
