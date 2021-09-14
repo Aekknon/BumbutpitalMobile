@@ -1,3 +1,4 @@
+import 'package:bumbutpital/ComponentMainScreen/BottomNavBar.dart';
 import 'package:flutter/material.dart';
 import 'package:syncfusion_flutter_gauges/gauges.dart';
 
@@ -34,7 +35,7 @@ class ShowResult extends StatelessWidget {
             style: TextStyle(fontWeight: FontWeight.bold, fontSize: 24),
           ),
           SizedBox(
-            height: 24,
+            height: 30,
           ),
           Column(
             children: [
@@ -137,12 +138,20 @@ class ShowResult extends StatelessWidget {
               ),
             ],
           ),
-
-          // ElevatedButton(
-          //     onPressed: () {
-          //       print(_phq9Type);
-          //     },
-          //     child: Text('click'))
+          SizedBox(
+            height: 50,
+          ),
+          ElevatedButton(
+            onPressed: () {
+              Navigator.push(context,
+                  MaterialPageRoute(builder: (context) => BottomNavBar()));
+            },
+            child: Text('Done'),
+            style: ElevatedButton.styleFrom(
+              primary: Color(0XFFFE7940),
+              padding: EdgeInsets.symmetric(horizontal: 100, vertical: 15),
+            ),
+          )
         ],
       ),
     );
