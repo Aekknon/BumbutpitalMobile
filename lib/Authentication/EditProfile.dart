@@ -1,4 +1,6 @@
+import 'package:bumbutpital/Authentication/Profile.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 class EditProfile extends StatefulWidget {
   @override
@@ -21,11 +23,25 @@ class _EditProfileState extends State<EditProfile> {
         centerTitle: true,
         backgroundColor: Color(0XFFECF2FF),
         elevation: 0,
-        iconTheme: IconThemeData(color: Colors.black),
         title: Text(
           "EDIT PROFILE",
           style: TextStyle(color: Colors.black),
         ),
+        actions: [
+          IconButton(
+            onPressed: () {
+              setState(() {
+                profileName = _controllerName.text;
+                profileSurname = _controllerSurname.text;
+                email = _controllerEmail.text;
+                print('$profileName' + '$profileSurname' + '$email');
+              });
+              Navigator.pop(context);
+            },
+            icon: Icon(Icons.done),
+            color: Colors.green,
+          )
+        ],
       ),
       body: SingleChildScrollView(
         child: Center(
@@ -49,37 +65,54 @@ class _EditProfileState extends State<EditProfile> {
               SizedBox(
                 height: 30,
               ),
-              TextField(
-                controller: _controllerName,
-                decoration: InputDecoration(
-                    border: OutlineInputBorder(), labelText: "Name"),
+              SizedBox(
+                width: 300,
+                child: TextField(
+                  controller: _controllerName,
+                  decoration: InputDecoration(
+                      border: OutlineInputBorder(),
+                      labelText: "Name",
+                      contentPadding:
+                          EdgeInsets.symmetric(vertical: 20, horizontal: 20),
+                      hintText: '$profileName'),
+                ),
               ),
               SizedBox(
                 height: 30,
               ),
-              TextField(
-                controller: _controllerSurname,
-                decoration: InputDecoration(
-                    border: OutlineInputBorder(), labelText: "Surname"),
-              ),
               SizedBox(
-                height: 30,
-              ),
-              TextField(
-                controller: _controllerEmail,
-                decoration: InputDecoration(
-                    border: OutlineInputBorder(), labelText: "Email"),
-              ),
-              ElevatedButton(
-                  onPressed: () {
-                    setState(() {
-                      profileName = _controllerName.text;
-                      profileSurname = _controllerSurname.text;
-                      email = _controllerEmail.text;
-                      print('$profileName' + '$profileSurname' + '$email');
-                    });
+                width: 300,
+                child: TextField(
+                  onChanged: (value) {
+                    profileName = value.trim as String;
                   },
-                  child: Text('Done'))
+                  controller: _controllerSurname,
+                  decoration: InputDecoration(
+                      border: OutlineInputBorder(),
+                      labelText: "Surname",
+                      contentPadding:
+                          EdgeInsets.symmetric(vertical: 20, horizontal: 20),
+                      hintText: '$profileSurname'),
+                ),
+              ),
+              SizedBox(
+                height: 30,
+              ),
+              SizedBox(
+                width: 300,
+                child: TextField(
+                  controller: _controllerEmail,
+                  decoration: InputDecoration(
+                      border: OutlineInputBorder(),
+                      labelText: "Email",
+                      contentPadding:
+                          EdgeInsets.symmetric(vertical: 20, horizontal: 20),
+                      hintText: '$email'),
+                ),
+              ),
+              SizedBox(
+                height: 30,
+              ),
             ],
           ),
         ),
