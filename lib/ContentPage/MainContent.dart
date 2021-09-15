@@ -11,7 +11,7 @@ class MainContent extends StatefulWidget {
 class _MainContentState extends State<MainContent> {
   int _currentTabs = 0;
 
-  List<int> tabs = [1, 2, 3 ];
+  List<int> tabs = [1, 2, 3];
 
   void _onChangeTab(int index) {
     setState(() {
@@ -58,7 +58,7 @@ class _MainContentState extends State<MainContent> {
                                 color: Colors.white,
                                 decoration: TextDecoration.none),
                           ),
-                        ) //Your widget here,
+                        ) 
                         ),
                   ),
                 ],
@@ -66,9 +66,9 @@ class _MainContentState extends State<MainContent> {
             ),
             Row(
               children: [
-                SizedBox(width: MediaQuery.of(context).size.width*0.1,),
+                SizedBox(width: MediaQuery.of(context).size.width * 0.125),
                 InkWell(
-                   onTap: ()=> _onChangeTab(0),
+                  onTap: () => _onChangeTab(0),
                   child: Container(
                     transform: Matrix4.translationValues(0, -25, 0.0),
                     height: 75,
@@ -87,7 +87,9 @@ class _MainContentState extends State<MainContent> {
                         borderRadius: BorderRadius.circular(50)),
                   ),
                 ),
-                SizedBox(width: MediaQuery.of(context).size.width*0.1,),
+                SizedBox(
+                  width: MediaQuery.of(context).size.width * 0.1,
+                ),
                 InkWell(
                   onTap: () => _onChangeTab(1),
                   child: Container(
@@ -108,8 +110,10 @@ class _MainContentState extends State<MainContent> {
                         borderRadius: BorderRadius.circular(50)),
                   ),
                 ),
-                SizedBox(width: MediaQuery.of(context).size.width*0.1,),
-               InkWell(
+                SizedBox(
+                  width: MediaQuery.of(context).size.width * 0.1,
+                ),
+                InkWell(
                   onTap: () => _onChangeTab(2),
                   child: Container(
                     transform: Matrix4.translationValues(0, -25, 0.0),
@@ -121,12 +125,13 @@ class _MainContentState extends State<MainContent> {
                           Icons.psychology_rounded,
                           size: 50,
                         ),
-                        Text('Depression',
-                            style: TextStyle(
-                                fontSize: 12,
-                                color: Colors.black,
-                                decoration: TextDecoration.none),
-                          ),
+                        Text(
+                          'Depression',
+                          style: TextStyle(
+                              fontSize: 12,
+                              color: Colors.black,
+                              decoration: TextDecoration.none),
+                        ),
                       ],
                     ),
                     decoration: BoxDecoration(
@@ -143,8 +148,8 @@ class _MainContentState extends State<MainContent> {
                   itemCount: tabs[_currentTabs],
                   itemBuilder: (ctx, index) {
                     return Column(children: [
-                      ...List.generate(
-                          tabs[_currentTabs.bitLength], (index) => ContentCard())
+                      ...List.generate(tabs[_currentTabs.bitLength],
+                          (index) => ContentCard())
                     ]);
                   },
                 ),
