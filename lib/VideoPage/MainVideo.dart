@@ -7,15 +7,16 @@ class MainVideo extends StatefulWidget {
 }
 
 class _MainVideoState extends State<MainVideo> {
-   int _currentTabs = 0;
+  int _currentTabs = 0;
 
-  List<int> tabs = [1, 2, 3 ];
+  List<int> tabs = [1, 2, 3];
 
   void _onChangeTab(int index) {
     setState(() {
       _currentTabs = index;
     });
   }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -62,9 +63,11 @@ class _MainVideoState extends State<MainVideo> {
               ),
               Row(
                 children: [
-                    SizedBox(width: MediaQuery.of(context).size.width*0.1,),
+                  SizedBox(
+                    width: MediaQuery.of(context).size.width * 0.125,
+                  ),
                   InkWell(
-                     onTap: () => _onChangeTab(0),
+                    onTap: () => _onChangeTab(0),
                     child: Container(
                       transform: Matrix4.translationValues(0, -25, 0.0),
                       height: 75,
@@ -84,9 +87,11 @@ class _MainVideoState extends State<MainVideo> {
                           borderRadius: BorderRadius.circular(50)),
                     ),
                   ),
-                    SizedBox(width: MediaQuery.of(context).size.width*0.1,),
+                  SizedBox(
+                    width: MediaQuery.of(context).size.width * 0.1,
+                  ),
                   InkWell(
-                  onTap: () => _onChangeTab(1),
+                    onTap: () => _onChangeTab(1),
                     child: Container(
                       transform: Matrix4.translationValues(0, -25, 0.0),
                       height: 75,
@@ -106,30 +111,31 @@ class _MainVideoState extends State<MainVideo> {
                           borderRadius: BorderRadius.circular(50)),
                     ),
                   ),
-                    SizedBox(width: MediaQuery.of(context).size.width*0.1,),
+                  SizedBox(
+                    width: MediaQuery.of(context).size.width * 0.1,
+                  ),
                   InkWell(
                     onTap: () => _onChangeTab(2),
                     child: Container(
                       transform: Matrix4.translationValues(0, -25, 0.0),
                       height: 75,
                       width: 75,
-                      
-                        child: Column(
-                          children: [
-                            Icon(
-                              Icons.psychology_rounded,
-                              size: 50,
-                              color: Color(0xff706A6A),
-                            ),
-                           Text('Depression',
+                      child: Column(
+                        children: [
+                          Icon(
+                            Icons.psychology_rounded,
+                            size: 50,
+                            color: Color(0xff706A6A),
+                          ),
+                          Text(
+                            'Depression',
                             style: TextStyle(
                                 fontSize: 12,
                                 color: Colors.black,
                                 decoration: TextDecoration.none),
                           ),
-                          ],
-                        ),
-                      
+                        ],
+                      ),
                       decoration: BoxDecoration(
                           color: Colors.white,
                           borderRadius: BorderRadius.circular(50)),
@@ -138,7 +144,7 @@ class _MainVideoState extends State<MainVideo> {
                 ],
               ),
               Expanded(
-                  child: ListView.builder(
+                child: ListView.builder(
                   itemCount: tabs[_currentTabs],
                   itemBuilder: (ctx, index) {
                     return Column(children: [
@@ -146,7 +152,8 @@ class _MainVideoState extends State<MainVideo> {
                           tabs[_currentTabs.bitLength], (index) => VideotCard())
                     ]);
                   },
-                ),)
+                ),
+              )
             ])));
   }
 }

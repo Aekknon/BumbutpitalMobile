@@ -1,7 +1,6 @@
 import 'package:video_player/video_player.dart';
 import 'package:flutter/material.dart';
 
-
 class VideoDetail extends StatefulWidget {
   VideoDetail({Key? key}) : super(key: key);
 
@@ -10,7 +9,7 @@ class VideoDetail extends StatefulWidget {
 }
 
 class _VideoDetailState extends State<VideoDetail> {
-   late VideoPlayerController _controller;
+  late VideoPlayerController _controller;
 
   @override
   void initState() {
