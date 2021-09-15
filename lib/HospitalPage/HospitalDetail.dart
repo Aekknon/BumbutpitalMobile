@@ -116,19 +116,26 @@ class _HospitalDetailState extends State<HospitalDetail> {
                                         decoration: TextDecoration.none),
                                   ),
                                 ),
-                                SizedBox(width: MediaQuery.of(context).size.width*0.5,),
-                                InkWell(onTap: () {
-                                  Navigator.push(
-                                      context,
-                                      MaterialPageRoute(
-                                          builder: (context) =>
-                                              PromotionPage()));
-                                },
-                                child: Text('See all',
+                                SizedBox(
+                                  width:
+                                      MediaQuery.of(context).size.width * 0.5,
+                                ),
+                                InkWell(
+                                  onTap: () {
+                                    Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                            builder: (context) =>
+                                                PromotionPage()));
+                                  },
+                                  child: Text(
+                                    'See all',
                                     style: TextStyle(
                                         fontSize: 12,
                                         color: Colors.blue,
-                                        decoration: TextDecoration.none),),)
+                                        decoration: TextDecoration.none),
+                                  ),
+                                )
                               ],
                             ),
                             Container(
@@ -328,7 +335,7 @@ class _HospitalDetailState extends State<HospitalDetail> {
                                                                   MaterialPageRoute(
                                                                       builder:
                                                                           (context) =>
-                                                                               KeepkoopongPage()));
+                                                                              KeepkoopongPage()));
                                                             },
                                                           ),
                                                         )) //Your widget here,
@@ -424,7 +431,7 @@ class _HospitalDetailState extends State<HospitalDetail> {
                                                                   MaterialPageRoute(
                                                                       builder:
                                                                           (context) =>
-                                                                               KeepkoopongPage()));
+                                                                              KeepkoopongPage()));
                                                             },
                                                           ),
                                                         )) //Your widget here,
@@ -520,7 +527,7 @@ class _HospitalDetailState extends State<HospitalDetail> {
                                                                   MaterialPageRoute(
                                                                       builder:
                                                                           (context) =>
-                                                                               KeepkoopongPage()));
+                                                                              KeepkoopongPage()));
                                                             },
                                                           ),
                                                         )) //Your widget here,
@@ -616,7 +623,7 @@ class _HospitalDetailState extends State<HospitalDetail> {
                                                                   MaterialPageRoute(
                                                                       builder:
                                                                           (context) =>
-                                                                               KeepkoopongPage()));
+                                                                              KeepkoopongPage()));
                                                             },
                                                           ),
                                                         )) //Your widget here,
@@ -712,7 +719,7 @@ class _HospitalDetailState extends State<HospitalDetail> {
                                                                   MaterialPageRoute(
                                                                       builder:
                                                                           (context) =>
-                                                                               KeepkoopongPage()));
+                                                                              KeepkoopongPage()));
                                                             },
                                                           ),
                                                         )) //Your widget here,

@@ -24,7 +24,6 @@ class _QRCodePageState extends State<QRCodePage> {
         child: Expanded(
           child: SingleChildScrollView(
             child: Container(
-              
               child: Center(
                 child: Column(
                   children: [
@@ -48,7 +47,8 @@ class _QRCodePageState extends State<QRCodePage> {
                               color: Colors.grey.withOpacity(0.5),
                               spreadRadius: 2,
                               blurRadius: 5,
-                              offset: Offset(0, 3), // changes position of shadow
+                              offset:
+                                  Offset(0, 3), // changes position of shadow
                             ),
                           ],
                           borderRadius: BorderRadius.all(Radius.circular(10)),
@@ -70,15 +70,15 @@ class _QRCodePageState extends State<QRCodePage> {
                           fontWeight: FontWeight.bold),
                     ),
                     SizedBox(
-                      height: MediaQuery.of(context).size.height * 0.31,
+                      height: MediaQuery.of(context).size.height * 0.15,
                     ),
                     ElevatedButton(
                       style: ElevatedButton.styleFrom(
                           primary: Color(hexColor('#FE7940')),
-                          padding:
-                              EdgeInsets.symmetric(horizontal: 100, vertical: 15),
-                          textStyle:
-                              TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
+                          padding: EdgeInsets.symmetric(
+                              horizontal: 100, vertical: 15),
+                          textStyle: TextStyle(
+                              fontSize: 20, fontWeight: FontWeight.bold)),
                       child: Text(
                         'COMPLETE',
                         style: TextStyle(
@@ -87,8 +87,10 @@ class _QRCodePageState extends State<QRCodePage> {
                             decoration: TextDecoration.none),
                       ),
                       onPressed: () {
-                        Navigator.push(context,
-                            MaterialPageRoute(builder: (context) => BottomNavBar()));
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => BottomNavBar()));
                       },
                     ),
                   ],

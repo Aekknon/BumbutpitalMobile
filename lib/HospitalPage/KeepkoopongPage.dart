@@ -19,12 +19,11 @@ class _KeepkoopongPageState extends State<KeepkoopongPage> {
           elevation: 0,
         ),
         body: Container(
-           color: Color(hexColor('#ECF2FF')),
-           height: MediaQuery.of(context).size.height,
+          color: Color(hexColor('#ECF2FF')),
+          height: MediaQuery.of(context).size.height,
           child: Expanded(
             child: SingleChildScrollView(
               child: Container(
-               
                 child: Center(
                   child: Column(
                     children: [
@@ -40,7 +39,8 @@ class _KeepkoopongPageState extends State<KeepkoopongPage> {
                                 color: Colors.grey.withOpacity(0.5),
                                 spreadRadius: 2,
                                 blurRadius: 5,
-                                offset: Offset(0, 3), // changes position of shadow
+                                offset:
+                                    Offset(0, 3), // changes position of shadow
                               ),
                             ],
                             borderRadius: BorderRadius.all(Radius.circular(10)),
@@ -74,7 +74,8 @@ class _KeepkoopongPageState extends State<KeepkoopongPage> {
                                 color: Colors.grey.withOpacity(0.5),
                                 spreadRadius: 2,
                                 blurRadius: 5,
-                                offset: Offset(0, 3), // changes position of shadow
+                                offset:
+                                    Offset(0, 3), // changes position of shadow
                               ),
                             ],
                             borderRadius: BorderRadius.all(Radius.circular(10)),
@@ -115,13 +116,13 @@ class _KeepkoopongPageState extends State<KeepkoopongPage> {
                         ),
                       ),
                       SizedBox(
-                        height: MediaQuery.of(context).size.height * 0.25,
+                        height: MediaQuery.of(context).size.height * 0.2,
                       ),
                       ElevatedButton(
                         style: ElevatedButton.styleFrom(
                             primary: Color(hexColor('#FE7940')),
-                            padding:
-                                EdgeInsets.symmetric(horizontal: 100, vertical: 15),
+                            padding: EdgeInsets.symmetric(
+                                horizontal: 100, vertical: 15),
                             textStyle: TextStyle(
                                 fontSize: 20, fontWeight: FontWeight.bold)),
                         child: Text(
