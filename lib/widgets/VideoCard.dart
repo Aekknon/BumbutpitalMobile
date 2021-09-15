@@ -1,6 +1,6 @@
 import 'package:bumbutpital/VideoPage/VideoDetail.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_link_preview/flutter_link_preview.dart';
+
 
 class VideotCard extends StatelessWidget {
   const VideotCard({Key? key}) : super(key: key);
@@ -21,13 +21,14 @@ class VideotCard extends StatelessWidget {
                                     Stack(children: [
                                       Row(
                                         children: [
-                                          FlutterLinkPreview(
-    url: "https://flutter.github.io/assets-for-api-docs/assets/videos/bee.mp4",
-    titleStyle: TextStyle(
-        color: Colors.blue,
-        fontWeight: FontWeight.bold,
-    ),
-),
+                                           Container(
+                                              padding: EdgeInsets.all(30),
+                                              child: Image.network(
+                                                'https://i.ytimg.com/vi/akFQ7JgeEMk/maxresdefault.jpg',
+                                                height: 100,
+                                                width: 150,
+                                              )),
+                                          
                                           Container(
                                             width: MediaQuery.of(context)
                                                     .size

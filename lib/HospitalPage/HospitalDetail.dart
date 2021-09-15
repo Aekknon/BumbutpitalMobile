@@ -1,3 +1,4 @@
+import 'package:bumbutpital/HospitalPage/KeepkoopongPage.dart';
 import 'package:bumbutpital/HospitalPage/PromotionPage.dart';
 import 'package:flutter/material.dart';
 
@@ -103,15 +104,32 @@ class _HospitalDetailState extends State<HospitalDetail> {
                             SizedBox(
                               height: 25,
                             ),
-                            Container(
-                              padding: EdgeInsets.fromLTRB(20, 0, 250, 20),
-                              child: Text(
-                                'Promotion',
-                                style: TextStyle(
-                                    fontSize: 15,
-                                    color: Colors.black,
-                                    decoration: TextDecoration.none),
-                              ),
+                            Row(
+                              children: [
+                                Container(
+                                  padding: EdgeInsets.fromLTRB(20, 0, 0, 20),
+                                  child: Text(
+                                    'Promotion',
+                                    style: TextStyle(
+                                        fontSize: 15,
+                                        color: Colors.black,
+                                        decoration: TextDecoration.none),
+                                  ),
+                                ),
+                                SizedBox(width: MediaQuery.of(context).size.width*0.5,),
+                                InkWell(onTap: () {
+                                  Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) =>
+                                              PromotionPage()));
+                                },
+                                child: Text('See all',
+                                    style: TextStyle(
+                                        fontSize: 12,
+                                        color: Colors.blue,
+                                        decoration: TextDecoration.none),),)
+                              ],
                             ),
                             Container(
                               width: MediaQuery.of(context).size.width,
@@ -215,7 +233,7 @@ class _HospitalDetailState extends State<HospitalDetail> {
                                                                   MaterialPageRoute(
                                                                       builder:
                                                                           (context) =>
-                                                                              PromotionPage()));
+                                                                              KeepkoopongPage()));
                                                             },
                                                           ),
                                                         ))),
@@ -310,7 +328,7 @@ class _HospitalDetailState extends State<HospitalDetail> {
                                                                   MaterialPageRoute(
                                                                       builder:
                                                                           (context) =>
-                                                                              PromotionPage()));
+                                                                               KeepkoopongPage()));
                                                             },
                                                           ),
                                                         )) //Your widget here,
@@ -406,7 +424,7 @@ class _HospitalDetailState extends State<HospitalDetail> {
                                                                   MaterialPageRoute(
                                                                       builder:
                                                                           (context) =>
-                                                                              PromotionPage()));
+                                                                               KeepkoopongPage()));
                                                             },
                                                           ),
                                                         )) //Your widget here,
@@ -502,7 +520,7 @@ class _HospitalDetailState extends State<HospitalDetail> {
                                                                   MaterialPageRoute(
                                                                       builder:
                                                                           (context) =>
-                                                                              PromotionPage()));
+                                                                               KeepkoopongPage()));
                                                             },
                                                           ),
                                                         )) //Your widget here,
@@ -598,7 +616,7 @@ class _HospitalDetailState extends State<HospitalDetail> {
                                                                   MaterialPageRoute(
                                                                       builder:
                                                                           (context) =>
-                                                                              PromotionPage()));
+                                                                               KeepkoopongPage()));
                                                             },
                                                           ),
                                                         )) //Your widget here,
@@ -694,7 +712,7 @@ class _HospitalDetailState extends State<HospitalDetail> {
                                                                   MaterialPageRoute(
                                                                       builder:
                                                                           (context) =>
-                                                                              PromotionPage()));
+                                                                               KeepkoopongPage()));
                                                             },
                                                           ),
                                                         )) //Your widget here,
