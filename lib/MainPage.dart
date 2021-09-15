@@ -3,7 +3,6 @@ import 'package:bumbutpital/ContentPage/MainContent.dart';
 import 'package:bumbutpital/HospitalPage/MainHospital.dart';
 import 'package:bumbutpital/HospitalPage/PromotionPage.dart';
 import 'package:bumbutpital/Questionare/MainQuestion.dart';
-import 'ComponentMainScreen/bottomnavbar.dart';
 import 'package:bumbutpital/VideoPage/MainVideo.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
