@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:carousel_slider/carousel_slider.dart';
-import 'ComponentMainScreen/bottomnavbar.dart';
+import 'ComponentMainScreen/bottom_navbar.dart';
 
 class MophPage extends StatefulWidget {
+  // ignore: prefer_const_constructors_in_immutables
   MophPage({Key? key}) : super(key: key);
 
   @override
@@ -18,11 +19,10 @@ class _MophPageState extends State<MophPage> {
     "https://i.ytimg.com/vi/tMn3cMkKYUY/maxresdefault.jpg",
   ];
   @override
-  @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: Container(
-        color: Color(hexColor('#ECF2FF')),
+        color: Color(0xffECF2FF),
         height: MediaQuery.of(context).size.height,
         child: Expanded(
           child: SingleChildScrollView(
@@ -31,26 +31,23 @@ class _MophPageState extends State<MophPage> {
                 SizedBox(
                   height: 40,
                 ),
-                Container(
-                  child: Text(
+                   Text(
                     'Ministry of Public Health',
                     style: TextStyle(
                         fontSize: 24,
                         color: Colors.black,
                         decoration: TextDecoration.none),
                   ),
-                ),
+                
                 SizedBox(
                   height: 20,
                 ),
-                Container(
-                  child: Text(
-                    'Our Campaign ',
-                    style: TextStyle(
-                        fontSize: 16,
-                        color: Colors.black,
-                        decoration: TextDecoration.none),
-                  ),
+                Text(
+                  'Our Campaign ',
+                  style: TextStyle(
+                      fontSize: 16,
+                      color: Colors.black,
+                      decoration: TextDecoration.none),
                 ),
                 SizedBox(
                   height: 20,
@@ -84,15 +81,13 @@ class _MophPageState extends State<MophPage> {
                 SizedBox(
                   height: 30,
                 ),
-                Container(
-                  child: Text(
+                Text(
                     'Infographic',
                     style: TextStyle(
                         fontSize: 24,
                         color: Colors.black,
                         decoration: TextDecoration.none),
                   ),
-                ),
                 SizedBox(
                   height: 20,
                 ),
@@ -323,12 +318,4 @@ class _MophPageState extends State<MophPage> {
       ),
     );
   }
-}
-
-int hexColor(String color) {
-  String newColor = '0xff' + color;
-
-  newColor = newColor.replaceAll('#', '');
-  int finalColor = int.parse(newColor);
-  return finalColor;
 }

@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
-import 'Authentication/Login.dart';
+import 'Authentication/login.dart';
 
 class SplashScreen extends StatefulWidget {
+  // ignore: prefer_const_constructors_in_immutables
   SplashScreen({Key? key}) : super(key: key);
 
   @override
@@ -35,11 +36,10 @@ class _SplashScreenState extends State<SplashScreen> {
                     image: AssetImage('asset/image/Bumbutpital Logo.png'))),
           ),
           SizedBox(height: 20),
-          Container(
-              child: Text(
+          Text(
             'BUMBUTPITAL',
             style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
-          )),
+          ),
         ]),
       ),
     );

@@ -1,9 +1,9 @@
-import 'package:bumbutpital/HospitalPage/KeepkoopongPage.dart';
-import 'package:bumbutpital/HospitalPage/PromotionPage.dart';
+import 'package:bumbutpital/HospitalPage/keep_koopong_screen.dart';
+import 'package:bumbutpital/HospitalPage/promotion_screen.dart';
 import 'package:flutter/material.dart';
 
 class HospitalDetail extends StatefulWidget {
-  HospitalDetail({Key? key}) : super(key: key);
+  const HospitalDetail({Key? key}) : super(key: key);
 
   @override
   _HospitalDetailState createState() => _HospitalDetailState();
@@ -78,7 +78,7 @@ class _HospitalDetailState extends State<HospitalDetail> {
                                 ),
                                 ElevatedButton(
                                   style: ElevatedButton.styleFrom(
-                                      primary: Color(hexColor('#FE7940')),
+                                      primary: Color(0XFFFE7940),
                                       padding: EdgeInsets.symmetric(
                                           horizontal: 25, vertical: 10),
                                       textStyle: TextStyle(
@@ -210,8 +210,7 @@ class _HospitalDetailState extends State<HospitalDetail> {
                                                           child: ElevatedButton(
                                                             style: ElevatedButton.styleFrom(
                                                                 primary: Color(
-                                                                    hexColor(
-                                                                        '#ECF2FF')),
+                                                                    0xffECF2FF),
                                                                 padding: EdgeInsets
                                                                     .symmetric(
                                                                         horizontal:
@@ -305,8 +304,7 @@ class _HospitalDetailState extends State<HospitalDetail> {
                                                           child: ElevatedButton(
                                                             style: ElevatedButton.styleFrom(
                                                                 primary: Color(
-                                                                    hexColor(
-                                                                        '#ECF2FF')),
+                                                                    0XFFECF2FF),
                                                                 padding: EdgeInsets
                                                                     .symmetric(
                                                                         horizontal:
@@ -401,8 +399,7 @@ class _HospitalDetailState extends State<HospitalDetail> {
                                                           child: ElevatedButton(
                                                             style: ElevatedButton.styleFrom(
                                                                 primary: Color(
-                                                                    hexColor(
-                                                                        '#ECF2FF')),
+                                                                        0xffECF2FF),
                                                                 padding: EdgeInsets
                                                                     .symmetric(
                                                                         horizontal:
@@ -497,8 +494,7 @@ class _HospitalDetailState extends State<HospitalDetail> {
                                                           child: ElevatedButton(
                                                             style: ElevatedButton.styleFrom(
                                                                 primary: Color(
-                                                                    hexColor(
-                                                                        '#ECF2FF')),
+                                                                        0XFFECF2FF),
                                                                 padding: EdgeInsets
                                                                     .symmetric(
                                                                         horizontal:
@@ -593,8 +589,7 @@ class _HospitalDetailState extends State<HospitalDetail> {
                                                           child: ElevatedButton(
                                                             style: ElevatedButton.styleFrom(
                                                                 primary: Color(
-                                                                    hexColor(
-                                                                        '#ECF2FF')),
+                                                                        0XFFECF2FF),
                                                                 padding: EdgeInsets
                                                                     .symmetric(
                                                                         horizontal:
@@ -689,8 +684,7 @@ class _HospitalDetailState extends State<HospitalDetail> {
                                                           child: ElevatedButton(
                                                             style: ElevatedButton.styleFrom(
                                                                 primary: Color(
-                                                                    hexColor(
-                                                                        '#ECF2FF')),
+                                                                    0XFFECF2FF),
                                                                 padding: EdgeInsets
                                                                     .symmetric(
                                                                         horizontal:
@@ -743,12 +737,4 @@ class _HospitalDetailState extends State<HospitalDetail> {
       ),
     );
   }
-}
-
-int hexColor(String color) {
-  String newColor = '0xff' + color;
-
-  newColor = newColor.replaceAll('#', '');
-  int finalColor = int.parse(newColor);
-  return finalColor;
 }

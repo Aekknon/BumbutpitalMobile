@@ -1,4 +1,4 @@
-import 'package:bumbutpital/HospitalPage/HospitalDetail.dart';
+import 'package:bumbutpital/HospitalPage/hospital_detail.dart';
 import 'package:flutter/material.dart';
 
 class MainHospital extends StatefulWidget {
@@ -13,20 +13,20 @@ class __MainHospitalState extends State<MainHospital> {
       appBar: AppBar(
         iconTheme: IconThemeData(color: Colors.white),
         centerTitle: true,
-        backgroundColor: Color(hexColor('#6367EA')),
+        backgroundColor: Color(0XFF6367EA),
         elevation: 0,
       ),
       body: Container(
         width: MediaQuery.of(context).size.width,
         height: MediaQuery.of(context).size.height,
-        color: Color(hexColor('#ECF2FF')),
+        color: Color(0XFFECF2FF),
         child: Column(
           children: [
             Container(
               width: MediaQuery.of(context).size.width,
               height: MediaQuery.of(context).size.height * 0.1,
               decoration: BoxDecoration(
-                color: Color(hexColor('#6367EA')),
+                color: Color(0XFF6367EA),
                 borderRadius: BorderRadius.only(
                     bottomLeft: Radius.circular(30),
                     bottomRight: Radius.circular(30)),
@@ -57,7 +57,7 @@ class __MainHospitalState extends State<MainHospital> {
             ),
             Expanded(
               child: Container(
-                color: Color(hexColor('#ECF2FF')),
+                color: Color(0XFFECF2FF),
                 width: MediaQuery.of(context).size.width,
                 height: MediaQuery.of(context).size.height * 0.79,
                 child: Padding(
@@ -331,10 +331,4 @@ class __MainHospitalState extends State<MainHospital> {
   }
 }
 
-int hexColor(String color) {
-  String newColor = '0xff' + color;
 
-  newColor = newColor.replaceAll('#', '');
-  int finalColor = int.parse(newColor);
-  return finalColor;
-}

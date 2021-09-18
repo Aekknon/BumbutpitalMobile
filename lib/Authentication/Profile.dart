@@ -1,6 +1,9 @@
-import 'package:bumbutpital/Authentication/EditProfile.dart';
-import 'package:bumbutpital/Questionare/ShowResult.dart';
+// ignore_for_file: avoid_print, file_names, use_key_in_widget_constructors
+
+import 'package:bumbutpital/Questionare/show_result.dart';
 import 'package:flutter/material.dart';
+
+import 'edit_profile.dart';
 
 // ignore: must_be_immutable
 class Profile extends StatelessWidget {

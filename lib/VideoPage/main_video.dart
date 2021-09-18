@@ -1,4 +1,4 @@
-import 'package:bumbutpital/widgets/VideoCard.dart';
+import 'package:bumbutpital/widgets/video_card.dart';
 import 'package:flutter/material.dart';
 
 class MainVideo extends StatefulWidget {

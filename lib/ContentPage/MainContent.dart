@@ -1,5 +1,5 @@
-import 'package:bumbutpital/ComponentMainScreen/bottomnavbar.dart';
-import 'package:bumbutpital/widgets/ContentCard.dart';
+import 'package:bumbutpital/ComponentMainScreen/bottom_navbar.dart';
+import 'package:bumbutpital/widgets/content_card.dart';
 import 'package:flutter/material.dart';
 import 'package:bumbutpital/ContentPage/ContentDetail.dart';
 

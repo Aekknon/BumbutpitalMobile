@@ -1,7 +1,10 @@
-import 'package:bumbutpital/Authentication/SignUp.dart';
-import 'package:flutter/material.dart';
-import 'package:bumbutpital/ComponentMainScreen/bottomnavbar.dart';
+// ignore_for_file: avoid_unnecessary_containers, file_names
 
+import 'package:bumbutpital/Authentication/sign_up.dart';
+import 'package:flutter/material.dart';
+import 'package:bumbutpital/ComponentMainScreen/bottom_navbar.dart';
+
+// ignore: use_key_in_widget_constructors
 class LoginPage extends StatefulWidget {
   @override
   _LoginPageState createState() => _LoginPageState();
@@ -107,9 +110,7 @@ class _LoginPageState extends State<LoginPage> {
                   SizedBox(
                     height: 16,
                   ),
-                  Container(
-                    child: Text('Sign in with'),
-                  ),
+                  Text('Sign in with'),
                   SizedBox(height: 24),
                   Container(
                       child: ElevatedButton.icon(
@@ -123,6 +124,7 @@ class _LoginPageState extends State<LoginPage> {
                       style: TextStyle(color: Colors.black),
                     ),
                     onPressed: () {
+                      // ignore: avoid_print
                       print('Pressed');
                     },
                     style: ElevatedButton.styleFrom(
@@ -145,9 +147,7 @@ class _LoginPageState extends State<LoginPage> {
                     ),
                   )),
                   SizedBox(height: 16),
-                  Container(
-                    child: Text("Don't have an Account?"),
-                  ),
+                  Text("Don't have an Account?"),
                   // ElevatedButton(
                   //   onPressed: onSubmit,
                   //   style: ElevatedButton.styleFrom(
