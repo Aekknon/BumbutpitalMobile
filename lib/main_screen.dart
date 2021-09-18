@@ -4,10 +4,10 @@
 // ignore_for_file: file_names
 
 import 'package:bumbutpital/Authentication/Profile.dart';
-import 'package:bumbutpital/ContentPage/MainContent.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
 
+import 'ContentPage/main_content.dart';
 import 'HospitalPage/main_hospital.dart';
 import 'HospitalPage/promotion_screen.dart';
 import 'Questionare/main_question.dart';

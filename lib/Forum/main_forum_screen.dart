@@ -1,9 +1,9 @@
-import 'package:bumbutpital/Forum/AddQuestion.dart';
+import 'package:bumbutpital/Forum/add_question.dart';
 import 'package:flutter/material.dart';
-import 'AllQuestion.dart';
+import 'all_question.dart';
 
 class MainForumPage extends StatefulWidget {
-  MainForumPage({Key? key}) : super(key: key);
+  const MainForumPage({Key? key}) : super(key: key);
 
   @override
   _MainForumPageState createState() => _MainForumPageState();
@@ -14,7 +14,7 @@ class _MainForumPageState extends State<MainForumPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Container(
-        color: Color(hexColor('#ECF2FF')),
+        color: Color(0xffECF2FF),
         child: Column(
           children: [
             Row(
@@ -23,7 +23,7 @@ class _MainForumPageState extends State<MainForumPage> {
                   height: MediaQuery.of(context).size.height * 0.15,
                   width: MediaQuery.of(context).size.width * 0.8,
                   decoration: BoxDecoration(
-                    color: Color(hexColor('#6367EA')),
+                    color: Color(0xff6367EA),
                     borderRadius: BorderRadius.only(
                         topRight: Radius.circular(70),
                         bottomRight: Radius.circular(70)),
@@ -51,14 +51,13 @@ class _MainForumPageState extends State<MainForumPage> {
                     Navigator.push(context,
                         MaterialPageRoute(builder: (context) => AllQuestion()));
                   },
-                  child: Container(
                     child: Center(
                       child: Column(
                         children: [
                           Container(
                             width: 300,
                             decoration: BoxDecoration(
-                              color: Color(hexColor('#6367EA')),
+                              color: Color(0xff6367EA),
                               borderRadius: BorderRadius.only(
                                   bottomLeft: Radius.circular(12),
                                   topLeft: Radius.circular(12),
@@ -72,7 +71,7 @@ class _MainForumPageState extends State<MainForumPage> {
                           Container(
                             width: 300,
                             decoration: BoxDecoration(
-                              color: Color(hexColor('#6367EA')),
+                              color: Color(0xff6367EA),
                               borderRadius: BorderRadius.only(
                                   bottomLeft: Radius.circular(12),
                                   topLeft: Radius.circular(12),
@@ -86,7 +85,7 @@ class _MainForumPageState extends State<MainForumPage> {
                           Container(
                             width: 300,
                             decoration: BoxDecoration(
-                              color: Color(hexColor('#6367EA')),
+                              color: Color(0xff6367EA),
                               borderRadius: BorderRadius.only(
                                   bottomLeft: Radius.circular(12),
                                   topLeft: Radius.circular(12),
@@ -100,7 +99,7 @@ class _MainForumPageState extends State<MainForumPage> {
                           Container(
                             width: 300,
                             decoration: BoxDecoration(
-                              color: Color(hexColor('#6367EA')),
+                              color: Color(0xff6367EA),
                               borderRadius: BorderRadius.only(
                                   bottomLeft: Radius.circular(12),
                                   topLeft: Radius.circular(12),
@@ -134,7 +133,7 @@ class _MainForumPageState extends State<MainForumPage> {
                                 Container(
                                     width: 300,
                                     decoration: BoxDecoration(
-                                      color: Color(hexColor('#6367EA')),
+                                      color: Color(0xff6367EA),
                                       borderRadius: BorderRadius.only(
                                         topLeft: Radius.circular(12),
                                         topRight: Radius.circular(12),
@@ -206,7 +205,6 @@ class _MainForumPageState extends State<MainForumPage> {
                   ),
                 ),
               ),
-            ),
           ],
         ),
       ),
@@ -216,16 +214,8 @@ class _MainForumPageState extends State<MainForumPage> {
                 MaterialPageRoute(builder: (context) => AddQuestion()));
           },
           child: const Icon(Icons.add),
-          backgroundColor: Color(hexColor('#6367EA'))),
+          backgroundColor: Color(0xff6367EA)),
       
     );
   }
-}
-
-int hexColor(String color) {
-  String newColor = '0xff' + color;
-
-  newColor = newColor.replaceAll('#', '');
-  int finalColor = int.parse(newColor);
-  return finalColor;
 }

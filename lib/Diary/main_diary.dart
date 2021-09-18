@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:carousel_slider/carousel_slider.dart';
-import 'WriteDiary.dart';
-import 'DiaryDetail.dart';
+import 'write_diary.dart';
+import 'diary_detail.dart';
 
 class MainDiary extends StatefulWidget {
   MainDiary({Key? key}) : super(key: key);
@@ -23,7 +23,7 @@ class _MainDiaryState extends State<MainDiary> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Container(
-        color: Color(hexColor('#ECF2FF')),
+        color: Color(0xffECF2FF),
         child: Column(
           children: [
             Row(
@@ -32,7 +32,7 @@ class _MainDiaryState extends State<MainDiary> {
                   height: MediaQuery.of(context).size.height * 0.15,
                   width: MediaQuery.of(context).size.width * 0.8,
                   decoration: BoxDecoration(
-                    color: Color(hexColor('#6367EA')),
+                    color: Color(0xff6367EA),
                     borderRadius: BorderRadius.only(
                         topRight: Radius.circular(70),
                         bottomRight: Radius.circular(70)),
@@ -57,7 +57,7 @@ class _MainDiaryState extends State<MainDiary> {
               child: Container(
                 padding: const EdgeInsets.only(
                     top: 34, bottom: 10, left: 5, right: 5),
-                color: Color(hexColor('#ECF2FF')),
+                color: Color(0xffECF2FF),
                 width: MediaQuery.of(context).size.width,
                 height: MediaQuery.of(context).size.height * 0.6,
                 child: Padding(
@@ -623,12 +623,4 @@ class _MainDiaryState extends State<MainDiary> {
           backgroundColor: Color(0xFFA9B0FF),),
     );
   }
-}
-
-int hexColor(String color) {
-  String newColor = '0xff' + color;
-
-  newColor = newColor.replaceAll('#', '');
-  int finalColor = int.parse(newColor);
-  return finalColor;
 }

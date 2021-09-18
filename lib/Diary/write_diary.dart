@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 
-import 'MainDiary.dart';
+import 'main_diary.dart';
 
 class WriteDiary extends StatefulWidget {
-  WriteDiary({Key? key}) : super(key: key);
+  const WriteDiary({Key? key}) : super(key: key);
 
   @override
   _WriteDiaryState createState() => _WriteDiaryState();
@@ -15,19 +15,18 @@ class _WriteDiaryState extends State<WriteDiary> {
     return Scaffold(
         appBar: AppBar(
           iconTheme: IconThemeData(color: Colors.black),
-          backgroundColor: Color(hexColor('#ECF2FF')),
+          backgroundColor: Color(0xffECF2FF),
           elevation: 0,
         ),
         body: Container(
-          color: Color(hexColor('#ECF2FF')),
+          color: Color(0xffECF2FF),
           height: MediaQuery.of(context).size.height,
           child: Expanded(
             child: SingleChildScrollView(
-              child: Container(
                 child: Column(
                   children: [
                     Container(
-                      color: Color(hexColor('#ECF2FF')),
+                      color: Color(0xffECF2FF),
                       height: MediaQuery.of(context).size.height * 0.25,
                       child: Container(
                           padding: const EdgeInsets.only(
@@ -83,7 +82,7 @@ class _WriteDiaryState extends State<WriteDiary> {
                                         MediaQuery.of(context).size.width * 0.9,
                                     child: TextField(
                                       style: TextStyle(
-                                          color: Color(hexColor('#6367EA'))),
+                                          color: Color(0xff6367EA)),
                                       decoration: InputDecoration(
                                         hintStyle: TextStyle(fontSize: 24),
                                         hintText: 'Enter Title Diary',
@@ -132,12 +131,11 @@ class _WriteDiaryState extends State<WriteDiary> {
                                     // SizedBox(
                                     //     // height: 10,
                                     //     ),
-                                    Container(
-                                      child: TextField(
+                                      TextField(
                                         maxLines: 15,
                                         // textAlign: TextAlign.start,
                                         style: TextStyle(
-                                            color: Color(hexColor('#6367EA'))),
+                                            color: Color(0xff6367EA)),
                                         decoration: InputDecoration(
                                           // labelStyle: St,
                                           hintText: 'Enter your story here',
@@ -146,13 +144,13 @@ class _WriteDiaryState extends State<WriteDiary> {
                                           border: InputBorder.none,
                                         ),
                                       ),
-                                    ),
+
                                     SizedBox(
                                       height: 30,
                                     ),
                                     ElevatedButton(
                                       style: ElevatedButton.styleFrom(
-                                          primary: Color(hexColor('#FE7940')),
+                                          primary: Color(0xffFE7940),
                                           padding: EdgeInsets.symmetric(
                                               horizontal: 100, vertical: 15),
                                           textStyle: TextStyle(
@@ -184,14 +182,7 @@ class _WriteDiaryState extends State<WriteDiary> {
               ),
             ),
           ),
-        ));
+        );
   }
 }
 
-int hexColor(String color) {
-  String newColor = '0xff' + color;
-
-  newColor = newColor.replaceAll('#', '');
-  int finalColor = int.parse(newColor);
-  return finalColor;
-}

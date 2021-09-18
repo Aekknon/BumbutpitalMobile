@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 
 
 class ContentDetail extends StatelessWidget {
+  const ContentDetail({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -38,10 +40,9 @@ class ContentDetail extends StatelessWidget {
             SizedBox(
               height: 10,
             ),
-            Container(
-              child: Text('What is Depresstion?',
+               Text('What is Depresstion?',
                   style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold)),
-            ),
+            
             SizedBox(
               height: 10,
             ),

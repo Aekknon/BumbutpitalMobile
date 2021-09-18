@@ -1,9 +1,9 @@
-import 'package:bumbutpital/Forum/AllQuestion.dart';
+
 import 'package:flutter/material.dart';
-import 'MainForumPage.dart';
+import 'main_forum_screen.dart';
 
 class AddQuestion extends StatefulWidget {
-  AddQuestion({Key? key}) : super(key: key);
+  const AddQuestion({Key? key}) : super(key: key);
 
   @override
   _AddQuestionState createState() => _AddQuestionState();
@@ -16,15 +16,14 @@ class _AddQuestionState extends State<AddQuestion> {
       appBar: AppBar(
         iconTheme: IconThemeData(color: Colors.white),
         centerTitle: true,
-        backgroundColor: Color(hexColor('#ECF2FF')),
+        backgroundColor: Color(0xffECF2FF),
         elevation: 0,
       ),
       body: Container(
         height: MediaQuery.of(context).size.height,
         width: MediaQuery.of(context).size.width,
-        color: Color(hexColor('#ECF2FF')),
+        color: Color(0xffECF2FF),
         child: SingleChildScrollView(
-            child: Container(
           child: Column(
             children: [
               SizedBox(
@@ -50,8 +49,7 @@ class _AddQuestionState extends State<AddQuestion> {
                       top: 10, bottom: 10, left: 20, right: 20),
                   child: Row(
                     children: [
-                      Container(
-                        child: Text(
+                        Text(
                           'Title: ',
                           style: TextStyle(
                               fontSize: 16,
@@ -59,11 +57,10 @@ class _AddQuestionState extends State<AddQuestion> {
                               decoration: TextDecoration.none,
                               fontWeight: FontWeight.bold),
                         ),
-                      ),
                       SizedBox(
                         width: 300,
                         child: TextField(
-                          style: TextStyle(color: Color(hexColor('#6367EA'))),
+                          style: TextStyle(color: Color(0xff6367EA)),
                           decoration: InputDecoration(
                             hintText: 'Enter Title Questions',
                             fillColor: Colors.white,
@@ -97,7 +94,7 @@ class _AddQuestionState extends State<AddQuestion> {
                       SizedBox(
                         width: 300,
                         child: TextField(
-                          style: TextStyle(color: Color(hexColor('#6367EA'))),
+                          style: TextStyle(color: Color(0xff6367EA)),
                           decoration: InputDecoration(
                             hintText: 'Enter Questions',
                             fillColor: Colors.white,
@@ -114,7 +111,7 @@ class _AddQuestionState extends State<AddQuestion> {
               ),
               ElevatedButton(
                 style: ElevatedButton.styleFrom(
-                    primary: Color(hexColor('#FE7940')),
+                    primary: Color(0xffFE7940),
                     padding:
                         EdgeInsets.symmetric(horizontal: 120, vertical: 15),
                     textStyle:
@@ -134,15 +131,6 @@ class _AddQuestionState extends State<AddQuestion> {
             ],
           ),
         )),
-      ),
-    );
+      );
   }
-}
-
-int hexColor(String color) {
-  String newColor = '0xff' + color;
-
-  newColor = newColor.replaceAll('#', '');
-  int finalColor = int.parse(newColor);
-  return finalColor;
 }
