@@ -1,11 +1,11 @@
 // import 'package:websafe_svg/websafe_svg.dart';
 // import 'package:bumbutpital/models/Questions.dart';
-import 'package:bumbutpital/models/Questions.dart';
+import 'package:bumbutpital/models/questions.dart';
 import 'package:flutter/material.dart';
 import 'package:percent_indicator/percent_indicator.dart';
 
-import 'ComponentQuestion/QuestionCard.dart';
-import 'ShowResult.dart';
+import 'ComponentQuestion/question_card.dart';
+import 'show_result.dart';
 
 class Question extends StatefulWidget {
   @override

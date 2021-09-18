@@ -1,8 +1,8 @@
-import 'package:bumbutpital/ComponentMainScreen/bottomnavbar.dart';
+import 'package:bumbutpital/ComponentMainScreen/bottom_navbar.dart';
 import 'package:flutter/material.dart';
 
 class QRCodePage extends StatefulWidget {
-  QRCodePage({Key? key}) : super(key: key);
+  const QRCodePage({Key? key}) : super(key: key);
 
   @override
   _QRCodePageState createState() => _QRCodePageState();
@@ -15,15 +15,14 @@ class _QRCodePageState extends State<QRCodePage> {
       appBar: AppBar(
         iconTheme: IconThemeData(color: Colors.white),
         centerTitle: true,
-        backgroundColor: Color(hexColor('#6367EA')),
+        backgroundColor: Color(0XFF6367EA),
         elevation: 0,
       ),
       body: Container(
-        color: Color(hexColor('#6367EA')),
+        color: Color(0xff6367EA),
         height: MediaQuery.of(context).size.height,
         child: Expanded(
           child: SingleChildScrollView(
-            child: Container(
               child: Center(
                 child: Column(
                   children: [
@@ -74,7 +73,7 @@ class _QRCodePageState extends State<QRCodePage> {
                     ),
                     ElevatedButton(
                       style: ElevatedButton.styleFrom(
-                          primary: Color(hexColor('#FE7940')),
+                          primary: Color(0xffFE7940),
                           padding: EdgeInsets.symmetric(
                               horizontal: 100, vertical: 15),
                           textStyle: TextStyle(
@@ -99,15 +98,7 @@ class _QRCodePageState extends State<QRCodePage> {
             ),
           ),
         ),
-      ),
-    );
+      );
   }
 }
 
-int hexColor(String color) {
-  String newColor = '0xff' + color;
-
-  newColor = newColor.replaceAll('#', '');
-  int finalColor = int.parse(newColor);
-  return finalColor;
-}

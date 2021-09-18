@@ -1,13 +1,21 @@
+
+// ignore: file_names
+
+// ignore_for_file: file_names
+
 import 'package:bumbutpital/Authentication/Profile.dart';
 import 'package:bumbutpital/ContentPage/MainContent.dart';
-import 'package:bumbutpital/HospitalPage/MainHospital.dart';
-import 'package:bumbutpital/HospitalPage/PromotionPage.dart';
-import 'package:bumbutpital/Questionare/MainQuestion.dart';
-import 'package:bumbutpital/VideoPage/MainVideo.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
 
-class MainPage extends StatelessWidget {
+import 'HospitalPage/main_hospital.dart';
+import 'HospitalPage/promotion_screen.dart';
+import 'Questionare/main_question.dart';
+import 'VideoPage/main_video.dart';
+
+class Mainpage extends StatelessWidget {
+  const Mainpage({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -15,29 +23,27 @@ class MainPage extends StatelessWidget {
       body: SafeArea(
         child: SingleChildScrollView(
           child: Column(children: [
-            Container(
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.end,
-                children: [
-                  Container(
-                    margin: EdgeInsets.fromLTRB(0, 20, 20, 0),
-                    child: IconButton(
-                      icon: Icon(
-                        Icons.account_circle_rounded,
-                        color: Color(0xFF6367EA),
-                        size: 60,
-                      ),
-                      onPressed: () {
-                        Navigator.push(context,
-                            MaterialPageRoute(builder: (context) => Profile()));
-                      },
+            Row(
+              mainAxisAlignment: MainAxisAlignment.end,
+              children: [
+                Container(
+                  margin: EdgeInsets.fromLTRB(0, 20, 20, 0),
+                  child: IconButton(
+                    icon: Icon(
+                      Icons.account_circle_rounded,
+                      color: Color(0xFF6367EA),
+                      size: 60,
                     ),
+                    onPressed: () {
+                      Navigator.push(context,
+                          MaterialPageRoute(builder: (context) => Profile()));
+                    },
                   ),
-                  SizedBox(
-                    width: 20,
-                  )
-                ],
-              ),
+                ),
+                SizedBox(
+                  width: 20,
+                )
+              ],
             ),
             SizedBox(
               height: 20,
@@ -146,8 +152,7 @@ class MainPage extends StatelessWidget {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Container(
-                  child: InkWell(
+                 InkWell(
                     onTap: () {
                       Navigator.push(
                           context,
@@ -194,53 +199,50 @@ class MainPage extends StatelessWidget {
                       ],
                     ),
                   ),
-                ),
-                Container(
-                  child: InkWell(
-                    onTap: () {
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => PromotionPage()));
-                    },
-                    child: Stack(
-                      children: [
-                        Container(
-                          margin: EdgeInsets.fromLTRB(30, 0, 30, 0),
-                          width: MediaQuery.of(context).size.width * 0.39,
-                          height: 80,
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.all(Radius.circular(8)),
-                            color: Color(0xFFA9B0FF),
-                          ),
-                          child: Row(
-                            children: [
-                              Container(
-                                child: Icon(
-                                  Icons.card_giftcard_outlined,
-                                  size: 50,
-                                  color: Colors.white,
-                                ),
-                                padding: EdgeInsets.all(10),
-                              ),
-                              Container(
-                                margin: EdgeInsets.fromLTRB(5, 0, 0, 0),
-                                child: Align(
-                                  alignment: Alignment.center,
-                                  child: Text(
-                                    'Promotion',
-                                    style: TextStyle(
-                                        fontSize: 14,
-                                        color: Colors.white,
-                                        fontWeight: FontWeight.bold),
-                                  ),
-                                ),
-                              ),
-                            ],
-                          ),
+                InkWell(
+                  onTap: () {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => PromotionPage()));
+                  },
+                  child: Stack(
+                    children: [
+                      Container(
+                        margin: EdgeInsets.fromLTRB(30, 0, 30, 0),
+                        width: MediaQuery.of(context).size.width * 0.39,
+                        height: 80,
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.all(Radius.circular(8)),
+                          color: Color(0xFFA9B0FF),
                         ),
-                      ],
-                    ),
+                        child: Row(
+                          children: [
+                            Container(
+                              child: Icon(
+                                Icons.card_giftcard_outlined,
+                                size: 50,
+                                color: Colors.white,
+                              ),
+                              padding: EdgeInsets.all(10),
+                            ),
+                            Container(
+                              margin: EdgeInsets.fromLTRB(5, 0, 0, 0),
+                              child: Align(
+                                alignment: Alignment.center,
+                                child: Text(
+                                  'Promotion',
+                                  style: TextStyle(
+                                      fontSize: 14,
+                                      color: Colors.white,
+                                      fontWeight: FontWeight.bold),
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ],
                   ),
                 ),
               ],

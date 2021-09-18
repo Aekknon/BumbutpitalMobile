@@ -1,4 +1,7 @@
-import 'package:bumbutpital/ComponentMainScreen/BottomNavBar.dart';
+
+// ignore_for_file: use_key_in_widget_constructors
+
+import 'package:bumbutpital/ComponentMainScreen/bottom_navbar.dart';
 import 'package:flutter/material.dart';
 import 'package:syncfusion_flutter_gauges/gauges.dart';
 
@@ -41,8 +44,7 @@ class ShowResult extends StatelessWidget {
             ),
             Column(
               children: [
-                Container(
-                  child: SfRadialGauge(
+                  SfRadialGauge(
                     axes: <RadialAxis>[
                       RadialAxis(
                           showLabels: false,
@@ -132,14 +134,11 @@ class ShowResult extends StatelessWidget {
                           ])
                     ],
                   ),
-                ),
-                Container(
-                  child: Text(
+                Text(
                     'You are ${getPhq9Type(result)}.',
                     style: TextStyle(fontWeight: FontWeight.bold, fontSize: 24),
                     textAlign: TextAlign.center,
                   ),
-                ),
               ],
             ),
             SizedBox(

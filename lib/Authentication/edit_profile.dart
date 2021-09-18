@@ -1,4 +1,5 @@
-import 'package:bumbutpital/Authentication/Profile.dart';
+// ignore_for_file: use_key_in_widget_constructors
+
 import 'package:flutter/material.dart';
 
 class EditProfile extends StatefulWidget {
@@ -33,7 +34,8 @@ class _EditProfileState extends State<EditProfile> {
                 profileName = _controllerName.text;
                 profileSurname = _controllerSurname.text;
                 email = _controllerEmail.text;
-                print('$profileName' + '$profileSurname' + '$email');
+                // ignore: avoid_print
+                print(profileName + profileSurname + email);
               });
               Navigator.pop(context);
             },
@@ -73,7 +75,7 @@ class _EditProfileState extends State<EditProfile> {
                       labelText: "Name",
                       contentPadding:
                           EdgeInsets.symmetric(vertical: 20, horizontal: 20),
-                      hintText: '$profileName'),
+                      hintText: profileName),
                 ),
               ),
               SizedBox(
@@ -91,7 +93,7 @@ class _EditProfileState extends State<EditProfile> {
                       labelText: "Surname",
                       contentPadding:
                           EdgeInsets.symmetric(vertical: 20, horizontal: 20),
-                      hintText: '$profileSurname'),
+                      hintText: profileSurname),
                 ),
               ),
               SizedBox(
@@ -106,7 +108,7 @@ class _EditProfileState extends State<EditProfile> {
                       labelText: "Email",
                       contentPadding:
                           EdgeInsets.symmetric(vertical: 20, horizontal: 20),
-                      hintText: '$email'),
+                      hintText: email),
                 ),
               ),
               SizedBox(

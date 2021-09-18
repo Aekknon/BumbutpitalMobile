@@ -1,7 +1,7 @@
-import 'package:bumbutpital/models/Questions.dart';
+import 'package:bumbutpital/models/questions.dart';
 import 'package:flutter/material.dart';
-import 'ButtonInCard.dart';
-import 'Option.dart';
+import 'button_in_card.dart';
+import 'option.dart';
 
 class QuestionCard extends StatelessWidget {
   final Question question;

@@ -1,4 +1,4 @@
-import 'package:bumbutpital/HospitalPage/KeepkoopongPage.dart';
+import 'package:bumbutpital/HospitalPage/keep_koopong_screen.dart';
 import 'package:flutter/material.dart';
 
 class PromotionPage extends StatefulWidget {
@@ -22,11 +22,11 @@ class _PromotionPageState extends State<PromotionPage> {
               color: Colors.black,
               decoration: TextDecoration.none),
         ),
-        backgroundColor: Color(hexColor('#ECF2FF')),
+        backgroundColor: Color(0xffECF2FF),
         elevation: 0,
       ),
       body: Container(
-        color: Color(hexColor('#ECF2FF')),
+        color: Color(0XFFECF2FF),
         child: Center(
           child: Container(
             padding:
@@ -278,12 +278,4 @@ class _PromotionPageState extends State<PromotionPage> {
       ),
     );
   }
-}
-
-int hexColor(String color) {
-  String newColor = '0xff' + color;
-
-  newColor = newColor.replaceAll('#', '');
-  int finalColor = int.parse(newColor);
-  return finalColor;
 }

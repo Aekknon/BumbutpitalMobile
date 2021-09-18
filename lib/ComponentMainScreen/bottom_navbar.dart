@@ -1,3 +1,4 @@
+// ignore: file_names
 // import 'package:bumbutpital/Authentication/Profile.dart';
 // import 'package:bumbutpital/ContentPage/MainContent.dart';
 // import 'package:bumbutpital/HospitalPage/MainHospital.dart';
@@ -7,18 +8,20 @@
 // import 'package:bumbutpital/VideoPage/MainVideo.dart';
 import 'package:bumbutpital/Diary/MainDiary.dart';
 import 'package:bumbutpital/Forum/MainForumPage.dart';
-import 'package:bumbutpital/MainPage.dart';
-import 'package:bumbutpital/MopHPage.dart';
+import 'package:bumbutpital/Main_Screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
 
+import '../moph_screen.dart';
+
+// ignore: use_key_in_widget_constructors
 class BottomNavBar extends StatefulWidget {
   @override
   State<BottomNavBar> createState() => _BottomNavBarState();
 }
 
 class _BottomNavBarState extends State<BottomNavBar> {
-  final tab = [MainPage(), MainForumPage(), MainDiary(), MophPage()];
+  final tab = [Mainpage(), MainForumPage(), MainDiary(), MophPage()];
   int currentTabIndex = 0;
 
   @override
