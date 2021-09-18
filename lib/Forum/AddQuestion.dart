@@ -65,10 +65,11 @@ class _AddQuestionState extends State<AddQuestion> {
                         child: TextField(
                           style: TextStyle(color: Color(hexColor('#6367EA'))),
                           decoration: InputDecoration(
-                            labelText: '    Enter Title Questions',
+                            hintText: 'Enter Title Questions',
                             fillColor: Colors.white,
-                            contentPadding: EdgeInsets.symmetric(vertical: 00),
-                            border: OutlineInputBorder(),
+                            contentPadding:
+                                EdgeInsets.symmetric(horizontal: 60),
+                            border: UnderlineInputBorder(),
                           ),
                         ),
                       ),
@@ -98,9 +99,10 @@ class _AddQuestionState extends State<AddQuestion> {
                         child: TextField(
                           style: TextStyle(color: Color(hexColor('#6367EA'))),
                           decoration: InputDecoration(
-                            labelText: '    Enter Questions',
+                            hintText: 'Enter Questions',
                             fillColor: Colors.white,
-                            contentPadding: EdgeInsets.symmetric(vertical: 80),
+                            contentPadding: EdgeInsets.symmetric(
+                                vertical: 80, horizontal: 70),
                             border: OutlineInputBorder(),
                           ),
                         ),
