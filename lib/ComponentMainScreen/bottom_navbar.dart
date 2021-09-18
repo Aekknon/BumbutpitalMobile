@@ -6,8 +6,8 @@
 // import 'package:bumbutpital/Questionare/MainQuestion.dart';
 
 // import 'package:bumbutpital/VideoPage/MainVideo.dart';
-import 'package:bumbutpital/Diary/MainDiary.dart';
-import 'package:bumbutpital/Forum/MainForumPage.dart';
+import 'package:bumbutpital/Diary/main_diary.dart';
+import 'package:bumbutpital/Forum/main_forum_screen.dart';
 import 'package:bumbutpital/Main_Screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';

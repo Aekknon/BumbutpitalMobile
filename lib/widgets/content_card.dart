@@ -1,4 +1,4 @@
-import 'package:bumbutpital/ContentPage/ContentDetail.dart';
+import 'package:bumbutpital/ContentPage/content_detail.dart';
 import 'package:flutter/material.dart';
 
 class ContentCard extends StatelessWidget {
