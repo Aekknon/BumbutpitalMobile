@@ -44,9 +44,9 @@ class _BottomNavBarState extends State<BottomNavBar> {
             label: 'Forum',
           ),
           BottomNavigationBarItem(
-            icon: Icon(
-              Icons.add,
-            ),
+            icon:Icon(
+              Icons.auto_stories,
+          ),
             label: 'Diary',
           ),
           BottomNavigationBarItem(
