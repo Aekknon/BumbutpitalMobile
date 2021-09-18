@@ -10,15 +10,15 @@ class ShowResult extends StatelessWidget {
   String getPhq9Type(int result) {
     var _phq9Type = "";
     if (result >= 0 && result <= 4) {
-      _phq9Type = 'Minimal depression';
+      _phq9Type = 'minimal depression';
     } else if (result > 4 && result <= 9) {
-      _phq9Type = 'Mind depression';
+      _phq9Type = 'mind depression';
     } else if (result > 9 && result <= 14) {
-      _phq9Type = 'Moderate depression';
+      _phq9Type = 'moderate depression';
     } else if (result > 14 && result <= 19) {
-      _phq9Type = 'Moderately severe depression';
+      _phq9Type = 'moderately severe depression';
     } else if (result > 19 && result <= 27) {
-      _phq9Type = 'Severe depression';
+      _phq9Type = 'severe depression';
     }
     return _phq9Type;
   }
@@ -135,8 +135,9 @@ class ShowResult extends StatelessWidget {
                 ),
                 Container(
                   child: Text(
-                    'YOU ARE ${getPhq9Type(result)}',
+                    'You are ${getPhq9Type(result)}.',
                     style: TextStyle(fontWeight: FontWeight.bold, fontSize: 24),
+                    textAlign: TextAlign.center,
                   ),
                 ),
               ],
