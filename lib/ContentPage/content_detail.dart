@@ -7,6 +7,7 @@ class ContentDetail extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+     List<dynamic> result = ModalRoute.of(context)!.settings.arguments as List<dynamic>  ;
     return Scaffold(
       backgroundColor: Color(0XFFECF2FF),
       appBar: AppBar(
@@ -35,12 +36,12 @@ class ContentDetail extends StatelessWidget {
               height: 400,
               width: 500,
               child: Image.network(
-                  'https://health.mil/-/media/Images/MHS/Infographics/DCOE/DCoE_PAO_depression101_Infographic_mediumsize_20151029.ashx?h=1250&la=en&w=1025&hash=972DFBF598052DA84DD4E2ABB3FB6291A6667774B6E550AA05F4493C4CCDF039'),
+                  result[0].toString(),)
             ),
             SizedBox(
               height: 10,
             ),
-               Text('What is Depresstion?',
+               Text(result[1],
                   style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold)),
             
             SizedBox(
@@ -49,9 +50,7 @@ class ContentDetail extends StatelessWidget {
             Container(
               padding: EdgeInsets.only(left: 30, right: 30),
               child: Text(
-                  'Lorem ipsum dolor sit amet, consectetur adipiscing elit.'
-                  'Praesent dapibus id tortor ut venenatis. Aenean dapibus'
-                  'tellus arcu, ut congue purus malesuada varius. Mauris ut molestie metus, a imperdiet ipsum. Aenean accumsan ultricies lacus et posuere.'),
+                  result[2]),
             )
           ],
         )),
