@@ -2,6 +2,7 @@
     package="com.example.bumbutpital">
    <application
         android:label="bumbutpital"
+        android:usesCleartextTraffic="true"
         android:icon="@mipmap/ic_launcher">
         <activity
             android:name=".MainActivity"

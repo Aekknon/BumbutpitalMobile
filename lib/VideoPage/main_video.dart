@@ -9,7 +9,7 @@ class MainVideo extends StatefulWidget {
 class _MainVideoState extends State<MainVideo> {
   int _currentTabs = 0;
 
-  List<int> tabs = [1, 2, 3];
+  final tabs  = [VideotCard1() ,VideotCard() ,VideotCard2()  ];
 
   void _onChangeTab(int index) {
     setState(() {
@@ -144,15 +144,7 @@ class _MainVideoState extends State<MainVideo> {
                 ],
               ),
               Expanded(
-                child: ListView.builder(
-                  itemCount: tabs[_currentTabs],
-                  itemBuilder: (ctx, index) {
-                    return Column(children: [
-                      ...List.generate(
-                          tabs[_currentTabs.bitLength], (index) => VideotCard())
-                    ]);
-                  },
-                ),
+                child: tabs[_currentTabs]
               )
             ])));
   }
