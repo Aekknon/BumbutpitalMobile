@@ -1,5 +1,7 @@
 import 'package:bumbutpital/ContentPage/content_detail.dart';
 import 'package:bumbutpital/services/graphql_config.dart';
+import 'package:bumbutpital/HospitalPage/hospital_detail.dart';
+import 'package:bumbutpital/HospitalPage/keep_koopong_screen.dart';
 import 'package:flutter/material.dart';
 import 'Questionare/show_result.dart';
 import 'splash_screen.dart';
@@ -23,7 +25,9 @@ class MyApp extends StatelessWidget {
           home: SplashScreen(), //create new widget class for this 'home' to
           routes: {
             ShowResult.routeName: (_) => ShowResult(),
-            "/ContentDetail": (_) => ContentDetail()
+            "/ContentDetail": (_) => ContentDetail(),
+            "/HospitalDetail": (_) => HospitalDetail(),
+          "/PromotionInHospitalDetail": (_) => KeepkoopongPage()
           }
           // escape 'No MediaQuery widget found' error
           ),

@@ -9,8 +9,10 @@ class KeepkoopongPage extends StatefulWidget {
 }
 
 class _KeepkoopongPageState extends State<KeepkoopongPage> {
+  
   @override
   Widget build(BuildContext context) {
+    List<dynamic> result = ModalRoute.of(context)!.settings.arguments as List<dynamic>  ;
     return Scaffold(
       appBar: AppBar(
         iconTheme: IconThemeData(color: Colors.black),
@@ -44,7 +46,7 @@ class _KeepkoopongPageState extends State<KeepkoopongPage> {
                         borderRadius: BorderRadius.all(Radius.circular(10)),
                         image: DecorationImage(
                           image: NetworkImage(
-                              "https://www.checkraka.com/uploaded/article/news/1363445/scb_hospital-cb8000b.jpg"),
+                             result[2]),
                           fit: BoxFit.cover,
                         )),
                   ),
@@ -52,7 +54,7 @@ class _KeepkoopongPageState extends State<KeepkoopongPage> {
                     height: 15,
                   ),
                   Text(
-                    'ดูแลคุณด้วยใจ',
+                    result[0],
                     style: TextStyle(
                         fontSize: 18,
                         color: Colors.black,
@@ -79,7 +81,7 @@ class _KeepkoopongPageState extends State<KeepkoopongPage> {
                       ),
                       child: Center(
                         child: Text(
-                          'เหลือเวลาอีก 12 วัน -หมดอายุ 31 ธ.ค. 64',
+                          result[3],
                           style: TextStyle(
                             fontSize: 12,
                             color: Colors.white,
@@ -104,7 +106,7 @@ class _KeepkoopongPageState extends State<KeepkoopongPage> {
                   Container(
                     width: MediaQuery.of(context).size.width * 0.8,
                     child: Text(
-                      '         Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
+                      result[1],
                       style: TextStyle(
                         fontSize: 12,
                         color: Colors.black,
