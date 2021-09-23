@@ -21,9 +21,11 @@ class VideotCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Query(
-        options: QueryOptions(variables: {
+        options: QueryOptions(
+          variables: {
           'vDepression': 'Depression',
-        }, document: gql(query), pollInterval: Duration(seconds: 1)),
+        }, 
+        document: gql(query), pollInterval: Duration(seconds: 1)),
         builder: (QueryResult result, {fetchMore, refetch}) {
           if (result.hasException) {
             return Text(result.exception.toString());
@@ -55,7 +57,7 @@ class VideotCard extends StatelessWidget {
                       Row(
                         children: [
                           Container(
-                              padding: EdgeInsets.all(30),
+                              padding: EdgeInsets.only(left: 30,right: 30,top: 10 ,bottom: 5),
                               child: Image.network(
                                 result.data!['getAllContent'][index]['pictureUrl'],
                                 height: 100,
@@ -101,9 +103,7 @@ class VideotCard extends StatelessWidget {
                   ],
                 ),
               ),
-              SizedBox(
-                height: 20,
-              )
+             
             ],
           );
               },
@@ -168,7 +168,7 @@ class VideotCard1 extends StatelessWidget {
                       Row(
                         children: [
                           Container(
-                              padding: EdgeInsets.all(30),
+                              padding: EdgeInsets.only(left: 30,right: 30,top: 10 ,bottom: 5),
                               child: Image.network(
                                 result.data!['getAllContent'][index]['pictureUrl'],
                                 height: 100,
@@ -214,9 +214,7 @@ class VideotCard1 extends StatelessWidget {
                   ],
                 ),
               ),
-              SizedBox(
-                height: 20,
-              )
+              
             ],
           );
               },
@@ -282,7 +280,7 @@ class VideotCard2 extends StatelessWidget {
                       Row(
                         children: [
                           Container(
-                              padding: EdgeInsets.all(30),
+                              padding: EdgeInsets.only(left: 30,right: 30,top: 10 ,bottom: 5),
                               child: Image.network(
                                 result.data!['getAllContent'][index]['pictureUrl'],
                                 height: 100,
@@ -328,9 +326,7 @@ class VideotCard2 extends StatelessWidget {
                   ],
                 ),
               ),
-              SizedBox(
-                height: 20,
-              )
+              
             ],
           );
               },
