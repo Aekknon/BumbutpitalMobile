@@ -1,51 +1,119 @@
-import 'package:video_player/video_player.dart';
+import 'dart:developer';
+
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:youtube_player_iframe/youtube_player_iframe.dart';
+import 'video_widget/meta_data_section.dart';
+import 'video_widget/play_pause_button_bar.dart';
+import 'video_widget/player_state_section.dart';
+import 'video_widget/source_input_section.dart';
+import 'video_widget/volume_slider.dart';
 
+///
+
+///
 class VideoDetail extends StatefulWidget {
-  const VideoDetail({Key? key}) : super(key: key);
-
   @override
-  _VideoDetailState createState() => _VideoDetailState();
+  _VideoDetail createState() => _VideoDetail();
 }
 
-class _VideoDetailState extends State<VideoDetail> {
-  late VideoPlayerController _controller;
+class _VideoDetail extends State<VideoDetail> {
+  late YoutubePlayerController _controller;
 
   @override
-  void initState() {
-    super.initState();
-    _controller = VideoPlayerController.network(
-        'https://flutter.github.io/assets-for-api-docs/assets/videos/bee.mp4')
-      ..initialize().then((_) {
-        // Ensure the first frame is shown after the video is initialized, even before the play button has been pressed.
-        setState(() {});
-      });
-  }
-
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Video Demo',
-      home: Scaffold(
-        body: Center(
-          child: _controller.value.isInitialized
-              ? AspectRatio(
-                  aspectRatio: _controller.value.aspectRatio,
-                  child: VideoPlayer(_controller),
-                )
-              : Container(),
-        ),
-        floatingActionButton: FloatingActionButton(
-          onPressed: () {
-            setState(() {
-              _controller.value.isPlaying
-                  ? _controller.pause()
-                  : _controller.play();
-            });
+    const player = YoutubePlayerIFrame();
+    List<dynamic> result =
+        ModalRoute.of(context)!.settings.arguments as List<dynamic>;
+    final _youtubeId =
+        YoutubePlayerController.convertUrlToId(result[1]).toString();
+    final _controller = YoutubePlayerController(
+      initialVideoId: _youtubeId,
+      params: const YoutubePlayerParams(
+        startAt: const Duration(minutes: 1, seconds: 36),
+        showControls: true,
+        showFullscreenButton: true,
+        desktopMode: false,
+        privacyEnhanced: true,
+        useHybridComposition: true,
+      ),
+    );
+    _controller.onEnterFullscreen = () {
+      SystemChrome.setPreferredOrientations([
+        DeviceOrientation.landscapeLeft,
+        DeviceOrientation.landscapeRight,
+      ]);
+      log('Entered Fullscreen');
+    };
+    _controller.onExitFullscreen = () {
+      log('Exited Fullscreen');
+    };
+    return YoutubePlayerControllerProvider(
+      // Passing controller to widgets below.
+      controller: _controller,
+      child: Scaffold(
+        body: LayoutBuilder(
+          builder: (context, constraints) {
+            if (kIsWeb && constraints.maxWidth > 800) {
+              return Row(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  const Expanded(child: player),
+                  const SizedBox(
+                    width: 500,
+                    child: SingleChildScrollView(
+                      child: Controls(),
+                    ),
+                  ),
+                ],
+              );
+            }
+            return ListView(
+              children: [
+                Stack(
+                  children: [
+                    player,
+                    Positioned.fill(
+                      child: YoutubeValueBuilder(
+                        controller: _controller,
+                        builder: (context, value) {
+                          return AnimatedCrossFade(
+                            firstChild: const SizedBox.shrink(),
+                            secondChild: Material(
+                              child: DecoratedBox(
+                                decoration: BoxDecoration(
+                                  image: DecorationImage(
+                                    image: NetworkImage(
+                                      YoutubePlayerController.getThumbnail(
+                                        videoId:
+                                            _controller.params.playlist.first,
+                                        quality: ThumbnailQuality.medium,
+                                      ),
+                                    ),
+                                    fit: BoxFit.fitWidth,
+                                  ),
+                                ),
+                                child: const Center(
+                                  child: CircularProgressIndicator(),
+                                ),
+                              ),
+                            ),
+                            crossFadeState: value.isReady
+                                ? CrossFadeState.showFirst
+                                : CrossFadeState.showSecond,
+                            duration: const Duration(milliseconds: 300),
+                          );
+                        },
+                      ),
+                    ),
+                  ],
+                ),
+                const Controls(),
+              ],
+            );
           },
-          child: Icon(
-            _controller.value.isPlaying ? Icons.pause : Icons.play_arrow,
-          ),
         ),
       ),
     );
@@ -53,7 +121,35 @@ class _VideoDetailState extends State<VideoDetail> {
 
   @override
   void dispose() {
+    _controller.close();
     super.dispose();
-    _controller.dispose();
   }
+}
+
+///
+class Controls extends StatelessWidget {
+  ///
+  const Controls();
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.all(16),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          _space,
+          MetaDataSection(),
+          _space,
+          PlayPauseButtonBar(),
+          _space,
+          VolumeSlider(),
+          _space,
+          PlayerStateSection(),
+        ],
+      ),
+    );
+  }
+
+  Widget get _space => const SizedBox(height: 10);
 }
