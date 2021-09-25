@@ -32,7 +32,7 @@ class _VideoDetail extends State<VideoDetail> {
     final _controller = YoutubePlayerController(
       initialVideoId: _youtubeId,
       params: const YoutubePlayerParams(
-        startAt: const Duration(minutes: 1, seconds: 36),
+        // startAt: const Duration(minutes: 1, seconds: 36),
         showControls: true,
         showFullscreenButton: true,
         desktopMode: false,
@@ -53,67 +53,71 @@ class _VideoDetail extends State<VideoDetail> {
     return YoutubePlayerControllerProvider(
       // Passing controller to widgets below.
       controller: _controller,
-      child: Scaffold(
-        body: LayoutBuilder(
-          builder: (context, constraints) {
-            if (kIsWeb && constraints.maxWidth > 800) {
-              return Row(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  const Expanded(child: player),
-                  const SizedBox(
-                    width: 500,
-                    child: SingleChildScrollView(
-                      child: Controls(),
-                    ),
-                  ),
-                ],
-              );
-            }
-            return ListView(
-              children: [
-                Stack(
+      child: SafeArea(
+        child: Scaffold(
+          body: LayoutBuilder(
+            builder: (context, constraints) {
+              if (constraints.maxWidth > 200) {
+                return Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    player,
-                    Positioned.fill(
-                      child: YoutubeValueBuilder(
-                        controller: _controller,
-                        builder: (context, value) {
-                          return AnimatedCrossFade(
-                            firstChild: const SizedBox.shrink(),
-                            secondChild: Material(
-                              child: DecoratedBox(
-                                decoration: BoxDecoration(
-                                  image: DecorationImage(
-                                    image: NetworkImage(
-                                      YoutubePlayerController.getThumbnail(
-                                        videoId:
-                                            _controller.params.playlist.first,
-                                        quality: ThumbnailQuality.medium,
-                                      ),
-                                    ),
-                                    fit: BoxFit.fitWidth,
-                                  ),
-                                ),
-                                child: const Center(
-                                  child: CircularProgressIndicator(),
-                                ),
-                              ),
-                            ),
-                            crossFadeState: value.isReady
-                                ? CrossFadeState.showFirst
-                                : CrossFadeState.showSecond,
-                            duration: const Duration(milliseconds: 300),
-                          );
-                        },
+                    const Expanded(child: player),
+                    const SizedBox(
+                      height: 500,
+                      // width: MediaQuery.of(context).size.width,
+                      width: 1200,
+                      child: SingleChildScrollView(
+                        child: Controls(),
                       ),
                     ),
                   ],
-                ),
-                const Controls(),
-              ],
-            );
-          },
+                );
+              }
+              return ListView(
+                children: [
+                  Stack(
+                    children: [
+                      player,
+                      Positioned.fill(
+                        child: YoutubeValueBuilder(
+                          controller: _controller,
+                          builder: (context, value) {
+                            return AnimatedCrossFade(
+                              firstChild: const SizedBox.shrink(),
+                              secondChild: Material(
+                                child: DecoratedBox(
+                                  decoration: BoxDecoration(
+                                    image: DecorationImage(
+                                      image: NetworkImage(
+                                        YoutubePlayerController.getThumbnail(
+                                          videoId:
+                                              _controller.params.playlist.first,
+                                          quality: ThumbnailQuality.medium,
+                                        ),
+                                      ),
+                                      fit: BoxFit.fitWidth,
+                                    ),
+                                  ),
+                                  child: const Center(
+                                    child: CircularProgressIndicator(),
+                                  ),
+                                ),
+                              ),
+                              crossFadeState: value.isReady
+                                  ? CrossFadeState.showFirst
+                                  : CrossFadeState.showSecond,
+                              duration: const Duration(milliseconds: 300),
+                            );
+                          },
+                        ),
+                      ),
+                    ],
+                  ),
+                  const Controls(),
+                ],
+              );
+            },
+          ),
         ),
       ),
     );
