@@ -1,4 +1,5 @@
 import 'package:bumbutpital/ContentPage/content_detail.dart';
+import 'package:bumbutpital/VideoPage/video_detail.dart';
 import 'package:bumbutpital/services/graphql_config.dart';
 import 'package:bumbutpital/HospitalPage/hospital_detail.dart';
 import 'package:bumbutpital/HospitalPage/keep_koopong_screen.dart';
@@ -27,7 +28,8 @@ class MyApp extends StatelessWidget {
             ShowResult.routeName: (_) => ShowResult(),
             "/ContentDetail": (_) => ContentDetail(),
             "/HospitalDetail": (_) => HospitalDetail(),
-          "/PromotionInHospitalDetail": (_) => KeepkoopongPage()
+          "/PromotionInHospitalDetail": (_) => KeepkoopongPage(),
+          "/VideoDetail": (_) => VideoDetail()
           }
           // escape 'No MediaQuery widget found' error
           ),
