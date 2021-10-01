@@ -2,6 +2,7 @@ import 'package:bumbutpital/widgets/content_card.dart';
 import 'package:flutter/material.dart';
 import 'package:graphql_flutter/graphql_flutter.dart';
 
+// ignore: use_key_in_widget_constructors
 class MainContent extends StatefulWidget {
   @override
   _MainContentState createState() => _MainContentState();

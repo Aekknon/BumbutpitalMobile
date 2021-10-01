@@ -1,7 +1,11 @@
 // ignore_for_file: avoid_print, file_names, use_key_in_widget_constructors
 
+import 'package:bumbutpital/Authentication/Login.dart';
 import 'package:bumbutpital/Questionare/show_result.dart';
+import 'package:bumbutpital/services/graphql_config.dart';
+import 'package:bumbutpital/splash_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 import 'edit_profile.dart';
 
@@ -151,10 +155,15 @@ class Profile extends StatelessWidget {
               height: 50,
             ),
             ElevatedButton(
-              onPressed: () {
+              onPressed: () async {
                 // Navigator.push(context,
                 //     MaterialPageRoute(builder: (context) => ShowResult()));
-                print("Pressed");
+                await Provider.of<GraphQLConfiguration>(context, listen: false)
+                    .clearToken();
+                Navigator.pushAndRemoveUntil(
+                    context,
+                    MaterialPageRoute(builder: (context) => LoginPage()),
+                    (route) => false);
               },
               child: Text("LOGOUT"),
               style: ElevatedButton.styleFrom(

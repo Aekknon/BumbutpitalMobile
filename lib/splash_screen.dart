@@ -1,4 +1,6 @@
+import 'package:bumbutpital/services/graphql_config.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'Authentication/login.dart';
 
 class SplashScreen extends StatefulWidget {
@@ -11,9 +13,15 @@ class SplashScreen extends StatefulWidget {
 
 class _SplashScreenState extends State<SplashScreen> {
   @override
-  void initState() {
+  void initState()  {
     super.initState();
+    _tryLogin();
     _navigatetohome();
+  }
+
+  _tryLogin() async {
+    await Provider.of<GraphQLConfiguration>(context, listen: false)
+        .fetchToken();
   }
 
   _navigatetohome() async {
