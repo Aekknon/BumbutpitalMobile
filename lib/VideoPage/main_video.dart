@@ -9,7 +9,7 @@ class MainVideo extends StatefulWidget {
 class _MainVideoState extends State<MainVideo> {
   int _currentTabs = 0;
 
-  final tabs  = [VideotCard1() ,VideotCard() ,VideotCard2()  ];
+  final tabs = [VideotCard1(), VideotCard(), VideotCard2()];
 
   void _onChangeTab(int index) {
     setState(() {
@@ -99,7 +99,7 @@ class _MainVideoState extends State<MainVideo> {
                       child: Column(
                         children: [
                           Icon(
-                            Icons.add,
+                            Icons.health_and_safety_rounded,
                             size: 50,
                             color: Color(0xff706A6A),
                           ),
@@ -143,9 +143,7 @@ class _MainVideoState extends State<MainVideo> {
                   ),
                 ],
               ),
-              Expanded(
-                child: tabs[_currentTabs]
-              )
+              Expanded(child: tabs[_currentTabs])
             ])));
   }
 }

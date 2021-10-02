@@ -52,11 +52,8 @@ class VideotCard extends StatelessWidget {
                             context,
                             "/VideoDetail",
                             arguments: [
-                              result.data!['getAllVideo'][index]
-                                  ['title'],
-                              result.data!['getAllVideo'][index]
-                                  ['videoUrl'],
-                              
+                              result.data!['getAllVideo'][index]['title'],
+                              result.data!['getAllVideo'][index]['videoUrl'],
                             ],
                           );
                         },
@@ -92,8 +89,9 @@ class VideotCard extends StatelessWidget {
                                           //     Matrix4.translationValues(
                                           //         -20, -30, 0.0),
                                           child: Text(
-                                            'Topic:'+result.data!['getAllVideo'][index]
-                                  ['title'],
+                                            'Topic:' +
+                                                result.data!['getAllVideo']
+                                                    [index]['title'],
                                             style: TextStyle(
                                               fontWeight: FontWeight.bold,
                                             ),
@@ -185,11 +183,8 @@ class VideotCard1 extends StatelessWidget {
                             context,
                             "/VideoDetail",
                             arguments: [
-                              result.data!['getAllVideo'][index]
-                                  ['title'],
-                              result.data!['getAllVideo'][index]
-                                  ['videoUrl'],
-                              
+                              result.data!['getAllVideo'][index]['title'],
+                              result.data!['getAllVideo'][index]['videoUrl'],
                             ],
                           );
                         },
@@ -225,7 +220,9 @@ class VideotCard1 extends StatelessWidget {
                                           //     Matrix4.translationValues(
                                           //         -20, -30, 0.0),
                                           child: Text(
-                                            'Topic: โรคกลัวความมืด',
+                                            'Topic:' +
+                                                result.data!['getAllVideo']
+                                                    [index]['title'],
                                             style: TextStyle(
                                               fontWeight: FontWeight.bold,
                                             ),
@@ -317,11 +314,8 @@ class VideotCard2 extends StatelessWidget {
                             context,
                             "/VideoDetail",
                             arguments: [
-                              result.data!['getAllVideo'][index]
-                                  ['title'],
-                              result.data!['getAllVideo'][index]
-                                  ['videoUrl'],
-                              
+                              result.data!['getAllVideo'][index]['title'],
+                              result.data!['getAllVideo'][index]['videoUrl'],
                             ],
                           );
                         },
@@ -357,7 +351,9 @@ class VideotCard2 extends StatelessWidget {
                                           //     Matrix4.translationValues(
                                           //         -20, -30, 0.0),
                                           child: Text(
-                                            'Topic: โรคซึมเศร้า',
+                                            'Topic:' +
+                                                result.data!['getAllVideo']
+                                                    [index]['title'],
                                             style: TextStyle(
                                               fontWeight: FontWeight.bold,
                                             ),

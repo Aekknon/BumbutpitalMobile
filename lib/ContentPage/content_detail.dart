@@ -49,6 +49,9 @@ class ContentDetail extends StatelessWidget {
             Container(
               padding: EdgeInsets.only(left: 30, right: 30),
               child: Text(result[2]),
+            ),
+            SizedBox(
+              height: 20,
             )
           ],
         )),
