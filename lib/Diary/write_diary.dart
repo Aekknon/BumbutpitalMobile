@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+
 import 'main_diary.dart';
 
 class WriteDiary extends StatefulWidget {
