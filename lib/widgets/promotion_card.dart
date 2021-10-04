@@ -9,7 +9,6 @@ class PromotionCard extends StatelessWidget {
     getAllPromotion{
       promotionId
       hospitalId
-      userId
       createAt
       title
       hospitalDetail

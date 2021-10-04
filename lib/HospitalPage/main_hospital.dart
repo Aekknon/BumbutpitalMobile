@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:bumbutpital/widgets/hospital_card.dart';
 
-
 class MainHospital extends StatefulWidget {
   @override
   __MainHospitalState createState() => __MainHospitalState();
@@ -10,7 +9,6 @@ class MainHospital extends StatefulWidget {
 class __MainHospitalState extends State<MainHospital> {
   @override
   Widget build(BuildContext context) {
-    
     return Scaffold(
         appBar: AppBar(
           iconTheme: IconThemeData(color: Colors.white),
@@ -57,19 +55,20 @@ class __MainHospitalState extends State<MainHospital> {
                         SizedBox(
                           height: 20,
                         ),
-                        
                       ],
                     )),
                   ),
+                  SizedBox(
+                    height: 30,
+                  ),
                   Expanded(
-                    child: Container(
-                  color: Color((0XFFECF2FF)),
-                  child: HospitalCard(),
-                ))
+                      child: Container(
+                    color: Color((0XFFECF2FF)),
+                    child: HospitalCard(),
+                  ))
                 ],
               ),
             )),
-            
           ],
         ));
   }
