@@ -6,7 +6,7 @@ class VideotCard extends StatelessWidget {
   const VideotCard({Key? key}) : super(key: key);
   static const query = """
                     query {
-    getAllVideo{
+    getSmartVideo{
       videoID
       staffID
       appropiatePHQSeverity
@@ -52,8 +52,8 @@ class VideotCard extends StatelessWidget {
                             context,
                             "/VideoDetail",
                             arguments: [
-                              result.data!['getAllVideo'][index]['title'],
-                              result.data!['getAllVideo'][index]['videoUrl'],
+                              result.data!['getSmartVideo'][index]['title'],
+                              result.data!['getSmartVideo'][index]['videoUrl'],
                             ],
                           );
                         },
@@ -69,7 +69,7 @@ class VideotCard extends StatelessWidget {
                                           top: 10,
                                           bottom: 5),
                                       child: Image.network(
-                                        result.data!['getAllVideo'][index]
+                                        result.data!['getSmartVideo'][index]
                                             ['pictureUrl'],
                                         height: 100,
                                         width: 150,
@@ -90,7 +90,7 @@ class VideotCard extends StatelessWidget {
                                           //         -20, -30, 0.0),
                                           child: Text(
                                             'Topic:' +
-                                                result.data!['getAllVideo']
+                                                result.data!['getSmartVideo']
                                                     [index]['title'],
                                             style: TextStyle(
                                               fontWeight: FontWeight.bold,
@@ -125,7 +125,7 @@ class VideotCard extends StatelessWidget {
                     ],
                   );
                 },
-                itemCount: result.data!['getAllVideo'].length,
+                itemCount: result.data!['getSmartVideo'].length,
               ))
             ],
           );
@@ -137,7 +137,7 @@ class VideotCard1 extends StatelessWidget {
   const VideotCard1({Key? key}) : super(key: key);
   static const query = """
                    query {
-    getAllVideo{
+    getSmartVideoHealth{
       videoID
       staffID
       appropiatePHQSeverity
@@ -183,8 +183,8 @@ class VideotCard1 extends StatelessWidget {
                             context,
                             "/VideoDetail",
                             arguments: [
-                              result.data!['getAllVideo'][index]['title'],
-                              result.data!['getAllVideo'][index]['videoUrl'],
+                              result.data!['getSmartVideoHealth'][index]['title'],
+                              result.data!['getSmartVideoHealth'][index]['videoUrl'],
                             ],
                           );
                         },
@@ -200,7 +200,7 @@ class VideotCard1 extends StatelessWidget {
                                           top: 10,
                                           bottom: 5),
                                       child: Image.network(
-                                        result.data!['getAllVideo'][index]
+                                        result.data!['getSmartVideoHealth'][index]
                                             ['pictureUrl'],
                                         height: 100,
                                         width: 150,
@@ -221,7 +221,7 @@ class VideotCard1 extends StatelessWidget {
                                           //         -20, -30, 0.0),
                                           child: Text(
                                             'Topic:' +
-                                                result.data!['getAllVideo']
+                                                result.data!['getSmartVideoHealth']
                                                     [index]['title'],
                                             style: TextStyle(
                                               fontWeight: FontWeight.bold,
@@ -256,7 +256,7 @@ class VideotCard1 extends StatelessWidget {
                     ],
                   );
                 },
-                itemCount: result.data!['getAllVideo'].length,
+                itemCount: result.data!['getSmartVideoHealth'].length,
               ))
             ],
           );
@@ -268,7 +268,7 @@ class VideotCard2 extends StatelessWidget {
   const VideotCard2({Key? key}) : super(key: key);
   static const query = """
                    query {
-    getAllVideo{
+    getSmartVideoDepression{
       videoID
       staffID
       appropiatePHQSeverity
@@ -314,8 +314,8 @@ class VideotCard2 extends StatelessWidget {
                             context,
                             "/VideoDetail",
                             arguments: [
-                              result.data!['getAllVideo'][index]['title'],
-                              result.data!['getAllVideo'][index]['videoUrl'],
+                              result.data!['getSmartVideoDepression'][index]['title'],
+                              result.data!['getSmartVideoDepression'][index]['videoUrl'],
                             ],
                           );
                         },
@@ -331,7 +331,7 @@ class VideotCard2 extends StatelessWidget {
                                           top: 10,
                                           bottom: 5),
                                       child: Image.network(
-                                        result.data!['getAllVideo'][index]
+                                        result.data!['getSmartVideoDepression'][index]
                                             ['pictureUrl'],
                                         height: 100,
                                         width: 150,
@@ -352,7 +352,7 @@ class VideotCard2 extends StatelessWidget {
                                           //         -20, -30, 0.0),
                                           child: Text(
                                             'Topic:' +
-                                                result.data!['getAllVideo']
+                                                result.data!['getSmartVideoDepression']
                                                     [index]['title'],
                                             style: TextStyle(
                                               fontWeight: FontWeight.bold,
@@ -387,7 +387,7 @@ class VideotCard2 extends StatelessWidget {
                     ],
                   );
                 },
-                itemCount: result.data!['getAllVideo'].length,
+                itemCount: result.data!['getSmartVideoDepression'].length,
               ))
             ],
           );

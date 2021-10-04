@@ -4,6 +4,7 @@
 import 'package:bumbutpital/ComponentMainScreen/bottom_navbar.dart';
 import 'package:flutter/material.dart';
 import 'package:syncfusion_flutter_gauges/gauges.dart';
+import 'package:graphql_flutter/graphql_flutter.dart';
 
 class ShowResult extends StatelessWidget {
   static const routeName = "/question/result";
@@ -13,22 +14,64 @@ class ShowResult extends StatelessWidget {
   String getPhq9Type(int result) {
     var _phq9Type = "";
     if (result >= 0 && result <= 4) {
-      _phq9Type = 'minimal depression';
+      _phq9Type = 'Minimal Depression';
     } else if (result > 4 && result <= 9) {
-      _phq9Type = 'mind depression';
+      _phq9Type = 'Mild Depression';
     } else if (result > 9 && result <= 14) {
-      _phq9Type = 'moderate depression';
+      _phq9Type = 'Moderate Depression';
     } else if (result > 14 && result <= 19) {
-      _phq9Type = 'moderately severe depression';
+      _phq9Type = 'Moderately severe Depression';
     } else if (result > 19 && result <= 27) {
-      _phq9Type = 'severe depression';
+      _phq9Type = 'Severe Depression';
     }
     return _phq9Type;
   }
+ 
+ static const addPHQ9Score = """
+      
+     mutation(\$phq9: String! ){
+  addPHQScore( appropiatePHQSeverity:\$phq9){
+    successful
+    message
+  }
+}
+                        """;
+
 
   @override
   Widget build(BuildContext context) {
     final result = ModalRoute.of(context)!.settings.arguments as int;
+    Future<void> onSubmit(RunMutation run) async {
+  
+    if (getPhq9Type(result).isEmpty) return;
+    try {
+      final response = run({
+        "phq9": getPhq9Type(result),
+      });
+      print((await response.networkResult) as dynamic);
+
+      Navigator.pushAndRemoveUntil(
+          context,
+          MaterialPageRoute(builder: (context) => BottomNavBar()),
+          (route) => false);
+    } catch (err) {
+      showDialog<void>(
+        context: context,
+        builder: (BuildContext context) {
+          return AlertDialog(
+            title: const Text('Error!'),
+            content: SingleChildScrollView(
+              child: ListBody(
+                children: const <Widget>[
+                  Text('Insert your Question'),
+                ],
+              ),
+            ),
+          );
+        },
+      );
+    }
+  }
     return Scaffold(
       body: Container(
         color: Color(0XFFECF2FF),
@@ -149,13 +192,22 @@ class ShowResult extends StatelessWidget {
                 Navigator.push(context,
                     MaterialPageRoute(builder: (context) => BottomNavBar()));
               },
-              child: Text('Done'),
-              style: ElevatedButton.styleFrom(
-                primary: Color(0XFFFE7940),
-                padding: EdgeInsets.symmetric(horizontal: 100, vertical: 15),
-              ),
-            )
-          ],
+              child:  Mutation(
+                                  options:
+                                      MutationOptions(document: gql(addPHQ9Score)),
+                                  builder: (run, _) => ElevatedButton(
+                                    onPressed: () async {
+                                      await onSubmit(run);
+                                    },
+                                    style: ElevatedButton.styleFrom(
+                                      primary: Color(0XFFFE7940),
+                                      padding: EdgeInsets.symmetric(
+                                          horizontal: 100, vertical: 15),
+                                    ),
+                                    child: Text("SUBMIT QUESTION"),
+                                  ),
+                                )
+            )],
         ),
       ),
     );

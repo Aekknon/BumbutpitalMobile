@@ -6,7 +6,7 @@ class ContentCard extends StatelessWidget {
   const ContentCard({Key? key}) : super(key: key);
   static const query = """
                    query {
-    getAllContent {
+    getSmartContent {
       contentID
        title
     description
@@ -36,7 +36,7 @@ class ContentCard extends StatelessWidget {
         if (result.data == null) {
           return Text(result.toString());
         }
-        final content = result.data!['getAllContent'];
+        final content = result.data!['getSmartContent'];
         return Column(
           children: [
             Expanded(
@@ -49,9 +49,9 @@ class ContentCard extends StatelessWidget {
                     Navigator.pushNamed(
                       context,
                       "/ContentDetail",
-                      arguments:[result.data!['getAllContent'][index]['pictureUrl'],
-                                 result.data!['getAllContent'][index]['title'],
-                                 result.data!['getAllContent'][index]['description']] ,
+                      arguments:[result.data!['getSmartContent'][index]['pictureUrl'],
+                                 result.data!['getSmartContent'][index]['title'],
+                                 result.data!['getSmartContent'][index]['description']] ,
                       
                     );
                   },
@@ -75,7 +75,7 @@ class ContentCard extends StatelessWidget {
                                           BorderRadius.all(Radius.circular(10)),
                                       image: DecorationImage(
                                         image: NetworkImage(
-                                            result.data!['getAllContent'][index]['pictureUrl']),
+                                            result.data!['getSmartContent'][index]['pictureUrl']),
                                         fit: BoxFit.cover,
                                       )),
                                 ),
@@ -85,7 +85,7 @@ class ContentCard extends StatelessWidget {
                   ],
                 );
               },
-              itemCount: result.data!['getAllContent'].length,
+              itemCount: result.data!['getSmartContent'].length,
             )),
             
             
@@ -100,7 +100,7 @@ class ContentCard1 extends StatelessWidget {
   const ContentCard1({Key? key}) : super(key: key);
   static const query = """
                    query {
-    getAllContent {
+    getSmartContentHealth {
       contentID
        title
     description
@@ -130,7 +130,7 @@ class ContentCard1 extends StatelessWidget {
         if (result.data == null) {
           return Text(result.toString());
         }
-        final content = result.data!['getAllContent'];
+        final content = result.data!['getSmartContentHealth'];
         return Column(
           children: [
             Expanded(
@@ -143,9 +143,9 @@ class ContentCard1 extends StatelessWidget {
                     Navigator.pushNamed(
                       context,
                       "/ContentDetail",
-                      arguments:[result.data!['getAllContent'][index]['pictureUrl'],
-                                 result.data!['getAllContent'][index]['title'],
-                                 result.data!['getAllContent'][index]['description']] ,
+                      arguments:[result.data!['getSmartContentHealth'][index]['pictureUrl'],
+                                 result.data!['getSmartContentHealth'][index]['title'],
+                                 result.data!['getSmartContentHealth'][index]['description']] ,
                       
                     );
                   },
@@ -169,7 +169,7 @@ class ContentCard1 extends StatelessWidget {
                                           BorderRadius.all(Radius.circular(10)),
                                       image: DecorationImage(
                                         image: NetworkImage(
-                                            result.data!['getAllContent'][index]['pictureUrl']),
+                                            result.data!['getSmartContentHealth'][index]['pictureUrl']),
                                         fit: BoxFit.cover,
                                       )),
                                 ),
@@ -179,7 +179,7 @@ class ContentCard1 extends StatelessWidget {
                   ],
                 );
               },
-              itemCount: result.data!['getAllContent'].length,
+              itemCount: result.data!['getSmartContentHealth'].length,
             )),
             
             
@@ -195,7 +195,7 @@ class ContentCard2 extends StatelessWidget {
   const ContentCard2({Key? key}) : super(key: key);
   static const query = """
                    query {
-    getAllContent {
+    getSmartContentDepression {
       contentID
        title
     description
@@ -225,7 +225,7 @@ class ContentCard2 extends StatelessWidget {
         if (result.data == null) {
           return Text(result.toString());
         }
-        final content = result.data!['getAllContent'];
+        final content = result.data!['getSmartContentDepression'];
         return Column(
           children: [
             Expanded(
@@ -238,9 +238,9 @@ class ContentCard2 extends StatelessWidget {
                     Navigator.pushNamed(
                       context,
                       "/ContentDetail",
-                      arguments:[result.data!['getAllContent'][index]['pictureUrl'],
-                                 result.data!['getAllContent'][index]['title'],
-                                 result.data!['getAllContent'][index]['description']] ,
+                      arguments:[result.data!['getSmartContentDepression'][index]['pictureUrl'],
+                                 result.data!['getSmartContentDepression'][index]['title'],
+                                 result.data!['getSmartContentDepression'][index]['description']] ,
                       
                     );
                   },
@@ -264,7 +264,7 @@ class ContentCard2 extends StatelessWidget {
                                           BorderRadius.all(Radius.circular(10)),
                                       image: DecorationImage(
                                         image: NetworkImage(
-                                            result.data!['getAllContent'][index]['pictureUrl']),
+                                            result.data!['getSmartContentDepression'][index]['pictureUrl']),
                                         fit: BoxFit.cover,
                                       )),
                                 ),
@@ -274,7 +274,7 @@ class ContentCard2 extends StatelessWidget {
                   ],
                 );
               },
-              itemCount: result.data!['getAllContent'].length,
+              itemCount: result.data!['getSmartContentDepression'].length,
             )),
             
             
