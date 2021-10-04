@@ -9,7 +9,7 @@ class MainVideo extends StatefulWidget {
 class _MainVideoState extends State<MainVideo> {
   int _currentTabs = 0;
 
-  final tabs = [VideotCard1(), VideotCard(), VideotCard2()];
+  final tabs = [VideotCard(), VideotCard1(), VideotCard2()];
 
   void _onChangeTab(int index) {
     setState(() {
