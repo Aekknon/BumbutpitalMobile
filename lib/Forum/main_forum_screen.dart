@@ -71,11 +71,11 @@ class _MainForumPageState extends State<MainForumPage> {
                       Spacer()
                     ],
                   ),
-                  SizedBox(
-                    height: 20,
-                  ),
+                  SizedBox(height: MediaQuery.of(context).size.height*0.05,),
                   Expanded(
                     child: ListView.builder(
+                      reverse: true,
+                       shrinkWrap: true,
                         itemCount: result.data!['getAllForum'].length,
                         itemBuilder: (BuildContext context, int index) {
                           return Column(
@@ -83,64 +83,9 @@ class _MainForumPageState extends State<MainForumPage> {
                               Center(
                                 child: Column(
                                   children: [
+                                   
                                     Container(
-                                      width: 300,
-                                      decoration: BoxDecoration(
-                                        color: Color(0xff6367EA),
-                                        borderRadius: BorderRadius.only(
-                                            bottomLeft: Radius.circular(12),
-                                            topLeft: Radius.circular(12),
-                                            topRight: Radius.circular(12),
-                                            bottomRight: Radius.circular(12)),
-                                      ),
-                                    ),
-                                    SizedBox(
-                                      height: 20,
-                                    ),
-                                    Container(
-                                      width: 300,
-                                      decoration: BoxDecoration(
-                                        color: Color(0xff6367EA),
-                                        borderRadius: BorderRadius.only(
-                                            bottomLeft: Radius.circular(12),
-                                            topLeft: Radius.circular(12),
-                                            topRight: Radius.circular(12),
-                                            bottomRight: Radius.circular(12)),
-                                      ),
-                                    ),
-                                    SizedBox(
-                                      height: 20,
-                                    ),
-                                    Container(
-                                      width: 300,
-                                      decoration: BoxDecoration(
-                                        color: Color(0xff6367EA),
-                                        borderRadius: BorderRadius.only(
-                                            bottomLeft: Radius.circular(12),
-                                            topLeft: Radius.circular(12),
-                                            topRight: Radius.circular(12),
-                                            bottomRight: Radius.circular(12)),
-                                      ),
-                                    ),
-                                    SizedBox(
-                                      height: 20,
-                                    ),
-                                    Container(
-                                      width: 300,
-                                      decoration: BoxDecoration(
-                                        color: Color(0xff6367EA),
-                                        borderRadius: BorderRadius.only(
-                                            bottomLeft: Radius.circular(12),
-                                            topLeft: Radius.circular(12),
-                                            topRight: Radius.circular(12),
-                                            bottomRight: Radius.circular(12)),
-                                      ),
-                                    ),
-                                    SizedBox(
-                                      height: 20,
-                                    ),
-                                    Container(
-                                      width: 300,
+                                      width: MediaQuery.of(context).size.width*0.7,
                                       decoration: BoxDecoration(
                                         boxShadow: [
                                           BoxShadow(
@@ -160,7 +105,7 @@ class _MainForumPageState extends State<MainForumPage> {
                                       child: Column(
                                         children: [
                                           Container(
-                                              width: 300,
+                                              width: MediaQuery.of(context).size.width*0.7,
                                               decoration: BoxDecoration(
                                                 color: Color(0xff6367EA),
                                                 borderRadius: BorderRadius.only(
@@ -177,7 +122,7 @@ class _MainForumPageState extends State<MainForumPage> {
                                                     result.data!['getAllForum']
                                                         [index]['title'],
                                                     style: TextStyle(
-                                                        fontSize: 12,
+                                                        fontSize: 16,
                                                         color: Colors.white,
                                                         decoration:
                                                             TextDecoration
@@ -189,7 +134,7 @@ class _MainForumPageState extends State<MainForumPage> {
                                                 ],
                                               )),
                                           Container(
-                                            width: 300,
+                                            width: MediaQuery.of(context).size.width*0.8,
                                             color: Colors.white,
                                             padding: const EdgeInsets.only(
                                                 top: 10,
@@ -200,7 +145,7 @@ class _MainForumPageState extends State<MainForumPage> {
                                               result.data!['getAllForum'][index]
                                                   ['description'],
                                               style: TextStyle(
-                                                  fontSize: 12,
+                                                  fontSize: 16,
                                                   color: Colors.black,
                                                   decoration:
                                                       TextDecoration.none),
@@ -222,7 +167,7 @@ class _MainForumPageState extends State<MainForumPage> {
                                                               'getAllForum']
                                                           [index]['answer'],
                                                       style: TextStyle(
-                                                          fontSize: 12,
+                                                          fontSize: 16,
                                                           color: Colors.black,
                                                           decoration:
                                                               TextDecoration
@@ -248,10 +193,12 @@ class _MainForumPageState extends State<MainForumPage> {
                                   ],
                                 ),
                               ),
+                              SizedBox(height: MediaQuery.of(context).size.height*0.08,)
                             ],
                           );
                         }),
                   ),
+                  
                 ],
               ),
             );
