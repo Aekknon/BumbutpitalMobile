@@ -146,7 +146,6 @@ class VideotCard1 extends StatelessWidget {
       createAt
       videoUrl
       
-      
     }
   }
                   """;

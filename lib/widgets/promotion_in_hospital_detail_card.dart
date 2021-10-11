@@ -16,7 +16,7 @@ class promotioninhospitaldetail_card extends StatelessWidget {
       hospitalDetail,
       couponCode,
       Url,
-
+      expiredDate
     }
   }
 
@@ -55,7 +55,8 @@ class promotioninhospitaldetail_card extends StatelessWidget {
                             result.data!['getAllPromotion'][index]
                                 ['hospitalDetail'],
                             result.data!['getAllPromotion'][index]['Url'],
-                            result.data!['getAllPromotion'][index]['createAt']
+                            result.data!['getAllPromotion'][index]
+                                ['expiredDate']
                           ],
                         );
                       },

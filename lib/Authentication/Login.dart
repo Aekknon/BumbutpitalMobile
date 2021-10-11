@@ -1,6 +1,7 @@
 // ignore_for_file: avoid_unnecessary_containers, file_names
 
 import 'package:bumbutpital/Authentication/sign_up.dart';
+import 'package:bumbutpital/Questionare/main_question.dart';
 import 'package:bumbutpital/services/graphql_config.dart';
 import 'package:flutter/material.dart';
 import 'package:bumbutpital/ComponentMainScreen/bottom_navbar.dart';
@@ -43,7 +44,7 @@ class _LoginPageState extends State<LoginPage> {
           .setToken(token);
       Navigator.pushAndRemoveUntil(
           context,
-          MaterialPageRoute(builder: (context) => BottomNavBar()),
+          MaterialPageRoute(builder: (context) => MainQuestion()),
           (route) => false);
     } catch (err) {
       showDialog<void>(

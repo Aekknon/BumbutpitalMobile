@@ -10,8 +10,7 @@ class AddQuestion extends StatefulWidget {
   _AddQuestionState createState() => _AddQuestionState();
 }
 
-// \$userID:String!,\$staffID:String!,
-// userID:\$userID,staffID:\$staffID,
+
 class _AddQuestionState extends State<AddQuestion> {
   static const addForum = """
       

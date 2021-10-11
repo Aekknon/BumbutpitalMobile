@@ -9,11 +9,11 @@ class PromotionCard extends StatelessWidget {
     getAllPromotion{
       promotionId
       hospitalId
-      createAt
       title
       hospitalDetail
       couponCode
       Url
+      expiredDate
 
     }
   }                """;
@@ -51,7 +51,7 @@ class PromotionCard extends StatelessWidget {
                             result.data!['getAllPromotion'][index]
                                 ['hospitalDetail'],
                             result.data!['getAllPromotion'][index]['Url'],
-                            result.data!['getAllPromotion'][index]['createAt']
+                            result.data!['getAllPromotion'][index]['expiredDate']
                           ],
                         );
                       },

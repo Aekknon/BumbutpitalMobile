@@ -63,9 +63,9 @@ class _VideoDetail extends State<VideoDetail> {
                   children: [
                     const Expanded(child: player),
                     const SizedBox(
-                      height: 500,
+                      height: 420,
                       // width: MediaQuery.of(context).size.width,
-                      width: 1200,
+                      width: 600,
                       child: SingleChildScrollView(
                         child: Controls(),
                       ),

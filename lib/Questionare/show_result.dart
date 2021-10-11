@@ -57,16 +57,6 @@ class ShowResult extends StatelessWidget {
 
     return Scaffold(
         backgroundColor: Color(0XFFECF2FF),
-        appBar: AppBar(
-          centerTitle: true,
-          backgroundColor: Color(0XFFECF2FF),
-          elevation: 0,
-          iconTheme: IconThemeData(color: Colors.black),
-          title: Text(
-            "My Profile",
-            style: TextStyle(color: Colors.black),
-          ),
-        ),
         body: Query(
           options: QueryOptions(
               document: gql(query), pollInterval: Duration(seconds: 1)),
