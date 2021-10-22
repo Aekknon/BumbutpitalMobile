@@ -99,7 +99,7 @@ class _MainVideoState extends State<MainVideo> {
                       child: Column(
                         children: [
                           Icon(
-                            Icons.health_and_safety_rounded,
+                            Icons.add,
                             size: 50,
                             color: Color(0xff706A6A),
                           ),

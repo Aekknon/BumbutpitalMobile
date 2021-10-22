@@ -1,6 +1,6 @@
 import 'package:bumbutpital/Forum/add_question.dart';
 import 'package:flutter/material.dart';
-import 'all_question.dart';
+import 'forum_page/forum_page.dart';
 import 'package:graphql_flutter/graphql_flutter.dart';
 
 class MainForumPage extends StatefulWidget {
@@ -11,198 +11,101 @@ class MainForumPage extends StatefulWidget {
 }
 
 class _MainForumPageState extends State<MainForumPage> {
-  static const query = """
-      
-   query{
-    getAllForum{
-     title
-    description
-    answer
-  }
-}
+  final tabs = [AllForum(), MyForum()];
+  int _currentTabs = 0;
+  String selected = "1";
 
-                        """;
+ 
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Query(
-          options: QueryOptions(
-              document: gql(query), pollInterval: Duration(seconds: 1)),
-          builder: (QueryResult result, {fetchMore, refetch}) {
-            if (result.hasException) {
-              return Text(result.exception.toString());
-            }
-            if (result.isLoading) {
-              return Center(
-                child: CircularProgressIndicator(),
-              );
-            }
-
-            if (result.data == null) {
-              return Text(result.toString());
-            }
-            final forum = result.data!['getAllForum'];
-            print(forum);
-            return Container(
-              color: Color(0xffECF2FF),
-              child: Column(
+      body: Container(
+        color: Color(0xffECF2FF),
+        child: Column(
+          children: [
+            Row(
+              children: [
+                Container(
+                  height: MediaQuery.of(context).size.height * 0.15,
+                  width: MediaQuery.of(context).size.width * 0.8,
+                  decoration: BoxDecoration(
+                    color: Color(0xff6367EA),
+                    borderRadius: BorderRadius.only(
+                        topRight: Radius.circular(70),
+                        bottomRight: Radius.circular(70)),
+                  ),
+                  child: Center(
+                    child: Text(
+                      'FORUM Q&A',
+                      style: TextStyle(
+                          fontSize: 24,
+                          color: Colors.white,
+                          decoration: TextDecoration.none),
+                    ),
+                  ),
+                ),
+                Spacer()
+              ],
+            ),
+            SizedBox(
+              height: MediaQuery.of(context).size.height * 0.05,
+            ),
+            Center(
+              child: Row(
                 children: [
-                  Row(
-                    children: [
-                      Container(
-                        height: MediaQuery.of(context).size.height * 0.15,
-                        width: MediaQuery.of(context).size.width * 0.8,
-                        decoration: BoxDecoration(
-                          color: Color(0xff6367EA),
-                          borderRadius: BorderRadius.only(
-                              topRight: Radius.circular(70),
-                              bottomRight: Radius.circular(70)),
-                        ),
-                        child: Center(
-                          child: Text(
-                            'FORUM Q&A',
-                            style: TextStyle(
-                                fontSize: 24,
-                                color: Colors.white,
-                                decoration: TextDecoration.none),
-                          ),
-                        ),
-                      ),
-                      Spacer()
-                    ],
+                  Spacer(),
+                  InkWell(
+                    onTap: () {
+                      setState(() {
+                        _currentTabs = 0;
+                        selected = '1';
+                      });
+                    },
+                    child: Text(
+                      'All Forum',
+                      style: TextStyle(
+                          fontSize: 16,
+                          color:
+                              selected == '1' ? Color(0xff6367EA) : Colors.grey,
+                          decoration: TextDecoration.none,
+                          fontWeight: FontWeight.bold),
+                    ),
                   ),
-                  SizedBox(height: MediaQuery.of(context).size.height*0.05,),
-                  Expanded(
-                    child: ListView.builder(
-                      reverse: true,
-                       shrinkWrap: true,
-                        itemCount: result.data!['getAllForum'].length,
-                        itemBuilder: (BuildContext context, int index) {
-                          return Column(
-                            children: [
-                              Center(
-                                child: Column(
-                                  children: [
-                                   
-                                    Container(
-                                      width: MediaQuery.of(context).size.width*0.7,
-                                      decoration: BoxDecoration(
-                                        boxShadow: [
-                                          BoxShadow(
-                                            color: Colors.grey.withOpacity(0.5),
-                                            spreadRadius: 2,
-                                            blurRadius: 5,
-                                            offset: Offset(0,
-                                                3), // changes position of shadow
-                                          ),
-                                        ],
-                                        borderRadius: BorderRadius.only(
-                                            bottomLeft: Radius.circular(12),
-                                            topLeft: Radius.circular(12),
-                                            topRight: Radius.circular(12),
-                                            bottomRight: Radius.circular(12)),
-                                      ),
-                                      child: Column(
-                                        children: [
-                                          Container(
-                                              width: MediaQuery.of(context).size.width*0.7,
-                                              decoration: BoxDecoration(
-                                                color: Color(0xff6367EA),
-                                                borderRadius: BorderRadius.only(
-                                                  topLeft: Radius.circular(12),
-                                                  topRight: Radius.circular(12),
-                                                ),
-                                              ),
-                                              child: Column(
-                                                children: [
-                                                  SizedBox(
-                                                    height: 10,
-                                                  ),
-                                                  Text(
-                                                    result.data!['getAllForum']
-                                                        [index]['title'],
-                                                    style: TextStyle(
-                                                        fontSize: 16,
-                                                        color: Colors.white,
-                                                        decoration:
-                                                            TextDecoration
-                                                                .none),
-                                                  ),
-                                                  SizedBox(
-                                                    height: 10,
-                                                  ),
-                                                ],
-                                              )),
-                                          Container(
-                                            width: MediaQuery.of(context).size.width*0.8,
-                                            color: Colors.white,
-                                            padding: const EdgeInsets.only(
-                                                top: 10,
-                                                bottom: 10,
-                                                left: 30,
-                                                right: 10),
-                                            child: Text(
-                                              result.data!['getAllForum'][index]
-                                                  ['description'],
-                                              style: TextStyle(
-                                                  fontSize: 16,
-                                                  color: Colors.black,
-                                                  decoration:
-                                                      TextDecoration.none),
-                                            ),
-                                          ),
-                                          if (result.data!['getAllForum'][index]
-                                                  ['answer'] !=
-                                              null)
-                                            Container(
-                                                padding: const EdgeInsets.only(
-                                                    top: 10,
-                                                    bottom: 5,
-                                                    left: 10,
-                                                    right: 10),
-                                                child: Column(
-                                                  children: [
-                                                    Text(
-                                                      result.data![
-                                                              'getAllForum']
-                                                          [index]['answer'],
-                                                      style: TextStyle(
-                                                          fontSize: 16,
-                                                          color: Colors.black,
-                                                          decoration:
-                                                              TextDecoration
-                                                                  .none),
-                                                    ),
-                                                    SizedBox(
-                                                      height: 10,
-                                                    ),
-                                                    Text(
-                                                      'Dr. WIsa Moolhom',
-                                                      style: TextStyle(
-                                                          fontSize: 8,
-                                                          color: Colors.black,
-                                                          decoration:
-                                                              TextDecoration
-                                                                  .none),
-                                                    ),
-                                                  ],
-                                                ))
-                                        ],
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                              ),
-                              SizedBox(height: MediaQuery.of(context).size.height*0.08,)
-                            ],
-                          );
-                        }),
+                  SizedBox(
+                    width: MediaQuery.of(context).size.width * 0.2,
                   ),
-                  
+                  InkWell(
+                    onTap: () {
+                      setState(() {
+                        _currentTabs = 1;
+                        selected = '2';
+                      });
+                    },
+                    child: Text(
+                      'My Forum',
+                      style: TextStyle(
+                          fontSize: 16,
+                          color:  selected == '2' ? Color(0xff6367EA) : Colors.grey,
+                          decoration: TextDecoration.none,
+                          fontWeight: FontWeight.bold),
+                    ),
+                  ),
+                  Spacer(),
                 ],
               ),
-            );
-          }),
+            ),
+            SizedBox(
+              height: MediaQuery.of(context).size.height * 0.05,
+            ),
+            Expanded(
+                child: Container(
+              color: Color((0XFFECF2FF)),
+              child: tabs[_currentTabs],
+            ))
+          ],
+        ),
+      ),
       floatingActionButton: FloatingActionButton(
           onPressed: () {
             Navigator.push(context,
