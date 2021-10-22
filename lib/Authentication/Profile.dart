@@ -12,15 +12,7 @@ import 'edit_profile.dart';
 // ignore: must_be_immutable
 class Profile extends StatelessWidget {
   // ignore: non_constant_identifier_names
-  String getPhq9Type(String Permission) {
-    var _phq9Type = "";
-    if (Permission == "y") {
-      _phq9Type = 'ON';
-    } else if (Permission == "n") {
-      _phq9Type = 'OFF';
-    }
-    return _phq9Type;
-  }
+
 
   static const query = """
                    query {
@@ -31,15 +23,14 @@ class Profile extends StatelessWidget {
     email
     phoneNumber
     appropiatePHQSeverity
-    phq9permission
     }
   }
                   """;
 
   static const mutation = """
       
-     mutation(\$_phq9permission: String! , \$appropiatePHQSeverity: String!){
-  phq9permission( phq9permission:\$_phq9permission , appropiatePHQSeverity: \$appropiatePHQSeverity){
+     mutation( \$appropiatePHQSeverity: String!){
+  phq9permission(  appropiatePHQSeverity: \$appropiatePHQSeverity){
     successful
     message
   }
@@ -172,6 +163,7 @@ class Profile extends StatelessWidget {
                     children: [
                       Row(
                         children: [
+                          Spacer(),
                           Text(
                             result.data!['getCurrentUser'][0]['name'] +
                                 " " +
@@ -193,6 +185,7 @@ class Profile extends StatelessWidget {
                                 Icons.edit,
                                 color: Color(0xff706A6A),
                               )),
+                              Spacer(),
                         ],
                       ),
                     ],
@@ -328,8 +321,11 @@ class Profile extends StatelessWidget {
                           horizontal: 20.0, vertical: 22.0),
                       child: Row(
                         children: <Widget>[
+                         
                           Expanded(
-                            child: Column(
+                            child: Row(children: [
+                               Spacer(),
+                              Column(
                               children: <Widget>[
                                 Text(
                                   "My PHQ-9 Severity",
@@ -351,78 +347,11 @@ class Profile extends StatelessWidget {
                                   ),
                                 ),
                               ],
-                            ),
+                            ), Spacer(),
+                            ],)
                           ),
-                          Column(
-                            children: [
-                              Text(
-                                "PHQ-9 Severity Permission",
-                                style: TextStyle(
-                                  color: Colors.redAccent,
-                                  fontSize: 15.0,
-                                  fontWeight: FontWeight.bold,
-                                ),
-                              ),
-                              SizedBox(
-                                height: 10,
-                              ),
-                              Row(
-                                children: [
-                                  Text(
-                                    getPhq9Type(result.data!['getCurrentUser']
-                                            [0]['phq9permission']
-                                        .toString()),
-                                    style: TextStyle(
-                                      fontSize: 15.0,
-                                      color: Colors.black,
-                                    ),
-                                  ),
-                                  TextButton(
-                                    onPressed: () => showDialog<String>(
-                                      context: context,
-                                      builder: (BuildContext context) =>
-                                          AlertDialog(
-                                        title: const Text('PQH-9 PERMISSION'),
-                                        content: const Text('PQH-9 PERMISSION'),
-                                        actions: <Widget>[
-                                          Mutation(
-                                            options: MutationOptions(
-                                                document: gql(mutation)),
-                                            builder: (run, _) => TextButton(
-                                              onPressed: () async {
-                                                await onSubmit(run);
-                                              },
-                                              child: const Text('YES'),
-                                            ),
-                                          ),
-                                          SizedBox(
-                                            height: 10,
-                                          ),
-                                          Mutation(
-                                            options: MutationOptions(
-                                                document: gql(mutation)),
-                                            builder: (run, _) => TextButton(
-                                              onPressed: () async {
-                                                await onSubmit1(run);
-                                              },
-                                              child: const Text('NO'),
-                                            ),
-                                          )
-                                        ],
-                                      ),
-                                    ),
-                                    child: const Icon(
-                                      Icons.edit,
-                                      color: Color(0xff706A6A),
-                                    ),
-                                  )
-                                ],
-                              ),
-                            ],
-                          ),
-                          SizedBox(
-                            width: 10,
-                          )
+                          
+                        
                         ],
                       ),
                     ),

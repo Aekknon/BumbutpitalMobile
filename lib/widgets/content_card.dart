@@ -82,7 +82,7 @@ class ContentCard extends StatelessWidget {
                       ),
                     ),
                     SizedBox(
-                      height: 10,
+                      height: 30,
                     )
                   ],
                 );
@@ -173,7 +173,7 @@ class ContentCard1 extends StatelessWidget {
                       ),
                     ),
                     SizedBox(
-                      height: 10,
+                      height: 30,
                     )
                   ],
                 );
@@ -267,7 +267,7 @@ class ContentCard2 extends StatelessWidget {
                       ),
                     ),
                     SizedBox(
-                      height: 10,
+                      height: 30,
                     )
                   ],
                 );
@@ -362,7 +362,7 @@ class ContentCard3 extends StatelessWidget {
                       ),
                     ),
                     SizedBox(
-                      height: 10,
+                      height: 30,
                     )
                   ],
                 );
@@ -456,7 +456,7 @@ class ContentCard4 extends StatelessWidget {
                       ),
                     ),
                     SizedBox(
-                      height: 10,
+                      height: 30,
                     )
                   ],
                 );
@@ -550,7 +550,7 @@ class ContentCard5 extends StatelessWidget {
                       ),
                     ),
                     SizedBox(
-                      height: 10,
+                      height: 30,
                     )
                   ],
                 );

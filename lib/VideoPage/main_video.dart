@@ -8,14 +8,13 @@ class MainVideo extends StatefulWidget {
 
 class _MainVideoState extends State<MainVideo> {
   int _currentTabs = 0;
+  String selected = "1";
+  String select1 = "1";
+  bool visible = true;
 
-  final tabs = [VideotCard(), VideotCard1(), VideotCard2()];
+  final tabs = [VideotCard(), VideotCard1(), VideotCard2(), VideotCard3() , VideotCard4() , VideotCard5()];
 
-  void _onChangeTab(int index) {
-    setState(() {
-      _currentTabs = index;
-    });
-  }
+  
 
   @override
   Widget build(BuildContext context) {
@@ -27,10 +26,11 @@ class _MainVideoState extends State<MainVideo> {
           elevation: 0,
         ),
         body: Container(
-            width: MediaQuery.of(context).size.width,
-            height: MediaQuery.of(context).size.height,
-            color: Color((0XFFECF2FF)),
-            child: Column(children: [
+          width: MediaQuery.of(context).size.width,
+          height: MediaQuery.of(context).size.height,
+          color: Color((0XFFECF2FF)),
+          child: Column(
+            children: [
               Container(
                 width: MediaQuery.of(context).size.width,
                 height: MediaQuery.of(context).size.height * 0.1,
@@ -53,97 +53,325 @@ class _MainVideoState extends State<MainVideo> {
                               style: TextStyle(
                                   fontSize: 32,
                                   color: Colors.white,
-                                  decoration: TextDecoration.none),
+                                  decoration: TextDecoration.none,
+                                  fontWeight: FontWeight.bold,)
                             ),
-                          ) //Your widget here,
-                          ),
+                          )),
                     ),
                   ],
                 )),
               ),
               Row(
                 children: [
-                  SizedBox(
-                    width: MediaQuery.of(context).size.width * 0.125,
-                  ),
+                  Spacer(),
+                  
+                 
                   InkWell(
-                    onTap: () => _onChangeTab(0),
-                    child: Container(
+                    onTap: () {
+                      setState(() {
+                        _currentTabs = 5;
+                        selected = '1';
+                        visible = false;
+                      });
+                    },
+                    child:  Container(
+                      child: Column(children: [
+                        Container(
                       transform: Matrix4.translationValues(0, -25, 0.0),
                       height: 75,
                       width: 75,
-                      child: Column(
+                      child: Center(
+                        child: Column(
                         children: [
-                          Icon(
-                            Icons.visibility,
-                            size: 50,
-                            color: Color(0xff706A6A),
-                          ),
-                          Text('see all'),
-                        ],
-                      ),
-                      decoration: BoxDecoration(
-                          color: Colors.white,
-                          borderRadius: BorderRadius.circular(50)),
-                    ),
-                  ),
-                  SizedBox(
-                    width: MediaQuery.of(context).size.width * 0.1,
-                  ),
-                  InkWell(
-                    onTap: () => _onChangeTab(1),
-                    child: Container(
-                      transform: Matrix4.translationValues(0, -25, 0.0),
-                      height: 75,
-                      width: 75,
-                      child: Column(
-                        children: [
-                          Icon(
+                          Spacer(),
+                         Icon(
                             Icons.add,
                             size: 50,
-                            color: Color(0xff706A6A),
+                            color: selected == '1' ? Colors.white : Colors.grey,
                           ),
-                          Text('Health')
+                          Spacer(),
                         ],
                       ),
+                      ),
                       decoration: BoxDecoration(
-                          color: Colors.white,
+                          color: selected == '1'
+                              ? Color(0XFFFE7940)
+                              : Colors.white,
                           borderRadius: BorderRadius.circular(50)),
                     ),
+                    Container(
+                      transform: Matrix4.translationValues(0, -25, 0.0),
+                      child: Text(
+                            'Recommend',
+                            style: TextStyle(
+                              color:
+                                  Colors.black,
+                                  fontWeight: FontWeight.bold
+                            ),
+                          ),
+                    )
+                      ],),
+                    )
                   ),
                   SizedBox(
-                    width: MediaQuery.of(context).size.width * 0.1,
+                    width: MediaQuery.of(context).size.width * 0.25,
                   ),
                   InkWell(
-                    onTap: () => _onChangeTab(2),
+                    onTap: () {
+                      setState(() {
+                        selected = '2';
+                        visible = true;
+                      });
+                    },
                     child: Container(
+                      child: Column(children: [
+                        Container(
                       transform: Matrix4.translationValues(0, -25, 0.0),
                       height: 75,
                       width: 75,
-                      child: Column(
+                      child: Center(
+                        child: Column(
                         children: [
-                          Icon(
-                            Icons.psychology_rounded,
+                          Spacer(),
+                         Icon(
+                            Icons.library_books,
                             size: 50,
-                            color: Color(0xff706A6A),
+                            color: selected == '2' ? Colors.white : Colors.grey,
                           ),
-                          Text(
-                            'Depression',
+                          Spacer(),
+                        ],
+                      ),
+                      ),
+                      decoration: BoxDecoration(
+                          color: selected == '2'
+                              ? Color(0XFFFE7940)
+                              : Colors.white,
+                          borderRadius: BorderRadius.circular(50)),
+                    ),
+                    Container(
+                      transform: Matrix4.translationValues(0, -25, 0.0),
+                      child: Text(
+                            'See All',
                             style: TextStyle(
-                                fontSize: 12,
-                                color: Colors.black,
-                                decoration: TextDecoration.none),
+                              color:
+                                  Colors.black,
+                                  fontWeight: FontWeight.bold
+                            ),
+                          ),
+                    )
+                      ],),
+                    )
+                  ),
+                  Spacer(),
+                ],
+              ),
+              Visibility(
+                  visible: visible,
+                  child: Container(
+                    width: MediaQuery.of(context).size.width,
+                    height: MediaQuery.of(context).size.height * 0.05,
+                    child: Expanded(
+                      child: ListView(
+                        scrollDirection: Axis.horizontal,
+                        children: <Widget>[
+                          SizedBox(
+                            width: MediaQuery.of(context).size.width * 0.05,
+                          ),
+                          InkWell(
+                              onTap: () {
+                                setState(() {
+                                  _currentTabs = 0;
+                                  select1 = '1';
+                                });
+                              },
+                              child: Container(
+                                 
+                                padding: const EdgeInsets.all(5.0),
+                                decoration: BoxDecoration(
+                                  color: select1 == '1'
+                                          ? Color(0xff6367EA)
+                                          : Colors.transparent,
+                                  border: Border.all(color: select1 == '1'
+                                          ? Color(0xff6367EA)
+                                          : Colors.grey,
+                                          ),
+                                  borderRadius: BorderRadius.all(
+                                      Radius.circular(
+                                          20.0) //                 <--- border radius here
+                                      ),
+                                ),
+                                child: Text(
+                                  'Minimal Depression',
+                                  style: TextStyle(
+                                      fontSize: 16,
+                                      color: select1 == '1'
+                                          ? Colors.white
+                                          : Colors.grey,
+                                      decoration: TextDecoration.none,
+                                      fontWeight: FontWeight.bold),
+                                ),
+                              )),
+                          SizedBox(
+                            width: MediaQuery.of(context).size.width * 0.05,
+                          ),
+                          InkWell(
+                              onTap: () {
+                                setState(() {
+                                  _currentTabs = 1;
+                                  select1 = '2';
+                                });
+                              },
+                              child: Container(
+                                
+                                padding: const EdgeInsets.all(5.0),
+                                decoration: BoxDecoration(
+                                  color: select1 == '2'
+                                          ? Color(0xff6367EA)
+                                          : Colors.transparent,
+                                    border:
+                                        Border.all(color: select1 == '2'
+                                          ? Color(0xff6367EA)
+                                          : Colors.grey,),
+                                  borderRadius: BorderRadius.all(
+                                      Radius.circular(
+                                          20.0) //                 <--- border radius here
+                                      ),),
+                                child: Text(
+                                  'Mild Depression',
+                                  style: TextStyle(
+                                      fontSize: 16,
+                                      color: select1 == '2'
+                                          ? Colors.white
+                                          : Colors.grey,
+                                      decoration: TextDecoration.none,
+                                      fontWeight: FontWeight.bold),
+                                ),
+                              )),
+                          SizedBox(
+                            width: MediaQuery.of(context).size.width * 0.05,
+                          ),
+                          InkWell(
+                              onTap: () {
+                                setState(() {
+                                  _currentTabs = 2;
+                                  select1 = '3';
+                                });
+                              },
+                              child: Container(
+                               
+                                padding: const EdgeInsets.all(5.0),
+                                decoration: BoxDecoration(
+                                  color: select1 == '3'
+                                          ? Color(0xff6367EA)
+                                          : Colors.transparent,
+                                    border:
+                                        Border.all(color: select1 == '3'
+                                          ? Color(0xff6367EA)
+                                          : Colors.grey,),
+                                  borderRadius: BorderRadius.all(
+                                      Radius.circular(
+                                          20.0) //                 <--- border radius here
+                                      ),),
+                                child: Text(
+                                  'Moderate Depression',
+                                  style: TextStyle(
+                                      fontSize: 16,
+                                      color: select1 == '3'
+                                          ? Colors.white
+                                          : Colors.grey,
+                                      decoration: TextDecoration.none,
+                                      fontWeight: FontWeight.bold),
+                                ),
+                              )),
+                          SizedBox(
+                            width: MediaQuery.of(context).size.width * 0.05,
+                          ),
+                          InkWell(
+                              onTap: () {
+                                setState(() {
+                                  _currentTabs = 3;
+                                  select1 = '4';
+                                });
+                              },
+                              child: Container(
+                               
+                                padding: const EdgeInsets.all(5.0),
+                                decoration: BoxDecoration(
+                                  color: select1 == '4'
+                                          ? Color(0xff6367EA)
+                                          : Colors.transparent,
+                                    border:
+                                        Border.all(color: select1 == '4'
+                                          ? Color(0xff6367EA)
+                                          : Colors.grey,),
+                                  borderRadius: BorderRadius.all(
+                                      Radius.circular(
+                                          20.0) //                 <--- border radius here
+                                      ),),
+                                child: Text(
+                                  'Moderately severe Depression',
+                                  style: TextStyle(
+                                      fontSize: 16,
+                                      color: select1 == '4'
+                                          ? Colors.white
+                                          : Colors.grey,
+                                      decoration: TextDecoration.none,
+                                      fontWeight: FontWeight.bold),
+                                ),
+                              )),
+                          SizedBox(
+                            width: MediaQuery.of(context).size.width * 0.05,
+                          ),
+                          InkWell(
+                              onTap: () {
+                                setState(() {
+                                  _currentTabs = 4;
+                                  select1 = '5';
+                                });
+                              },
+                              child: Container(
+                             
+                                padding: const EdgeInsets.all(5.0),
+                                decoration: BoxDecoration(
+                                  color: select1 == '5'
+                                          ? Color(0xff6367EA)
+                                          : Colors.transparent,
+                                    border:
+                                        Border.all(color: select1 == '5'
+                                          ? Color(0xff6367EA)
+                                          : Colors.grey,),
+                                  borderRadius: BorderRadius.all(
+                                      Radius.circular(
+                                          20.0) //                 <--- border radius here
+                                      ),),
+                                child: Text(
+                                  'Severe Depression',
+                                  style: TextStyle(
+                                      fontSize: 16,
+                                      color: select1 == '5'
+                                          ? Colors.white
+                                          : Colors.grey,
+                                      decoration: TextDecoration.none,
+                                      fontWeight: FontWeight.bold),
+                                ),
+                              )),
+                          SizedBox(
+                            width: MediaQuery.of(context).size.width * 0.05,
                           ),
                         ],
                       ),
-                      decoration: BoxDecoration(
-                          color: Colors.white,
-                          borderRadius: BorderRadius.circular(50)),
                     ),
-                  ),
-                ],
+                  )),
+              SizedBox(
+                height: 15,
               ),
-              Expanded(child: tabs[_currentTabs])
-            ])));
+              Expanded(
+                  child: Container(
+                color: Color((0XFFECF2FF)),
+                child: tabs[_currentTabs],
+              ))
+            ],
+          ),
+        ));
   }
 }

@@ -45,7 +45,7 @@ class ShowResult extends StatelessWidget {
     email
     phoneNumber
     appropiatePHQSeverity
-  phq9permission
+
 
     }
   }
@@ -76,8 +76,7 @@ class ShowResult extends StatelessWidget {
             final Phq9Score =
                 result.data!['getCurrentUser'][0]['phq9permission'];
             Future<void> onSubmit(RunMutation run) async {
-              if (Phq9Score == "y") {
-                try {
+              try {
                   final response = run({
                     "phq9": getPhq9Type(PHQ9result),
                   });
@@ -104,35 +103,6 @@ class ShowResult extends StatelessWidget {
                     },
                   );
                 }
-              } else if (Phq9Score == "n") {
-                try {
-                  final response = run({
-                    "phq9": "",
-                  });
-                  print((await response.networkResult) as dynamic);
-
-                  Navigator.pushAndRemoveUntil(
-                      context,
-                      MaterialPageRoute(builder: (context) => BottomNavBar()),
-                      (route) => false);
-                } catch (err) {
-                  showDialog<void>(
-                    context: context,
-                    builder: (BuildContext context) {
-                      return AlertDialog(
-                        title: const Text('Error!'),
-                        content: SingleChildScrollView(
-                          child: ListBody(
-                            children: const <Widget>[
-                              Text('Insert your Question'),
-                            ],
-                          ),
-                        ),
-                      );
-                    },
-                  );
-                }
-              }
             }
 
             return Center(
