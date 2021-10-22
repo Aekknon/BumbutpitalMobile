@@ -27,12 +27,13 @@ class _QuestionState extends State<Question> {
       if (_currentPage == 9) {
         Navigator.of(context).pushNamed(ShowResult.routeName,
             arguments: _answerList.reduce((a, b) => a + b));
+        print(_answerList);
       }
       _currentAnswer = _answerList[_currentPage];
       _currentPage++;
     });
 
-    print(_answerList);
+    // print(_answerList);
   }
 
   void onClickPrevPage() {
@@ -44,7 +45,7 @@ class _QuestionState extends State<Question> {
       _currentPage--;
     });
 
-    print(_answerList);
+    // print(_answerList);
   }
 
   void onSelectAnswer(int index) {

@@ -49,7 +49,7 @@ class Profile extends StatelessWidget {
   static const query1 = """
       
    query{
-    getAllForum{
+    getcurrentForum{
      title
     description
     answer
@@ -245,7 +245,7 @@ class Profile extends StatelessWidget {
                                         }
 
                                         return Text(
-                                          result.data!['getAllForum'].length
+                                          result.data!['getcurrentForum'].length
                                               .toString(),
                                           style: TextStyle(
                                             fontSize: 15.0,
