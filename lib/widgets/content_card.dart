@@ -54,7 +54,8 @@ class ContentCard extends StatelessWidget {
                                 ['pictureUrl'],
                             result.data!['getMinimalContent'][index]['title'],
                             result.data!['getMinimalContent'][index]
-                                ['description']
+                                ['description'],
+                            result.data!['getMinimalContent'][index]['createAt']
                           ],
                         );
                       },
@@ -146,7 +147,9 @@ class ContentCard1 extends StatelessWidget {
                           arguments: [
                             result.data!['getMildContent'][index]['pictureUrl'],
                             result.data!['getMildContent'][index]['title'],
-                            result.data!['getMildContent'][index]['description']
+                            result.data!['getMildContent'][index]
+                                ['description'],
+                            result.data!['getMildContent'][index]['createAt']
                           ],
                         );
                       },
@@ -239,7 +242,9 @@ class ContentCard2 extends StatelessWidget {
                                 ['pictureUrl'],
                             result.data!['getModerateContent'][index]['title'],
                             result.data!['getModerateContent'][index]
-                                ['description']
+                                ['description'],
+                            result.data!['getModerateContent'][index]
+                                ['createAt']
                           ],
                         );
                       },
@@ -334,7 +339,9 @@ class ContentCard3 extends StatelessWidget {
                             result.data!['getModeratelySeverContent'][index]
                                 ['title'],
                             result.data!['getModeratelySeverContent'][index]
-                                ['description']
+                                ['description'],
+                            result.data!['getModeratelySeverContent'][index]
+                                ['createAt']
                           ],
                         );
                       },
@@ -428,7 +435,8 @@ class ContentCard4 extends StatelessWidget {
                                 ['pictureUrl'],
                             result.data!['getSevereContent'][index]['title'],
                             result.data!['getSevereContent'][index]
-                                ['description']
+                                ['description'],
+                            result.data!['getSevereContent'][index]['createAt']
                           ],
                         );
                       },
@@ -522,7 +530,8 @@ class ContentCard5 extends StatelessWidget {
                                 ['pictureUrl'],
                             result.data!['getSmartContent'][index]['title'],
                             result.data!['getSmartContent'][index]
-                                ['description']
+                                ['description'],
+                            result.data!['getSmartContent'][index]['createAt']
                           ],
                         );
                       },
@@ -563,4 +572,3 @@ class ContentCard5 extends StatelessWidget {
     );
   }
 }
-

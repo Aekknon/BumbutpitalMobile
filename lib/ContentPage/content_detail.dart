@@ -18,33 +18,38 @@ class ContentDetail extends StatelessWidget {
         child: SafeArea(
             child: Column(
           children: [
-            // SizedBox(
-            //   child: Container(
-            //     transform: Matrix4.translationValues(-110, 0, 0),
-            //     // padding: EdgeInsets.fromLTRB(0, 0, 0, 0),
-            //     child: Text(
-            //       'What is ?',
-            //       style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
-            //     ),
-            //   ),
-            // ),
-            SizedBox(
-              height: 20,
-            ),
+            
             Container(
-                height: 400,
-                width: 500,
+                
+                width: MediaQuery.of(context).size.width,
                 child: Image.network(
                   result[0].toString(),
                 )),
             SizedBox(
               height: 10,
             ),
-            Text(result[1],
+            
+                 Container(
+              padding: EdgeInsets.only(left: 30, right: 30),
+              child: Text(result[1],
                 style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold)),
-
+            ),
             SizedBox(
-              height: 10,
+              height: 30,
+            ),
+            Row(children: [
+              Spacer(),
+              Container(
+              padding: EdgeInsets.only(left: 30, right: 30),
+              child: Text(result[3].toString(),
+                style: TextStyle(fontSize: 10, )),
+            ),
+            ],),
+            Divider(
+              color: Colors.black
+            ),
+             SizedBox(
+              height: 20,
             ),
             Container(
               padding: EdgeInsets.only(left: 30, right: 30),

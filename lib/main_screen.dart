@@ -23,7 +23,6 @@ class Mainpage extends StatelessWidget {
     email
     phoneNumber
     appropiatePHQSeverity
-    phq9permission
     }
   }""";
   const Mainpage({Key? key}) : super(key: key);

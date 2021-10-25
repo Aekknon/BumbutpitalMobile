@@ -27,7 +27,8 @@ class MyApp extends StatelessWidget {
           client: graphQLConfig.clientToQuery(),
           child: MaterialApp(
               debugShowCheckedModeBanner: false,
-              home: graphQLConfig.isAuth ? BottomNavBar() : SplashScreen(),
+              // home: graphQLConfig.isAuth ? BottomNavBar() : SplashScreen(),
+              home: SplashScreen(),
               routes: {
                 ShowResult.routeName: (_) => ShowResult(),
                 "/ContentDetail": (_) => ContentDetail(),
