@@ -1,5 +1,6 @@
 import 'package:bumbutpital/Questionare/question_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:bumbutpital/ComponentMainScreen/bottom_navbar.dart';
 
 class MainQuestion extends StatelessWidget {
   @override
@@ -63,21 +64,49 @@ class MainQuestion extends StatelessWidget {
                   SizedBox(
                     height: 21,
                   ),
-                  ElevatedButton(
-                    onPressed: () {
-                      Navigator.push(context,
-                          MaterialPageRoute(builder: (context) => Question()));
-                    },
-                    style: ElevatedButton.styleFrom(
-                      shape: new RoundedRectangleBorder(
-                        borderRadius: new BorderRadius.circular(8.0),
+                  Row(
+                    children: [
+                      Spacer(),
+                      ElevatedButton(
+                        onPressed: () {
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => Question()));
+                        },
+                        style: ElevatedButton.styleFrom(
+                          shape: new RoundedRectangleBorder(
+                            borderRadius: new BorderRadius.circular(8.0),
+                          ),
+                          primary: Color(0XFFFE7940),
+                          padding: EdgeInsets.symmetric(
+                              horizontal: 40, vertical: 15),
+                        ),
+                        child: Text("GET STARTED"),
                       ),
-                      primary: Color(0XFFFE7940),
-                      padding:
-                          EdgeInsets.symmetric(horizontal: 100, vertical: 15),
-                    ),
-                    child: Text("GET STARTED"),
-                  ),
+                      SizedBox(
+                        width: 20,
+                      ),
+                      ElevatedButton(
+                        onPressed: () {
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => BottomNavBar()));
+                        },
+                        style: ElevatedButton.styleFrom(
+                          shape: new RoundedRectangleBorder(
+                            borderRadius: new BorderRadius.circular(8.0),
+                          ),
+                          primary: Color(0xFF7B8CE4),
+                          padding: EdgeInsets.symmetric(
+                              horizontal: 40, vertical: 15),
+                        ),
+                        child: Text("Skip"),
+                      ),
+                      Spacer(),
+                    ],
+                  )
                 ],
               ),
             ),
