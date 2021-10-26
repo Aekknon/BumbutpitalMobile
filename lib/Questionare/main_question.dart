@@ -5,12 +5,21 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:graphql_flutter/graphql_flutter.dart';
 import 'package:flutter/services.dart' show rootBundle;
 
-class MainQuestion extends StatelessWidget {
+class MainQuestion extends StatefulWidget {
+  MainQuestion({Key? key}) : super(key: key);
+
+  @override
+  _MainQuestionState createState() => _MainQuestionState();
+}
+
+class _MainQuestionState extends State<MainQuestion> {
+  bool isChecked = false;
   static const query = """
                    query {
     getCurrentUser {
      
     permissionPHQSeverity
+    appropiatePHQSeverity
 
     }
   }
@@ -25,13 +34,36 @@ class MainQuestion extends StatelessWidget {
   }
 }
                         """;
-                        
+  String data = '';
+  bool checkedValue = false;
+  fetchFileData() async {
+    String responseText;
+    responseText = await rootBundle.loadString('asset/text/consent.txt');
+    setState(() {
+      data = responseText;
+    });
+  }
+
+  @override
+  void initState() {
+    fetchFileData();
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
-    Future<String> loadAsset(BuildContext context) async {
-  return await DefaultAssetBundle.of(context).loadString('asset/text/consent.txt');
-}
+    Color getColor(Set<MaterialState> states) {
+      const Set<MaterialState> interactiveStates = <MaterialState>{
+        MaterialState.pressed,
+        MaterialState.hovered,
+        MaterialState.focused,
+      };
+      if (states.any(interactiveStates.contains)) {
+        return Colors.blue;
+      }
+      return Colors.red;
+    }
+
     return MaterialApp(
       title: "Main Question",
       home: Scaffold(
@@ -78,6 +110,16 @@ class MainQuestion extends StatelessWidget {
                 }
               }
 
+              bool visible1 = true;
+              bool visible2 = false;
+              bool visibleaccept = false;
+              bool visibleaccept1 = true;
+              if (result.data!['getCurrentUser'][0]['appropiatePHQSeverity'] ==
+                  null) {
+                visible1 = false;
+                visible2 = true;
+              }
+
               if (result.data!['getCurrentUser'][0]['permissionPHQSeverity'] ==
                   '') {
                 Future.delayed(
@@ -105,33 +147,35 @@ class MainQuestion extends StatelessWidget {
                                   Divider(color: Colors.black),
                                 ],
                               ),
-                              content: Center(
-                                child: Column(
-                                  children: [
-                                    Text(
-                                        "This is one time dialogaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"),
-                                    Text(
-                                        "This is one time dialogaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"),
-                                  ],
-                                ),
-                              ),
+                              content: SingleChildScrollView(
+                                  child: Column(
+                                children: [
+                                  Text(data,
+                                      style: TextStyle(
+                                          fontWeight: FontWeight.normal,
+                                          fontSize: 16)),
+                                  
+                                ],
+                              )),
                               actions: <Widget>[
+                               
                                 // usually buttons at the bottom of the dialog
                                 Mutation(
-                                  options: MutationOptions(
-                                      document: gql(permission)),
-                                  builder: (run, _) => ElevatedButton(
-                                    onPressed: () async {
-                                      await onSubmit(run);
-                                    },
-                                    style: ElevatedButton.styleFrom(
-                                      primary: Color(0XFFFE7940),
-                                      padding: EdgeInsets.symmetric(
-                                          horizontal: 50, vertical: 15),
-                                    ),
-                                    child: Text("Accept"),
-                                  ),
-                                )
+                                      options: MutationOptions(
+                                          document: gql(permission)),
+                                      builder: (run, _) => ElevatedButton(
+                                        onPressed: () async {
+                                          await onSubmit(run);
+                                        },
+                                        style: ElevatedButton.styleFrom(
+                                          primary: Color(0XFFFE7940),
+                                          padding: EdgeInsets.symmetric(
+                                              horizontal: 50, vertical: 15),
+                                        ),
+                                        child: Text("Accept"),
+                                      ),
+                                    )
+                               
                               ],
                             );
                           },
@@ -209,7 +253,7 @@ class MainQuestion extends StatelessWidget {
                                 shape: RoundedRectangleBorder(
                                   borderRadius: BorderRadius.circular(8.0),
                                 ),
-                                primary: Color(0XFFFE7940),
+                                primary: Color((0xff6367EA)),
                                 padding: EdgeInsets.symmetric(
                                     horizontal: 40, vertical: 15),
                               ),
@@ -218,22 +262,46 @@ class MainQuestion extends StatelessWidget {
                             SizedBox(
                               width: 20,
                             ),
-                            ElevatedButton(
-                              onPressed: () {
-                                Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                        builder: (context) => BottomNavBar()));
-                              },
-                              style: ElevatedButton.styleFrom(
-                                shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(8.0),
+                            Visibility(
+                              visible: visible1,
+                              child: ElevatedButton(
+                                onPressed: () {
+                                  Navigator.pushReplacement(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) =>
+                                              BottomNavBar()));
+                                },
+                                style: ElevatedButton.styleFrom(
+                                  shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(8.0),
+                                  ),
+                                  primary: Colors.white,
+                                  padding: EdgeInsets.symmetric(
+                                      horizontal: 40, vertical: 15),
                                 ),
-                                primary: Color(0xFF7B8CE4),
-                                padding: EdgeInsets.symmetric(
-                                    horizontal: 40, vertical: 15),
+                                child: Text("Skip",
+                            style: TextStyle(
+                                fontWeight: FontWeight.bold, fontSize: 18, color: Color((0xff6367EA)),),
+                                ),
                               ),
-                              child: Text("Skip"),
+                            ),
+                            Visibility(
+                              visible: visible2,
+                              child: ElevatedButton(
+                                onPressed: () {},
+                                style: ElevatedButton.styleFrom(
+                                  shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(8.0),
+                                  ),
+                                  primary: Colors.grey,
+                                  padding: EdgeInsets.symmetric(
+                                      horizontal: 40, vertical: 15),
+                                ),
+                                child: Text("Skip",
+                            style: TextStyle(
+                                fontWeight: FontWeight.bold, fontSize: 18, color: Colors.white,),),
+                              ),
                             ),
                             Spacer(),
                           ],

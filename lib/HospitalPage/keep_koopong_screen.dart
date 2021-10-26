@@ -119,7 +119,7 @@ class _KeepkoopongPageState extends State<KeepkoopongPage> {
                   ),
                   ElevatedButton(
                     style: ElevatedButton.styleFrom(
-                        primary: Color(0xffFE7940),
+                        primary: Color((0xff6367EA)),
                         padding:
                             EdgeInsets.symmetric(horizontal: 100, vertical: 15),
                         textStyle: TextStyle(

@@ -27,8 +27,6 @@ class _EditProfileState extends State<EditProfile> {
     email
     phoneNumber
     appropiatePHQSeverity
-  phq9permission
-
     }
   }
                   """;
@@ -166,11 +164,11 @@ class _EditProfileState extends State<EditProfile> {
                           await onSubmit(run);
                         },
                         style: ElevatedButton.styleFrom(
-                          primary: Color(0XFFFE7940),
+                          primary:   Color((0xff6367EA)),
                           padding: EdgeInsets.symmetric(
                               horizontal: 100, vertical: 15),
                         ),
-                        child: Text("SUBMIT QUESTION"),
+                        child: Text("Save Change"),
                       ),
                     )
                   ],

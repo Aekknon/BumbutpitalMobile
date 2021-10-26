@@ -78,29 +78,7 @@ class _HospitalDetailState extends State<HospitalDetail> {
                                 SizedBox(
                                   width: 200,
                                 ),
-                                ElevatedButton(
-                                  style: ElevatedButton.styleFrom(
-                                      primary: Color(0XFFFE7940),
-                                      padding: EdgeInsets.symmetric(
-                                          horizontal: 25, vertical: 10),
-                                      textStyle: TextStyle(
-                                          fontSize: 20,
-                                          fontWeight: FontWeight.bold)),
-                                  child: Text(
-                                    'Hospital Link',
-                                    style: TextStyle(
-                                        fontSize: 15,
-                                        color: Colors.white,
-                                        decoration: TextDecoration.none),
-                                  ),
-                                  onPressed: () {
-                                    Navigator.push(
-                                        context,
-                                        MaterialPageRoute(
-                                            builder: (context) =>
-                                                HospitalDetail()));
-                                  },
-                                ),
+                               
                               ],
                             ),
                             SizedBox(

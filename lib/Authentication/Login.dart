@@ -152,29 +152,7 @@ class _LoginPageState extends State<LoginPage> {
                 ),
                 Text('Sign in with'),
                 SizedBox(height: 24),
-                Container(
-                    child: ElevatedButton.icon(
-                  icon: Icon(
-                    Icons.mail_outline,
-                    color: Color(0XFF6367EA),
-                    size: 24.0,
-                  ),
-                  label: Text(
-                    'Sign in with Google account',
-                    style: TextStyle(color: Colors.black),
-                  ),
-                  onPressed: () {
-                    // ignore: avoid_print
-                    print('Pressed');
-                  },
-                  style: ElevatedButton.styleFrom(
-                    primary: Colors.white,
-                    //fixedSize: Size(350, 50),
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(8.0),
-                    ),
-                  ),
-                )),
+               
                 SizedBox(height: 16),
                 Container(
                     child: InkWell(

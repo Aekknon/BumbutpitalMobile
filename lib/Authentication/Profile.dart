@@ -8,12 +8,18 @@ import 'package:flutter/material.dart';
 import 'package:graphql_flutter/graphql_flutter.dart';
 import 'package:provider/provider.dart';
 import 'edit_profile.dart';
+import 'package:syncfusion_flutter_gauges/gauges.dart';
+import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 
 // ignore: must_be_immutable
-class Profile extends StatelessWidget {
-  // ignore: non_constant_identifier_names
+class Profile extends StatefulWidget {
+  Profile({Key? key}) : super(key: key);
 
+  @override
+  _ProfileState createState() => _ProfileState();
+}
 
+class _ProfileState extends State<Profile> {
   static const query = """
                    query {
     getCurrentUser {
@@ -23,6 +29,7 @@ class Profile extends StatelessWidget {
     email
     phoneNumber
     appropiatePHQSeverity
+    appropiatePHQSeverityScore
     }
   }
                   """;
@@ -55,12 +62,12 @@ class Profile extends StatelessWidget {
         backgroundColor: Color(0XFFECF2FF),
         appBar: AppBar(
           centerTitle: true,
-          backgroundColor: Color(0XFFECF2FF),
+          backgroundColor: Color(0xff6367EA),
           elevation: 0,
-          iconTheme: IconThemeData(color: Colors.black),
+          iconTheme: IconThemeData(color: Colors.white),
           title: Text(
             "My Profile",
-            style: TextStyle(color: Colors.black),
+            style: TextStyle(color: Colors.white),
           ),
         ),
         body: Query(
@@ -135,252 +142,546 @@ class Profile extends StatelessWidget {
               }
             }
 
-            return Center(
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.start,
-                children: [
-                  SizedBox(
-                    height: 20,
-                  ),
-                  InkWell(
-                    onTap: () {
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => EditProfile()));
-                    },
-                    child: CircleAvatar(
-                      backgroundImage: NetworkImage(
-                          'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS6yT-obMdemGbSctinso7rd-tJGyxHhnxetinsg4Nwj2Va1nbirK_lT9wy2KEqIiAMjkw&usqp=CAU'),
-                      radius: 60,
-                    ),
-                  ),
-                  SizedBox(
-                    height: 10,
-                  ),
-                  Center(
-                      child: Column(
-                    children: [
-                      Row(
+            return Container(
+              child: SingleChildScrollView(
+                child: Column(
+                  children: [
+                    Container(
+                      height: MediaQuery.of(context).size.height * 0.2,
+                      width: MediaQuery.of(context).size.width,
+                      decoration: BoxDecoration(
+                        color: Color((0xff6367EA)),
+                        boxShadow: [
+                          BoxShadow(
+                            color: Colors.grey.withOpacity(0.5),
+                            spreadRadius: 2,
+                            blurRadius: 5,
+                            offset: Offset(0, 3), // changes position of shadow
+                          ),
+                        ],
+                        borderRadius: BorderRadius.only(
+                            bottomLeft: Radius.circular(30),
+                            bottomRight: Radius.circular(30)),
+                      ),
+                      child: Row(
                         children: [
                           Spacer(),
-                          Text(
-                            result.data!['getCurrentUser'][0]['name'] +
-                                " " +
-                                result.data!['getCurrentUser'][0]['surname'],
-                            style: TextStyle(
-                              color: Colors.black,
-                              fontSize: 15.0,
-                              fontWeight: FontWeight.bold,
+                          Container(
+                              transform:
+                                  Matrix4.translationValues(-30, -25, 0.0),
+                              child: Column(
+                                children: [
+                                  Spacer(),
+                                  Row(
+                                    children: [
+                                      Text(
+                                        result.data!['getCurrentUser'][0]
+                                                ['name'] +
+                                            " " +
+                                            result.data!['getCurrentUser'][0]
+                                                ['surname'],
+                                        style: TextStyle(
+                                          color: Colors.white,
+                                          fontSize: 18.0,
+                                          fontWeight: FontWeight.bold,
+                                        ),
+                                      ),
+                                      SizedBox(
+                                        width: 10,
+                                      ),
+                                      InkWell(
+                                        onTap: () {
+                                          Navigator.push(
+                                              context,
+                                              MaterialPageRoute(
+                                                  builder: (context) =>
+                                                      EditProfile()));
+                                        },
+                                        child: Icon(Icons.edit,
+                                            color: Colors.white),
+                                      ),
+                                    ],
+                                  ),
+                                  Text(
+                                    result.data!['getCurrentUser'][0]['email'],
+                                    style: TextStyle(
+                                      color: Colors.white,
+                                      fontSize: 12.0,
+                                    ),
+                                  ),
+                                  Spacer(),
+                                ],
+                              )),
+                          InkWell(
+                            onTap: () {
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => EditProfile()));
+                            },
+                            child: CircleAvatar(
+                              backgroundImage: NetworkImage(
+                                  'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS6yT-obMdemGbSctinso7rd-tJGyxHhnxetinsg4Nwj2Va1nbirK_lT9wy2KEqIiAMjkw&usqp=CAU'),
+                              radius: 60,
                             ),
                           ),
-                          InkWell(
-                              onTap: () {
-                                Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                        builder: (context) => EditProfile()));
-                              },
-                              child: Icon(
-                                Icons.edit,
-                                color: Color(0xff706A6A),
-                              )),
-                              Spacer(),
+                          Spacer(),
                         ],
                       ),
-                    ],
-                  )),
-                  SizedBox(
-                    height: 10.0,
-                  ),
-                  Card(
-                    margin:
-                        EdgeInsets.symmetric(horizontal: 20.0, vertical: 5.0),
-                    clipBehavior: Clip.antiAlias,
-                    color: Colors.white,
-                    elevation: 5.0,
-                    child: Padding(
-                      padding: const EdgeInsets.symmetric(
-                          horizontal: 8.0, vertical: 22.0),
+                    ),
+                    Center(
                       child: Column(
+                        mainAxisAlignment: MainAxisAlignment.start,
                         children: [
-                          Row(
-                            children: <Widget>[
-                              Expanded(
-                                child: Column(
-                                  children: <Widget>[
-                                    Text(
-                                      "My Question",
-                                      style: TextStyle(
-                                        color: Colors.redAccent,
-                                        fontSize: 15.0,
-                                        fontWeight: FontWeight.bold,
+                          SizedBox(
+                            height: 30,
+                          ),
+                          Card(
+                            margin: EdgeInsets.symmetric(
+                                horizontal: 40.0, vertical: 5.0),
+                            clipBehavior: Clip.antiAlias,
+                            color: Colors.white,
+                            elevation: 5.0,
+                            child: Padding(
+                              padding: const EdgeInsets.symmetric(
+                                  horizontal: 16.0, vertical: 22.0),
+                              child: Column(
+                                children: [
+                                  Row(
+                                    children: [
+                                      Container(
+                                        margin: EdgeInsets.all(10),
+                                        child: Icon(
+                                          Icons.help_rounded,
+                                          color: Color(0xff6367EA),
+                                        ),
+                                      ),
+                                      SizedBox(
+                                        width: 5,
+                                      ),
+                                      Text(
+                                        "My Question",
+                                        style: TextStyle(
+                                          color: Colors.black,
+                                          fontSize: 18.0,
+                                          fontWeight: FontWeight.bold,
+                                        ),
+                                      ),
+                                      Spacer(),
+                                      Query(
+                                        options: QueryOptions(
+                                            document: gql(query1),
+                                            pollInterval: Duration(seconds: 1)),
+                                        builder: (QueryResult result,
+                                            {fetchMore, refetch}) {
+                                          if (result.hasException) {
+                                            return Text(
+                                                result.exception.toString());
+                                          }
+                                          if (result.isLoading) {
+                                            return Center(
+                                              child:
+                                                  CircularProgressIndicator(),
+                                            );
+                                          }
+
+                                          if (result.data == null) {
+                                            return Text(result.toString());
+                                          }
+
+                                          return Container(
+                                              width: 30,
+                                              height: 30,
+                                              decoration: BoxDecoration(
+                                                  color: Color((0xff6367EA)),
+                                                  boxShadow: [
+                                                    BoxShadow(
+                                                      color: Colors.grey
+                                                          .withOpacity(0.5),
+                                                      spreadRadius: 2,
+                                                      blurRadius: 5,
+                                                      offset: Offset(0,
+                                                          3), // changes position of shadow
+                                                    ),
+                                                  ],
+                                                  borderRadius:
+                                                      BorderRadius.only(
+                                                    bottomLeft:
+                                                        Radius.circular(8),
+                                                    bottomRight:
+                                                        Radius.circular(8),
+                                                    topLeft: Radius.circular(8),
+                                                    topRight:
+                                                        Radius.circular(8),
+                                                  )),
+                                              child: Row(
+                                                children: [
+                                                  Spacer(),
+                                                  Text(
+                                                    result
+                                                        .data![
+                                                            'getcurrentForum']
+                                                        .length
+                                                        .toString(),
+                                                    style: TextStyle(
+                                                      fontSize: 18.0,
+                                                      color: Colors.white,
+                                                    ),
+                                                  ),
+                                                  Spacer(),
+                                                ],
+                                              ));
+                                        },
+                                      ),
+                                      SizedBox(
+                                        width: 20,
+                                      )
+                                    ],
+                                  ),
+                                  Row(
+                                    children: [
+                                      Container(
+                                        margin: EdgeInsets.all(10),
+                                        child: Icon(
+                                          Icons.auto_stories,
+                                          color: Color(0xff6367EA),
+                                        ),
+                                      ),
+                                      SizedBox(
+                                        width: 5,
+                                      ),
+                                      Text(
+                                        "My Diary",
+                                        style: TextStyle(
+                                          color: Colors.black,
+                                          fontSize: 18.0,
+                                          fontWeight: FontWeight.bold,
+                                        ),
+                                      ),
+                                      Spacer(),
+                                      Container(
+                                          width: 30,
+                                          height: 30,
+                                          decoration: BoxDecoration(
+                                              color: Color((0xff6367EA)),
+                                              boxShadow: [
+                                                BoxShadow(
+                                                  color: Colors.grey
+                                                      .withOpacity(0.5),
+                                                  spreadRadius: 2,
+                                                  blurRadius: 5,
+                                                  offset: Offset(0,
+                                                      3), // changes position of shadow
+                                                ),
+                                              ],
+                                              borderRadius: BorderRadius.only(
+                                                bottomLeft: Radius.circular(8),
+                                                bottomRight: Radius.circular(8),
+                                                topLeft: Radius.circular(8),
+                                                topRight: Radius.circular(8),
+                                              )),
+                                          child: Row(
+                                            children: [
+                                              Spacer(),
+                                              Text(
+                                                "10",
+                                                style: TextStyle(
+                                                  fontSize: 18.0,
+                                                  color: Colors.white,
+                                                ),
+                                              ),
+                                              Spacer(),
+                                            ],
+                                          )),
+                                      SizedBox(
+                                        width: 20.0,
+                                      ),
+                                      SizedBox(
+                                        height: 60.0,
+                                      ),
+                                    ],
+                                  ),
+                                  Row(
+                                    children: [
+                                      Container(
+                                        margin: EdgeInsets.all(10),
+                                        child: Icon(
+                                          Icons.card_giftcard_outlined,
+                                          color: Color(0xff6367EA),
+                                        ),
+                                      ),
+                                      SizedBox(
+                                        width: 5,
+                                      ),
+                                      Text(
+                                        "My Promotion",
+                                        style: TextStyle(
+                                          color: Colors.black,
+                                          fontSize: 18.0,
+                                          fontWeight: FontWeight.bold,
+                                        ),
+                                      ),
+                                      SizedBox(
+                                        height: 5.0,
+                                      ),
+                                      Spacer(),
+                                      Container(
+                                          width: 30,
+                                          height: 30,
+                                          decoration: BoxDecoration(
+                                              color: Color((0xff6367EA)),
+                                              boxShadow: [
+                                                BoxShadow(
+                                                  color: Colors.grey
+                                                      .withOpacity(0.5),
+                                                  spreadRadius: 2,
+                                                  blurRadius: 5,
+                                                  offset: Offset(0,
+                                                      3), // changes position of shadow
+                                                ),
+                                              ],
+                                              borderRadius: BorderRadius.only(
+                                                bottomLeft: Radius.circular(8),
+                                                bottomRight: Radius.circular(8),
+                                                topLeft: Radius.circular(8),
+                                                topRight: Radius.circular(8),
+                                              )),
+                                          child: Row(
+                                            children: [
+                                              Spacer(),
+                                              Text(
+                                                "8",
+                                                style: TextStyle(
+                                                  fontSize: 18.0,
+                                                  color: Colors.white,
+                                                ),
+                                              ),
+                                              Spacer(),
+                                            ],
+                                          )),
+                                      SizedBox(
+                                        width: 20.0,
+                                      ),
+                                    ],
+                                  )
+                                ],
+                              ),
+                            ),
+                          ),
+                          SizedBox(
+                            height: 20.0,
+                          ),
+                          Card(
+                              margin: EdgeInsets.symmetric(
+                                  horizontal: 40.0, vertical: 1.0),
+                              clipBehavior: Clip.antiAlias,
+                              color: Colors.white,
+                              elevation: 5.0,
+                              child: Padding(
+                                padding: const EdgeInsets.symmetric(
+                                    horizontal: 16.0, vertical: 0.0),
+                                child: Row(
+                                  children: [
+                                    Spacer(),
+                                    Container(
+                                      transform:
+                                          Matrix4.translationValues(0, 25, 0.0),
+                                      height: 130,
+                                      width: 130,
+                                      child: SfRadialGauge(
+                                        axes: <RadialAxis>[
+                                          RadialAxis(
+                                              showLabels: false,
+                                              showAxisLine: false,
+                                              showTicks: false,
+                                              minimum: 0,
+                                              maximum: 27,
+                                              startAngle: 180,
+                                              endAngle: 0,
+                                              ranges: <GaugeRange>[
+                                                GaugeRange(
+                                                  startValue: 0,
+                                                  endValue: 5,
+                                                  color: Color(0xff20CBFE),
+                                                  // label: 'Slow',
+                                                  sizeUnit:
+                                                      GaugeSizeUnit.factor,
+                                                  labelStyle: GaugeTextStyle(
+                                                      fontFamily: 'Times',
+                                                      fontSize: 20),
+                                                  startWidth: 0.15,
+                                                  endWidth: 0.15,
+                                                ),
+                                                GaugeRange(
+                                                  startValue: 5,
+                                                  endValue: 10,
+                                                  color: Color(0xff32D475),
+                                                  // label: 'Moderate',
+                                                  labelStyle: GaugeTextStyle(
+                                                      fontFamily: 'Times',
+                                                      fontSize: 20),
+                                                  startWidth: 0.15,
+                                                  endWidth: 0.15,
+                                                  sizeUnit:
+                                                      GaugeSizeUnit.factor,
+                                                ),
+                                                GaugeRange(
+                                                  startValue: 10,
+                                                  endValue: 15,
+                                                  color: Color(0xffFFBC17),
+                                                  // label: 'Fast',
+                                                  labelStyle: GaugeTextStyle(
+                                                      fontFamily: 'Times',
+                                                      fontSize: 20),
+                                                  sizeUnit:
+                                                      GaugeSizeUnit.factor,
+                                                  startWidth: 0.15,
+                                                  endWidth: 0.15,
+                                                ),
+                                                GaugeRange(
+                                                  startValue: 15,
+                                                  endValue: 20,
+                                                  color: Color(0xffE76849),
+                                                  // label: 'Fast',
+                                                  labelStyle: GaugeTextStyle(
+                                                      fontFamily: 'Times',
+                                                      fontSize: 20),
+                                                  sizeUnit:
+                                                      GaugeSizeUnit.factor,
+                                                  startWidth: 0.15,
+                                                  endWidth: 0.15,
+                                                ),
+                                                GaugeRange(
+                                                  startValue: 20,
+                                                  endValue: 27,
+                                                  color: Color(0xffF14949),
+                                                  // label: 'Fast',
+                                                  labelStyle: GaugeTextStyle(
+                                                      fontFamily: 'Times',
+                                                      fontSize: 20),
+                                                  sizeUnit:
+                                                      GaugeSizeUnit.factor,
+                                                  startWidth: 0.15,
+                                                  endWidth: 0.15,
+                                                ),
+                                              ],
+                                              pointers: <GaugePointer>[
+                                                MarkerPointer(
+                                                    value: double.parse(
+                                                      result.data![
+                                                              'getCurrentUser'][0]
+                                                          [
+                                                          'appropiatePHQSeverityScore'],
+                                                    ),
+                                                    enableDragging: true,
+                                                    markerWidth: 20,
+                                                    markerHeight: 20,
+                                                    markerOffset: 30,
+                                                    overlayColor: Colors.red
+                                                        .withOpacity(0.12),
+                                                    markerType:
+                                                        MarkerType.triangle)
+                                              ],
+                                              annotations: <GaugeAnnotation>[
+                                                GaugeAnnotation(
+                                                    angle: 90,
+                                                    positionFactor: 0,
+                                                    widget: Text(
+                                                      result.data![
+                                                              'getCurrentUser'][0]
+                                                          [
+                                                          'appropiatePHQSeverityScore'],
+                                                      style: TextStyle(
+                                                          fontWeight:
+                                                              FontWeight.bold,
+                                                          fontSize: 26),
+                                                    ))
+                                              ])
+                                        ],
                                       ),
                                     ),
-                                    Query(
-                                      options: QueryOptions(
-                                          document: gql(query1),
-                                          pollInterval: Duration(seconds: 1)),
-                                      builder: (QueryResult result,
-                                          {fetchMore, refetch}) {
-                                        if (result.hasException) {
-                                          return Text(
-                                              result.exception.toString());
-                                        }
-                                        if (result.isLoading) {
-                                          return Center(
-                                            child: CircularProgressIndicator(),
-                                          );
-                                        }
-
-                                        if (result.data == null) {
-                                          return Text(result.toString());
-                                        }
-
-                                        return Text(
-                                          result.data!['getcurrentForum'].length
-                                              .toString(),
+                                    SizedBox(
+                                      width: 25,
+                                    ),
+                                    Column(
+                                      children: [
+                                        Text(
+                                          "My PHQ-9 Severity",
+                                          style: TextStyle(
+                                            color: Colors.redAccent,
+                                            fontSize: 16.0,
+                                            fontWeight: FontWeight.bold,
+                                          ),
+                                        ),
+                                        SizedBox(
+                                          height: 10,
+                                        ),
+                                        Text(
+                                          result.data!['getCurrentUser'][0]
+                                              ['appropiatePHQSeverity'],
                                           style: TextStyle(
                                             fontSize: 15.0,
                                             color: Colors.black,
                                           ),
-                                        );
-                                      },
+                                        ),
+                                      ],
                                     ),
-                                    SizedBox(
-                                      height: 5.0,
-                                    ),
+                                    Spacer(),
                                   ],
                                 ),
+                              )),
+                          SizedBox(
+                            height: 30,
+                          ),
+                          ElevatedButton(
+                            onPressed: () async {
+                              // Navigator.push(context,
+                              //     MaterialPageRoute(builder: (context) => ShowResult()));
+                              await Provider.of<GraphQLConfiguration>(context,
+                                      listen: false)
+                                  .clearToken();
+                              Navigator.pushAndRemoveUntil(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => LoginPage()),
+                                  (route) => false);
+                            },
+                            child: Container(
+                              width: MediaQuery.of(context).size.width * 0.3,
+                              child: Row(
+                                children: [
+                                  Spacer(),
+                                  Icon(
+                                    Icons.logout,
+                                    color: Color(0xff6367EA),
+                                  ),
+                                  SizedBox(
+                                    width: 10,
+                                  ),
+                                  Text(
+                                    "LOGOUT",
+                                    style: TextStyle(
+                                      fontSize: 15.0,
+                                      color: Color((0xff6367EA)),
+                                    ),
+                                  ),
+                                  Spacer(),
+                                ],
                               ),
-                              Expanded(
-                                child: Column(
-                                  children: <Widget>[
-                                    Text(
-                                      "My Promotion",
-                                      style: TextStyle(
-                                        color: Colors.redAccent,
-                                        fontSize: 15.0,
-                                        fontWeight: FontWeight.bold,
-                                      ),
-                                    ),
-                                    SizedBox(
-                                      height: 5.0,
-                                    ),
-                                    Text(
-                                      "2",
-                                      style: TextStyle(
-                                        fontSize: 15.0,
-                                        color: Colors.black,
-                                      ),
-                                    )
-                                  ],
+                            ),
+                            style: ElevatedButton.styleFrom(
+                                padding: EdgeInsets.symmetric(
+                                    vertical: 10, horizontal: 100),
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(8),
                                 ),
-                              ),
-                              Expanded(
-                                child: Column(
-                                  children: <Widget>[
-                                    Text(
-                                      "My Diary",
-                                      style: TextStyle(
-                                        color: Colors.redAccent,
-                                        fontSize: 15.0,
-                                        fontWeight: FontWeight.bold,
-                                      ),
-                                    ),
-                                    SizedBox(
-                                      height: 5.0,
-                                    ),
-                                    Text(
-                                      "10",
-                                      style: TextStyle(
-                                        fontSize: 15.0,
-                                        color: Colors.black,
-                                      ),
-                                    )
-                                  ],
-                                ),
-                              ),
-                            ],
+                                primary: Colors.white),
                           ),
                         ],
                       ),
                     ),
-                  ),
-                  SizedBox(
-                    height: 10.0,
-                  ),
-                  Card(
-                    margin:
-                        EdgeInsets.symmetric(horizontal: 20.0, vertical: 5.0),
-                    clipBehavior: Clip.antiAlias,
-                    color: Colors.white,
-                    elevation: 5.0,
-                    child: Padding(
-                      padding: const EdgeInsets.symmetric(
-                          horizontal: 20.0, vertical: 22.0),
-                      child: Row(
-                        children: <Widget>[
-                         
-                          Expanded(
-                            child: Row(children: [
-                               Spacer(),
-                              Column(
-                              children: <Widget>[
-                                Text(
-                                  "My PHQ-9 Severity",
-                                  style: TextStyle(
-                                    color: Colors.redAccent,
-                                    fontSize: 15.0,
-                                    fontWeight: FontWeight.bold,
-                                  ),
-                                ),
-                                SizedBox(
-                                  height: 5.0,
-                                ),
-                                Text(
-                                  result.data!['getCurrentUser'][0]
-                                      ['appropiatePHQSeverity'],
-                                  style: TextStyle(
-                                    fontSize: 15.0,
-                                    color: Colors.black,
-                                  ),
-                                ),
-                              ],
-                            ), Spacer(),
-                            ],)
-                          ),
-                          
-                        
-                        ],
-                      ),
-                    ),
-                  ),
-                  SizedBox(
-                    height: 50,
-                  ),
-                  ElevatedButton(
-                    onPressed: () async {
-                      // Navigator.push(context,
-                      //     MaterialPageRoute(builder: (context) => ShowResult()));
-                      await Provider.of<GraphQLConfiguration>(context,
-                              listen: false)
-                          .clearToken();
-                      Navigator.pushAndRemoveUntil(
-                          context,
-                          MaterialPageRoute(builder: (context) => LoginPage()),
-                          (route) => false);
-                    },
-                    child: Text("LOGOUT"),
-                    style: ElevatedButton.styleFrom(
-                        padding:
-                            EdgeInsets.symmetric(vertical: 10, horizontal: 100),
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(8),
-                        ),
-                        primary: Color(0XFFFE7940)),
-                  ),
-                ],
+                  ],
+                ),
               ),
             );
           },
