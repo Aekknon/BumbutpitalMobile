@@ -19,7 +19,7 @@ class _QRCodePageState extends State<QRCodePage> {
         elevation: 0,
       ),
       body: Container(
-        color: Color(0xff6367EA),
+        color: Color((0xff6367EA)),
         height: MediaQuery.of(context).size.height,
         child: Expanded(
           child: SingleChildScrollView(
@@ -73,7 +73,7 @@ class _QRCodePageState extends State<QRCodePage> {
                     ),
                     ElevatedButton(
                       style: ElevatedButton.styleFrom(
-                          primary: Color(0xffFE7940),
+                          primary: Colors.white,
                           padding: EdgeInsets.symmetric(
                               horizontal: 100, vertical: 15),
                           textStyle: TextStyle(
@@ -82,7 +82,7 @@ class _QRCodePageState extends State<QRCodePage> {
                         'COMPLETE',
                         style: TextStyle(
                             fontSize: 15,
-                            color: Colors.white,
+                            color: Color((0xff6367EA)),
                             decoration: TextDecoration.none),
                       ),
                       onPressed: () {

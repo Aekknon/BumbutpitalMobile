@@ -10,7 +10,6 @@ class AddQuestion extends StatefulWidget {
   _AddQuestionState createState() => _AddQuestionState();
 }
 
-
 class _AddQuestionState extends State<AddQuestion> {
   static const addForum = """
       
@@ -128,16 +127,32 @@ class _AddQuestionState extends State<AddQuestion> {
                                   options:
                                       MutationOptions(document: gql(addForum)),
                                   builder: (run, _) => ElevatedButton(
-                                    onPressed: () async {
-                                      await onSubmit(run);
-                                    },
-                                    style: ElevatedButton.styleFrom(
-                                      primary: Color(0XFFFE7940),
-                                      padding: EdgeInsets.symmetric(
-                                          horizontal: 100, vertical: 15),
-                                    ),
-                                    child: Text("SUBMIT QUESTION"),
-                                  ),
+                                      onPressed: () async {
+                                        await onSubmit(run);
+                                      },
+                                      style: ElevatedButton.styleFrom(
+                                        primary: Color((0xff6367EA)),
+                                        padding: EdgeInsets.symmetric(
+                                            horizontal: 100, vertical: 15),
+                                      ),
+                                      child: Container(
+                                        width: 150,
+                                        child: Row(
+                                          children: [
+                                            Spacer(),
+                                            Text(
+                                              "SUBMIT QUESTION",
+                                              style: TextStyle(
+                                                  fontSize: 12,
+                                                  color: Colors.white,
+                                                  decoration:
+                                                      TextDecoration.none,
+                                                  fontWeight: FontWeight.bold),
+                                            ),
+                                            Spacer(),
+                                          ],
+                                        ),
+                                      )),
                                 )
                               ],
                             )),

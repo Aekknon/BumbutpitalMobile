@@ -74,7 +74,7 @@ class _QuestionState extends State<Question> {
                   lineHeight: 14.0,
                   percent: _currentPage / 9,
                   backgroundColor: Colors.grey,
-                  progressColor: Color(0xFFFE7940),
+                  progressColor:Color((0xff6367EA)),
                 ),
                 Container(
                   height: 16,

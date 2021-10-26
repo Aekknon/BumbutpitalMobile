@@ -24,7 +24,7 @@ class CardBarButton extends StatelessWidget {
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(8.0),
           ),
-          primary: Color(0XFFFE7940),
+          primary: Color((0xff6367EA)),
           padding: EdgeInsets.symmetric(horizontal: 24, vertical: 16),
         ),
         child: Text(title),

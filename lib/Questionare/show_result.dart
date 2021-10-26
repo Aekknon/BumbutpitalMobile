@@ -28,8 +28,8 @@ class ShowResult extends StatelessWidget {
 
   static const addPHQ9Score = """
       
-     mutation(\$phq9: String! ){
-  addPHQScore( appropiatePHQSeverity:\$phq9){
+     mutation(\$phq9: String! , \$phq9score: String!){
+  addPHQScore( appropiatePHQSeverity:\$phq9 ,appropiatePHQSeverityScore: \$phq9score){
     successful
     message
   }
@@ -79,6 +79,7 @@ class ShowResult extends StatelessWidget {
               try {
                   final response = run({
                     "phq9": getPhq9Type(PHQ9result),
+                    "phq9score": PHQ9result.toString()
                   });
                   print((await response.networkResult) as dynamic);
 
@@ -226,7 +227,7 @@ class ShowResult extends StatelessWidget {
                         await onSubmit(run);
                       },
                       style: ElevatedButton.styleFrom(
-                        primary: Color(0XFFFE7940),
+                        primary:Color((0xff6367EA)),
                         padding:
                             EdgeInsets.symmetric(horizontal: 100, vertical: 15),
                       ),

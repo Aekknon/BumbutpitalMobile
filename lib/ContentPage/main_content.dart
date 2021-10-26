@@ -132,6 +132,7 @@ class _MainContentState extends State<MainContent> {
                       onTap: () {
                         setState(() {
                           selected = '2';
+                          _currentTabs = 0;
                           visible = true;
                         });
                       },
@@ -159,7 +160,7 @@ class _MainContentState extends State<MainContent> {
                               ),
                               decoration: BoxDecoration(
                                   color: selected == '2'
-                                      ? Color(0XFFFE7940)
+                                      ? Color(0XFF6399EA)
                                       : Colors.white,
                                   borderRadius: BorderRadius.circular(50)),
                             ),
@@ -206,11 +207,11 @@ class _MainContentState extends State<MainContent> {
                                   padding: const EdgeInsets.all(5.0),
                                   decoration: BoxDecoration(
                                     color: select1 == '1'
-                                        ? Color(0xff6367EA)
+                                        ? Color(0xff36DB1B)
                                         : Colors.transparent,
                                     border: Border.all(
                                       color: select1 == '1'
-                                          ? Color(0xff6367EA)
+                                          ? Color(0xff36DB1B)
                                           : Colors.grey,
                                     ),
                                     borderRadius: BorderRadius.all(
@@ -230,6 +231,7 @@ class _MainContentState extends State<MainContent> {
                                               : Colors.grey,
                                         ),
                                       ),
+                                      SizedBox(width: 5),
                                       Text(
                                         'Minimal Depression',
                                         style: TextStyle(
@@ -261,11 +263,11 @@ class _MainContentState extends State<MainContent> {
                                 padding: const EdgeInsets.all(5.0),
                                 decoration: BoxDecoration(
                                   color: select1 == '2'
-                                      ? Color(0xff6367EA)
+                                      ? Color(0xffFFD600)
                                       : Colors.transparent,
                                   border: Border.all(
                                     color: select1 == '2'
-                                        ? Color(0xff6367EA)
+                                        ? Color(0xffFFD600)
                                         : Colors.grey,
                                   ),
                                   borderRadius: BorderRadius.all(
@@ -284,7 +286,7 @@ class _MainContentState extends State<MainContent> {
                                               ? Colors.white
                                               : Colors.grey,
                                         ),
-                                      ),
+                                      ),SizedBox(width: 5),
                                       Text(
                                         'Mild Depression',
                                         style: TextStyle(
@@ -318,11 +320,11 @@ class _MainContentState extends State<MainContent> {
                                 padding: const EdgeInsets.all(5.0),
                                 decoration: BoxDecoration(
                                   color: select1 == '3'
-                                      ? Color(0xff6367EA)
+                                      ? Color(0xff419AED)
                                       : Colors.transparent,
                                   border: Border.all(
                                     color: select1 == '3'
-                                        ? Color(0xff6367EA)
+                                        ? Color(0xff419AED)
                                         : Colors.grey,
                                   ),
                                   borderRadius: BorderRadius.all(
@@ -341,7 +343,7 @@ class _MainContentState extends State<MainContent> {
                                               ? Colors.white
                                               : Colors.grey,
                                         ),
-                                      ),
+                                      ),SizedBox(width: 5),
                                       Text(
                                         'Moderate Depression',
                                         style: TextStyle(
@@ -374,11 +376,11 @@ class _MainContentState extends State<MainContent> {
                                 padding: const EdgeInsets.all(5.0),
                                 decoration: BoxDecoration(
                                   color: select1 == '4'
-                                      ? Color(0xff6367EA)
+                                      ? Color(0xffEA9C63)
                                       : Colors.transparent,
                                   border: Border.all(
                                     color: select1 == '4'
-                                        ? Color(0xff6367EA)
+                                        ? Color(0xffEA9C63)
                                         : Colors.grey,
                                   ),
                                   borderRadius: BorderRadius.all(
@@ -397,7 +399,7 @@ class _MainContentState extends State<MainContent> {
                                               ? Colors.white
                                               : Colors.grey,
                                         ),
-                                      ),
+                                      ),SizedBox(width: 5),
                                       Text(
                                         'Moderately severe Depression',
                                         style: TextStyle(
@@ -430,11 +432,11 @@ class _MainContentState extends State<MainContent> {
                                 padding: const EdgeInsets.all(5.0),
                                 decoration: BoxDecoration(
                                   color: select1 == '5'
-                                      ? Color(0xff6367EA)
+                                      ? Color(0xffCE2424)
                                       : Colors.transparent,
                                   border: Border.all(
                                     color: select1 == '5'
-                                        ? Color(0xff6367EA)
+                                        ? Color(0xffCE2424)
                                         : Colors.grey,
                                   ),
                                   borderRadius: BorderRadius.all(
@@ -453,7 +455,7 @@ class _MainContentState extends State<MainContent> {
                                               ? Colors.white
                                               : Colors.grey,
                                         ),
-                                      ),
+                                      ),SizedBox(width: 5),
                                       Text(
                                         'Severe Depression',
                                         style: TextStyle(

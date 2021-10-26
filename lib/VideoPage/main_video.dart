@@ -17,9 +17,15 @@ class _MainVideoState extends State<MainVideo> {
   bool visible5 = false;
   bool visible = false;
 
-
-  final tabs = [VideotCard(), VideotCard1(), VideotCard2(), VideotCard3() , VideotCard4() , VideotCard5()];
-
+  final tabs = [
+    VideotCard(),
+    VideotCard1(),
+    VideotCard2(),
+    VideotCard3(),
+    VideotCard4(),
+    VideotCard5(),
+    
+  ];
   
 
   @override
@@ -125,6 +131,7 @@ class _MainVideoState extends State<MainVideo> {
                         setState(() {
                           selected = '2';
                           visible = true;
+                          _currentTabs = 0;
                         });
                       },
                       child: Container(
@@ -198,11 +205,11 @@ class _MainVideoState extends State<MainVideo> {
                                   padding: const EdgeInsets.all(5.0),
                                   decoration: BoxDecoration(
                                     color: select1 == '1'
-                                        ? Color(0xff6367EA)
+                                        ? Color(0xff36DB1B)
                                         : Colors.transparent,
                                     border: Border.all(
                                       color: select1 == '1'
-                                          ? Color(0xff6367EA)
+                                          ? Color(0xff36DB1B)
                                           : Colors.grey,
                                     ),
                                     borderRadius: BorderRadius.all(
@@ -222,6 +229,7 @@ class _MainVideoState extends State<MainVideo> {
                                               : Colors.grey,
                                         ),
                                       ),
+                                      SizedBox(width: 5),
                                       Text(
                                         'Minimal Depression',
                                         style: TextStyle(
@@ -253,11 +261,11 @@ class _MainVideoState extends State<MainVideo> {
                                 padding: const EdgeInsets.all(5.0),
                                 decoration: BoxDecoration(
                                   color: select1 == '2'
-                                      ? Color(0xff6367EA)
+                                      ? Color(0xffFFD600)
                                       : Colors.transparent,
                                   border: Border.all(
                                     color: select1 == '2'
-                                        ? Color(0xff6367EA)
+                                        ? Color(0xffFFD600)
                                         : Colors.grey,
                                   ),
                                   borderRadius: BorderRadius.all(
@@ -276,7 +284,7 @@ class _MainVideoState extends State<MainVideo> {
                                               ? Colors.white
                                               : Colors.grey,
                                         ),
-                                      ),
+                                      ),SizedBox(width: 5),
                                       Text(
                                         'Mild Depression',
                                         style: TextStyle(
@@ -310,11 +318,11 @@ class _MainVideoState extends State<MainVideo> {
                                 padding: const EdgeInsets.all(5.0),
                                 decoration: BoxDecoration(
                                   color: select1 == '3'
-                                      ? Color(0xff6367EA)
+                                      ? Color(0xff419AED)
                                       : Colors.transparent,
                                   border: Border.all(
                                     color: select1 == '3'
-                                        ? Color(0xff6367EA)
+                                        ? Color(0xff419AED)
                                         : Colors.grey,
                                   ),
                                   borderRadius: BorderRadius.all(
@@ -333,7 +341,7 @@ class _MainVideoState extends State<MainVideo> {
                                               ? Colors.white
                                               : Colors.grey,
                                         ),
-                                      ),
+                                      ),SizedBox(width: 5),
                                       Text(
                                         'Moderate Depression',
                                         style: TextStyle(
@@ -366,11 +374,11 @@ class _MainVideoState extends State<MainVideo> {
                                 padding: const EdgeInsets.all(5.0),
                                 decoration: BoxDecoration(
                                   color: select1 == '4'
-                                      ? Color(0xff6367EA)
+                                      ? Color(0xffEA9C63)
                                       : Colors.transparent,
                                   border: Border.all(
                                     color: select1 == '4'
-                                        ? Color(0xff6367EA)
+                                        ? Color(0xffEA9C63)
                                         : Colors.grey,
                                   ),
                                   borderRadius: BorderRadius.all(
@@ -389,7 +397,7 @@ class _MainVideoState extends State<MainVideo> {
                                               ? Colors.white
                                               : Colors.grey,
                                         ),
-                                      ),
+                                      ),SizedBox(width: 5),
                                       Text(
                                         'Moderately severe Depression',
                                         style: TextStyle(
@@ -422,11 +430,11 @@ class _MainVideoState extends State<MainVideo> {
                                 padding: const EdgeInsets.all(5.0),
                                 decoration: BoxDecoration(
                                   color: select1 == '5'
-                                      ? Color(0xff6367EA)
+                                      ? Color(0xffCE2424)
                                       : Colors.transparent,
                                   border: Border.all(
                                     color: select1 == '5'
-                                        ? Color(0xff6367EA)
+                                        ? Color(0xffCE2424)
                                         : Colors.grey,
                                   ),
                                   borderRadius: BorderRadius.all(
@@ -445,7 +453,7 @@ class _MainVideoState extends State<MainVideo> {
                                               ? Colors.white
                                               : Colors.grey,
                                         ),
-                                      ),
+                                      ),SizedBox(width: 5),
                                       Text(
                                         'Severe Depression',
                                         style: TextStyle(
