@@ -50,7 +50,8 @@ class HospitalCard extends StatelessWidget {
                       "/HospitalDetail",
                       arguments:[result.data!['getAllHospital'][index]['hospitalName'],
                                  result.data!['getAllHospital'][index]['hospitalDescription'],
-                                 result.data!['getAllHospital'][index]['imageUrl']] ,
+                                 result.data!['getAllHospital'][index]['imageUrl'],
+                                 result.data!['getAllHospital'][index]['hospitalID'],] ,
                       
                     );
                   },

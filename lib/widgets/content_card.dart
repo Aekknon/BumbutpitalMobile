@@ -3,7 +3,10 @@ import 'package:flutter/material.dart';
 import 'package:graphql_flutter/graphql_flutter.dart';
 
 class ContentCard extends StatelessWidget {
+
   const ContentCard({Key? key}) : super(key: key);
+
+
   static const query = """
                    query {
     getMinimalContent {
@@ -17,6 +20,7 @@ class ContentCard extends StatelessWidget {
     }
   }
                   """;
+  
 
   @override
   Widget build(BuildContext context) {
@@ -39,11 +43,13 @@ class ContentCard extends StatelessWidget {
         final content = result.data!['getMinimalContent'];
         return Column(
           children: [
+            
             Expanded(
                 child: ListView.builder(
               itemBuilder: (BuildContext context, int index) {
                 return Column(
                   children: [
+                    
                     InkWell(
                       onTap: () {
                         Navigator.pushNamed(
@@ -95,6 +101,7 @@ class ContentCard extends StatelessWidget {
       },
     );
   }
+  
 }
 
 class ContentCard1 extends StatelessWidget {

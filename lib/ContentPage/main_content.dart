@@ -1,6 +1,7 @@
 import 'package:bumbutpital/widgets/content_card.dart';
 import 'package:flutter/material.dart';
 import 'package:graphql_flutter/graphql_flutter.dart';
+import 'package:bumbutpital/widgets/searching.dart';
 
 // ignore: use_key_in_widget_constructors
 class MainContent extends StatefulWidget {
@@ -9,6 +10,8 @@ class MainContent extends StatefulWidget {
 }
 
 class _MainContentState extends State<MainContent> {
+  TextEditingController editingController = TextEditingController();
+
   int _currentTabs = 0;
   String selected = "1";
   String select1 = "1";
@@ -28,7 +31,7 @@ class _MainContentState extends State<MainContent> {
     ContentCard5()
   ];
 
-  
+
 
   @override
   Widget build(BuildContext context) {
@@ -63,7 +66,7 @@ class _MainContentState extends State<MainContent> {
                           child: Padding(
                             padding: EdgeInsets.only(bottom: 30.0),
                             child: Text(
-                              'VIDEO',
+                              'Content',
                               style: TextStyle(
                                   fontSize: 32,
                                   color: Colors.white,
@@ -179,6 +182,27 @@ class _MainContentState extends State<MainContent> {
                   Spacer(),
                 ],
               ),
+              Container(
+                width: MediaQuery.of(context).size.width * 0.85,
+                height: 40,
+                child: TextField(
+                  onChanged: (value) {
+                    
+                  },
+                  controller: editingController,
+                  decoration: InputDecoration(
+                      labelText: "Search",
+                      hintText: "Search",
+                      prefixIcon: Icon(Icons.search),
+                      border: OutlineInputBorder(
+                          borderRadius: BorderRadius.all(
+                        Radius.circular(25.0),
+                      ))),
+                ),
+              ),
+              SizedBox(
+                height: 30,
+              ),
               Visibility(
                   visible: visible,
                   child: Container(
@@ -260,22 +284,22 @@ class _MainContentState extends State<MainContent> {
                                 });
                               },
                               child: Container(
-                                padding: const EdgeInsets.all(5.0),
-                                decoration: BoxDecoration(
-                                  color: select1 == '2'
-                                      ? Color(0xffFFD600)
-                                      : Colors.transparent,
-                                  border: Border.all(
+                                  padding: const EdgeInsets.all(5.0),
+                                  decoration: BoxDecoration(
                                     color: select1 == '2'
                                         ? Color(0xffFFD600)
-                                        : Colors.grey,
+                                        : Colors.transparent,
+                                    border: Border.all(
+                                      color: select1 == '2'
+                                          ? Color(0xffFFD600)
+                                          : Colors.grey,
+                                    ),
+                                    borderRadius: BorderRadius.all(
+                                        Radius.circular(
+                                            20.0) //                 <--- border radius here
+                                        ),
                                   ),
-                                  borderRadius: BorderRadius.all(
-                                      Radius.circular(
-                                          20.0) //                 <--- border radius here
-                                      ),
-                                ),
-                                child: Row(
+                                  child: Row(
                                     children: [
                                       Visibility(
                                         visible: visible2,
@@ -286,7 +310,8 @@ class _MainContentState extends State<MainContent> {
                                               ? Colors.white
                                               : Colors.grey,
                                         ),
-                                      ),SizedBox(width: 5),
+                                      ),
+                                      SizedBox(width: 5),
                                       Text(
                                         'Mild Depression',
                                         style: TextStyle(
@@ -298,9 +323,7 @@ class _MainContentState extends State<MainContent> {
                                             fontWeight: FontWeight.bold),
                                       ),
                                     ],
-                                  )
-                                 
-                              )),
+                                  ))),
                           SizedBox(
                             width: MediaQuery.of(context).size.width * 0.05,
                           ),
@@ -309,7 +332,7 @@ class _MainContentState extends State<MainContent> {
                                 setState(() {
                                   _currentTabs = 2;
                                   select1 = '3';
-                                   visible1 = false;
+                                  visible1 = false;
                                   visible2 = false;
                                   visible3 = true;
                                   visible4 = false;
@@ -317,22 +340,22 @@ class _MainContentState extends State<MainContent> {
                                 });
                               },
                               child: Container(
-                                padding: const EdgeInsets.all(5.0),
-                                decoration: BoxDecoration(
-                                  color: select1 == '3'
-                                      ? Color(0xff419AED)
-                                      : Colors.transparent,
-                                  border: Border.all(
+                                  padding: const EdgeInsets.all(5.0),
+                                  decoration: BoxDecoration(
                                     color: select1 == '3'
                                         ? Color(0xff419AED)
-                                        : Colors.grey,
+                                        : Colors.transparent,
+                                    border: Border.all(
+                                      color: select1 == '3'
+                                          ? Color(0xff419AED)
+                                          : Colors.grey,
+                                    ),
+                                    borderRadius: BorderRadius.all(
+                                        Radius.circular(
+                                            20.0) //                 <--- border radius here
+                                        ),
                                   ),
-                                  borderRadius: BorderRadius.all(
-                                      Radius.circular(
-                                          20.0) //                 <--- border radius here
-                                      ),
-                                ),
-                                child: Row(
+                                  child: Row(
                                     children: [
                                       Visibility(
                                         visible: visible3,
@@ -343,7 +366,8 @@ class _MainContentState extends State<MainContent> {
                                               ? Colors.white
                                               : Colors.grey,
                                         ),
-                                      ),SizedBox(width: 5),
+                                      ),
+                                      SizedBox(width: 5),
                                       Text(
                                         'Moderate Depression',
                                         style: TextStyle(
@@ -355,8 +379,7 @@ class _MainContentState extends State<MainContent> {
                                             fontWeight: FontWeight.bold),
                                       ),
                                     ],
-                                  )
-                              )),
+                                  ))),
                           SizedBox(
                             width: MediaQuery.of(context).size.width * 0.05,
                           ),
@@ -365,7 +388,7 @@ class _MainContentState extends State<MainContent> {
                                 setState(() {
                                   _currentTabs = 3;
                                   select1 = '4';
-                                   visible1 = false;
+                                  visible1 = false;
                                   visible2 = false;
                                   visible3 = false;
                                   visible4 = true;
@@ -373,22 +396,22 @@ class _MainContentState extends State<MainContent> {
                                 });
                               },
                               child: Container(
-                                padding: const EdgeInsets.all(5.0),
-                                decoration: BoxDecoration(
-                                  color: select1 == '4'
-                                      ? Color(0xffEA9C63)
-                                      : Colors.transparent,
-                                  border: Border.all(
+                                  padding: const EdgeInsets.all(5.0),
+                                  decoration: BoxDecoration(
                                     color: select1 == '4'
                                         ? Color(0xffEA9C63)
-                                        : Colors.grey,
+                                        : Colors.transparent,
+                                    border: Border.all(
+                                      color: select1 == '4'
+                                          ? Color(0xffEA9C63)
+                                          : Colors.grey,
+                                    ),
+                                    borderRadius: BorderRadius.all(
+                                        Radius.circular(
+                                            20.0) //                 <--- border radius here
+                                        ),
                                   ),
-                                  borderRadius: BorderRadius.all(
-                                      Radius.circular(
-                                          20.0) //                 <--- border radius here
-                                      ),
-                                ),
-                                child: Row(
+                                  child: Row(
                                     children: [
                                       Visibility(
                                         visible: visible4,
@@ -399,7 +422,8 @@ class _MainContentState extends State<MainContent> {
                                               ? Colors.white
                                               : Colors.grey,
                                         ),
-                                      ),SizedBox(width: 5),
+                                      ),
+                                      SizedBox(width: 5),
                                       Text(
                                         'Moderately severe Depression',
                                         style: TextStyle(
@@ -411,8 +435,7 @@ class _MainContentState extends State<MainContent> {
                                             fontWeight: FontWeight.bold),
                                       ),
                                     ],
-                                  )
-                              )),
+                                  ))),
                           SizedBox(
                             width: MediaQuery.of(context).size.width * 0.05,
                           ),
@@ -421,7 +444,7 @@ class _MainContentState extends State<MainContent> {
                                 setState(() {
                                   _currentTabs = 4;
                                   select1 = '5';
-                                   visible1 = false;
+                                  visible1 = false;
                                   visible2 = false;
                                   visible3 = false;
                                   visible4 = false;
@@ -429,22 +452,22 @@ class _MainContentState extends State<MainContent> {
                                 });
                               },
                               child: Container(
-                                padding: const EdgeInsets.all(5.0),
-                                decoration: BoxDecoration(
-                                  color: select1 == '5'
-                                      ? Color(0xffCE2424)
-                                      : Colors.transparent,
-                                  border: Border.all(
+                                  padding: const EdgeInsets.all(5.0),
+                                  decoration: BoxDecoration(
                                     color: select1 == '5'
                                         ? Color(0xffCE2424)
-                                        : Colors.grey,
+                                        : Colors.transparent,
+                                    border: Border.all(
+                                      color: select1 == '5'
+                                          ? Color(0xffCE2424)
+                                          : Colors.grey,
+                                    ),
+                                    borderRadius: BorderRadius.all(
+                                        Radius.circular(
+                                            20.0) //                 <--- border radius here
+                                        ),
                                   ),
-                                  borderRadius: BorderRadius.all(
-                                      Radius.circular(
-                                          20.0) //                 <--- border radius here
-                                      ),
-                                ),
-                                child:  Row(
+                                  child: Row(
                                     children: [
                                       Visibility(
                                         visible: visible5,
@@ -455,7 +478,8 @@ class _MainContentState extends State<MainContent> {
                                               ? Colors.white
                                               : Colors.grey,
                                         ),
-                                      ),SizedBox(width: 5),
+                                      ),
+                                      SizedBox(width: 5),
                                       Text(
                                         'Severe Depression',
                                         style: TextStyle(
@@ -467,8 +491,7 @@ class _MainContentState extends State<MainContent> {
                                             fontWeight: FontWeight.bold),
                                       ),
                                     ],
-                                  )
-                              )),
+                                  ))),
                           SizedBox(
                             width: MediaQuery.of(context).size.width * 0.05,
                           ),
@@ -477,7 +500,7 @@ class _MainContentState extends State<MainContent> {
                     ),
                   )),
               SizedBox(
-                height: 15,
+                height: 20,
               ),
               Expanded(
                   child: Container(
