@@ -1,5 +1,6 @@
 import 'package:bumbutpital/ComponentMainScreen/bottom_navbar.dart';
 import 'package:bumbutpital/ContentPage/content_detail.dart';
+import 'package:bumbutpital/HospitalPage/qr_code_screen.dart';
 import 'package:bumbutpital/VideoPage/video_detail.dart';
 import 'package:bumbutpital/services/graphql_config.dart';
 import 'package:bumbutpital/HospitalPage/hospital_detail.dart';
@@ -34,7 +35,9 @@ class MyApp extends StatelessWidget {
                 "/ContentDetail": (_) => ContentDetail(),
                 "/HospitalDetail": (_) => HospitalDetail(),
                 "/PromotionInHospitalDetail": (_) => KeepkoopongPage(),
-                "/VideoDetail": (_) => VideoDetail()
+                "/VideoDetail": (_) => VideoDetail(),
+                 "/QRCodePage": (_) => QRCodePage(),
+                "/CurrentPromotionInHospitalDetail": (_) => KeepCurrentKoopongPage(),
               }),
         );
       }),

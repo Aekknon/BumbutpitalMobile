@@ -158,7 +158,7 @@ class _MainVideoState extends State<MainVideo> {
                               ),
                               decoration: BoxDecoration(
                                   color: selected == '2'
-                                      ? Color(0XFFFE7940)
+                                      ? Color(0XFF6399EA)
                                       : Colors.white,
                                   borderRadius: BorderRadius.circular(50)),
                             ),
