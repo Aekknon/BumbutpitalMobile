@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:carousel_slider/carousel_slider.dart';
-import 'write_diary.dart';
-import 'diary_detail.dart';
+
+import 'package:bumbutpital/Diary/sql_helper.dart';
+import 'package:flutter/services.dart';
+import 'package:graphql_flutter/graphql_flutter.dart';
 
 class MainDiary extends StatefulWidget {
   MainDiary({Key? key}) : super(key: key);
@@ -11,616 +12,396 @@ class MainDiary extends StatefulWidget {
 }
 
 class _MainDiaryState extends State<MainDiary> {
-  final List<String> imageList = [
-    "https://fbi.dek-d.com/27/0833/6340/131125299",
-    "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQOh2gJ9eXdaox-uRpAz3oqWtjDlJ3k0AukWgxlzXg07nH71OpRzx20BZG9JcxkxH3loZc&usqp=CAU",
-    "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTnj7GvtqijGyb2focyFejrmqJk1g_Bcjl2qg&usqp=CAU",
-    "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRV7vJmRomAsYtE3JazzOxK61x63rrsfilphA&usqp=CAU",
-    "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS0YpfIsnCgTkcz39Z_4-EzgbDsDqh9T0wPfA&usqp=CAU",
-  ];
+  static const query = """
+                   query {
+    getCurrentUser {
+     id
+       name
+    surname
+    email
+    phoneNumber
+    appropiatePHQSeverity
+    appropiatePHQSeverityScore
+    }
+  }
+                  """;
+  List<Map<String, dynamic>> _journals = [];
+
+  bool _isLoading = true;
+  // This function is used to fetch all data from the database
+  void _refreshJournals() async {
+    final data = await SQLHelper.getItems();
+    setState(() {
+      _journals = data;
+      _isLoading = false;
+    });
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    _refreshJournals(); // Loading the diary when the app starts
+  }
+
+  final TextEditingController _titleController = TextEditingController();
+  final TextEditingController _descriptionController = TextEditingController();
+  String userID = "";
+
+  // This function will be triggered when the floating button is pressed
+  // It will also be triggered when you want to update an item
+  void _showForm(int? id) async {
+    if (id != null) {
+      // id == null -> create new item
+      // id != null -> update an existing item
+      final existingJournal =
+          _journals.firstWhere((element) => element['id'] == id);
+      _titleController.text = existingJournal['title'];
+      _descriptionController.text = existingJournal['description'];
+    }
+
+    showModalBottomSheet(
+      context: context,
+      elevation: 5,
+      builder: (_) => Container(
+        color: Color(0xffECF2FF),
+        height: MediaQuery.of(context).size.height,
+        child: Expanded(
+          child: SingleChildScrollView(
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              crossAxisAlignment: CrossAxisAlignment.end,
+              children: [
+                SizedBox(
+                  height: 50,
+                ),
+                Container(
+                  color: Color(0xffECF2FF),
+                  height: MediaQuery.of(context).size.height * 0.25,
+                  child: Container(
+                      padding: const EdgeInsets.only(
+                          top: 10, bottom: 10, left: 20, right: 20),
+                      child: Column(
+                        children: [
+                          Row(
+                            children: [
+                              SizedBox(
+                                width: 15,
+                              ),
+                              Column(
+                                children: [
+                                  Text(
+                                    'Monday',
+                                    style: TextStyle(
+                                        fontSize: 24,
+                                        color: Colors.black,
+                                        decoration: TextDecoration.none,
+                                        fontWeight: FontWeight.bold),
+                                  ),
+                                  Text(
+                                    'May 20',
+                                    // textAlign: TextAlign.left,
+                                    style: TextStyle(
+                                      fontSize: 16,
+                                      color: Colors.black,
+                                      decoration: TextDecoration.none,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                              // Spacer()
+                            ],
+                          ),
+                          SizedBox(
+                            height: 25,
+                          ),
+                          Row(
+                            children: [
+                              SizedBox(
+                                width: MediaQuery.of(context).size.width * 0.9,
+                                child: TextField(
+                                  inputFormatters: [
+                                    //only numeric keyboard.
+                                    LengthLimitingTextInputFormatter(
+                                        33), //only 6 digit
+                                  ],
+                                  controller: _titleController,
+                                  maxLines: 1,
+                                  style: TextStyle(color: Color(0xff6367EA)),
+                                  decoration: InputDecoration(
+                                    hintStyle: TextStyle(fontSize: 24),
+                                    hintText: 'Enter Title Diary',
+                                    fillColor: Colors.white,
+                                    // contentPadding: EdgeInsets.symmetric(
+                                    //     vertical: 00, horizontal: 0),
+                                    border: UnderlineInputBorder(),
+                                  ),
+                                ),
+                              )
+                            ],
+                          )
+                        ],
+                      )),
+                ),
+                Container(
+                  height: MediaQuery.of(context).size.height * 0.7,
+                  width: MediaQuery.of(context).size.width,
+                  decoration: BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.only(
+                        topRight: Radius.circular(70),
+                        topLeft: Radius.circular(70)),
+                  ),
+                  child: Expanded(
+                    child: SingleChildScrollView(
+                      child: Container(
+                        padding: const EdgeInsets.only(
+                            top: 10, bottom: 10, left: 30, right: 30),
+                        child: Container(
+                            padding: const EdgeInsets.only(
+                                top: 10, bottom: 10, left: 20, right: 20),
+                            child: Column(
+                              children: [
+                                TextField(
+                                  controller: _descriptionController,
+                                  maxLines: 15,
+                                  // textAlign: TextAlign.start,
+                                  style: TextStyle(color: Color(0xff6367EA)),
+                                  decoration: InputDecoration(
+                                    // labelStyle: St,
+                                    hintText: 'Enter your story here',
+                                    contentPadding: EdgeInsets.symmetric(
+                                        vertical: 24, horizontal: 8),
+                                    border: InputBorder.none,
+                                  ),
+                                ),
+                                SizedBox(
+                                  height: 30,
+                                ),
+                                ElevatedButton(
+                                  style: ElevatedButton.styleFrom(
+                                      primary: Color((0xff6367EA)),
+                                      padding: EdgeInsets.symmetric(
+                                          horizontal: 100, vertical: 15),
+                                      textStyle: TextStyle(
+                                          fontSize: 20,
+                                          fontWeight: FontWeight.bold)),
+                                  child: Text(
+                                    'Add Diary',
+                                    style: TextStyle(
+                                        fontSize: 15,
+                                        color: Colors.white,
+                                        decoration: TextDecoration.none),
+                                  ),
+                                  onPressed: () async {
+                                    // Save new journal
+                                    if (id == null) {
+                                      await _addItem();
+                                      print(_journals.length.toString());
+                                    }
+                                    if (id != null) {
+                                      await _updateItem(id);
+                                    }
+
+                                    // Clear the text fields
+                                    _titleController.text = '';
+                                    _descriptionController.text = '';
+
+                                    // Close the bottom sheet
+                                    Navigator.of(context).pop();
+                                  },
+                                ),
+                              ],
+                            )),
+                      ),
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ),
+      ),
+      isScrollControlled: true,
+    );
+  }
+
+// Insert a new journal to the database
+  Future<void> _addItem() async {
+    await SQLHelper.createItem(
+        _titleController.text, _descriptionController.text);
+    _refreshJournals();
+  }
+
+  // Update an existing journal
+  Future<void> _updateItem(int id) async {
+    await SQLHelper.updateItem(
+        id, _titleController.text, _descriptionController.text);
+    _refreshJournals();
+  }
+
+  // Delete an item
+  void _deleteItem(int id) async {
+    await SQLHelper.deleteItem(id);
+    ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+      content: Text('Successfully deleted a journal!'),
+    ));
+    _refreshJournals();
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: Container(
         color: Color(0xffECF2FF),
-        child: Column(
-          children: [
-            Row(
-              children: [
-                Container(
-                  height: MediaQuery.of(context).size.height * 0.15,
-                  width: MediaQuery.of(context).size.width * 0.8,
-                  decoration: BoxDecoration(
-                    color: Color(0xff6367EA),
-                    borderRadius: BorderRadius.only(
-                        topRight: Radius.circular(70),
-                        bottomRight: Radius.circular(70)),
-                  ),
-                  child: Center(
-                    child: Text(
-                      'Diary',
-                      style: TextStyle(
-                          fontSize: 24,
-                          color: Colors.white,
-                          decoration: TextDecoration.none),
-                    ),
-                  ),
-                ),
-                Spacer()
-              ],
-            ),
-            SizedBox(
-              height: 60,
-            ),
-            Expanded(
-              child: Container(
-                padding: const EdgeInsets.only(
-                    top: 34, bottom: 10, left: 5, right: 5),
-                color: Color(0xffECF2FF),
-                width: MediaQuery.of(context).size.width,
-                height: MediaQuery.of(context).size.height * 0.6,
-                child: Padding(
-                  padding:
-                      EdgeInsets.only(top: 5, bottom: 10, left: 10, right: 10),
-                  child: GridView.count(
-                    scrollDirection: Axis.horizontal,
-                    crossAxisCount: 1,
-                    crossAxisSpacing: 20.0,
-                    mainAxisSpacing: 20.0,
-                    shrinkWrap: true,
-                    childAspectRatio: 1.5,
-                    children: [
-                      InkWell(
-                        onTap: () {
-                          Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => DiaryDetail()));
-                        },
-                        child: Container(
-                          height: 200,
-                          width: 150,
-                          padding: const EdgeInsets.only(
-                              top: 0, bottom: 10, left: 5, right: 5),
-                          decoration: BoxDecoration(
-                              boxShadow: [
-                                BoxShadow(
-                                  color: Colors.grey.withOpacity(0.5),
-                                  spreadRadius: 2,
-                                  blurRadius: 5,
-                                  offset: Offset(
-                                      0, 3), // changes position of shadow
-                                ),
-                              ],
-                              borderRadius:
-                                  BorderRadius.all(Radius.circular(10)),
-                              image: DecorationImage(
-                                image: NetworkImage(
-                                    "https://storage.thaipost.net/main/uploads/photos/big/20200127/image_big_5e2e947024c9f.jpg"),
-                                fit: BoxFit.cover,
-                              )),
-                              child: Center(
-                                child: Column(children: [
-                                  Spacer(),
-                                  Row(
-                                    children: [
-                                     
-                                      Container(
-                                  height: 120,
-                                  width: 120,
-                                  
-                                   decoration: BoxDecoration(
-                                     color: Colors.white,
-                              boxShadow: [
-                                BoxShadow(
-                                  color: Colors.grey.withOpacity(0.5),
-                                  spreadRadius: 2,
-                                  blurRadius: 5,
-                                  offset: Offset(
-                                      0, 3), // changes position of shadow
-                                ),
-                              ],
-                              borderRadius:
-                                  BorderRadius.all(Radius.circular(10)),
-                              
-                              ),
-                              child: Column(children: [
-                                SizedBox(height: 25,),
-                                Text('Topic:',
-          style: TextStyle(
-              fontSize: 16,
-              color: Colors.black,
-              fontWeight: FontWeight.bold,
-              decoration: TextDecoration.none),),
-               Text('Market',
-          style: TextStyle(
-              fontSize: 16,
-              color: Colors.black,
-              
-              decoration: TextDecoration.none),),
-                              ],)
-                                ), Spacer()
-                                    ],
-                                  )
-                                ],)
-                              ),
+        child: _isLoading
+            ? const Center(
+                child: CircularProgressIndicator(),
+              )
+            : ListView.builder(
+                scrollDirection: Axis.horizontal,
+                itemCount: _journals.length,
+                itemBuilder: (context, index) => Row(
+                      children: [
+                        SizedBox(
+                          width: 50,
                         ),
-                      ),
-                      InkWell(
-                        onTap: () {
-                          Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => DiaryDetail()));
-                        },
-                        child: Container(
-                          height: 200,
-                          width: 150,
-                          padding: const EdgeInsets.only(
-                              top: 0, bottom: 10, left: 5, right: 5),
-                          decoration: BoxDecoration(
-                              boxShadow: [
-                                BoxShadow(
-                                  color: Colors.grey.withOpacity(0.5),
-                                  spreadRadius: 2,
-                                  blurRadius: 5,
-                                  offset: Offset(
-                                      0, 3), // changes position of shadow
+                        Column(
+                          children: [
+                            Spacer(),
+                            Container(
+                                decoration: BoxDecoration(
+                                  boxShadow: [
+                                    BoxShadow(
+                                      color: Colors.grey.withOpacity(0.5),
+                                      spreadRadius: 2,
+                                      blurRadius: 5,
+                                      offset: Offset(
+                                          0, 3), // changes position of shadow
+                                    ),
+                                  ],
+                                  color: Color(0xff6367EA),
+                                  borderRadius: BorderRadius.only(
+                                      topRight: Radius.circular(10),
+                                      bottomRight: Radius.circular(10),
+                                      bottomLeft: Radius.circular(10),
+                                      topLeft: Radius.circular(10)),
                                 ),
-                              ],
-                              borderRadius:
-                                  BorderRadius.all(Radius.circular(10)),
-                              image: DecorationImage(
-                                image: NetworkImage(
-                                    "https://www.greatstarsdigital.com/wp-content/uploads/2018/04/%E0%B8%84%E0%B8%A3%E0%B8%AD%E0%B8%9A%E0%B8%84%E0%B8%A3%E0%B8%B1%E0%B8%A7%E0%B8%AD%E0%B8%9A%E0%B8%AD%E0%B8%B8%E0%B9%88%E0%B8%99_180413_0013.jpg"),
-                                fit: BoxFit.cover,
-                              )),
-                              child: Center(
-                                child: Column(children: [
-                                  Spacer(),
-                                  Row(
+                                width: MediaQuery.of(context).size.width * 0.8,
+                                height:
+                                    MediaQuery.of(context).size.height * 0.7,
+                                child: SingleChildScrollView(
+                                  child: Column(
                                     children: [
-                                     
+                                      Row(
+                                        children: [
+                                          Spacer(),
+                                          IconButton(
+                                            icon: const Icon(
+                                              Icons.edit,
+                                              color: Colors.white,
+                                            ),
+                                            onPressed: () => _showForm(
+                                                _journals[index]['id']),
+                                          ),
+                                          IconButton(
+                                            icon: const Icon(
+                                              Icons.delete,
+                                              color: Colors.red,
+                                            ),
+                                            onPressed: () => _deleteItem(
+                                                _journals[index]['id']),
+                                          ),
+                                        ],
+                                      ),
+                                      Row(
+                                        children: [
+                                          SizedBox(
+                                            width: 10,
+                                          ),
+                                          Spacer(),
+                                          Container(
+                                            width: MediaQuery.of(context)
+                                                    .size
+                                                    .width *
+                                                0.7,
+                                            child: Text(
+                                                _journals[index]['title'],
+                                                style: TextStyle(
+                                                    color: Colors.white,
+                                                    fontSize: 16,
+                                                    fontWeight:
+                                                        FontWeight.bold)),
+                                          ),
+                                          Spacer(),
+                                          SizedBox(
+                                            width: 10,
+                                          ),
+                                        ],
+                                      ),
+                                      SizedBox(
+                                        height: 20,
+                                      ),
                                       Container(
-                                  height: 120,
-                                  width: 120,
-                                  
-                                   decoration: BoxDecoration(
-                                     color: Colors.white,
-                              boxShadow: [
-                                BoxShadow(
-                                  color: Colors.grey.withOpacity(0.5),
-                                  spreadRadius: 2,
-                                  blurRadius: 5,
-                                  offset: Offset(
-                                      0, 3), // changes position of shadow
-                                ),
-                              ],
-                              borderRadius:
-                                  BorderRadius.all(Radius.circular(10)),
-                              
-                              ),
-                              child: Column(children: [
-                                SizedBox(height: 25,),
-                                Text('Topic:',
-          style: TextStyle(
-              fontSize: 16,
-              color: Colors.black,
-              fontWeight: FontWeight.bold,
-              decoration: TextDecoration.none),),
-               Text('Market',
-          style: TextStyle(
-              fontSize: 16,
-              color: Colors.black,
-              
-              decoration: TextDecoration.none),),
-                              ],)
-                                ), Spacer()
+                                          padding: EdgeInsets.all(10),
+                                          width: MediaQuery.of(context)
+                                                  .size
+                                                  .width *
+                                              0.72,
+                                          height: MediaQuery.of(context)
+                                                  .size
+                                                  .height *
+                                              0.52,
+                                          decoration: BoxDecoration(
+                                            boxShadow: [
+                                              BoxShadow(
+                                                color: Colors.grey
+                                                    .withOpacity(0.5),
+                                                spreadRadius: 2,
+                                                blurRadius: 5,
+                                                offset: Offset(0,
+                                                    3), // changes position of shadow
+                                              ),
+                                            ],
+                                            color: Colors.white,
+                                            borderRadius: BorderRadius.only(
+                                                topRight: Radius.circular(10),
+                                                bottomRight:
+                                                    Radius.circular(10),
+                                                bottomLeft: Radius.circular(10),
+                                                topLeft: Radius.circular(10)),
+                                          ),
+                                          child: Container(
+                                            width: MediaQuery.of(context)
+                                                    .size
+                                                    .width *
+                                                0.5,
+                                            height: MediaQuery.of(context)
+                                                    .size
+                                                    .height *
+                                                0.4,
+                                            child: SingleChildScrollView(
+                                              child: Text(
+                                                  _journals[index]
+                                                      ['description'],
+                                                  style: TextStyle(
+                                                      color: Colors.black,
+                                                      fontSize: 14)),
+                                            ),
+                                          )),
                                     ],
-                                  )
-                                ],)
-                              ),
-                        ),
-                      ),
-                      InkWell(
-                        onTap: () {
-                          Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => DiaryDetail()));
-                        },
-                        child: Container(
-                          height: 200,
-                          width: 150,
-                          padding: const EdgeInsets.only(
-                              top: 0, bottom: 10, left: 5, right: 5),
-                          decoration: BoxDecoration(
-                              boxShadow: [
-                                BoxShadow(
-                                  color: Colors.grey.withOpacity(0.5),
-                                  spreadRadius: 2,
-                                  blurRadius: 5,
-                                  offset: Offset(
-                                      0, 3), // changes position of shadow
-                                ),
-                              ],
-                              borderRadius:
-                                  BorderRadius.all(Radius.circular(10)),
-                              image: DecorationImage(
-                                image: NetworkImage(
-                                    "https://entertain.teenee.com/gossip/img3/1852425.jpg"),
-                                fit: BoxFit.cover,
-                              )),
-                              child: Center(
-                                child: Column(children: [
-                                  Spacer(),
-                                  Row(
-                                    children: [
-                                     
-                                      Container(
-                                  height: 120,
-                                  width: 120,
-                                  
-                                   decoration: BoxDecoration(
-                                     color: Colors.white,
-                              boxShadow: [
-                                BoxShadow(
-                                  color: Colors.grey.withOpacity(0.5),
-                                  spreadRadius: 2,
-                                  blurRadius: 5,
-                                  offset: Offset(
-                                      0, 3), // changes position of shadow
-                                ),
-                              ],
-                              borderRadius:
-                                  BorderRadius.all(Radius.circular(10)),
-                              
-                              ),
-                              child: Column(children: [
-                                SizedBox(height: 25,),
-                                Text('Topic:',
-          style: TextStyle(
-              fontSize: 16,
-              color: Colors.black,
-              fontWeight: FontWeight.bold,
-              decoration: TextDecoration.none),),
-               Text('Market',
-          style: TextStyle(
-              fontSize: 16,
-              color: Colors.black,
-              
-              decoration: TextDecoration.none),),
-                              ],)
-                                ), Spacer()
-                                    ],
-                                  )
-                                ],)
-                              ),
-                        ),
-                      ),
-                      InkWell(
-                        onTap: () {
-                          Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => DiaryDetail()));
-                        },
-                        child: Container(
-                          height: 200,
-                          width: 150,
-                          padding: const EdgeInsets.only(
-                              top: 0, bottom: 10, left: 5, right: 5),
-                          decoration: BoxDecoration(
-                              boxShadow: [
-                                BoxShadow(
-                                  color: Colors.grey.withOpacity(0.5),
-                                  spreadRadius: 2,
-                                  blurRadius: 5,
-                                  offset: Offset(
-                                      0, 3), // changes position of shadow
-                                ),
-                              ],
-                              borderRadius:
-                                  BorderRadius.all(Radius.circular(10)),
-                              image: DecorationImage(
-                                image: NetworkImage(
-                                    "https://news.kaazip.com/wp-content/uploads/2021/04/%E0%B8%81%E0%B8%B8%E0%B8%A5%E0%B9%81%E0%B8%88%E0%B8%8B%E0%B8%AD%E0%B8%A5-2.jpg"),
-                                fit: BoxFit.cover,
-                              )),
-                              child: Center(
-                                child: Column(children: [
-                                  Spacer(),
-                                  Row(
-                                    children: [
-                                     
-                                      Container(
-                                  height: 120,
-                                  width: 120,
-                                  
-                                   decoration: BoxDecoration(
-                                     color: Colors.white,
-                              boxShadow: [
-                                BoxShadow(
-                                  color: Colors.grey.withOpacity(0.5),
-                                  spreadRadius: 2,
-                                  blurRadius: 5,
-                                  offset: Offset(
-                                      0, 3), // changes position of shadow
-                                ),
-                              ],
-                              borderRadius:
-                                  BorderRadius.all(Radius.circular(10)),
-                              
-                              ),
-                              child: Column(children: [
-                                SizedBox(height: 25,),
-                                Text('Topic:',
-          style: TextStyle(
-              fontSize: 16,
-              color: Colors.black,
-              fontWeight: FontWeight.bold,
-              decoration: TextDecoration.none),),
-               Text('Market',
-          style: TextStyle(
-              fontSize: 16,
-              color: Colors.black,
-              
-              decoration: TextDecoration.none),),
-                              ],)
-                                ), Spacer()
-                                    ],
-                                  )
-                                ],)
-                              ),
-                        ),
-                      ),
-                      InkWell(
-                        onTap: () {
-                          Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => DiaryDetail()));
-                        },
-                        child: Container(
-                          height: 200,
-                          width: 150,
-                          padding: const EdgeInsets.only(
-                              top: 0, bottom: 10, left: 5, right: 5),
-                          decoration: BoxDecoration(
-                              boxShadow: [
-                                BoxShadow(
-                                  color: Colors.grey.withOpacity(0.5),
-                                  spreadRadius: 2,
-                                  blurRadius: 5,
-                                  offset: Offset(
-                                      0, 3), // changes position of shadow
-                                ),
-                              ],
-                              borderRadius:
-                                  BorderRadius.all(Radius.circular(10)),
-                              image: DecorationImage(
-                                image: NetworkImage(
-                                    "https://www.princubon.com/wp-content/uploads/2021/01/%E0%B8%84%E0%B8%99%E0%B8%A5%E0%B8%B0%E0%B8%84%E0%B8%A3%E0%B8%B6%E0%B9%88%E0%B8%87_1040x1040px-768x768.png"),
-                                fit: BoxFit.cover,
-                              )),
-                              child: Center(
-                                child: Column(children: [
-                                  Spacer(),
-                                  Row(
-                                    children: [
-                                     
-                                      Container(
-                                  height: 120,
-                                  width: 120,
-                                  
-                                   decoration: BoxDecoration(
-                                     color: Colors.white,
-                              boxShadow: [
-                                BoxShadow(
-                                  color: Colors.grey.withOpacity(0.5),
-                                  spreadRadius: 2,
-                                  blurRadius: 5,
-                                  offset: Offset(
-                                      0, 3), // changes position of shadow
-                                ),
-                              ],
-                              borderRadius:
-                                  BorderRadius.all(Radius.circular(10)),
-                              
-                              ),
-                              child: Column(children: [
-                                SizedBox(height: 25,),
-                                Text('Topic:',
-          style: TextStyle(
-              fontSize: 16,
-              color: Colors.black,
-              fontWeight: FontWeight.bold,
-              decoration: TextDecoration.none),),
-               Text('Market',
-          style: TextStyle(
-              fontSize: 16,
-              color: Colors.black,
-              
-              decoration: TextDecoration.none),),
-                              ],)
-                                ), Spacer()
-                                    ],
-                                  )
-                                ],)
-                              ),
-                        ),
-                      ),
-                      InkWell(
-                        onTap: () {
-                          Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => DiaryDetail()));
-                        },
-                        child: Container(
-                          height: 200,
-                          width: 150,
-                          padding: const EdgeInsets.only(
-                              top: 0, bottom: 10, left: 5, right: 5),
-                          decoration: BoxDecoration(
-                              boxShadow: [
-                                BoxShadow(
-                                  color: Colors.grey.withOpacity(0.5),
-                                  spreadRadius: 2,
-                                  blurRadius: 5,
-                                  offset: Offset(
-                                      0, 3), // changes position of shadow
-                                ),
-                              ],
-                              borderRadius:
-                                  BorderRadius.all(Radius.circular(10)),
-                              image: DecorationImage(
-                                image: NetworkImage(
-                                    "https://i0.wp.com/www.amarinbabyandkids.com/app/uploads/2017/01/shutterstock_124904711-e1483514453518.jpg"),
-                                fit: BoxFit.cover,
-                              )),
-                              child: Center(
-                                child: Column(children: [
-                                  Spacer(),
-                                  Row(
-                                    children: [
-                                     
-                                      Container(
-                                  height: 120,
-                                  width: 120,
-                                  
-                                   decoration: BoxDecoration(
-                                     color: Colors.white,
-                              boxShadow: [
-                                BoxShadow(
-                                  color: Colors.grey.withOpacity(0.5),
-                                  spreadRadius: 2,
-                                  blurRadius: 5,
-                                  offset: Offset(
-                                      0, 3), // changes position of shadow
-                                ),
-                              ],
-                              borderRadius:
-                                  BorderRadius.all(Radius.circular(10)),
-                              
-                              ),
-                              child: Column(children: [
-                                SizedBox(height: 25,),
-                                Text('Topic:',
-          style: TextStyle(
-              fontSize: 16,
-              color: Colors.black,
-              fontWeight: FontWeight.bold,
-              decoration: TextDecoration.none),),
-               Text('Market',
-          style: TextStyle(
-              fontSize: 16,
-              color: Colors.black,
-              
-              decoration: TextDecoration.none),),
-                              ],)
-                                ), Spacer()
-                                    ],
-                                  )
-                                ],)
-                              ),
-                        ),
-                      ),
-                      InkWell(
-                        onTap: () {
-                          Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => DiaryDetail()));
-                        },
-                        child: Container(
-                          height: 200,
-                          width: 150,
-                          padding: const EdgeInsets.only(
-                              top: 0, bottom: 10, left: 5, right: 5),
-                          decoration: BoxDecoration(
-                              boxShadow: [
-                                BoxShadow(
-                                  color: Colors.grey.withOpacity(0.5),
-                                  spreadRadius: 2,
-                                  blurRadius: 5,
-                                  offset: Offset(
-                                      0, 3), // changes position of shadow
-                                ),
-                              ],
-                              borderRadius:
-                                  BorderRadius.all(Radius.circular(10)),
-                              image: DecorationImage(
-                                image: NetworkImage(
-                                    "https://line-mag.com/wp-content/uploads/2021/05/%E0%B8%95%E0%B8%B1%E0%B9%8A%E0%B8%81-%E0%B8%99%E0%B8%B8%E0%B9%89%E0%B8%A2.jpg"),
-                                fit: BoxFit.cover,
-                              )),
-                              child: Center(
-                                child: Column(children: [
-                                  Spacer(),
-                                  Row(
-                                    children: [
-                                     
-                                      Container(
-                                  height: 120,
-                                  width: 120,
-                                  
-                                   decoration: BoxDecoration(
-                                     color: Colors.white,
-                              boxShadow: [
-                                BoxShadow(
-                                  color: Colors.grey.withOpacity(0.5),
-                                  spreadRadius: 2,
-                                  blurRadius: 5,
-                                  offset: Offset(
-                                      0, 3), // changes position of shadow
-                                ),
-                              ],
-                              borderRadius:
-                                  BorderRadius.all(Radius.circular(10)),
-                              
-                              ),
-                              child: Column(children: [
-                                SizedBox(height: 25,),
-                                Text('Topic:',
-          style: TextStyle(
-              fontSize: 16,
-              color: Colors.black,
-              fontWeight: FontWeight.bold,
-              decoration: TextDecoration.none),),
-               Text('Market',
-          style: TextStyle(
-              fontSize: 16,
-              color: Colors.black,
-              
-              decoration: TextDecoration.none),),
-                              ],)
-                                ), Spacer()
-                                    ],
-                                  )
-                                ],)
-                              ),
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-              ),
-            ),
-            SizedBox(
-              height: 120,
-            )
-          ],
-        ),
+                                  ),
+                                )),
+                            Spacer(),
+                          ],
+                        )
+                      ],
+                    )),
       ),
       floatingActionButton: FloatingActionButton(
-          onPressed: () {
-            Navigator.push(
-                context, MaterialPageRoute(builder: (context) => WriteDiary()));
-          },
-          child: const Icon(Icons.add),
-          backgroundColor: Color(0xFFA9B0FF),),
+        backgroundColor: Color(0xff6367EA),
+        child: const Icon(Icons.add),
+        onPressed: () => _showForm(null),
+      ),
     );
   }
 }

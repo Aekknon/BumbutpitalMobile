@@ -12,7 +12,7 @@ class MainForumPage extends StatefulWidget {
 
 class _MainForumPageState extends State<MainForumPage> {
   final tabs = [AllForum(), MyForum()];
-  int _currentTabs = 0;
+  int _currentTabs = 1;
   String selected = "1";
 
  
@@ -58,12 +58,12 @@ class _MainForumPageState extends State<MainForumPage> {
                   InkWell(
                     onTap: () {
                       setState(() {
-                        _currentTabs = 0;
+                        _currentTabs = 1;
                         selected = '1';
                       });
                     },
                     child: Text(
-                      'All Forum',
+                      'My Forum',
                       style: TextStyle(
                           fontSize: 16,
                           color:
@@ -78,12 +78,12 @@ class _MainForumPageState extends State<MainForumPage> {
                   InkWell(
                     onTap: () {
                       setState(() {
-                        _currentTabs = 1;
+                        _currentTabs = 0;
                         selected = '2';
                       });
                     },
                     child: Text(
-                      'My Forum',
+                      'All Forum',
                       style: TextStyle(
                           fontSize: 16,
                           color:  selected == '2' ? Color(0xff6367EA) : Colors.grey,

@@ -92,8 +92,8 @@ class _LoginPageState extends State<LoginPage> {
                 SizedBox(height: 44),
                 _textField(
                   _email,
-                  "Email",
-                  Icon(Icons.email),
+                  "Username",
+                  Icon(Icons.account_box),
                 ),
                 SizedBox(height: 44),
                 _textField(
@@ -101,32 +101,9 @@ class _LoginPageState extends State<LoginPage> {
                   "Password",
                   Icon(Icons.lock),
                 ),
-                Container(
-                  child: Text(
-                    'Forget Password?',
-                    style: TextStyle(height: 2),
-                  ),
-                  alignment: Alignment.bottomRight,
-                ),
-                Container(
-                  alignment: Alignment.topLeft,
-                  child: Row(
-                    children: [
-                      Checkbox(
-                        value: isRemember,
-                        onChanged: (bool? value) {
-                          if (value != null) {
-                            setState(() {
-                              isRemember = value;
-                            });
-                          }
-                        },
-                      ),
-                      Text('Remember Me'),
-                    ],
-                  ),
-                ),
-                SizedBox(height: 16),
+               
+               
+                SizedBox(height: 32),
                 Mutation(
                   options: MutationOptions(document: gql(loginQuery)),
                   builder: (run, _) => ElevatedButton(
@@ -134,7 +111,7 @@ class _LoginPageState extends State<LoginPage> {
                       await onSubmit(run);
                     },
                     style: ElevatedButton.styleFrom(
-                      primary: Color(0XFFFE7940),
+                      primary:  Color(0xff6367EA),
                       padding:
                           EdgeInsets.symmetric(horizontal: 100, vertical: 15),
                     ),
@@ -144,15 +121,10 @@ class _LoginPageState extends State<LoginPage> {
                 SizedBox(
                   height: 16,
                 ),
-                Container(
-                  child: Text("-OR-"),
-                ),
+               
                 SizedBox(
                   height: 16,
                 ),
-                Text('Sign in with'),
-                SizedBox(height: 24),
-               
                 SizedBox(height: 16),
                 Container(
                     child: InkWell(
@@ -166,16 +138,7 @@ class _LoginPageState extends State<LoginPage> {
                 )),
                 SizedBox(height: 16),
                 Text("Don't have an Account?"),
-                // ElevatedButton(
-                //   onPressed: onSubmit,
-                //   style: ElevatedButton.styleFrom(
-                //       primary: Color(0XFFFFFFFF),
-                //       fixedSize: Size(350, 50)),
-                //   child: Text(
-                //     "Sign in with Google account",
-                //     style: TextStyle(color: Colors.black.withOpacity(0.8)),
-                //   ),
-                // ),
+               
               ],
             ),
           ),

@@ -101,19 +101,7 @@ class _EditProfileState extends State<EditProfile> {
                     SizedBox(
                       height: 20,
                     ),
-                    InkWell(
-                      onTap: () {
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => EditProfile()));
-                      },
-                      child: CircleAvatar(
-                        backgroundImage: NetworkImage(
-                            'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS6yT-obMdemGbSctinso7rd-tJGyxHhnxetinsg4Nwj2Va1nbirK_lT9wy2KEqIiAMjkw&usqp=CAU'),
-                        radius: 60,
-                      ),
-                    ),
+                   
                     SizedBox(
                       height: 30,
                     ),
