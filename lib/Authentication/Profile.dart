@@ -2,16 +2,12 @@
 
 import 'package:bumbutpital/Authentication/Login.dart';
 import 'package:bumbutpital/HospitalPage/current_koopong.dart';
-import 'package:bumbutpital/Questionare/show_result.dart';
 import 'package:bumbutpital/services/graphql_config.dart';
-import 'package:bumbutpital/splash_screen.dart';
-import 'package:bumbutpital/widgets/promotion_card.dart';
 import 'package:flutter/material.dart';
 import 'package:graphql_flutter/graphql_flutter.dart';
 import 'package:provider/provider.dart';
 import 'edit_profile.dart';
 import 'package:syncfusion_flutter_gauges/gauges.dart';
-import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 
 // ignore: must_be_immutable
 class Profile extends StatefulWidget {
@@ -25,7 +21,7 @@ class _ProfileState extends State<Profile> {
   static const query = """
                    query {
     getCurrentUser {
-     
+     id
        name
     surname
     email
@@ -35,7 +31,8 @@ class _ProfileState extends State<Profile> {
     }
   }
                   """;
-                  static const query2 = """
+
+  static const query2 = """
                    query {
     getCurrentPromotion {
      
@@ -96,6 +93,7 @@ class _ProfileState extends State<Profile> {
             if (result.data == null) {
               return Text(result.toString());
             }
+
             final Phq9Score =
                 result.data!['getCurrentUser'][0]['appropiatePHQSeverity'];
             Future<void> onSubmit(RunMutation run) async {
@@ -192,7 +190,7 @@ class _ProfileState extends State<Profile> {
                                                 ['surname'],
                                         style: TextStyle(
                                           color: Colors.white,
-                                          fontSize: 18.0,
+                                          fontSize: 24.0,
                                           fontWeight: FontWeight.bold,
                                         ),
                                       ),
@@ -222,19 +220,6 @@ class _ProfileState extends State<Profile> {
                                   Spacer(),
                                 ],
                               )),
-                          InkWell(
-                            onTap: () {
-                              Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (context) => EditProfile()));
-                            },
-                            child: CircleAvatar(
-                              backgroundImage: NetworkImage(
-                                  'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS6yT-obMdemGbSctinso7rd-tJGyxHhnxetinsg4Nwj2Va1nbirK_lT9wy2KEqIiAMjkw&usqp=CAU'),
-                              radius: 60,
-                            ),
-                          ),
                           Spacer(),
                         ],
                       ),
@@ -369,70 +354,40 @@ class _ProfileState extends State<Profile> {
                                         ),
                                       ),
                                       Spacer(),
-                                      Query(
-                                        options: QueryOptions(
-                                            document: gql(query2),
-                                            pollInterval: Duration(seconds: 1)),
-                                        builder: (QueryResult result2,
-                                            {fetchMore, refetch}) {
-                                          if (result.hasException) {
-                                            return Text(
-                                                result.exception.toString());
-                                          }
-                                          if (result.isLoading) {
-                                            return Center(
-                                              child:
-                                                  CircularProgressIndicator(),
-                                            );
-                                          }
-
-                                          if (result.data == null) {
-                                            return Text(result.toString());
-                                          }
-
-                                          return Container(
-                                              width: 30,
-                                              height: 30,
-                                              decoration: BoxDecoration(
-                                                  color: Color((0xff6367EA)),
-                                                  boxShadow: [
-                                                    BoxShadow(
-                                                      color: Colors.grey
-                                                          .withOpacity(0.5),
-                                                      spreadRadius: 2,
-                                                      blurRadius: 5,
-                                                      offset: Offset(0,
-                                                          3), // changes position of shadow
-                                                    ),
-                                                  ],
-                                                  borderRadius:
-                                                      BorderRadius.only(
-                                                    bottomLeft:
-                                                        Radius.circular(8),
-                                                    bottomRight:
-                                                        Radius.circular(8),
-                                                    topLeft: Radius.circular(8),
-                                                    topRight:
-                                                        Radius.circular(8),
-                                                  )),
-                                              child: Row(
-                                                children: [
-                                                  Spacer(),
-                                                  Text(
-                                                    result2
-                                                        .data![
-                                                            'getCurrentPromotion']
-                                                        .length
-                                                        .toString(),
-                                                    style: TextStyle(
-                                                      fontSize: 18.0,
-                                                      color: Colors.white,
-                                                    ),
-                                                  ),
-                                                  Spacer(),
-                                                ],
-                                              ));
-                                        },),
+                                      Container(
+                                          width: 30,
+                                          height: 30,
+                                          decoration: BoxDecoration(
+                                              color: Color((0xff6367EA)),
+                                              boxShadow: [
+                                                BoxShadow(
+                                                  color: Colors.grey
+                                                      .withOpacity(0.5),
+                                                  spreadRadius: 2,
+                                                  blurRadius: 5,
+                                                  offset: Offset(0,
+                                                      3), // changes position of shadow
+                                                ),
+                                              ],
+                                              borderRadius: BorderRadius.only(
+                                                bottomLeft: Radius.circular(8),
+                                                bottomRight: Radius.circular(8),
+                                                topLeft: Radius.circular(8),
+                                                topRight: Radius.circular(8),
+                                              )),
+                                          child: Row(
+                                            children: [
+                                              Spacer(),
+                                              Text(
+                                                '10',
+                                                style: TextStyle(
+                                                  fontSize: 18.0,
+                                                  color: Colors.white,
+                                                ),
+                                              ),
+                                              Spacer(),
+                                            ],
+                                          )),
                                       SizedBox(
                                         width: 20.0,
                                       ),
@@ -441,8 +396,8 @@ class _ProfileState extends State<Profile> {
                                       ),
                                     ],
                                   ),
-                                   Container(
-                                     child: InkWell(
+                                  Container(
+                                    child: InkWell(
                                         onTap: () {
                                           Navigator.push(
                                               context,
@@ -450,102 +405,114 @@ class _ProfileState extends State<Profile> {
                                                   builder: (context) =>
                                                       CurrentPromotionPage()));
                                         },
-                                        child:  Row(
-                                    children: [
-                                      Container(
-                                        margin: EdgeInsets.all(10),
-                                        child: Icon(
-                                          Icons.card_giftcard_outlined,
-                                          color: Color(0xff6367EA),
-                                        ),
-                                      ),
-                                      SizedBox(
-                                        width: 5,
-                                      ),
-                                      Text(
-                                        "My Promotion",
-                                        style: TextStyle(
-                                          color: Colors.black,
-                                          fontSize: 18.0,
-                                          fontWeight: FontWeight.bold,
-                                        ),
-                                      ),
-                                      SizedBox(
-                                        height: 5.0,
-                                      ),
-                                      Spacer(),
-                                      Query(
-                                        options: QueryOptions(
-                                            document: gql(query2),
-                                            pollInterval: Duration(seconds: 1)),
-                                        builder: (QueryResult result2,
-                                            {fetchMore, refetch}) {
-                                          if (result.hasException) {
-                                            return Text(
-                                                result.exception.toString());
-                                          }
-                                          if (result.isLoading) {
-                                            return Center(
-                                              child:
-                                                  CircularProgressIndicator(),
-                                            );
-                                          }
+                                        child: Row(
+                                          children: [
+                                            Container(
+                                              margin: EdgeInsets.all(10),
+                                              child: Icon(
+                                                Icons.card_giftcard_outlined,
+                                                color: Color(0xff6367EA),
+                                              ),
+                                            ),
+                                            SizedBox(
+                                              width: 5,
+                                            ),
+                                            Text(
+                                              "My Promotion",
+                                              style: TextStyle(
+                                                color: Colors.black,
+                                                fontSize: 18.0,
+                                                fontWeight: FontWeight.bold,
+                                              ),
+                                            ),
+                                            SizedBox(
+                                              height: 5.0,
+                                            ),
+                                            Spacer(),
+                                            Query(
+                                              options: QueryOptions(
+                                                  document: gql(query2),
+                                                  pollInterval:
+                                                      Duration(seconds: 1)),
+                                              builder: (QueryResult result2,
+                                                  {fetchMore, refetch}) {
+                                                if (result.hasException) {
+                                                  return Text(result.exception
+                                                      .toString());
+                                                }
+                                                if (result.isLoading) {
+                                                  return Center(
+                                                    child:
+                                                        CircularProgressIndicator(),
+                                                  );
+                                                }
 
-                                          if (result.data == null) {
-                                            return Text(result.toString());
-                                          }
-
-                                          return Container(
-                                              width: 30,
-                                              height: 30,
-                                              decoration: BoxDecoration(
-                                                  color: Color((0xff6367EA)),
-                                                  boxShadow: [
-                                                    BoxShadow(
-                                                      color: Colors.grey
-                                                          .withOpacity(0.5),
-                                                      spreadRadius: 2,
-                                                      blurRadius: 5,
-                                                      offset: Offset(0,
-                                                          3), // changes position of shadow
-                                                    ),
-                                                  ],
-                                                  borderRadius:
-                                                      BorderRadius.only(
-                                                    bottomLeft:
-                                                        Radius.circular(8),
-                                                    bottomRight:
-                                                        Radius.circular(8),
-                                                    topLeft: Radius.circular(8),
-                                                    topRight:
-                                                        Radius.circular(8),
-                                                  )),
-                                              child: Row(
-                                                children: [
-                                                  Spacer(),
-                                                  Text(
-                                                    result2
+                                                if (result.data == null) {
+                                                  return Text(
+                                                      result.toString());
+                                                }
+                                                String promotion_int = "";
+                                                if (result2
                                                         .data![
                                                             'getCurrentPromotion']
-                                                        .length
-                                                        .toString(),
-                                                    style: TextStyle(
-                                                      fontSize: 18.0,
-                                                      color: Colors.white,
-                                                    ),
-                                                  ),
-                                                  Spacer(),
-                                                ],
-                                              ));
-                                        },),
-                                      SizedBox(
-                                        width: 20.0,
-                                      ),
-                                    ],
+                                                        .length ==
+                                                    null) {
+                                                  promotion_int = "0";
+                                                } else {
+                                                  promotion_int = result2
+                                                      .data![
+                                                          'getCurrentPromotion']
+                                                      .length
+                                                      .toString();
+                                                }
+
+                                                return Container(
+                                                    width: 30,
+                                                    height: 30,
+                                                    decoration: BoxDecoration(
+                                                        color:
+                                                            Color((0xff6367EA)),
+                                                        boxShadow: [
+                                                          BoxShadow(
+                                                            color: Colors.grey
+                                                                .withOpacity(
+                                                                    0.5),
+                                                            spreadRadius: 2,
+                                                            blurRadius: 5,
+                                                            offset: Offset(0,
+                                                                3), // changes position of shadow
+                                                          ),
+                                                        ],
+                                                        borderRadius:
+                                                            BorderRadius.only(
+                                                          bottomLeft:
+                                                              Radius.circular(
+                                                                  8),
+                                                          bottomRight:
+                                                              Radius.circular(
+                                                                  8),
+                                                          topLeft:
+                                                              Radius.circular(
+                                                                  8),
+                                                          topRight:
+                                                              Radius.circular(
+                                                                  8),
+                                                        )),
+                                                    child: Row(
+                                                      children: [
+                                                        Spacer(),
+                                                        Text(promotion_int),
+                                                        Spacer(),
+                                                      ],
+                                                    ));
+                                              },
+                                            ),
+                                            SizedBox(
+                                              width: 20.0,
+                                            ),
+                                          ],
+                                        )),
                                   )
-                                      ),
-                                   )
-                                 
                                 ],
                               ),
                             ),

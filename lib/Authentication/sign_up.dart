@@ -137,7 +137,7 @@ class _SignUpPageState extends State<SignUp> {
                       await onSubmit(run);
                     },
                     style: ElevatedButton.styleFrom(
-                      primary: Color(0XFFFE7940),
+                      primary:  Color(0xff6367EA),
                       padding:
                           EdgeInsets.symmetric(horizontal: 100, vertical: 15),
                     ),

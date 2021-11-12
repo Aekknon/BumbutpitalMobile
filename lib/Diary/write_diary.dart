@@ -73,20 +73,11 @@ class _WriteDiaryState extends State<WriteDiary> {
                               ),
                               Row(
                                 children: [
-                                  // Container(
-                                  //   child: Text(
-                                  //     'Title: ',
-                                  //     style: TextStyle(
-                                  //         fontSize: 20,
-                                  //         color: Colors.black,
-                                  //         decoration: TextDecoration.none,
-                                  //         fontWeight: FontWeight.bold),
-                                  //   ),
-                                  // ),
                                   SizedBox(
                                     width:
                                         MediaQuery.of(context).size.width * 0.9,
                                     child: TextField(
+                                      
                                       style: TextStyle(
                                           color: Color(0xff6367EA)),
                                       decoration: InputDecoration(
@@ -123,20 +114,7 @@ class _WriteDiaryState extends State<WriteDiary> {
                                     top: 10, bottom: 10, left: 20, right: 20),
                                 child: Column(
                                   children: [
-                                    // SizedBox(
-                                    //   height: 15,
-                                    // ),
-                                    // Text(
-                                    //   'Your story ',
-                                    //   style: TextStyle(
-                                    //       fontSize: 16,
-                                    //       color: Colors.black,
-                                    //       decoration: TextDecoration.none,
-                                    //       fontWeight: FontWeight.bold),
-                                    // ),
-                                    // SizedBox(
-                                    //     // height: 10,
-                                    //     ),
+                                    
                                       TextField(
                                         maxLines: 15,
                                         // textAlign: TextAlign.start,

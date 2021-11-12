@@ -370,36 +370,21 @@ class _KeepCurrentKoopongPageState extends State<KeepCurrentKoopongPage> {
         ModalRoute.of(context)!.settings.arguments as List<dynamic>;
          String QRdata = promotiondata[0];
     Future<void> onSubmit(RunMutation run) async {
-      try {
+      
         final response = run({
           "promotion": "",
           "usedpromotion": promotiondata[3],
-          "status": "use"
+          "status": "use",
+           
         });
         print((await response.networkResult) as dynamic);
 
         Navigator.pushNamed(
                               context,
                               "/QRCodePage",
-                              arguments: [QRdata[0]],
+                              arguments: [QRdata],
                             );
-      } catch (err) {
-        showDialog<void>(
-          context: context,
-          builder: (BuildContext context) {
-            return AlertDialog(
-              title: const Text('Error!'),
-              content: SingleChildScrollView(
-                child: ListBody(
-                  children: const <Widget>[
-                    Text('Insert your Question'),
-                  ],
-                ),
-              ),
-            );
-          },
-        );
-      }
+      
     }
 
     return Scaffold(

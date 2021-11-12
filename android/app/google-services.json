@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "259470883559",
+    "project_id": "bumbutpital-d2f70",
+    "storage_bucket": "bumbutpital-d2f70.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:259470883559:android:b1c90615ef78cde66a0042",
+        "android_client_info": {
+          "package_name": "com.example.bumbutpital"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "259470883559-olcfd17teukos96aqt8h7lh622b57th4.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB6rnoOe7Xw9OqG3ubqkYIMNYLLXmAu7jg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "259470883559-olcfd17teukos96aqt8h7lh622b57th4.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
