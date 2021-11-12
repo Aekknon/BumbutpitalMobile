@@ -10,14 +10,7 @@ import 'edit_profile.dart';
 import 'package:syncfusion_flutter_gauges/gauges.dart';
 
 // ignore: must_be_immutable
-class Profile extends StatefulWidget {
-  Profile({Key? key}) : super(key: key);
-
-  @override
-  _ProfileState createState() => _ProfileState();
-}
-
-class _ProfileState extends State<Profile> {
+class Profile extends StatelessWidget {
   static const query = """
                    query {
     getCurrentUser {
@@ -94,68 +87,14 @@ class _ProfileState extends State<Profile> {
               return Text(result.toString());
             }
 
-            final Phq9Score =
-                result.data!['getCurrentUser'][0]['appropiatePHQSeverity'];
-            Future<void> onSubmit(RunMutation run) async {
-              try {
-                final response = run({
-                  "_phq9permission": "y",
-                  "appropiatePHQSeverity": Phq9Score
-                });
-                print((await response.networkResult) as dynamic);
-
-                Navigator.pop(context, 'OK');
-              } catch (err) {
-                showDialog<void>(
-                  context: context,
-                  builder: (BuildContext context) {
-                    return AlertDialog(
-                      title: const Text('Error!'),
-                      content: SingleChildScrollView(
-                        child: ListBody(
-                          children: const <Widget>[
-                            Text('Insert your Question'),
-                          ],
-                        ),
-                      ),
-                    );
-                  },
-                );
-              }
-            }
-
-            Future<void> onSubmit1(RunMutation run) async {
-              try {
-                final response =
-                    run({"_phq9permission": "n", "appropiatePHQSeverity": ""});
-                print((await response.networkResult) as dynamic);
-
-                Navigator.pop(context, 'OK');
-              } catch (err) {
-                showDialog<void>(
-                  context: context,
-                  builder: (BuildContext context) {
-                    return AlertDialog(
-                      title: const Text('Error!'),
-                      content: SingleChildScrollView(
-                        child: ListBody(
-                          children: const <Widget>[
-                            Text('Insert your Question'),
-                          ],
-                        ),
-                      ),
-                    );
-                  },
-                );
-              }
-            }
-
+            
+            
             return Container(
               child: SingleChildScrollView(
                 child: Column(
                   children: [
                     Container(
-                      height: MediaQuery.of(context).size.height * 0.2,
+                      height: MediaQuery.of(context).size.height * 0.15,
                       width: MediaQuery.of(context).size.width,
                       decoration: BoxDecoration(
                         color: Color((0xff6367EA)),
@@ -175,8 +114,7 @@ class _ProfileState extends State<Profile> {
                         children: [
                           Spacer(),
                           Container(
-                              transform:
-                                  Matrix4.translationValues(-30, -25, 0.0),
+                              
                               child: Column(
                                 children: [
                                   Spacer(),
@@ -217,6 +155,7 @@ class _ProfileState extends State<Profile> {
                                       fontSize: 12.0,
                                     ),
                                   ),
+                                  SizedBox(height: 30,),
                                   Spacer(),
                                 ],
                               )),
@@ -451,60 +390,11 @@ class _ProfileState extends State<Profile> {
                                                   return Text(
                                                       result.toString());
                                                 }
-                                                String promotion_int = "";
-                                                if (result2
-                                                        .data![
-                                                            'getCurrentPromotion']
-                                                        .length ==
-                                                    null) {
-                                                  promotion_int = "0";
-                                                } else {
-                                                  promotion_int = result2
-                                                      .data![
-                                                          'getCurrentPromotion']
-                                                      .length
-                                                      .toString();
-                                                }
 
-                                                return Container(
-                                                    width: 30,
-                                                    height: 30,
-                                                    decoration: BoxDecoration(
-                                                        color:
-                                                            Color((0xff6367EA)),
-                                                        boxShadow: [
-                                                          BoxShadow(
-                                                            color: Colors.grey
-                                                                .withOpacity(
-                                                                    0.5),
-                                                            spreadRadius: 2,
-                                                            blurRadius: 5,
-                                                            offset: Offset(0,
-                                                                3), // changes position of shadow
-                                                          ),
-                                                        ],
-                                                        borderRadius:
-                                                            BorderRadius.only(
-                                                          bottomLeft:
-                                                              Radius.circular(
-                                                                  8),
-                                                          bottomRight:
-                                                              Radius.circular(
-                                                                  8),
-                                                          topLeft:
-                                                              Radius.circular(
-                                                                  8),
-                                                          topRight:
-                                                              Radius.circular(
-                                                                  8),
-                                                        )),
-                                                    child: Row(
-                                                      children: [
-                                                        Spacer(),
-                                                        Text(promotion_int),
-                                                        Spacer(),
-                                                      ],
-                                                    ));
+                                                return Icon(
+                                                  Icons.arrow_forward_rounded,
+                                                 color:   Color((0xff6367EA))
+                                                );
                                               },
                                             ),
                                             SizedBox(

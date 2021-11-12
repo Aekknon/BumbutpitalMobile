@@ -7,7 +7,7 @@ class MainVideo extends StatefulWidget {
 }
 
 class _MainVideoState extends State<MainVideo> {
-  int _currentTabs = 0;
+  int _currentTabs = 5;
   String selected = "1";
   String select1 = "1";
   bool visible1 = true;
@@ -132,6 +132,12 @@ class _MainVideoState extends State<MainVideo> {
                           selected = '2';
                           visible = true;
                           _currentTabs = 0;
+                          select1 = '1';
+                                  visible1 = true;
+                                  visible2 = false;
+                                  visible3 = false;
+                                  visible4 = false;
+                                  visible5 = false;
                         });
                       },
                       child: Container(

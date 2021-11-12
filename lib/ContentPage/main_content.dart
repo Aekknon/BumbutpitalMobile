@@ -12,7 +12,7 @@ class MainContent extends StatefulWidget {
 class _MainContentState extends State<MainContent> {
   TextEditingController editingController = TextEditingController();
 
-  int _currentTabs = 0;
+  int _currentTabs = 5;
   String selected = "1";
   String select1 = "1";
   bool visible1 = true;
@@ -137,6 +137,12 @@ class _MainContentState extends State<MainContent> {
                           selected = '2';
                           _currentTabs = 0;
                           visible = true;
+                          select1 = '1';
+                                  visible1 = true;
+                                  visible2 = false;
+                                  visible3 = false;
+                                  visible4 = false;
+                                  visible5 = false;
                         });
                       },
                       child: Container(

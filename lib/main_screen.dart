@@ -33,6 +33,19 @@ class Mainpage extends StatelessWidget {
         body: Query(
           options: QueryOptions(document: gql(query)),
           builder: (QueryResult result, {fetchMore, refetch}) {
+            if (result.hasException) {
+              return Text(result.exception.toString());
+            }
+            if (result.isLoading) {
+              return Center(
+                child: CircularProgressIndicator(),
+              );
+            }
+
+            if (result.data == null) {
+              return Text(result.toString());
+            }
+
             // ignore: non_constant_identifier_names
             final user = result.data!['getCurrentUser'];
             return SafeArea(
@@ -41,24 +54,8 @@ class Mainpage extends StatelessWidget {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.end,
                     children: [
-                      Container(
-                        margin: EdgeInsets.fromLTRB(0, 20, 20, 0),
-                        child: IconButton(
-                          icon: Icon(
-                            Icons.account_circle_rounded,
-                            color: Color(0xFF6367EA),
-                            size: 60,
-                          ),
-                          onPressed: () {
-                            Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => Profile()));
-                          },
-                        ),
-                      ),
                       SizedBox(
-                        width: 20,
+                        height: 60,
                       )
                     ],
                   ),

@@ -1,5 +1,4 @@
 
-import 'package:bumbutpital/ComponentMainScreen/bottom_navbar.dart';
 import 'package:bumbutpital/ContentPage/content_detail.dart';
 import 'package:bumbutpital/HospitalPage/qr_code_screen.dart';
 import 'package:bumbutpital/VideoPage/video_detail.dart';
@@ -11,12 +10,10 @@ import 'package:provider/provider.dart';
 import 'Questionare/show_result.dart';
 import 'splash_screen.dart';
 import 'package:graphql_flutter/graphql_flutter.dart';
-import 'dart:io';
-import 'package:firebase_core/firebase_core.dart';
-import 'package:flutter/services.dart';
 
 
-Future main() async {
+
+void main() {
   runApp(MyApp());
 }
 class MyApp extends StatelessWidget {
@@ -35,7 +32,7 @@ class MyApp extends StatelessWidget {
               // home: graphQLConfig.isAuth ? BottomNavBar() : SplashScreen(),
               home: SplashScreen(),
               routes: {
-                ShowResult.routeName: (_) => ShowResult(),
+                ShowResult.routeName:  (_) => ShowResult(),
                 "/ContentDetail": (_) => ContentDetail(),
                 "/HospitalDetail": (_) => HospitalDetail(),
                 "/PromotionInHospitalDetail": (_) => KeepkoopongPage(),
