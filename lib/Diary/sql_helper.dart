@@ -1,4 +1,5 @@
 import 'package:flutter/foundation.dart';
+import 'package:intl/intl.dart';
 import 'package:sqflite/sqflite.dart' as sql;
 
 class SQLHelper {
@@ -7,7 +8,8 @@ class SQLHelper {
         id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
         title TEXT,
         description TEXT,
-        createdAt TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
+        createdAt TEXT,
+        
       )
       """);
   }
@@ -18,18 +20,29 @@ class SQLHelper {
   static Future<sql.Database> db() async {
     return sql.openDatabase(
       'kindacode.db',
-      version: 1,
+      version: 2,
       onCreate: (sql.Database database, int version) async {
         await createTables(database);
       },
+      onUpgrade: (sql.Database database ,int oldV , int newV) async {
+        if(oldV < newV){
+          await database.execute('alter table items add column userID TEXT');
+
+        }
+      }
     );
   }
 
   // Create new item (journal)
-  static Future<int> createItem(String title, String? descrption) async {
+  // ignore: non_constant_identifier_names
+  static Future<int> createItem(String title, String? descrption , String createdAt , String userID) async {
     final db = await SQLHelper.db();
+     final now = new DateTime.now();
+    String Day = DateFormat.yMMMMd('en_US').format(now);
+    String Time = new DateFormat.jm().format(now);
 
-    final data = {'title': title, 'description': descrption};
+
+    final data = {'title': title, 'description': descrption, 'createdAt': createdAt , 'userID': userID};
     final id = await db.insert('items', data,
         conflictAlgorithm: sql.ConflictAlgorithm.replace);
     return id;
@@ -50,13 +63,16 @@ class SQLHelper {
 
   // Update an item by id
   static Future<int> updateItem(
-      int id, String title, String? descrption) async {
+      int id, String title, String? descrption , String createdAt, String userID) async {
     final db = await SQLHelper.db();
 
     final data = {
       'title': title,
       'description': descrption,
-      'createdAt': DateTime.now().toString()
+      'createdAt': createdAt,
+      'userID': userID
+     
+      
     };
 
     final result =

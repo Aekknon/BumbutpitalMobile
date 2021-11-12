@@ -44,6 +44,7 @@ class VideotCard extends StatelessWidget {
               Expanded(
                   child: ListView.builder(
                 itemBuilder: (BuildContext context, int index) {
+                  int reverseIndex = result.data!['getMinimalVideo'].length - 1 - index;
                   return Column(
                     children: [
                       InkWell(
@@ -52,8 +53,8 @@ class VideotCard extends StatelessWidget {
                             context,
                             "/VideoDetail",
                             arguments: [
-                              result.data!['getMinimalVideo'][index]['title'],
-                              result.data!['getMinimalVideo'][index]['videoUrl'],
+                              result.data!['getMinimalVideo'][reverseIndex]['title'],
+                              result.data!['getMinimalVideo'][reverseIndex]['videoUrl'],
                             ],
                           );
                         },
@@ -69,7 +70,7 @@ class VideotCard extends StatelessWidget {
                                           top: 10,
                                           bottom: 5),
                                       child: Image.network(
-                                        result.data!['getMinimalVideo'][index]
+                                        result.data!['getMinimalVideo'][reverseIndex]
                                             ['pictureUrl'],
                                         height: 100,
                                         width: 150,
@@ -91,7 +92,7 @@ class VideotCard extends StatelessWidget {
                                           child: Text(
                                             'Topic:' +
                                                 result.data!['getMinimalVideo']
-                                                    [index]['title'],
+                                                    [reverseIndex]['title'],
                                             style: TextStyle(
                                               fontWeight: FontWeight.bold,
                                             ),
@@ -175,6 +176,7 @@ class VideotCard1 extends StatelessWidget {
               Expanded(
                   child: ListView.builder(
                 itemBuilder: (BuildContext context, int index) {
+                  int reverseIndex = result.data!['getMildVideo'].length - 1 - index;
                   return Column(
                     children: [
                       InkWell(
@@ -183,8 +185,8 @@ class VideotCard1 extends StatelessWidget {
                             context,
                             "/VideoDetail",
                             arguments: [
-                              result.data!['getMildVideo'][index]['title'],
-                              result.data!['getMildVideo'][index]['videoUrl'],
+                              result.data!['getMildVideo'][reverseIndex]['title'],
+                              result.data!['getMildVideo'][reverseIndex]['videoUrl'],
                             ],
                           );
                         },
@@ -200,7 +202,7 @@ class VideotCard1 extends StatelessWidget {
                                           top: 10,
                                           bottom: 5),
                                       child: Image.network(
-                                        result.data!['getMildVideo'][index]
+                                        result.data!['getMildVideo'][reverseIndex]
                                             ['pictureUrl'],
                                         height: 100,
                                         width: 150,
@@ -222,7 +224,7 @@ class VideotCard1 extends StatelessWidget {
                                           child: Text(
                                             'Topic:' +
                                                 result.data!['getMildVideo']
-                                                    [index]['title'],
+                                                    [reverseIndex]['title'],
                                             style: TextStyle(
                                               fontWeight: FontWeight.bold,
                                             ),
@@ -306,6 +308,7 @@ class VideotCard2 extends StatelessWidget {
               Expanded(
                   child: ListView.builder(
                 itemBuilder: (BuildContext context, int index) {
+                  int reverseIndex = result.data!['getModerateVideo'].length - 1 - index;
                   return Column(
                     children: [
                       InkWell(
@@ -314,8 +317,8 @@ class VideotCard2 extends StatelessWidget {
                             context,
                             "/VideoDetail",
                             arguments: [
-                              result.data!['getModerateVideo'][index]['title'],
-                              result.data!['getModerateVideo'][index]['videoUrl'],
+                              result.data!['getModerateVideo'][reverseIndex]['title'],
+                              result.data!['getModerateVideo'][reverseIndex]['videoUrl'],
                             ],
                           );
                         },
@@ -331,7 +334,7 @@ class VideotCard2 extends StatelessWidget {
                                           top: 10,
                                           bottom: 5),
                                       child: Image.network(
-                                        result.data!['getModerateVideo'][index]
+                                        result.data!['getModerateVideo'][reverseIndex]
                                             ['pictureUrl'],
                                         height: 100,
                                         width: 150,
@@ -353,7 +356,7 @@ class VideotCard2 extends StatelessWidget {
                                           child: Text(
                                             'Topic:' +
                                                 result.data!['getModerateVideo']
-                                                    [index]['title'],
+                                                    [reverseIndex]['title'],
                                             style: TextStyle(
                                               fontWeight: FontWeight.bold,
                                             ),
@@ -437,6 +440,7 @@ class VideotCard3 extends StatelessWidget {
               Expanded(
                   child: ListView.builder(
                 itemBuilder: (BuildContext context, int index) {
+                  int reverseIndex = result.data!['getModeratelySeverVideo'].length - 1 - index;
                   return Column(
                     children: [
                       InkWell(
@@ -445,8 +449,8 @@ class VideotCard3 extends StatelessWidget {
                             context,
                             "/VideoDetail",
                             arguments: [
-                              result.data!['getModeratelySeverVideo'][index]['title'],
-                              result.data!['getModeratelySeverVideo'][index]['videoUrl'],
+                              result.data!['getModeratelySeverVideo'][reverseIndex]['title'],
+                              result.data!['getModeratelySeverVideo'][reverseIndex]['videoUrl'],
                             ],
                           );
                         },
@@ -462,7 +466,7 @@ class VideotCard3 extends StatelessWidget {
                                           top: 10,
                                           bottom: 5),
                                       child: Image.network(
-                                        result.data!['getModeratelySeverVideo'][index]
+                                        result.data!['getModeratelySeverVideo'][reverseIndex]
                                             ['pictureUrl'],
                                         height: 100,
                                         width: 150,
@@ -484,7 +488,7 @@ class VideotCard3 extends StatelessWidget {
                                           child: Text(
                                             'Topic:' +
                                                 result.data!['getModeratelySeverVideo']
-                                                    [index]['title'],
+                                                    [reverseIndex]['title'],
                                             style: TextStyle(
                                               fontWeight: FontWeight.bold,
                                             ),
@@ -568,6 +572,7 @@ class VideotCard4 extends StatelessWidget {
               Expanded(
                   child: ListView.builder(
                 itemBuilder: (BuildContext context, int index) {
+                  int reverseIndex = result.data!['getSevereVideo'].length - 1 - index;
                   return Column(
                     children: [
                       InkWell(
@@ -576,8 +581,8 @@ class VideotCard4 extends StatelessWidget {
                             context,
                             "/VideoDetail",
                             arguments: [
-                              result.data!['getSevereVideo'][index]['title'],
-                              result.data!['getSevereVideo'][index]['videoUrl'],
+                              result.data!['getSevereVideo'][reverseIndex]['title'],
+                              result.data!['getSevereVideo'][reverseIndex]['videoUrl'],
                             ],
                           );
                         },
@@ -593,7 +598,7 @@ class VideotCard4 extends StatelessWidget {
                                           top: 10,
                                           bottom: 5),
                                       child: Image.network(
-                                        result.data!['getSevereVideo'][index]
+                                        result.data!['getSevereVideo'][reverseIndex]
                                             ['pictureUrl'],
                                         height: 100,
                                         width: 150,
@@ -615,7 +620,7 @@ class VideotCard4 extends StatelessWidget {
                                           child: Text(
                                             'Topic:' +
                                                 result.data!['getSevereVideo']
-                                                    [index]['title'],
+                                                    [reverseIndex]['title'],
                                             style: TextStyle(
                                               fontWeight: FontWeight.bold,
                                             ),
@@ -699,6 +704,7 @@ class VideotCard5 extends StatelessWidget {
               Expanded(
                   child: ListView.builder(
                 itemBuilder: (BuildContext context, int index) {
+                   int reverseIndex = result.data!['getSmartVideo'].length - 1 - index;
                   return Column(
                     children: [
                       InkWell(
@@ -707,8 +713,8 @@ class VideotCard5 extends StatelessWidget {
                             context,
                             "/VideoDetail",
                             arguments: [
-                              result.data!['getSmartVideo'][index]['title'],
-                              result.data!['getSmartVideo'][index]['videoUrl'],
+                              result.data!['getSmartVideo'][reverseIndex]['title'],
+                              result.data!['getSmartVideo'][reverseIndex]['videoUrl'],
                             ],
                           );
                         },
@@ -724,7 +730,7 @@ class VideotCard5 extends StatelessWidget {
                                           top: 10,
                                           bottom: 5),
                                       child: Image.network(
-                                        result.data!['getSmartVideo'][index]
+                                        result.data!['getSmartVideo'][reverseIndex]
                                             ['pictureUrl'],
                                         height: 100,
                                         width: 150,
@@ -746,7 +752,7 @@ class VideotCard5 extends StatelessWidget {
                                           child: Text(
                                             'Topic:' +
                                                 result.data!['getSmartVideo']
-                                                    [index]['title'],
+                                                    [reverseIndex]['title'],
                                             style: TextStyle(
                                               fontWeight: FontWeight.bold,
                                             ),

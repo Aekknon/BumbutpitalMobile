@@ -40,10 +40,11 @@ class AllForum extends StatelessWidget {
           children: [
             Expanded(
                     child: ListView.builder(
-                      reverse: true,
-                       shrinkWrap: true,
+                      
+                      
                         itemCount: result.data!['getAllForum'].length,
                         itemBuilder: (BuildContext context, int index) {
+                          int reverseIndex = result.data!['getAllForum'].length - 1 - index;
                           return Column(
                             children: [
                               Center(
@@ -86,7 +87,7 @@ class AllForum extends StatelessWidget {
                                                   ),
                                                   Text(
                                                     result.data!['getAllForum']
-                                                        [index]['title'],
+                                                        [reverseIndex]['title'],
                                                     style: TextStyle(
                                                         fontSize: 16,
                                                         color: Colors.white,
@@ -108,7 +109,7 @@ class AllForum extends StatelessWidget {
                                                 left: 30,
                                                 right: 10),
                                             child: Text(
-                                              result.data!['getAllForum'][index]
+                                              result.data!['getAllForum'][reverseIndex]
                                                   ['description'],
                                               style: TextStyle(
                                                   fontSize: 16,
@@ -117,7 +118,7 @@ class AllForum extends StatelessWidget {
                                                       TextDecoration.none),
                                             ),
                                           ),
-                                          if (result.data!['getAllForum'][index]
+                                          if (result.data!['getAllForum'][reverseIndex]
                                                   ['answer'] !=
                                               null)
                                             Container(
@@ -131,7 +132,7 @@ class AllForum extends StatelessWidget {
                                                     Text(
                                                       result.data![
                                                               'getAllForum']
-                                                          [index]['answer'],
+                                                          [reverseIndex]['answer'],
                                                       style: TextStyle(
                                                           fontSize: 16,
                                                           color: Colors.black,
@@ -210,10 +211,10 @@ class MyForum extends StatelessWidget {
           children: [
             Expanded(
                     child: ListView.builder(
-                      reverse: true,
-                       shrinkWrap: true,
+                      
                         itemCount: result.data!['getcurrentForum'].length,
                         itemBuilder: (BuildContext context, int index) {
+                          int reverseIndex = result.data!['getcurrentForum'].length - 1 - index;
                           return Column(
                             children: [
                               Center(
@@ -256,7 +257,7 @@ class MyForum extends StatelessWidget {
                                                   ),
                                                   Text(
                                                     result.data!['getcurrentForum']
-                                                        [index]['title'],
+                                                        [reverseIndex]['title'],
                                                     style: TextStyle(
                                                         fontSize: 16,
                                                         color: Colors.white,
@@ -278,7 +279,7 @@ class MyForum extends StatelessWidget {
                                                 left: 30,
                                                 right: 10),
                                             child: Text(
-                                              result.data!['getcurrentForum'][index]
+                                              result.data!['getcurrentForum'][reverseIndex]
                                                   ['description'],
                                               style: TextStyle(
                                                   fontSize: 16,
@@ -287,7 +288,7 @@ class MyForum extends StatelessWidget {
                                                       TextDecoration.none),
                                             ),
                                           ),
-                                          if (result.data!['getcurrentForum'][index]
+                                          if (result.data!['getcurrentForum'][reverseIndex]
                                                   ['answer'] !=
                                               null)
                                             Container(
@@ -301,7 +302,7 @@ class MyForum extends StatelessWidget {
                                                     Text(
                                                       result.data![
                                                               'getcurrentForum']
-                                                          [index]['answer'],
+                                                          [reverseIndex]['answer'],
                                                       style: TextStyle(
                                                           fontSize: 16,
                                                           color: Colors.black,

@@ -6,6 +6,7 @@
 // import 'package:bumbutpital/Questionare/MainQuestion.dart';
 
 // import 'package:bumbutpital/VideoPage/MainVideo.dart';
+import 'package:bumbutpital/Authentication/Profile.dart';
 import 'package:bumbutpital/Diary/main_diary.dart';
 import 'package:bumbutpital/Forum/main_forum_screen.dart';
 import 'package:bumbutpital/Main_Screen.dart';
@@ -21,7 +22,7 @@ class BottomNavBar extends StatefulWidget {
 }
 
 class _BottomNavBarState extends State<BottomNavBar> {
-  final tab = [Mainpage(), MainForumPage(), MainDiary(), MophPage()];
+  final tab = [Mainpage(), MainForumPage(), MainDiary(), Profile()];
   int currentTabIndex = 0;
 
   @override
@@ -53,11 +54,10 @@ class _BottomNavBarState extends State<BottomNavBar> {
             label: 'Diary',
           ),
           BottomNavigationBarItem(
-            icon: ImageIcon(
-              AssetImage('asset/image/MOPH_Icon2.png'),
-              size: 30,
-            ),
-            label: 'MOPH',
+            icon:Icon(
+              Icons.account_circle
+          ),
+            label: 'Profile',
           ),
         ],
         currentIndex: currentTabIndex,

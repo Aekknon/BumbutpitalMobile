@@ -32,10 +32,7 @@ class _AddQuestionState extends State<AddQuestion> {
       });
       print((await response.networkResult) as dynamic);
 
-      Navigator.pushAndRemoveUntil(
-          context,
-          MaterialPageRoute(builder: (context) => BottomNavBar()),
-          (route) => false);
+     Navigator.of(context).pop();
     } catch (err) {
       showDialog<void>(
         context: context,
