@@ -98,6 +98,9 @@ class PromotionCard extends StatelessWidget {
                 return Column(
                   children: [
                     Expanded(
+                        child: Scrollbar(
+                          isAlwaysShown: true,
+                          showTrackOnHover: true,
                       child: ListView.builder(
                         itemBuilder: (BuildContext context, int index) {
                           int reverseIndex =
@@ -151,7 +154,7 @@ class PromotionCard extends StatelessWidget {
                                             [reverseIndex]['Url'],
                                         result.data!['getAllPromotion']
                                             [reverseIndex]['promotionId'],
-                                            result.data!['getAllPromotion']
+                                        result.data!['getAllPromotion']
                                             [reverseIndex]['expiredDate']
                                       ],
                                     );
@@ -194,7 +197,7 @@ class PromotionCard extends StatelessWidget {
                         },
                         itemCount: result.data!['getAllPromotion'].length,
                       ),
-                    )
+                    ))
                   ],
                 );
               },
@@ -302,6 +305,9 @@ class CurrentPromotionCard extends StatelessWidget {
                 return Column(
                   children: [
                     Expanded(
+                        child: Scrollbar(
+                      isAlwaysShown: true,
+                      showTrackOnHover: true,
                       child: ListView.builder(
                         itemBuilder: (BuildContext context, int index) {
                           int reverseIndex =
@@ -314,12 +320,12 @@ class CurrentPromotionCard extends StatelessWidget {
                               i < result1.data!['getPromotionLog'].length;
                               i++) {
                             if (result.data!['getAllPromotion'][reverseIndex]
-                                    ['promotionId'] ==
-                                result1.data!['getPromotionLog'][i]
-                                    ['keeppromotionId']&&
-                                    result2.data!['getCurrentUser'][0]
-                                        ['id'] ==  result1.data!['getPromotionLog'][i]
-                                            ['userId']) {
+                                        ['promotionId'] ==
+                                    result1.data!['getPromotionLog'][i]
+                                        ['keeppromotionId'] &&
+                                result2.data!['getCurrentUser'][0]['id'] ==
+                                    result1.data!['getPromotionLog'][i]
+                                        ['userId']) {
                               x = x - 1;
                               for (var j = 0;
                                   j < result1.data!['getPromotionLog'].length;
@@ -328,8 +334,8 @@ class CurrentPromotionCard extends StatelessWidget {
                                             [reverseIndex]['promotionId'] ==
                                         result1.data!['getPromotionLog'][j]
                                             ['usedpromotionId'] &&
-                                    result2.data!['getCurrentUser'][0]
-                                        ['id'] ==  result1.data!['getPromotionLog'][j]
+                                    result2.data!['getCurrentUser'][0]['id'] ==
+                                        result1.data!['getPromotionLog'][j]
                                             ['userId']) {
                                   x = x + 1;
                                 }
@@ -358,7 +364,7 @@ class CurrentPromotionCard extends StatelessWidget {
                                             [reverseIndex]['Url'],
                                         result.data!['getAllPromotion']
                                             [reverseIndex]['promotionId'],
-                                            result.data!['getAllPromotion']
+                                        result.data!['getAllPromotion']
                                             [reverseIndex]['expiredDate']
                                       ],
                                     );
@@ -401,7 +407,7 @@ class CurrentPromotionCard extends StatelessWidget {
                         },
                         itemCount: result.data!['getAllPromotion'].length,
                       ),
-                    )
+                    ))
                   ],
                 );
               },

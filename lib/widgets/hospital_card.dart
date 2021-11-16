@@ -38,9 +38,13 @@ class HospitalCard extends StatelessWidget {
         return Column(
           children: [
             Expanded(
+                child: Scrollbar(
+              isAlwaysShown: true,
+              showTrackOnHover: true,
               child: ListView.builder(
                 itemBuilder: (BuildContext context, int index) {
-                  int reverseIndex = result.data!['getAllHospital'].length - 1 - index;
+                  int reverseIndex =
+                      result.data!['getAllHospital'].length - 1 - index;
                   return InkWell(
                       onTap: () {
                         Navigator.pushNamed(
@@ -51,8 +55,10 @@ class HospitalCard extends StatelessWidget {
                                 ['hospitalName'],
                             result.data!['getAllHospital'][reverseIndex]
                                 ['hospitalDescription'],
-                            result.data!['getAllHospital'][reverseIndex]['imageUrl'],
-                            result.data!['getAllHospital'][reverseIndex]['hospitalID'],
+                            result.data!['getAllHospital'][reverseIndex]
+                                ['imageUrl'],
+                            result.data!['getAllHospital'][reverseIndex]
+                                ['hospitalID'],
                           ],
                         );
                       },
@@ -76,8 +82,8 @@ class HospitalCard extends StatelessWidget {
                                     BorderRadius.all(Radius.circular(10)),
                                 image: DecorationImage(
                                   image: NetworkImage(
-                                      result.data!['getAllHospital'][reverseIndex]
-                                          ['imageUrl']),
+                                      result.data!['getAllHospital']
+                                          [reverseIndex]['imageUrl']),
                                   fit: BoxFit.cover,
                                 )),
                           ),
@@ -89,7 +95,7 @@ class HospitalCard extends StatelessWidget {
                 },
                 itemCount: result.data!['getAllHospital'].length,
               ),
-            )
+            ))
           ],
         );
       },

@@ -3,15 +3,18 @@ import 'package:intl/intl.dart';
 import 'package:bumbutpital/Diary/sql_helper.dart';
 import 'package:flutter/services.dart';
 import 'package:graphql_flutter/graphql_flutter.dart';
+import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 
 class MainDiary extends StatefulWidget {
-  MainDiary({Key? key}) : super(key: key);
+  MainDiary({Key? key }) : super(key: key);
+  
 
   @override
   _MainDiaryState createState() => _MainDiaryState();
 }
 
 class _MainDiaryState extends State<MainDiary> {
+  
   static const query = """
                    query {
     getCurrentUser {
@@ -25,7 +28,9 @@ class _MainDiaryState extends State<MainDiary> {
     }
   }
                   """;
+
   List<Map<String, dynamic>> _journals = [];
+
 
   bool _isLoading = true;
   // This function is used to fetch all data from the database
@@ -46,6 +51,8 @@ class _MainDiaryState extends State<MainDiary> {
   final TextEditingController _titleController = TextEditingController();
   final TextEditingController _descriptionController = TextEditingController();
   final TextEditingController _userID = TextEditingController();
+  final TextEditingController _sensitivePoint = TextEditingController();
+  final TextEditingController _countBadDiary = TextEditingController();
 
   // This function will be triggered when the floating button is pressed
   // It will also be triggered when you want to update an item
@@ -58,11 +65,24 @@ class _MainDiaryState extends State<MainDiary> {
       _titleController.text = existingJournal['title'];
       _descriptionController.text = existingJournal['description'];
       _userID.text = existingJournal['userID'];
+      _sensitivePoint.text = existingJournal['sensitivePoint'];
+      _countBadDiary.text = existingJournal['countBadDiary'];
     }
 
     final now = new DateTime.now();
     String Day = DateFormat.yMMMMd('en_US').format(now);
     String Time = new DateFormat.jm().format(now);
+    double _initialRating = 3.0;
+    bool _isVertical = false;
+    late final _ratingController;
+    late double _rating;
+    void initState() {
+      super.initState();
+      _ratingController = TextEditingController(text: '3.0');
+      _rating = _initialRating;
+    }
+
+    int countBadDiary = 0;
 
     showModalBottomSheet(
       context: context,
@@ -135,7 +155,7 @@ class _MainDiaryState extends State<MainDiary> {
                       ],
                     )),
                 Container(
-                  height: MediaQuery.of(context).size.height * 0.7,
+                  height: MediaQuery.of(context).size.height * 0.5,
                   width: MediaQuery.of(context).size.width,
                   decoration: BoxDecoration(
                     color: Colors.white,
@@ -188,77 +208,62 @@ class _MainDiaryState extends State<MainDiary> {
                                       return Text(result.toString());
                                     }
 
-                                    return TextField(
-                                      inputFormatters: [
-                                        //only numeric keyboard.
-                                        LengthLimitingTextInputFormatter(
-                                            33), //only 6 digit
-                                      ],
-                                      controller: _userID,
-                                      enabled: false,
-                                      maxLines: 1,
-                                      style: TextStyle(color: Colors.white),
-                                      decoration: InputDecoration(
-                                        hintStyle: TextStyle(fontSize: 24),
-                                        fillColor: Colors.white,
-                                        border: InputBorder.none,
+                                    return Container(
+                                      child: Column(
+                                        children: [
+                                          TextField(
+                                            inputFormatters: [
+                                              //only numeric keyboard.
+                                              LengthLimitingTextInputFormatter(
+                                                  33), //only 6 digit
+                                            ],
+                                            controller: _userID,
+                                            enabled: false,
+                                            maxLines: 1,
+                                            style:
+                                                TextStyle(color: Colors.white),
+                                            decoration: InputDecoration(
+                                              hintStyle: TextStyle(fontSize: 1),
+                                              fillColor: Colors.white,
+                                              border: InputBorder.none,
+                                            ),
+                                          ),
+                                          TextField(
+                                            inputFormatters: [
+                                              //only numeric keyboard.
+                                              LengthLimitingTextInputFormatter(
+                                                  33), //only 6 digit
+                                            ],
+                                            controller: _sensitivePoint,
+                                            enabled: false,
+                                            maxLines: 1,
+                                            style:
+                                                TextStyle(color: Colors.white),
+                                            decoration: InputDecoration(
+                                              hintStyle: TextStyle(fontSize: 1),
+                                              fillColor: Colors.white,
+                                              border: InputBorder.none,
+                                            ),
+                                          ),
+                                          TextField(
+                                            inputFormatters: [
+                                              //only numeric keyboard.
+                                              LengthLimitingTextInputFormatter(
+                                                  33), //only 6 digit
+                                            ],
+                                            controller: _countBadDiary,
+                                            enabled: false,
+                                            maxLines: 1,
+                                            style:
+                                                TextStyle(color: Colors.white),
+                                            decoration: InputDecoration(
+                                              hintStyle: TextStyle(fontSize: 1),
+                                              fillColor: Colors.white,
+                                              border: InputBorder.none,
+                                            ),
+                                          ),
+                                        ],
                                       ),
-                                    );
-                                  },
-                                ),
-                                Query(
-                                  options: QueryOptions(
-                                      document: gql(query),
-                                      pollInterval: Duration(seconds: 1)),
-                                  builder: (QueryResult result,
-                                      {fetchMore, refetch}) {
-                                    if (result.hasException) {
-                                      return Text(result.exception.toString());
-                                    }
-                                    if (result.isLoading) {
-                                      return Center(
-                                        child: CircularProgressIndicator(),
-                                      );
-                                    }
-
-                                    if (result.data == null) {
-                                      return Text(result.toString());
-                                    }
-
-                                    return ElevatedButton(
-                                      style: ElevatedButton.styleFrom(
-                                          primary: Color((0xff6367EA)),
-                                          padding: EdgeInsets.symmetric(
-                                              horizontal: 100, vertical: 15),
-                                          textStyle: TextStyle(
-                                              fontSize: 20,
-                                              fontWeight: FontWeight.bold)),
-                                      child: Text(
-                                        'Add Diary',
-                                        style: TextStyle(
-                                            fontSize: 15,
-                                            color: Colors.white,
-                                            decoration: TextDecoration.none),
-                                      ),
-                                      onPressed: () async {
-                                        // Save new journal
-                                        _userID.text = result
-                                            .data!['getCurrentUser'][0]['id'];
-                                        if (id == null) {
-                                          await _addItem();
-                                          print(_journals.length.toString());
-                                        }
-                                        if (id != null) {
-                                          await _updateItem(id);
-                                        }
-
-                                        // Clear the text fields
-                                        _titleController.text = '';
-                                        _descriptionController.text = '';
-
-                                        // Close the bottom sheet
-                                        Navigator.of(context).pop();
-                                      },
                                     );
                                   },
                                 ),
@@ -267,6 +272,168 @@ class _MainDiaryState extends State<MainDiary> {
                       ),
                     ),
                   ),
+                ),
+                Row(
+                  children: [
+                    Spacer(),
+                    Container(
+                      height: MediaQuery.of(context).size.height * 0.1,
+                      width: MediaQuery.of(context).size.width * 0.6,
+                      child: RatingBar.builder(
+                        initialRating: _initialRating,
+                        direction:
+                            _isVertical ? Axis.vertical : Axis.horizontal,
+                        itemCount: 5,
+                        itemPadding: EdgeInsets.symmetric(horizontal: 4.0),
+                        itemBuilder: (context, index) {
+                          switch (index) {
+                            case 0:
+                              return Container(
+                                transform:
+                                    Matrix4.translationValues(0, -25, 0.0),
+                                child: Container(
+                                  height: 70,
+                                  width: 70,
+                                  decoration: BoxDecoration(
+                                      image: DecorationImage(
+                                          image: AssetImage(
+                                              'asset/image/crying.png'))),
+                                ),
+                              );
+                            case 1:
+                              return Container(
+                                transform:
+                                    Matrix4.translationValues(0, -25, 0.0),
+                                child: Container(
+                                  height: 70,
+                                  width: 70,
+                                  decoration: BoxDecoration(
+                                      image: DecorationImage(
+                                          image: AssetImage(
+                                              'asset/image/disappointed.png'))),
+                                ),
+                              );
+                            case 2:
+                              return Container(
+                                transform:
+                                    Matrix4.translationValues(0, -25, 0.0),
+                                child: Container(
+                                  height: 70,
+                                  width: 70,
+                                  decoration: BoxDecoration(
+                                      image: DecorationImage(
+                                          image: AssetImage(
+                                              'asset/image/annoyed.png'))),
+                                ),
+                              );
+                            case 3:
+                              return Container(
+                                transform:
+                                    Matrix4.translationValues(0, -25, 0.0),
+                                child: Container(
+                                  height: 70,
+                                  width: 70,
+                                  decoration: BoxDecoration(
+                                      image: DecorationImage(
+                                          image: AssetImage(
+                                              'asset/image/wink.png'))),
+                                ),
+                              );
+                            case 4:
+                              return Container(
+                                transform:
+                                    Matrix4.translationValues(0, -25, 0.0),
+                                child: Container(
+                                  height: 70,
+                                  width: 70,
+                                  decoration: BoxDecoration(
+                                      image: DecorationImage(
+                                          image: AssetImage(
+                                              'asset/image/smile.png'))),
+                                ),
+                              );
+                            default:
+                              return Container();
+                          }
+                        },
+                        onRatingUpdate: (rating) {
+                          setState(() {
+                            _rating = rating;
+                          });
+                        },
+                        updateOnDrag: true,
+                      ),
+                    ),
+                    Spacer()
+                  ],
+                ),
+                Query(
+                  options: QueryOptions(
+                      document: gql(query), pollInterval: Duration(seconds: 1)),
+                  builder: (QueryResult result, {fetchMore, refetch}) {
+                    if (result.hasException) {
+                      return Text(result.exception.toString());
+                    }
+                    if (result.isLoading) {
+                      return Center(
+                        child: CircularProgressIndicator(),
+                      );
+                    }
+
+                    if (result.data == null) {
+                      return Text(result.toString());
+                    }
+
+                    return Container(
+                      child: Row(
+                        children: [
+                          Spacer(),
+                          ElevatedButton(
+                            style: ElevatedButton.styleFrom(
+                                primary: Color((0xff6367EA)),
+                                padding: EdgeInsets.symmetric(
+                                    horizontal: 100, vertical: 15),
+                                textStyle: TextStyle(
+                                    fontSize: 20, fontWeight: FontWeight.bold)),
+                            child: Text(
+                              'Add Diary',
+                              style: TextStyle(
+                                  fontSize: 15,
+                                  color: Colors.white,
+                                  decoration: TextDecoration.none),
+                            ),
+                            onPressed: () async {
+                              // Save new journal
+                              _userID.text =
+                                  result.data!['getCurrentUser'][0]['id'];
+
+                              _sensitivePoint.text = _rating.toString();
+                              print(_sensitivePoint.text);
+
+                              
+                             
+                              _countBadDiary.text = 'empty/not use';
+
+                              if (id == null) {
+                                await _addItem();
+                              }
+                              if (id != null) {
+                                await _updateItem(id);
+                              }
+
+                              // Clear the text fields
+                              _titleController.text = '';
+                              _descriptionController.text = '';
+
+                              // Close the bottom sheet
+                              Navigator.of(context).pop();
+                            },
+                          ),
+                          Spacer()
+                        ],
+                      ),
+                    );
+                  },
                 ),
               ],
             ),
@@ -283,8 +450,13 @@ class _MainDiaryState extends State<MainDiary> {
     String Day = DateFormat.yMMMMd('en_US').format(now);
     String Time = new DateFormat.jm().format(now);
 
-    await SQLHelper.createItem(_titleController.text,
-        _descriptionController.text, Day + " " + Time, _userID.text);
+    await SQLHelper.createItem(
+        _titleController.text,
+        _descriptionController.text,
+        Day + " " + Time,
+        _userID.text,
+        _sensitivePoint.text,
+        _countBadDiary.text);
     _refreshJournals();
   }
 
@@ -294,8 +466,14 @@ class _MainDiaryState extends State<MainDiary> {
     String Day = DateFormat.yMMMMd('en_US').format(now);
     String Time = new DateFormat.jm().format(now);
 
-    await SQLHelper.updateItem(id, _titleController.text,
-        _descriptionController.text, Day + ' ' + Time, _userID.text);
+    await SQLHelper.updateItem(
+        id,
+        _titleController.text,
+        _descriptionController.text,
+        Day + ' ' + Time,
+        _userID.text,
+        _sensitivePoint.text,
+        _countBadDiary.text);
     _refreshJournals();
   }
 
@@ -344,6 +522,25 @@ class _MainDiaryState extends State<MainDiary> {
                         if (_journals[reverseIndex]['userID'] ==
                             result.data!['getCurrentUser'][0]['id']) {
                           visible = true;
+                        }
+                        String emotion = '';
+
+                        // 2.0
+                        if (_journals[reverseIndex]['sensitivePoint'] ==
+                            '5.0') {
+                          emotion = 'asset/image/smile.png';
+                        } else if (_journals[reverseIndex]['sensitivePoint'] ==
+                            '4.0') {
+                          emotion = 'asset/image/wink.png';
+                        } else if (_journals[reverseIndex]['sensitivePoint'] ==
+                            '3.0') {
+                          emotion = 'asset/image/annoyed.png';
+                        } else if (_journals[reverseIndex]['sensitivePoint'] ==
+                            '2.0') {
+                          emotion = 'asset/image/disappointed.png';
+                        } else if (_journals[reverseIndex]['sensitivePoint'] ==
+                            '1.0') {
+                          emotion = 'asset/image/crying.png';
                         }
                         return Visibility(
                           visible: visible,
@@ -395,24 +592,50 @@ class _MainDiaryState extends State<MainDiary> {
                                                         fontWeight:
                                                             FontWeight.bold)),
                                                 Spacer(),
-                                                IconButton(
-                                                  icon: const Icon(
-                                                    Icons.edit,
-                                                    color: Colors.white,
-                                                  ),
-                                                  onPressed: () => _showForm(
-                                                      _journals[reverseIndex]
-                                                          ['id']),
+                                                Column(
+                                                  children: [
+                                                    Container(
+                                                      transform: Matrix4
+                                                          .translationValues(
+                                                              0, -25, 0.0),
+                                                      child: Container(
+                                                        height: 50,
+                                                        width: 50,
+                                                        decoration: BoxDecoration(
+                                                            image: DecorationImage(
+                                                                image: AssetImage(
+                                                                    emotion))),
+                                                      ),
+                                                    ),
+                                                    //     Row(
+                                                    //       children: [
+                                                    //         Container(
+
+                                                    //   child: IconButton(
+                                                    //   icon: const Icon(
+                                                    //     Icons.edit,
+                                                    //     color: Colors.white,
+                                                    //   ),
+                                                    //   onPressed: () => _showForm(
+                                                    //       _journals[reverseIndex]
+                                                    //           ['id']),
+                                                    // ),),
+                                                    // IconButton(
+                                                    //   icon: const Icon(
+                                                    //     Icons.delete,
+                                                    //     color: Colors.red,
+                                                    //   ),
+                                                    //   onPressed: () => _deleteItem(
+                                                    //       _journals[reverseIndex]
+                                                    //           ['id']),
+                                                    // ),
+                                                    //       ],
+                                                    //     )
+                                                  ],
                                                 ),
-                                                IconButton(
-                                                  icon: const Icon(
-                                                    Icons.delete,
-                                                    color: Colors.red,
-                                                  ),
-                                                  onPressed: () => _deleteItem(
-                                                      _journals[reverseIndex]
-                                                          ['id']),
-                                                ),
+                                                SizedBox(
+                                                  width: 20,
+                                                )
                                               ],
                                             ),
                                             Row(
@@ -498,10 +721,23 @@ class _MainDiaryState extends State<MainDiary> {
                                                             fontSize: 14)),
                                                   ),
                                                 )),
-                                                SizedBox(height: 10,),
+                                            SizedBox(
+                                              height: 10,
+                                            ),
                                             Visibility(
                                               child: Text(
-                                                 'By: '+result.data!['getCurrentUser'][0]['name'] + " " + result.data!['getCurrentUser'][0]['surname'],
+                                                  'By: ' +
+                                                      result.data![
+                                                              'getCurrentUser']
+                                                          [0]['name'] +
+                                                      " " +
+                                                      result.data![
+                                                              'getCurrentUser']
+                                                          [0]['surname'] +
+                                                      "  UserID: " +
+                                                      result.data![
+                                                              'getCurrentUser']
+                                                          [0]['id'],
                                                   style: TextStyle(
                                                       color: Colors.white,
                                                       fontSize: 14)),
