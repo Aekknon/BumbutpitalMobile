@@ -126,7 +126,10 @@ class _LoginPageState extends State<LoginPage> {
                   height: 16,
                 ),
                 SizedBox(height: 16),
-                Container(
+                Text("Don't have an Account?"),
+               
+                SizedBox(height: 16),
+                 Container(
                     child: InkWell(
                   onTap: () {
                     Navigator.push(context,
@@ -136,8 +139,7 @@ class _LoginPageState extends State<LoginPage> {
                     'Sign Up',
                   ),
                 )),
-                SizedBox(height: 16),
-                Text("Don't have an Account?"),
+                
                
               ],
             ),

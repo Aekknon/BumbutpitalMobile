@@ -23,34 +23,6 @@ class _AddQuestionState extends State<AddQuestion> {
 
   final _title = TextEditingController();
   final _description = TextEditingController();
-  Future<void> onSubmit(RunMutation run) async {
-    if (_title.text.isEmpty && _description.text.isEmpty) return;
-    try {
-      final response = run({
-        "title": _title.text,
-        "description": _description.text,
-      });
-      print((await response.networkResult) as dynamic);
-
-     Navigator.of(context).pop();
-    } catch (err) {
-      showDialog<void>(
-        context: context,
-        builder: (BuildContext context) {
-          return AlertDialog(
-            title: const Text('Error!'),
-            content: SingleChildScrollView(
-              child: ListBody(
-                children: const <Widget>[
-                  Text('Insert your Question'),
-                ],
-              ),
-            ),
-          );
-        },
-      );
-    }
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -93,7 +65,7 @@ class _AddQuestionState extends State<AddQuestion> {
                                 child: _textField1(_title, "title"),
                               )
                             ],
-                          )
+                          ),
                         ],
                       )),
                 ),
@@ -126,6 +98,7 @@ class _AddQuestionState extends State<AddQuestion> {
                                   builder: (run, _) => ElevatedButton(
                                       onPressed: () async {
                                         await onSubmit(run);
+                                        
                                       },
                                       style: ElevatedButton.styleFrom(
                                         primary: Color((0xff6367EA)),
@@ -150,7 +123,7 @@ class _AddQuestionState extends State<AddQuestion> {
                                           ],
                                         ),
                                       )),
-                                )
+                                ),
                               ],
                             )),
                       ),
@@ -197,5 +170,49 @@ class _AddQuestionState extends State<AddQuestion> {
       keyboardType: TextInputType.visiblePassword,
       autocorrect: true,
     );
+  }
+
+  Future<void> onSubmit(RunMutation run) async {
+    if (_title.text.isEmpty && _description.text.isEmpty) return;
+    try {
+      final response = run({
+        "title": _title.text,
+        "description": _description.text,
+      });
+      print((await response.networkResult) as dynamic);
+
+      Navigator.of(context).pop();
+    } catch (err) {
+      showDialog<void>(
+        context: context,
+        builder: (BuildContext context) {
+          return AlertDialog(
+            title: const Text('Error!'),
+            content: SingleChildScrollView(
+              child: ListBody(
+                children: const <Widget>[
+                  Text('Insert your Question'),
+                ],
+              ),
+            ),
+          );
+        },
+      );
+    }
+  }
+
+  String search = 'dead';
+
+  @override
+  void initState() {
+    super.initState();
+    caseSensitive:
+    false;
+    RegExp exp = RegExp(
+      "\\b" + search + "\\b",
+      caseSensitive: false,
+    );
+    bool containe = exp.hasMatch(_title.text);
+    print(containe);
   }
 }

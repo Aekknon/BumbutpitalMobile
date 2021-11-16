@@ -8,6 +8,7 @@ import 'package:graphql_flutter/graphql_flutter.dart';
 import 'package:provider/provider.dart';
 import 'edit_profile.dart';
 import 'package:syncfusion_flutter_gauges/gauges.dart';
+import 'package:bumbutpital/Diary/main_diary.dart';
 
 // ignore: must_be_immutable
 class Profile extends StatelessWidget {
@@ -87,8 +88,6 @@ class Profile extends StatelessWidget {
               return Text(result.toString());
             }
 
-            
-            
             return Container(
               child: SingleChildScrollView(
                 child: Column(
@@ -114,51 +113,51 @@ class Profile extends StatelessWidget {
                         children: [
                           Spacer(),
                           Container(
-                              
                               child: Column(
+                            children: [
+                              Spacer(),
+                              Row(
                                 children: [
-                                  Spacer(),
-                                  Row(
-                                    children: [
-                                      Text(
-                                        result.data!['getCurrentUser'][0]
-                                                ['name'] +
-                                            " " +
-                                            result.data!['getCurrentUser'][0]
-                                                ['surname'],
-                                        style: TextStyle(
-                                          color: Colors.white,
-                                          fontSize: 24.0,
-                                          fontWeight: FontWeight.bold,
-                                        ),
-                                      ),
-                                      SizedBox(
-                                        width: 10,
-                                      ),
-                                      InkWell(
-                                        onTap: () {
-                                          Navigator.push(
-                                              context,
-                                              MaterialPageRoute(
-                                                  builder: (context) =>
-                                                      EditProfile()));
-                                        },
-                                        child: Icon(Icons.edit,
-                                            color: Colors.white),
-                                      ),
-                                    ],
-                                  ),
                                   Text(
-                                    result.data!['getCurrentUser'][0]['email'],
+                                    result.data!['getCurrentUser'][0]['name'] +
+                                        " " +
+                                        result.data!['getCurrentUser'][0]
+                                            ['surname'],
                                     style: TextStyle(
                                       color: Colors.white,
-                                      fontSize: 12.0,
+                                      fontSize: 24.0,
+                                      fontWeight: FontWeight.bold,
                                     ),
                                   ),
-                                  SizedBox(height: 30,),
-                                  Spacer(),
+                                  SizedBox(
+                                    width: 10,
+                                  ),
+                                  InkWell(
+                                    onTap: () {
+                                      Navigator.push(
+                                          context,
+                                          MaterialPageRoute(
+                                              builder: (context) =>
+                                                  EditProfile()));
+                                    },
+                                    child:
+                                        Icon(Icons.edit, color: Colors.white),
+                                  ),
                                 ],
-                              )),
+                              ),
+                              Text(
+                                result.data!['getCurrentUser'][0]['email'],
+                                style: TextStyle(
+                                  color: Colors.white,
+                                  fontSize: 12.0,
+                                ),
+                              ),
+                              SizedBox(
+                                height: 30,
+                              ),
+                              Spacer(),
+                            ],
+                          )),
                           Spacer(),
                         ],
                       ),
@@ -392,9 +391,8 @@ class Profile extends StatelessWidget {
                                                 }
 
                                                 return Icon(
-                                                  Icons.arrow_forward_rounded,
-                                                 color:   Color((0xff6367EA))
-                                                );
+                                                    Icons.arrow_forward_rounded,
+                                                    color: Color((0xff6367EA)));
                                               },
                                             ),
                                             SizedBox(

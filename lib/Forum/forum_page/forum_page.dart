@@ -1,10 +1,11 @@
 import 'package:bumbutpital/ContentPage/content_detail.dart';
 import 'package:flutter/material.dart';
 import 'package:graphql_flutter/graphql_flutter.dart';
+import 'package:intl/date_symbols.dart';
 
 class AllForum extends StatelessWidget {
   const AllForum({Key? key}) : super(key: key);
-    static const query = """
+  static const query = """
       
    query{
     getAllForum{
@@ -15,7 +16,6 @@ class AllForum extends StatelessWidget {
 }
 
                         """;
-
 
   @override
   Widget build(BuildContext context) {
@@ -39,134 +39,133 @@ class AllForum extends StatelessWidget {
         return Column(
           children: [
             Expanded(
-                    child: ListView.builder(
-                      
-                      
-                        itemCount: result.data!['getAllForum'].length,
-                        itemBuilder: (BuildContext context, int index) {
-                          int reverseIndex = result.data!['getAllForum'].length - 1 - index;
-                          return Column(
+                child: Scrollbar(
+              isAlwaysShown: true,
+              showTrackOnHover: true,
+              child: ListView.builder(
+                  itemCount: result.data!['getAllForum'].length,
+                  itemBuilder: (BuildContext context, int index) {
+                    int reverseIndex =
+                        result.data!['getAllForum'].length - 1 - index;
+                    return Column(
+                      children: [
+                        Center(
+                          child: Column(
                             children: [
-                              Center(
+                              Container(
+                                width: MediaQuery.of(context).size.width * 0.7,
+                                decoration: BoxDecoration(
+                                  boxShadow: [
+                                    BoxShadow(
+                                      color: Colors.grey.withOpacity(0.5),
+                                      spreadRadius: 2,
+                                      blurRadius: 5,
+                                      offset: Offset(
+                                          0, 3), // changes position of shadow
+                                    ),
+                                  ],
+                                  borderRadius: BorderRadius.only(
+                                      bottomLeft: Radius.circular(12),
+                                      topLeft: Radius.circular(12),
+                                      topRight: Radius.circular(12),
+                                      bottomRight: Radius.circular(12)),
+                                ),
                                 child: Column(
                                   children: [
-                                   
                                     Container(
-                                      width: MediaQuery.of(context).size.width*0.7,
-                                      decoration: BoxDecoration(
-                                        boxShadow: [
-                                          BoxShadow(
-                                            color: Colors.grey.withOpacity(0.5),
-                                            spreadRadius: 2,
-                                            blurRadius: 5,
-                                            offset: Offset(0,
-                                                3), // changes position of shadow
-                                          ),
-                                        ],
-                                        borderRadius: BorderRadius.only(
-                                            bottomLeft: Radius.circular(12),
+                                        width:
+                                            MediaQuery.of(context).size.width *
+                                                0.7,
+                                        decoration: BoxDecoration(
+                                          color: Color(0xff6367EA),
+                                          borderRadius: BorderRadius.only(
                                             topLeft: Radius.circular(12),
                                             topRight: Radius.circular(12),
-                                            bottomRight: Radius.circular(12)),
-                                      ),
-                                      child: Column(
-                                        children: [
-                                          Container(
-                                              width: MediaQuery.of(context).size.width*0.7,
-                                              decoration: BoxDecoration(
-                                                color: Color(0xff6367EA),
-                                                borderRadius: BorderRadius.only(
-                                                  topLeft: Radius.circular(12),
-                                                  topRight: Radius.circular(12),
-                                                ),
-                                              ),
-                                              child: Column(
-                                                children: [
-                                                  SizedBox(
-                                                    height: 10,
-                                                  ),
-                                                  Text(
-                                                    result.data!['getAllForum']
-                                                        [reverseIndex]['title'],
-                                                    style: TextStyle(
-                                                        fontSize: 16,
-                                                        color: Colors.white,
-                                                        decoration:
-                                                            TextDecoration
-                                                                .none),
-                                                  ),
-                                                  SizedBox(
-                                                    height: 10,
-                                                  ),
-                                                ],
-                                              )),
-                                          Container(
-                                            width: MediaQuery.of(context).size.width*0.8,
-                                            color: Colors.white,
-                                            padding: const EdgeInsets.only(
-                                                top: 10,
-                                                bottom: 10,
-                                                left: 30,
-                                                right: 10),
-                                            child: Text(
-                                              result.data!['getAllForum'][reverseIndex]
-                                                  ['description'],
+                                          ),
+                                        ),
+                                        child: Column(
+                                          children: [
+                                            SizedBox(
+                                              height: 10,
+                                            ),
+                                            Text(
+                                              result.data!['getAllForum']
+                                                  [reverseIndex]['title'],
                                               style: TextStyle(
                                                   fontSize: 16,
-                                                  color: Colors.black,
+                                                  color: Colors.white,
                                                   decoration:
                                                       TextDecoration.none),
                                             ),
-                                          ),
-                                          if (result.data!['getAllForum'][reverseIndex]
-                                                  ['answer'] !=
-                                              null)
-                                            Container(
-                                                padding: const EdgeInsets.only(
-                                                    top: 10,
-                                                    bottom: 5,
-                                                    left: 10,
-                                                    right: 10),
-                                                child: Column(
-                                                  children: [
-                                                    Text(
-                                                      result.data![
-                                                              'getAllForum']
-                                                          [reverseIndex]['answer'],
-                                                      style: TextStyle(
-                                                          fontSize: 16,
-                                                          color: Colors.black,
-                                                          decoration:
-                                                              TextDecoration
-                                                                  .none),
-                                                    ),
-                                                    SizedBox(
-                                                      height: 10,
-                                                    ),
-                                                    Text(
-                                                      'Dr. WIsa Moolhom',
-                                                      style: TextStyle(
-                                                          fontSize: 8,
-                                                          color: Colors.black,
-                                                          decoration:
-                                                              TextDecoration
-                                                                  .none),
-                                                    ),
-                                                  ],
-                                                ))
-                                        ],
+                                            SizedBox(
+                                              height: 10,
+                                            ),
+                                          ],
+                                        )),
+                                    Container(
+                                      width: MediaQuery.of(context).size.width *
+                                          0.8,
+                                      color: Colors.white,
+                                      padding: const EdgeInsets.only(
+                                          top: 10,
+                                          bottom: 10,
+                                          left: 30,
+                                          right: 10),
+                                      child: Text(
+                                        result.data!['getAllForum']
+                                            [reverseIndex]['description'],
+                                        style: TextStyle(
+                                            fontSize: 16,
+                                            color: Colors.black,
+                                            decoration: TextDecoration.none),
                                       ),
                                     ),
+                                    if (result.data!['getAllForum']
+                                            [reverseIndex]['answer'] !=
+                                        null)
+                                      Container(
+                                          padding: const EdgeInsets.only(
+                                              top: 10,
+                                              bottom: 5,
+                                              left: 10,
+                                              right: 10),
+                                          child: Column(
+                                            children: [
+                                              Text(
+                                                result.data!['getAllForum']
+                                                    [reverseIndex]['answer'],
+                                                style: TextStyle(
+                                                    fontSize: 16,
+                                                    color: Colors.black,
+                                                    decoration:
+                                                        TextDecoration.none),
+                                              ),
+                                              SizedBox(
+                                                height: 10,
+                                              ),
+                                              Text(
+                                                'Dr. WIsa Moolhom',
+                                                style: TextStyle(
+                                                    fontSize: 8,
+                                                    color: Colors.black,
+                                                    decoration:
+                                                        TextDecoration.none),
+                                              ),
+                                            ],
+                                          ))
                                   ],
                                 ),
                               ),
-                              SizedBox(height: MediaQuery.of(context).size.height*0.08,)
                             ],
-                          );
-                        }),
-                  ),
-            
-            
+                          ),
+                        ),
+                        SizedBox(
+                          height: MediaQuery.of(context).size.height * 0.08,
+                        )
+                      ],
+                    );
+                  }),
+            )),
           ],
         );
       },
@@ -210,133 +209,133 @@ class MyForum extends StatelessWidget {
         return Column(
           children: [
             Expanded(
-                    child: ListView.builder(
-                      
-                        itemCount: result.data!['getcurrentForum'].length,
-                        itemBuilder: (BuildContext context, int index) {
-                          int reverseIndex = result.data!['getcurrentForum'].length - 1 - index;
-                          return Column(
+                child: Scrollbar(
+              isAlwaysShown: true,
+              showTrackOnHover: true,
+              child: ListView.builder(
+                  itemCount: result.data!['getcurrentForum'].length,
+                  itemBuilder: (BuildContext context, int index) {
+                    int reverseIndex =
+                        result.data!['getcurrentForum'].length - 1 - index;
+                    return Column(
+                      children: [
+                        Center(
+                          child: Column(
                             children: [
-                              Center(
+                              Container(
+                                width: MediaQuery.of(context).size.width * 0.7,
+                                decoration: BoxDecoration(
+                                  boxShadow: [
+                                    BoxShadow(
+                                      color: Colors.grey.withOpacity(0.5),
+                                      spreadRadius: 2,
+                                      blurRadius: 5,
+                                      offset: Offset(
+                                          0, 3), // changes position of shadow
+                                    ),
+                                  ],
+                                  borderRadius: BorderRadius.only(
+                                      bottomLeft: Radius.circular(12),
+                                      topLeft: Radius.circular(12),
+                                      topRight: Radius.circular(12),
+                                      bottomRight: Radius.circular(12)),
+                                ),
                                 child: Column(
                                   children: [
-                                   
                                     Container(
-                                      width: MediaQuery.of(context).size.width*0.7,
-                                      decoration: BoxDecoration(
-                                        boxShadow: [
-                                          BoxShadow(
-                                            color: Colors.grey.withOpacity(0.5),
-                                            spreadRadius: 2,
-                                            blurRadius: 5,
-                                            offset: Offset(0,
-                                                3), // changes position of shadow
-                                          ),
-                                        ],
-                                        borderRadius: BorderRadius.only(
-                                            bottomLeft: Radius.circular(12),
+                                        width:
+                                            MediaQuery.of(context).size.width *
+                                                0.7,
+                                        decoration: BoxDecoration(
+                                          color: Color(0xff6367EA),
+                                          borderRadius: BorderRadius.only(
                                             topLeft: Radius.circular(12),
                                             topRight: Radius.circular(12),
-                                            bottomRight: Radius.circular(12)),
-                                      ),
-                                      child: Column(
-                                        children: [
-                                          Container(
-                                              width: MediaQuery.of(context).size.width*0.7,
-                                              decoration: BoxDecoration(
-                                                color: Color(0xff6367EA),
-                                                borderRadius: BorderRadius.only(
-                                                  topLeft: Radius.circular(12),
-                                                  topRight: Radius.circular(12),
-                                                ),
-                                              ),
-                                              child: Column(
-                                                children: [
-                                                  SizedBox(
-                                                    height: 10,
-                                                  ),
-                                                  Text(
-                                                    result.data!['getcurrentForum']
-                                                        [reverseIndex]['title'],
-                                                    style: TextStyle(
-                                                        fontSize: 16,
-                                                        color: Colors.white,
-                                                        decoration:
-                                                            TextDecoration
-                                                                .none),
-                                                  ),
-                                                  SizedBox(
-                                                    height: 10,
-                                                  ),
-                                                ],
-                                              )),
-                                          Container(
-                                            width: MediaQuery.of(context).size.width*0.8,
-                                            color: Colors.white,
-                                            padding: const EdgeInsets.only(
-                                                top: 10,
-                                                bottom: 10,
-                                                left: 30,
-                                                right: 10),
-                                            child: Text(
-                                              result.data!['getcurrentForum'][reverseIndex]
-                                                  ['description'],
+                                          ),
+                                        ),
+                                        child: Column(
+                                          children: [
+                                            SizedBox(
+                                              height: 10,
+                                            ),
+                                            Text(
+                                              result.data!['getcurrentForum']
+                                                  [reverseIndex]['title'],
                                               style: TextStyle(
                                                   fontSize: 16,
-                                                  color: Colors.black,
+                                                  color: Colors.white,
                                                   decoration:
                                                       TextDecoration.none),
                                             ),
-                                          ),
-                                          if (result.data!['getcurrentForum'][reverseIndex]
-                                                  ['answer'] !=
-                                              null)
-                                            Container(
-                                                padding: const EdgeInsets.only(
-                                                    top: 10,
-                                                    bottom: 5,
-                                                    left: 10,
-                                                    right: 10),
-                                                child: Column(
-                                                  children: [
-                                                    Text(
-                                                      result.data![
-                                                              'getcurrentForum']
-                                                          [reverseIndex]['answer'],
-                                                      style: TextStyle(
-                                                          fontSize: 16,
-                                                          color: Colors.black,
-                                                          decoration:
-                                                              TextDecoration
-                                                                  .none),
-                                                    ),
-                                                    SizedBox(
-                                                      height: 10,
-                                                    ),
-                                                    Text(
-                                                      'Dr. WIsa Moolhom',
-                                                      style: TextStyle(
-                                                          fontSize: 8,
-                                                          color: Colors.black,
-                                                          decoration:
-                                                              TextDecoration
-                                                                  .none),
-                                                    ),
-                                                  ],
-                                                ))
-                                        ],
+                                            SizedBox(
+                                              height: 10,
+                                            ),
+                                          ],
+                                        )),
+                                    Container(
+                                      width: MediaQuery.of(context).size.width *
+                                          0.8,
+                                      color: Colors.white,
+                                      padding: const EdgeInsets.only(
+                                          top: 10,
+                                          bottom: 10,
+                                          left: 30,
+                                          right: 10),
+                                      child: Text(
+                                        result.data!['getcurrentForum']
+                                            [reverseIndex]['description'],
+                                        style: TextStyle(
+                                            fontSize: 16,
+                                            color: Colors.black,
+                                            decoration: TextDecoration.none),
                                       ),
                                     ),
+                                    if (result.data!['getcurrentForum']
+                                            [reverseIndex]['answer'] !=
+                                        null)
+                                      Container(
+                                          padding: const EdgeInsets.only(
+                                              top: 10,
+                                              bottom: 5,
+                                              left: 10,
+                                              right: 10),
+                                          child: Column(
+                                            children: [
+                                              Text(
+                                                result.data!['getcurrentForum']
+                                                    [reverseIndex]['answer'],
+                                                style: TextStyle(
+                                                    fontSize: 16,
+                                                    color: Colors.black,
+                                                    decoration:
+                                                        TextDecoration.none),
+                                              ),
+                                              SizedBox(
+                                                height: 10,
+                                              ),
+                                              Text(
+                                                'Dr. WIsa Moolhom',
+                                                style: TextStyle(
+                                                    fontSize: 8,
+                                                    color: Colors.black,
+                                                    decoration:
+                                                        TextDecoration.none),
+                                              ),
+                                            ],
+                                          ))
                                   ],
                                 ),
                               ),
-                              SizedBox(height: MediaQuery.of(context).size.height*0.08,)
                             ],
-                          );
-                        }),
-                  ),
-            
-            
+                          ),
+                        ),
+                        SizedBox(
+                          height: MediaQuery.of(context).size.height * 0.08,
+                        )
+                      ],
+                    );
+                  }),
+            )),
           ],
         );
       },
