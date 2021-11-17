@@ -67,81 +67,105 @@ class _LoginPageState extends State<LoginPage> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: Color(0XFFECF2FF),
-      body: SafeArea(
-        child: SingleChildScrollView(
-          child: Container(
-            height: MediaQuery.of(context).size.height,
-            padding: EdgeInsets.symmetric(
-              horizontal: 20,
-            ),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.start,
-              children: [
-                SizedBox(height: 50),
-                Container(
-                  child: Text(
-                    'Sign In',
-                    style: TextStyle(
-                      fontSize: 24,
+    return Container(
+      width: MediaQuery.of(context).size.width,
+      height: MediaQuery.of(context).size.height,
+      decoration: BoxDecoration(
+          gradient:
+              LinearGradient(
+                begin: Alignment.topLeft,
+                end: Alignment.bottomRight,
+                colors: [Color(0XFFECF2FF), Colors.white])),
+      child: Scaffold(
+        backgroundColor: Colors.transparent,
+        body: SafeArea(
+          child: SingleChildScrollView(
+            child: Container(
+              height: MediaQuery.of(context).size.height,
+              padding: EdgeInsets.symmetric(
+                horizontal: 20,
+              ),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: [
+                  SizedBox(height: 40),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Container(
+                        height: 50,
+                        width: 50,
+                        child: Image.asset('asset/image/Bumbutpital Logo.png'),
+                      ),
+                      SizedBox(
+                        width: 20,
+                      ),
+                      Text('BUMBUTPITAL',
+                          style: TextStyle(fontWeight: FontWeight.normal)),
+                    ],
+                  ),
+                  SizedBox(height: 20),
+                  Container(
+                    child: Text(
+                      'Login',
+                      style: TextStyle(
+                        fontSize: 24,
+                      ),
+                    ),
+                    alignment: Alignment.center,
+                  ),
+                  SizedBox(height: 15),
+                  SizedBox(height: 30),
+                  _textField(
+                    _email,
+                    "Username",
+                    Icon(Icons.account_box),
+                  ),
+                  SizedBox(height: 44),
+                  _textField(
+                    _password,
+                    "Password",
+                    Icon(Icons.lock),
+                  ),
+                  SizedBox(height: 32),
+                  Mutation(
+                    options: MutationOptions(document: gql(loginQuery)),
+                    builder: (run, _) => ElevatedButton(
+                      onPressed: () async {
+                        await onSubmit(run);
+                      },
+                      style: ElevatedButton.styleFrom(
+                        primary: Color(0xff6367EA),
+                        padding:
+                            EdgeInsets.symmetric(horizontal: 100, vertical: 15),
+                      ),
+                      child: Text("Login"),
                     ),
                   ),
-                  alignment: Alignment.center,
-                ),
-                SizedBox(height: 44),
-                _textField(
-                  _email,
-                  "Username",
-                  Icon(Icons.account_box),
-                ),
-                SizedBox(height: 44),
-                _textField(
-                  _password,
-                  "Password",
-                  Icon(Icons.lock),
-                ),
-               
-               
-                SizedBox(height: 32),
-                Mutation(
-                  options: MutationOptions(document: gql(loginQuery)),
-                  builder: (run, _) => ElevatedButton(
-                    onPressed: () async {
-                      await onSubmit(run);
+                  SizedBox(
+                    height: 16,
+                  ),
+                  SizedBox(
+                    height: 16,
+                  ),
+                  SizedBox(height: 16),
+                  Text("Don't have an Account?"),
+                  SizedBox(height: 16),
+                  Container(
+                      child: InkWell(
+                    onTap: () {
+                      Navigator.push(context,
+                          MaterialPageRoute(builder: (context) => SignUp()));
                     },
-                    style: ElevatedButton.styleFrom(
-                      primary:  Color(0xff6367EA),
-                      padding:
-                          EdgeInsets.symmetric(horizontal: 100, vertical: 15),
+                    child: Text(
+                      'Sign Up',
+                      style: TextStyle(
+                          color: Color(0xff6367EA),
+                          fontWeight: FontWeight.bold),
                     ),
-                    child: Text("Login"),
-                  ),
-                ),
-                SizedBox(
-                  height: 16,
-                ),
-               
-                SizedBox(
-                  height: 16,
-                ),
-                SizedBox(height: 16),
-                Text("Don't have an Account?"),
-               
-                SizedBox(height: 16),
-                 Container(
-                    child: InkWell(
-                  onTap: () {
-                    Navigator.push(context,
-                        MaterialPageRoute(builder: (context) => SignUp()));
-                  },
-                  child: Text(
-                    'Sign Up',
-                  ),
-                )),
-                
-               
-              ],
+                  )),
+                ],
+              ),
             ),
           ),
         ),
@@ -154,7 +178,6 @@ class _LoginPageState extends State<LoginPage> {
       controller: cont,
       obscureText: label == "Password" ? isPasswordHidden : false,
       decoration: InputDecoration(
-        border: OutlineInputBorder(),
         labelText: label,
         hintText: "Enter your ${label.toLowerCase()}",
         prefixIcon: icon,

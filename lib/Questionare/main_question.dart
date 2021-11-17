@@ -20,6 +20,7 @@ class _MainQuestionState extends State<MainQuestion> {
                    query {
     getCurrentUser {
   appropiatePHQSeverity
+  role
 
 
     }
@@ -153,6 +154,12 @@ class _MainQuestionState extends State<MainQuestion> {
                   bool visible2 = false;
                   bool visiblePageConsent = false;
                   bool visibleMainPage = true;
+                  bool visibleMoph = false;
+                  bool visibleUser = true;
+                  if (result.data!['getCurrentUser'][0]['role'] == 'moph') {
+                    visibleMoph = true;
+                    visibleUser = false;
+                  }
                   if (result.data!['getCurrentUser'][0]
                           ['appropiatePHQSeverity'] ==
                       null) {
@@ -192,108 +199,213 @@ class _MainQuestionState extends State<MainQuestion> {
                                   SizedBox(
                                     height: 10,
                                   ),
-                                  Container(
-                                    width:
-                                        MediaQuery.of(context).size.width * 0.9,
-                                    child: Text(
-                                      "You accept to give a permission for Bumbutpital application to collect your information",
-                                      style: TextStyle(
-                                          fontSize: 16,
-                                          fontWeight: FontWeight.bold),
-                                    ),
-                                  ),
-                                  Divider(color: Colors.black),
-                                  Container(
-                                    height: MediaQuery.of(context).size.height *
-                                        0.6,
-                                    width:
-                                        MediaQuery.of(context).size.width * 0.8,
-                                    child: Scrollbar(child: SingleChildScrollView(
-                                      child: Text(data,
-                                          style: TextStyle(
-                                              fontWeight: FontWeight.normal,
-                                              fontSize: 14)),
-                                    ),)
-                                  ),
-                                  SizedBox(
-                                    height: 20,
-                                  ),
-                                  Row(
-                                    children: [
-                                      Spacer(),
-                                      Mutation(
-                                        options: MutationOptions(
-                                            document: gql(permission)),
-                                        builder: (run, _) => ElevatedButton(
-                                          onPressed: () async {
-                                            await onSubmit(run);
-                                          },
-                                          style: ElevatedButton.styleFrom(
-                                            primary: Color(0xff6367EA),
-                                            padding: EdgeInsets.symmetric(
-                                                horizontal: 50, vertical: 15),
-                                            shape: RoundedRectangleBorder(
-                                              borderRadius:
-                                                  BorderRadius.circular(8),
+                                  Visibility(
+                                      visible: visibleUser,
+                                      child: Column(
+                                        children: [
+                                          Container(
+                                            width: MediaQuery.of(context)
+                                                    .size
+                                                    .width *
+                                                0.9,
+                                            child: Text(
+                                              "You accept to give a permission for Bumbutpital application to collect your information",
+                                              style: TextStyle(
+                                                  fontSize: 16,
+                                                  fontWeight: FontWeight.bold),
                                             ),
                                           ),
-                                          child: Text("Accept"),
-                                        ),
-                                      ),
-                                      SizedBox(
-                                        width: 10,
-                                      ),
-                                      ElevatedButton(
-                                        onPressed: () async {
-                                          // Navigator.push(context,
-                                          //     MaterialPageRoute(builder: (context) => ShowResult()));
-                                          await Provider.of<
-                                                      GraphQLConfiguration>(
-                                                  context,
-                                                  listen: false)
-                                              .clearToken();
-                                          Navigator.pushAndRemoveUntil(
-                                              context,
-                                              MaterialPageRoute(
-                                                  builder: (context) =>
-                                                      LoginPage()),
-                                              (route) => false);
-                                        },
-                                        child: Container(
-                                          width: MediaQuery.of(context)
-                                                  .size
-                                                  .width *
-                                              0.3,
-                                          child: Row(
+                                          Divider(color: Colors.black),
+                                          Container(
+                                              height: MediaQuery.of(context)
+                                                      .size
+                                                      .height *
+                                                  0.6,
+                                              width: MediaQuery.of(context)
+                                                      .size
+                                                      .width *
+                                                  0.8,
+                                              child: Scrollbar(
+                                                child: SingleChildScrollView(
+                                                  child: Text(data,
+                                                      style: TextStyle(
+                                                          fontWeight:
+                                                              FontWeight.normal,
+                                                          fontSize: 14)),
+                                                ),
+                                              )),
+                                          SizedBox(
+                                            height: 20,
+                                          ),
+                                          Row(
                                             children: [
                                               Spacer(),
-                                              Text(
-                                                "No Accept",
-                                                style: TextStyle(
-                                                  fontSize: 15.0,
-                                                  color: Color((0xff6367EA)),
+                                              Mutation(
+                                                options: MutationOptions(
+                                                    document: gql(permission)),
+                                                builder: (run, _) =>
+                                                    ElevatedButton(
+                                                  onPressed: () async {
+                                                    await onSubmit(run);
+                                                  },
+                                                  style:
+                                                      ElevatedButton.styleFrom(
+                                                    primary: Color(0xff6367EA),
+                                                    padding:
+                                                        EdgeInsets.symmetric(
+                                                            horizontal: 50,
+                                                            vertical: 15),
+                                                    shape:
+                                                        RoundedRectangleBorder(
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                              8),
+                                                    ),
+                                                  ),
+                                                  child: Text("Accept"),
+                                                ),
+                                              ),
+                                              SizedBox(
+                                                width: 10,
+                                              ),
+                                              ElevatedButton(
+                                                onPressed: () async {
+                                                  // Navigator.push(context,
+                                                  //     MaterialPageRoute(builder: (context) => ShowResult()));
+                                                  await Provider.of<
+                                                              GraphQLConfiguration>(
+                                                          context,
+                                                          listen: false)
+                                                      .clearToken();
+                                                  Navigator.pushAndRemoveUntil(
+                                                      context,
+                                                      MaterialPageRoute(
+                                                          builder: (context) =>
+                                                              LoginPage()),
+                                                      (route) => false);
+                                                },
+                                                child: Container(
+                                                  width: MediaQuery.of(context)
+                                                          .size
+                                                          .width *
+                                                      0.3,
+                                                  child: Row(
+                                                    children: [
+                                                      Spacer(),
+                                                      Text(
+                                                        "No Accept",
+                                                        style: TextStyle(
+                                                          fontSize: 15.0,
+                                                          color: Color(
+                                                              (0xff6367EA)),
+                                                        ),
+                                                      ),
+                                                      Spacer(),
+                                                    ],
+                                                  ),
+                                                ),
+                                                style: ElevatedButton.styleFrom(
+                                                  primary: Colors.white,
+                                                  padding: EdgeInsets.symmetric(
+                                                      horizontal: 10,
+                                                      vertical: 15),
+                                                  shape: RoundedRectangleBorder(
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            8),
+                                                  ),
                                                 ),
                                               ),
                                               Spacer(),
                                             ],
                                           ),
-                                        ),
-                                        style: ElevatedButton.styleFrom(
-                                          primary: Colors.white,
-                                          padding: EdgeInsets.symmetric(
-                                              horizontal: 10, vertical: 15),
-                                          shape: RoundedRectangleBorder(
-                                            borderRadius:
-                                                BorderRadius.circular(8),
+                                          SizedBox(
+                                            height: 20,
+                                          )
+                                        ],
+                                      )),
+                                  Visibility(
+                                      visible: visibleMoph,
+                                      child: Column(
+                                        children: [
+                                          Container(
+                                            width: MediaQuery.of(context)
+                                                    .size
+                                                    .width *
+                                                0.9,
+                                            child: Text(
+                                              "You are Staff please Login in WebPage",
+                                              style: TextStyle(
+                                                  fontSize: 16,
+                                                  fontWeight: FontWeight.bold),
+                                            ),
                                           ),
-                                        ),
-                                      ),
-                                      Spacer(),
-                                    ],
-                                  ),
-                                  SizedBox(
-                                    height: 20,
-                                  )
+                                          Divider(color: Colors.black),
+                                          SizedBox(
+                                            height: 20,
+                                          ),
+                                          Row(
+                                            children: [
+                                              Spacer(),
+                                              SizedBox(
+                                                width: 10,
+                                              ),
+                                              ElevatedButton(
+                                                onPressed: () async {
+                                                  // Navigator.push(context,
+                                                  //     MaterialPageRoute(builder: (context) => ShowResult()));
+                                                  await Provider.of<
+                                                              GraphQLConfiguration>(
+                                                          context,
+                                                          listen: false)
+                                                      .clearToken();
+                                                  Navigator.pushAndRemoveUntil(
+                                                      context,
+                                                      MaterialPageRoute(
+                                                          builder: (context) =>
+                                                              LoginPage()),
+                                                      (route) => false);
+                                                },
+                                                child: Container(
+                                                  width: MediaQuery.of(context)
+                                                          .size
+                                                          .width *
+                                                      0.3,
+                                                  child: Row(
+                                                    children: [
+                                                      Spacer(),
+                                                      Text(
+                                                        "No Accept",
+                                                        style: TextStyle(
+                                                          fontSize: 15.0,
+                                                          color: Color(
+                                                              (0xff6367EA)),
+                                                        ),
+                                                      ),
+                                                      Spacer(),
+                                                    ],
+                                                  ),
+                                                ),
+                                                style: ElevatedButton.styleFrom(
+                                                  primary: Colors.white,
+                                                  padding: EdgeInsets.symmetric(
+                                                      horizontal: 10,
+                                                      vertical: 15),
+                                                  shape: RoundedRectangleBorder(
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            8),
+                                                  ),
+                                                ),
+                                              ),
+                                              Spacer(),
+                                            ],
+                                          ),
+                                          SizedBox(
+                                            height: 20,
+                                          )
+                                        ],
+                                      ))
                                 ],
                               ),
                             ),

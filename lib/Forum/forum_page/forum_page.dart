@@ -85,10 +85,10 @@ class AllForum extends StatelessWidget {
                                         ),
                                         child: Column(
                                           children: [
-                                            SizedBox(
-                                              height: 10,
-                                            ),
-                                            Text(
+                                            
+                                             Container(
+                                              padding: EdgeInsets.all(15),
+                                              child: Text(
                                               result.data!['getAllForum']
                                                   [reverseIndex]['title'],
                                               style: TextStyle(
@@ -96,6 +96,7 @@ class AllForum extends StatelessWidget {
                                                   color: Colors.white,
                                                   decoration:
                                                       TextDecoration.none),
+                                            ),
                                             ),
                                             SizedBox(
                                               height: 10,
@@ -253,12 +254,9 @@ class MyForum extends StatelessWidget {
                                             topRight: Radius.circular(12),
                                           ),
                                         ),
-                                        child: Column(
-                                          children: [
-                                            SizedBox(
-                                              height: 10,
-                                            ),
-                                            Text(
+                                        child: Container(
+                                              padding: EdgeInsets.all(15),
+                                              child: Text(
                                               result.data!['getcurrentForum']
                                                   [reverseIndex]['title'],
                                               style: TextStyle(
@@ -267,11 +265,7 @@ class MyForum extends StatelessWidget {
                                                   decoration:
                                                       TextDecoration.none),
                                             ),
-                                            SizedBox(
-                                              height: 10,
-                                            ),
-                                          ],
-                                        )),
+                                            ),),
                                     Container(
                                       width: MediaQuery.of(context).size.width *
                                           0.8,
@@ -279,7 +273,7 @@ class MyForum extends StatelessWidget {
                                       padding: const EdgeInsets.only(
                                           top: 10,
                                           bottom: 10,
-                                          left: 30,
+                                          left: 10,
                                           right: 10),
                                       child: Text(
                                         result.data!['getcurrentForum']

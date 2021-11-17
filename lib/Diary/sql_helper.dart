@@ -10,7 +10,7 @@ class SQLHelper {
         description TEXT,
         createdAt TEXT,
         userID TEXT,
-        sensitivePoint TEXT,
+        sensitivePoint TEXT
       )
       """);
   }
@@ -19,20 +19,16 @@ class SQLHelper {
 // created_at: the time that the item was created. It will be automatically handled by SQLite
 
   static Future<sql.Database> db() async {
-    return sql.openDatabase('kindacode1.db', version: 3,
+    return sql.openDatabase('kindacode1.db', version: 2,
         onCreate: (sql.Database database, int version) async {
       await createTables(database);
-    }, onUpgrade: (sql.Database db, int oldV, int newV) async {
-      if (oldV < newV) {
-        await db.execute('alter table items1 add column countBadDiary TEXT');
-      }
-    });
+    }, );
   }
 
   // Create new item (journal)
   // ignore: non_constant_identifier_names
   static Future<int> createItem(String title, String? descrption,
-      String createdAt, String userID, String sensitivePoint , String countBadDiary) async {
+      String createdAt, String userID, String sensitivePoint ) async {
     final db = await SQLHelper.db();
     final now = new DateTime.now();
     String Day = DateFormat.yMMMMd('en_US').format(now);
@@ -44,7 +40,7 @@ class SQLHelper {
       'createdAt': createdAt,
       'userID': userID,
       'sensitivePoint': sensitivePoint,
-      'countBadDiary': countBadDiary,
+     
     };
     final id = await db.insert('items1', data,
         conflictAlgorithm: sql.ConflictAlgorithm.replace);
@@ -66,7 +62,7 @@ class SQLHelper {
 
   // Update an item by id
   static Future<int> updateItem(int id, String title, String? descrption,
-      String createdAt, String userID, String sensitivePoint, String countBadDiary) async {
+      String createdAt, String userID, String sensitivePoint,) async {
     final db = await SQLHelper.db();
 
     final data = {
@@ -75,7 +71,7 @@ class SQLHelper {
       'createdAt': createdAt,
       'userID': userID,
       'sensitivePoint': sensitivePoint,
-      'countBadDiary': countBadDiary
+      
     };
 
     final result =

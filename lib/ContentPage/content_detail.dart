@@ -41,7 +41,7 @@ class ContentDetail extends StatelessWidget {
               Spacer(),
               Container(
               padding: EdgeInsets.only(left: 30, right: 30),
-              child: Text(result[3].toString(),
+              child: Text(result[3].toString().substring(0,24),
                 style: TextStyle(fontSize: 10, )),
             ),
             ],),

@@ -570,19 +570,64 @@ class Profile extends StatelessWidget {
                           SizedBox(
                             height: 30,
                           ),
+                          
                           ElevatedButton(
-                            onPressed: () async {
-                              // Navigator.push(context,
-                              //     MaterialPageRoute(builder: (context) => ShowResult()));
-                              await Provider.of<GraphQLConfiguration>(context,
-                                      listen: false)
-                                  .clearToken();
-                              Navigator.pushAndRemoveUntil(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (context) => LoginPage()),
-                                  (route) => false);
-                            },
+                            onPressed: () => showDialog<String>(
+                              context: context,
+                              builder: (BuildContext context) => AlertDialog(
+                                title: const Text('Logout'),
+                                content: const Text('Are you sure to Logout?'),
+                                actions: <Widget>[
+                                  TextButton(
+                                    onPressed: () =>
+                                        Navigator.pop(context, 'Cancel'),
+                                    child: const Text('Cancel'),
+                                  ),
+                                  ElevatedButton(
+                                    onPressed: () async {
+                                      // Navigator.push(context,
+                                      //     MaterialPageRoute(builder: (context) => ShowResult()));
+                                      await Provider.of<GraphQLConfiguration>(
+                                              context,
+                                              listen: false)
+                                          .clearToken();
+                                      Navigator.pushAndRemoveUntil(
+                                          context,
+                                          MaterialPageRoute(
+                                              builder: (context) =>
+                                                  LoginPage()),
+                                          (route) => false);
+                                    },
+                                    child: Container(
+                                      width: MediaQuery.of(context).size.width *
+                                          0.3,
+                                      child: Row(
+                                        children: [
+                                          Spacer(),
+                                         
+                                          Text(
+                                            "LOGOUT",
+                                            style: TextStyle(
+                                              fontSize: 15.0,
+                                              color: Colors.white,
+                                            ),
+                                          ),
+                                          Spacer(),
+                                        ],
+                                      ),
+                                    ),
+                                    style: ElevatedButton.styleFrom(
+                                        padding: EdgeInsets.symmetric(
+                                            vertical: 10, horizontal: 20),
+                                        shape: RoundedRectangleBorder(
+                                          borderRadius:
+                                              BorderRadius.circular(8),
+                                        ),
+                                        primary: Color((0xff6367EA))),
+                                  ),
+                                ],
+                              ),
+                            ),
                             child: Container(
                               width: MediaQuery.of(context).size.width * 0.3,
                               child: Row(
