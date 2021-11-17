@@ -42,8 +42,8 @@ class ContentCard extends StatelessWidget {
           children: [
             Expanded(
                 child: Scrollbar(
-                  isAlwaysShown: true,
-                  showTrackOnHover: true,
+              isAlwaysShown: true,
+              showTrackOnHover: true,
               child: ListView.builder(
                 itemBuilder: (BuildContext context, int index) {
                   int reverseIndex =
@@ -51,46 +51,84 @@ class ContentCard extends StatelessWidget {
                   return Column(
                     children: [
                       InkWell(
-                        onTap: () {
-                          Navigator.pushNamed(
-                            context,
-                            "/ContentDetail",
-                            arguments: [
-                              result.data!['getMinimalContent'][reverseIndex]
-                                  ['pictureUrl'],
-                              result.data!['getMinimalContent'][reverseIndex]
-                                  ['title'],
-                              result.data!['getMinimalContent'][reverseIndex]
-                                  ['description'],
-                              result.data!['getMinimalContent'][reverseIndex]
-                                  ['createAt']
-                            ],
-                          );
-                        },
-                        child: Container(
-                          height: 250,
-                          width: MediaQuery.of(context).size.width * 0.9,
-                          padding: EdgeInsets.all(20),
-                          decoration: BoxDecoration(
-                              boxShadow: [
-                                BoxShadow(
-                                  color: Colors.grey.withOpacity(0.5),
-                                  spreadRadius: 2,
-                                  blurRadius: 5,
-                                  offset: Offset(
-                                      0, 3), // changes position of shadow
-                                ),
+                          onTap: () {
+                            Navigator.pushNamed(
+                              context,
+                              "/ContentDetail",
+                              arguments: [
+                                result.data!['getMinimalContent'][reverseIndex]
+                                    ['pictureUrl'],
+                                result.data!['getMinimalContent'][reverseIndex]
+                                    ['title'],
+                                result.data!['getMinimalContent'][reverseIndex]
+                                    ['description'],
+                                result.data!['getMinimalContent'][reverseIndex]
+                                    ['createAt']
                               ],
-                              borderRadius:
-                                  BorderRadius.all(Radius.circular(10)),
-                              image: DecorationImage(
-                                image: NetworkImage(
-                                    result.data!['getMinimalContent']
-                                        [reverseIndex]['pictureUrl']),
-                                fit: BoxFit.cover,
-                              )),
-                        ),
-                      ),
+                            );
+                          },
+                          child: Column(
+                            children: [
+                              Container(
+                                height: 250,
+                                width: MediaQuery.of(context).size.width * 0.9,
+                                padding: EdgeInsets.all(20),
+                                decoration: BoxDecoration(
+                                    boxShadow: [
+                                      BoxShadow(
+                                        color: Colors.grey.withOpacity(0.5),
+                                        spreadRadius: 2,
+                                        blurRadius: 5,
+                                        offset: Offset(
+                                            0, 3), // changes position of shadow
+                                      ),
+                                    ],
+                                    borderRadius: BorderRadius.only(
+                                        topLeft: Radius.circular(10),
+                                        topRight: Radius.circular(10)),
+                                    image: DecorationImage(
+                                      image: NetworkImage(
+                                          result.data!['getMinimalContent']
+                                              [reverseIndex]['pictureUrl']),
+                                      fit: BoxFit.cover,
+                                    )),
+                              ),
+                              Container(
+                                  height: 40,
+                                  width:
+                                      MediaQuery.of(context).size.width * 0.9,
+                                  padding: EdgeInsets.all(10),
+                                  decoration: BoxDecoration(
+                                    color: Colors.white,
+                                    boxShadow: [
+                                      BoxShadow(
+                                        color: Colors.grey.withOpacity(0.5),
+                                        spreadRadius: 2,
+                                        blurRadius: 5,
+                                        offset: Offset(
+                                            0, 3), // changes position of shadow
+                                      ),
+                                    ],
+                                    borderRadius: BorderRadius.only(
+                                        bottomLeft: Radius.circular(10),
+                                        bottomRight: Radius.circular(10)),
+                                  ),
+                                  child: SingleChildScrollView(
+                                    scrollDirection: Axis.horizontal,
+                                    child: Row(children: [
+                                      Text(
+                                      "Title: ",
+                                      style: TextStyle(fontSize: 12),
+                                    ),
+                                      Text(
+                                      result.data!['getMinimalContent']
+                                          [reverseIndex]['title'],
+                                      style: TextStyle(fontSize: 12),
+                                    ),
+                                    ],)
+                                  )),
+                            ],
+                          )),
                       SizedBox(
                         height: 30,
                       )
@@ -146,8 +184,8 @@ class ContentCard1 extends StatelessWidget {
           children: [
             Expanded(
                 child: Scrollbar(
-                  isAlwaysShown: true,
-                  showTrackOnHover: true,
+              isAlwaysShown: true,
+              showTrackOnHover: true,
               child: ListView.builder(
                 itemBuilder: (BuildContext context, int index) {
                   int reverseIndex =
@@ -171,29 +209,68 @@ class ContentCard1 extends StatelessWidget {
                             ],
                           );
                         },
-                        child: Container(
-                          height: 250,
-                          width: MediaQuery.of(context).size.width * 0.9,
-                          padding: EdgeInsets.all(20),
-                          decoration: BoxDecoration(
-                              boxShadow: [
-                                BoxShadow(
-                                  color: Colors.grey.withOpacity(0.5),
-                                  spreadRadius: 2,
-                                  blurRadius: 5,
-                                  offset: Offset(
-                                      0, 3), // changes position of shadow
-                                ),
-                              ],
-                              borderRadius:
-                                  BorderRadius.all(Radius.circular(10)),
-                              image: DecorationImage(
-                                image: NetworkImage(
-                                    result.data!['getMildContent'][reverseIndex]
-                                        ['pictureUrl']),
-                                fit: BoxFit.cover,
-                              )),
-                        ),
+                        child: Column(
+                            children: [
+                              Container(
+                                height: 250,
+                                width: MediaQuery.of(context).size.width * 0.9,
+                                padding: EdgeInsets.all(20),
+                                decoration: BoxDecoration(
+                                    boxShadow: [
+                                      BoxShadow(
+                                        color: Colors.grey.withOpacity(0.5),
+                                        spreadRadius: 2,
+                                        blurRadius: 5,
+                                        offset: Offset(
+                                            0, 3), // changes position of shadow
+                                      ),
+                                    ],
+                                    borderRadius: BorderRadius.only(
+                                        topLeft: Radius.circular(10),
+                                        topRight: Radius.circular(10)),
+                                    image: DecorationImage(
+                                      image: NetworkImage(
+                                          result.data!['getMildContent']
+                                              [reverseIndex]['pictureUrl']),
+                                      fit: BoxFit.cover,
+                                    )),
+                              ),
+                              Container(
+                                  height: 40,
+                                  width:
+                                      MediaQuery.of(context).size.width * 0.9,
+                                  padding: EdgeInsets.all(10),
+                                  decoration: BoxDecoration(
+                                    color: Colors.white,
+                                    boxShadow: [
+                                      BoxShadow(
+                                        color: Colors.grey.withOpacity(0.5),
+                                        spreadRadius: 2,
+                                        blurRadius: 5,
+                                        offset: Offset(
+                                            0, 3), // changes position of shadow
+                                      ),
+                                    ],
+                                    borderRadius: BorderRadius.only(
+                                        bottomLeft: Radius.circular(10),
+                                        bottomRight: Radius.circular(10)),
+                                  ),
+                                  child: SingleChildScrollView(
+                                    scrollDirection: Axis.horizontal,
+                                    child:  Row(children: [
+                                      Text(
+                                      "Title: ",
+                                      style: TextStyle(fontSize: 12),
+                                    ),
+                                      Text(
+                                      result.data!['getMildContent']
+                                          [reverseIndex]['title'],
+                                      style: TextStyle(fontSize: 12),
+                                    ),
+                                    ],)
+                                  )),
+                            ],
+                          )
                       ),
                       SizedBox(
                         height: 30,
@@ -250,8 +327,8 @@ class ContentCard2 extends StatelessWidget {
           children: [
             Expanded(
                 child: Scrollbar(
-                  isAlwaysShown: true,
-                  showTrackOnHover: true,
+              isAlwaysShown: true,
+              showTrackOnHover: true,
               child: ListView.builder(
                 itemBuilder: (BuildContext context, int index) {
                   int reverseIndex =
@@ -276,29 +353,68 @@ class ContentCard2 extends StatelessWidget {
                             ],
                           );
                         },
-                        child: Container(
-                          height: 250,
-                          width: MediaQuery.of(context).size.width * 0.9,
-                          padding: EdgeInsets.all(20),
-                          decoration: BoxDecoration(
-                              boxShadow: [
-                                BoxShadow(
-                                  color: Colors.grey.withOpacity(0.5),
-                                  spreadRadius: 2,
-                                  blurRadius: 5,
-                                  offset: Offset(
-                                      0, 3), // changes position of shadow
-                                ),
-                              ],
-                              borderRadius:
-                                  BorderRadius.all(Radius.circular(10)),
-                              image: DecorationImage(
-                                image: NetworkImage(
-                                    result.data!['getModerateContent']
-                                        [reverseIndex]['pictureUrl']),
-                                fit: BoxFit.cover,
-                              )),
-                        ),
+                        child: Column(
+                            children: [
+                              Container(
+                                height: 250,
+                                width: MediaQuery.of(context).size.width * 0.9,
+                                padding: EdgeInsets.all(20),
+                                decoration: BoxDecoration(
+                                    boxShadow: [
+                                      BoxShadow(
+                                        color: Colors.grey.withOpacity(0.5),
+                                        spreadRadius: 2,
+                                        blurRadius: 5,
+                                        offset: Offset(
+                                            0, 3), // changes position of shadow
+                                      ),
+                                    ],
+                                    borderRadius: BorderRadius.only(
+                                        topLeft: Radius.circular(10),
+                                        topRight: Radius.circular(10)),
+                                    image: DecorationImage(
+                                      image: NetworkImage(
+                                          result.data!['getModerateContent']
+                                              [reverseIndex]['pictureUrl']),
+                                      fit: BoxFit.cover,
+                                    )),
+                              ),
+                              Container(
+                                  height: 40,
+                                  width:
+                                      MediaQuery.of(context).size.width * 0.9,
+                                  padding: EdgeInsets.all(10),
+                                  decoration: BoxDecoration(
+                                    color: Colors.white,
+                                    boxShadow: [
+                                      BoxShadow(
+                                        color: Colors.grey.withOpacity(0.5),
+                                        spreadRadius: 2,
+                                        blurRadius: 5,
+                                        offset: Offset(
+                                            0, 3), // changes position of shadow
+                                      ),
+                                    ],
+                                    borderRadius: BorderRadius.only(
+                                        bottomLeft: Radius.circular(10),
+                                        bottomRight: Radius.circular(10)),
+                                  ),
+                                  child: SingleChildScrollView(
+                                    scrollDirection: Axis.horizontal,
+                                    child:  Row(children: [
+                                      Text(
+                                      "Title: ",
+                                      style: TextStyle(fontSize: 12),
+                                    ),
+                                      Text(
+                                      result.data!['getModerateContent']
+                                          [reverseIndex]['title'],
+                                      style: TextStyle(fontSize: 12),
+                                    ),
+                                    ],)
+                                  )),
+                            ],
+                          )
                       ),
                       SizedBox(
                         height: 30,
@@ -361,7 +477,7 @@ class ContentCard3 extends StatelessWidget {
                     child: ListView.builder(
                       itemBuilder: (BuildContext context, int index) {
                         int reverseIndex =
-                            result.data!['getModerateContent'].length -
+                            result.data!['getModeratelySeverContent'].length -
                                 1 -
                                 index;
                         return Column(
@@ -383,7 +499,9 @@ class ContentCard3 extends StatelessWidget {
                                   ],
                                 );
                               },
-                              child: Container(
+                              child:Column(
+                            children: [
+                              Container(
                                 height: 250,
                                 width: MediaQuery.of(context).size.width * 0.9,
                                 padding: EdgeInsets.all(20),
@@ -397,15 +515,52 @@ class ContentCard3 extends StatelessWidget {
                                             0, 3), // changes position of shadow
                                       ),
                                     ],
-                                    borderRadius:
-                                        BorderRadius.all(Radius.circular(10)),
+                                    borderRadius: BorderRadius.only(
+                                        topLeft: Radius.circular(10),
+                                        topRight: Radius.circular(10)),
                                     image: DecorationImage(
-                                      image: NetworkImage(result.data![
-                                              'getModeratelySeverContent']
-                                          [reverseIndex]['pictureUrl']),
+                                      image: NetworkImage(
+                                          result.data!['getModeratelySeverContent']
+                                              [reverseIndex]['pictureUrl']),
                                       fit: BoxFit.cover,
                                     )),
                               ),
+                              Container(
+                                  height: 40,
+                                  width:
+                                      MediaQuery.of(context).size.width * 0.9,
+                                  padding: EdgeInsets.all(10),
+                                  decoration: BoxDecoration(
+                                    color: Colors.white,
+                                    boxShadow: [
+                                      BoxShadow(
+                                        color: Colors.grey.withOpacity(0.5),
+                                        spreadRadius: 2,
+                                        blurRadius: 5,
+                                        offset: Offset(
+                                            0, 3), // changes position of shadow
+                                      ),
+                                    ],
+                                    borderRadius: BorderRadius.only(
+                                        bottomLeft: Radius.circular(10),
+                                        bottomRight: Radius.circular(10)),
+                                  ),
+                                  child: SingleChildScrollView(
+                                    scrollDirection: Axis.horizontal,
+                                    child:  Row(children: [
+                                      Text(
+                                      "Title: ",
+                                      style: TextStyle(fontSize: 12),
+                                    ),
+                                      Text(
+                                      result.data!['getModeratelySeverContent']
+                                          [reverseIndex]['title'],
+                                      style: TextStyle(fontSize: 12),
+                                    ),
+                                    ],)
+                                  )),
+                            ],
+                          )
                             ),
                             SizedBox(
                               height: 30,
@@ -487,29 +642,68 @@ class ContentCard4 extends StatelessWidget {
                             ],
                           );
                         },
-                        child: Container(
-                          height: 250,
-                          width: MediaQuery.of(context).size.width * 0.9,
-                          padding: EdgeInsets.all(20),
-                          decoration: BoxDecoration(
-                              boxShadow: [
-                                BoxShadow(
-                                  color: Colors.grey.withOpacity(0.5),
-                                  spreadRadius: 2,
-                                  blurRadius: 5,
-                                  offset: Offset(
-                                      0, 3), // changes position of shadow
-                                ),
-                              ],
-                              borderRadius:
-                                  BorderRadius.all(Radius.circular(10)),
-                              image: DecorationImage(
-                                image: NetworkImage(
-                                    result.data!['getSevereContent']
-                                        [reverseIndex]['pictureUrl']),
-                                fit: BoxFit.cover,
-                              )),
-                        ),
+                        child: Column(
+                            children: [
+                              Container(
+                                height: 250,
+                                width: MediaQuery.of(context).size.width * 0.9,
+                                padding: EdgeInsets.all(20),
+                                decoration: BoxDecoration(
+                                    boxShadow: [
+                                      BoxShadow(
+                                        color: Colors.grey.withOpacity(0.5),
+                                        spreadRadius: 2,
+                                        blurRadius: 5,
+                                        offset: Offset(
+                                            0, 3), // changes position of shadow
+                                      ),
+                                    ],
+                                    borderRadius: BorderRadius.only(
+                                        topLeft: Radius.circular(10),
+                                        topRight: Radius.circular(10)),
+                                    image: DecorationImage(
+                                      image: NetworkImage(
+                                          result.data!['getSevereContent']
+                                              [reverseIndex]['pictureUrl']),
+                                      fit: BoxFit.cover,
+                                    )),
+                              ),
+                              Container(
+                                  height: 40,
+                                  width:
+                                      MediaQuery.of(context).size.width * 0.9,
+                                  padding: EdgeInsets.all(10),
+                                  decoration: BoxDecoration(
+                                    color: Colors.white,
+                                    boxShadow: [
+                                      BoxShadow(
+                                        color: Colors.grey.withOpacity(0.5),
+                                        spreadRadius: 2,
+                                        blurRadius: 5,
+                                        offset: Offset(
+                                            0, 3), // changes position of shadow
+                                      ),
+                                    ],
+                                    borderRadius: BorderRadius.only(
+                                        bottomLeft: Radius.circular(10),
+                                        bottomRight: Radius.circular(10)),
+                                  ),
+                                  child: SingleChildScrollView(
+                                    scrollDirection: Axis.horizontal,
+                                    child:  Row(children: [
+                                      Text(
+                                      "Title: ",
+                                      style: TextStyle(fontSize: 12),
+                                    ),
+                                      Text(
+                                      result.data!['getSevereContent']
+                                          [reverseIndex]['title'],
+                                      style: TextStyle(fontSize: 12),
+                                    ),
+                                    ],)
+                                  )),
+                            ],
+                          )
                       ),
                       SizedBox(
                         height: 30,
@@ -591,29 +785,68 @@ class ContentCard5 extends StatelessWidget {
                             ],
                           );
                         },
-                        child: Container(
-                          height: 250,
-                          width: MediaQuery.of(context).size.width * 0.9,
-                          padding: EdgeInsets.all(20),
-                          decoration: BoxDecoration(
-                              boxShadow: [
-                                BoxShadow(
-                                  color: Colors.grey.withOpacity(0.5),
-                                  spreadRadius: 2,
-                                  blurRadius: 5,
-                                  offset: Offset(
-                                      0, 3), // changes position of shadow
-                                ),
-                              ],
-                              borderRadius:
-                                  BorderRadius.all(Radius.circular(10)),
-                              image: DecorationImage(
-                                image: NetworkImage(
-                                    result.data!['getSmartContent']
-                                        [reverseIndex]['pictureUrl']),
-                                fit: BoxFit.cover,
-                              )),
-                        ),
+                        child: Column(
+                            children: [
+                              Container(
+                                height: 250,
+                                width: MediaQuery.of(context).size.width * 0.9,
+                                padding: EdgeInsets.all(20),
+                                decoration: BoxDecoration(
+                                    boxShadow: [
+                                      BoxShadow(
+                                        color: Colors.grey.withOpacity(0.5),
+                                        spreadRadius: 2,
+                                        blurRadius: 5,
+                                        offset: Offset(
+                                            0, 3), // changes position of shadow
+                                      ),
+                                    ],
+                                    borderRadius: BorderRadius.only(
+                                        topLeft: Radius.circular(10),
+                                        topRight: Radius.circular(10)),
+                                    image: DecorationImage(
+                                      image: NetworkImage(
+                                          result.data!['getSmartContent']
+                                              [reverseIndex]['pictureUrl']),
+                                      fit: BoxFit.cover,
+                                    )),
+                              ),
+                              Container(
+                                  height: 40,
+                                  width:
+                                      MediaQuery.of(context).size.width * 0.9,
+                                  padding: EdgeInsets.all(10),
+                                  decoration: BoxDecoration(
+                                    color: Colors.white,
+                                    boxShadow: [
+                                      BoxShadow(
+                                        color: Colors.grey.withOpacity(0.5),
+                                        spreadRadius: 2,
+                                        blurRadius: 5,
+                                        offset: Offset(
+                                            0, 3), // changes position of shadow
+                                      ),
+                                    ],
+                                    borderRadius: BorderRadius.only(
+                                        bottomLeft: Radius.circular(10),
+                                        bottomRight: Radius.circular(10)),
+                                  ),
+                                  child: SingleChildScrollView(
+                                    scrollDirection: Axis.horizontal,
+                                    child:  Row(children: [
+                                      Text(
+                                      "Title: ",
+                                      style: TextStyle(fontSize: 12),
+                                    ),
+                                      Text(
+                                      result.data!['getSmartContent']
+                                          [reverseIndex]['title'],
+                                      style: TextStyle(fontSize: 12),
+                                    ),
+                                    ],)
+                                  )),
+                            ],
+                          )
                       ),
                       SizedBox(
                         height: 30,

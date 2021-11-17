@@ -77,7 +77,7 @@ class _QRCodePageState extends State<QRCodePage> {
                           decoration: TextDecoration.none),
                     ),
                     onPressed: () {
-                      Navigator.push(
+                      Navigator.pushReplacement(
                           context,
                           MaterialPageRoute(
                               builder: (context) => BottomNavBar()));

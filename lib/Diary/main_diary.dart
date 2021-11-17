@@ -6,15 +6,13 @@ import 'package:graphql_flutter/graphql_flutter.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 
 class MainDiary extends StatefulWidget {
-  MainDiary({Key? key }) : super(key: key);
-  
+  MainDiary({Key? key}) : super(key: key);
 
   @override
   _MainDiaryState createState() => _MainDiaryState();
 }
 
 class _MainDiaryState extends State<MainDiary> {
-  
   static const query = """
                    query {
     getCurrentUser {
@@ -30,7 +28,6 @@ class _MainDiaryState extends State<MainDiary> {
                   """;
 
   List<Map<String, dynamic>> _journals = [];
-
 
   bool _isLoading = true;
   // This function is used to fetch all data from the database
@@ -52,7 +49,6 @@ class _MainDiaryState extends State<MainDiary> {
   final TextEditingController _descriptionController = TextEditingController();
   final TextEditingController _userID = TextEditingController();
   final TextEditingController _sensitivePoint = TextEditingController();
-  final TextEditingController _countBadDiary = TextEditingController();
 
   // This function will be triggered when the floating button is pressed
   // It will also be triggered when you want to update an item
@@ -66,7 +62,6 @@ class _MainDiaryState extends State<MainDiary> {
       _descriptionController.text = existingJournal['description'];
       _userID.text = existingJournal['userID'];
       _sensitivePoint.text = existingJournal['sensitivePoint'];
-      _countBadDiary.text = existingJournal['countBadDiary'];
     }
 
     final now = new DateTime.now();
@@ -129,6 +124,7 @@ class _MainDiaryState extends State<MainDiary> {
                         ),
                         Row(
                           children: [
+                            SizedBox(width: 15,),
                             SizedBox(
                               width: MediaQuery.of(context).size.width * 0.9,
                               child: TextField(
@@ -235,23 +231,6 @@ class _MainDiaryState extends State<MainDiary> {
                                                   33), //only 6 digit
                                             ],
                                             controller: _sensitivePoint,
-                                            enabled: false,
-                                            maxLines: 1,
-                                            style:
-                                                TextStyle(color: Colors.white),
-                                            decoration: InputDecoration(
-                                              hintStyle: TextStyle(fontSize: 1),
-                                              fillColor: Colors.white,
-                                              border: InputBorder.none,
-                                            ),
-                                          ),
-                                          TextField(
-                                            inputFormatters: [
-                                              //only numeric keyboard.
-                                              LengthLimitingTextInputFormatter(
-                                                  33), //only 6 digit
-                                            ],
-                                            controller: _countBadDiary,
                                             enabled: false,
                                             maxLines: 1,
                                             style:
@@ -410,10 +389,6 @@ class _MainDiaryState extends State<MainDiary> {
                               _sensitivePoint.text = _rating.toString();
                               print(_sensitivePoint.text);
 
-                              
-                             
-                              _countBadDiary.text = 'empty/not use';
-
                               if (id == null) {
                                 await _addItem();
                               }
@@ -451,12 +426,12 @@ class _MainDiaryState extends State<MainDiary> {
     String Time = new DateFormat.jm().format(now);
 
     await SQLHelper.createItem(
-        _titleController.text,
-        _descriptionController.text,
-        Day + " " + Time,
-        _userID.text,
-        _sensitivePoint.text,
-        _countBadDiary.text);
+      _titleController.text,
+      _descriptionController.text,
+      Day + " " + Time,
+      _userID.text,
+      _sensitivePoint.text,
+    );
     _refreshJournals();
   }
 
@@ -467,13 +442,13 @@ class _MainDiaryState extends State<MainDiary> {
     String Time = new DateFormat.jm().format(now);
 
     await SQLHelper.updateItem(
-        id,
-        _titleController.text,
-        _descriptionController.text,
-        Day + ' ' + Time,
-        _userID.text,
-        _sensitivePoint.text,
-        _countBadDiary.text);
+      id,
+      _titleController.text,
+      _descriptionController.text,
+      Day + ' ' + Time,
+      _userID.text,
+      _sensitivePoint.text,
+    );
     _refreshJournals();
   }
 
@@ -724,24 +699,7 @@ class _MainDiaryState extends State<MainDiary> {
                                             SizedBox(
                                               height: 10,
                                             ),
-                                            Visibility(
-                                              child: Text(
-                                                  'By: ' +
-                                                      result.data![
-                                                              'getCurrentUser']
-                                                          [0]['name'] +
-                                                      " " +
-                                                      result.data![
-                                                              'getCurrentUser']
-                                                          [0]['surname'] +
-                                                      "  UserID: " +
-                                                      result.data![
-                                                              'getCurrentUser']
-                                                          [0]['id'],
-                                                  style: TextStyle(
-                                                      color: Colors.white,
-                                                      fontSize: 14)),
-                                            )
+                                            
                                           ],
                                         ),
                                       )),

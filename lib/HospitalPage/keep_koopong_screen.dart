@@ -162,8 +162,9 @@ class _KeepkoopongPageState extends State<KeepkoopongPage> {
 
               for (var i = 0; i < result.data!['getPromotionLog'].length; i++) {
                 if (result.data!['getPromotionLog'][i]['keeppromotionId'] ==
-                    promotiondata[3] && result.data!['getPromotionLog'][i]['userId'] == result2.data!['getCurrentUser'][0]
-                                                ['id']) {
+                        promotiondata[3] &&
+                    result.data!['getPromotionLog'][i]['userId'] ==
+                        result2.data!['getCurrentUser'][0]['id']) {
                   x = false;
                 }
               }
@@ -398,7 +399,7 @@ class _KeepCurrentKoopongPageState extends State<KeepCurrentKoopongPage> {
       });
       print((await response.networkResult) as dynamic);
 
-      Navigator.pushNamed(
+      Navigator.pushReplacementNamed(
         context,
         "/QRCodePage",
         arguments: [QRdata],
