@@ -8,7 +8,7 @@ import 'package:graphql_flutter/graphql_flutter.dart';
 import 'package:provider/provider.dart';
 import 'edit_profile.dart';
 import 'package:syncfusion_flutter_gauges/gauges.dart';
-import 'package:bumbutpital/Diary/main_diary.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 // ignore: must_be_immutable
 class Profile extends StatelessWidget {
@@ -68,7 +68,7 @@ class Profile extends StatelessWidget {
           iconTheme: IconThemeData(color: Colors.white),
           title: Text(
             "My Profile",
-            style: TextStyle(color: Colors.white),
+            style: GoogleFonts.karla(color: Colors.white),
           ),
         ),
         body: Query(
@@ -123,7 +123,7 @@ class Profile extends StatelessWidget {
                                         " " +
                                         result.data!['getCurrentUser'][0]
                                             ['surname'],
-                                    style: TextStyle(
+                                    style: GoogleFonts.karla(
                                       color: Colors.white,
                                       fontSize: 24.0,
                                       fontWeight: FontWeight.bold,
@@ -147,7 +147,7 @@ class Profile extends StatelessWidget {
                               ),
                               Text(
                                 result.data!['getCurrentUser'][0]['email'],
-                                style: TextStyle(
+                                style: GoogleFonts.karla(
                                   color: Colors.white,
                                   fontSize: 12.0,
                                 ),
@@ -194,11 +194,12 @@ class Profile extends StatelessWidget {
                                       ),
                                       Text(
                                         "My Question",
-                                        style: TextStyle(
-                                          color: Colors.black,
-                                          fontSize: 18.0,
-                                          fontWeight: FontWeight.bold,
-                                        ),
+                                        style: GoogleFonts.karla(
+                                                color: Colors.black,
+                                                fontSize: 18.0,
+                                                fontWeight: FontWeight.bold
+                                               
+                                              ),
                                       ),
                                       Spacer(),
                                       Query(
@@ -285,11 +286,12 @@ class Profile extends StatelessWidget {
                                       ),
                                       Text(
                                         "My Diary",
-                                        style: TextStyle(
-                                          color: Colors.black,
-                                          fontSize: 18.0,
-                                          fontWeight: FontWeight.bold,
-                                        ),
+                                        style: GoogleFonts.karla(
+                                                color: Colors.black,
+                                                fontSize: 18.0,
+                                                fontWeight: FontWeight.bold
+                                               
+                                              ),
                                       ),
                                       Spacer(),
                                       Container(
@@ -357,10 +359,11 @@ class Profile extends StatelessWidget {
                                             ),
                                             Text(
                                               "My Promotion",
-                                              style: TextStyle(
+                                              style: GoogleFonts.karla(
                                                 color: Colors.black,
                                                 fontSize: 18.0,
-                                                fontWeight: FontWeight.bold,
+                                                fontWeight: FontWeight.bold
+                                               
                                               ),
                                             ),
                                             SizedBox(
@@ -528,7 +531,7 @@ class Profile extends StatelessWidget {
                                                               'getCurrentUser'][0]
                                                           [
                                                           'appropiatePHQSeverityScore'],
-                                                      style: TextStyle(
+                                                      style: GoogleFonts.karla(
                                                           fontWeight:
                                                               FontWeight.bold,
                                                           fontSize: 26),
@@ -544,7 +547,7 @@ class Profile extends StatelessWidget {
                                       children: [
                                         Text(
                                           "My PHQ-9 Severity",
-                                          style: TextStyle(
+                                          style: GoogleFonts.karla(
                                             color: Colors.redAccent,
                                             fontSize: 16.0,
                                             fontWeight: FontWeight.bold,
@@ -556,7 +559,7 @@ class Profile extends StatelessWidget {
                                         Text(
                                           result.data!['getCurrentUser'][0]
                                               ['appropiatePHQSeverity'],
-                                          style: TextStyle(
+                                          style: GoogleFonts.karla(
                                             fontSize: 15.0,
                                             color: Colors.black,
                                           ),
@@ -570,7 +573,6 @@ class Profile extends StatelessWidget {
                           SizedBox(
                             height: 30,
                           ),
-                          
                           ElevatedButton(
                             onPressed: () => showDialog<String>(
                               context: context,
@@ -604,10 +606,9 @@ class Profile extends StatelessWidget {
                                       child: Row(
                                         children: [
                                           Spacer(),
-                                         
                                           Text(
                                             "LOGOUT",
-                                            style: TextStyle(
+                                            style: GoogleFonts.karla(
                                               fontSize: 15.0,
                                               color: Colors.white,
                                             ),
@@ -642,7 +643,7 @@ class Profile extends StatelessWidget {
                                   ),
                                   Text(
                                     "LOGOUT",
-                                    style: TextStyle(
+                                    style: GoogleFonts.karla(
                                       fontSize: 15.0,
                                       color: Color((0xff6367EA)),
                                     ),

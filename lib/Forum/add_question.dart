@@ -1,6 +1,6 @@
 import 'package:bumbutpital/ComponentMainScreen/bottom_navbar.dart';
 import 'package:flutter/material.dart';
-import 'main_forum_screen.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:graphql_flutter/graphql_flutter.dart';
 
 class AddQuestion extends StatefulWidget {
@@ -98,7 +98,6 @@ class _AddQuestionState extends State<AddQuestion> {
                                   builder: (run, _) => ElevatedButton(
                                       onPressed: () async {
                                         await onSubmit(run);
-                                        
                                       },
                                       style: ElevatedButton.styleFrom(
                                         primary: Color((0xff6367EA)),
@@ -143,10 +142,10 @@ class _AddQuestionState extends State<AddQuestion> {
       controller: cont,
       maxLines: 15,
       // textAlign: TextAlign.start,
-      style: TextStyle(color: Color(0xff6367EA)),
+      style: GoogleFonts.karla(color: Color(0xff6367EA)),
       decoration: InputDecoration(
         // labelStyle: St,
-        hintText: "Enter your ${label.toLowerCase()}",
+        hintText: "Enter your Question",
         contentPadding: EdgeInsets.symmetric(vertical: 24, horizontal: 8),
         border: InputBorder.none,
       ),
@@ -158,7 +157,7 @@ class _AddQuestionState extends State<AddQuestion> {
   TextField _textField1(TextEditingController cont, String label) {
     return TextField(
       controller: cont,
-      style: TextStyle(color: Color(0xff6367EA)),
+      style: GoogleFonts.karla(color: Color(0xff6367EA)),
       decoration: InputDecoration(
         hintStyle: TextStyle(fontSize: 24),
         hintText: "Enter your ${label.toLowerCase()}",

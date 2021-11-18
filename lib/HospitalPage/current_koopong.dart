@@ -1,6 +1,7 @@
 import 'package:bumbutpital/HospitalPage/keep_koopong_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:bumbutpital/widgets/promotion_card.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class CurrentPromotionPage extends StatefulWidget {
   CurrentPromotionPage({Key? key}) : super(key: key);
@@ -18,7 +19,7 @@ class _PromotionPageState extends State<CurrentPromotionPage> {
         centerTitle: true,
         title: Text(
           "Promotion",
-          style: TextStyle(
+          style: GoogleFonts.karla(
               fontSize: 24,
               color: Colors.black,
               decoration: TextDecoration.none),

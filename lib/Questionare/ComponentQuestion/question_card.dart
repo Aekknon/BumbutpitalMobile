@@ -2,6 +2,7 @@ import 'package:bumbutpital/models/questions.dart';
 import 'package:flutter/material.dart';
 import 'button_in_card.dart';
 import 'option.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class QuestionCard extends StatelessWidget {
   final Question question;
@@ -32,7 +33,7 @@ class QuestionCard extends StatelessWidget {
         children: [
           Text(
             'Q${question.id}. ${question.title}?',
-            style: TextStyle(
+            style: GoogleFonts.karla(
               fontSize: 16,
             ),
           ),

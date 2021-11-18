@@ -5,6 +5,7 @@
 import 'package:bumbutpital/Authentication/Profile.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 import 'ContentPage/main_content.dart';
 import 'HospitalPage/main_hospital.dart';
@@ -66,7 +67,7 @@ class Mainpage extends StatelessWidget {
                     children: [
                       Container(padding: EdgeInsets.all(16)),
                       Text('Hello,',
-                          style: TextStyle(
+                          style: GoogleFonts.karla(
                               fontWeight: FontWeight.bold, fontSize: 24)),
                     ],
                   ),
@@ -74,8 +75,8 @@ class Mainpage extends StatelessWidget {
                     children: [
                       Container(padding: EdgeInsets.all(16)),
                       Text(user[0]["name"],
-                          style: TextStyle(
-                              fontWeight: FontWeight.bold, fontSize: 24)),
+                          style: GoogleFonts.karla(
+                               fontSize: 24)),
                       SizedBox(
                         width: 8,
                       ),
@@ -111,7 +112,7 @@ class Mainpage extends StatelessWidget {
                             alignment: Alignment.bottomLeft,
                             child: Text(
                               'Content',
-                              style: TextStyle(
+                              style: GoogleFonts.righteous(
                                   fontSize: 24,
                                   color: Colors.white,
                                   fontWeight: FontWeight.bold),
@@ -155,7 +156,7 @@ class Mainpage extends StatelessWidget {
                             alignment: Alignment.center,
                             child: Text(
                               'Hospital ads.',
-                              style: TextStyle(
+                              style: GoogleFonts.righteous(
                                   fontSize: 12,
                                   color: Colors.white,
                                   fontWeight: FontWeight.bold),
@@ -206,7 +207,7 @@ class Mainpage extends StatelessWidget {
                                       alignment: Alignment.center,
                                       child: Text(
                                         'PHQ-9',
-                                        style: TextStyle(
+                                        style: GoogleFonts.righteous(
                                             fontSize: 14,
                                             color: Colors.white,
                                             fontWeight: FontWeight.bold),
@@ -253,7 +254,7 @@ class Mainpage extends StatelessWidget {
                                       alignment: Alignment.center,
                                       child: Text(
                                         'Promotion',
-                                        style: TextStyle(
+                                        style: GoogleFonts.righteous(
                                             fontSize: 14,
                                             color: Colors.white,
                                             fontWeight: FontWeight.bold),
@@ -298,7 +299,7 @@ class Mainpage extends StatelessWidget {
                                     alignment: Alignment.centerLeft,
                                     child: Text(
                                       'VIDEO',
-                                      style: TextStyle(
+                                      style: GoogleFonts.righteous(
                                           fontSize: 18,
                                           color: Colors.white,
                                           fontWeight: FontWeight.bold),

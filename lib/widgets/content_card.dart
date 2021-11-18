@@ -1,5 +1,6 @@
 import 'package:bumbutpital/ContentPage/content_detail.dart';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:graphql_flutter/graphql_flutter.dart';
 
 class ContentCard extends StatelessWidget {
@@ -116,14 +117,11 @@ class ContentCard extends StatelessWidget {
                                   child: SingleChildScrollView(
                                     scrollDirection: Axis.horizontal,
                                     child: Row(children: [
-                                      Text(
-                                      "Title: ",
-                                      style: TextStyle(fontSize: 12),
-                                    ),
+                                      
                                       Text(
                                       result.data!['getMinimalContent']
                                           [reverseIndex]['title'],
-                                      style: TextStyle(fontSize: 12),
+                                      style: GoogleFonts.karla(fontSize: 16 , fontWeight: FontWeight.bold),
                                     ),
                                     ],)
                                   )),
@@ -258,14 +256,11 @@ class ContentCard1 extends StatelessWidget {
                                   child: SingleChildScrollView(
                                     scrollDirection: Axis.horizontal,
                                     child:  Row(children: [
-                                      Text(
-                                      "Title: ",
-                                      style: TextStyle(fontSize: 12),
-                                    ),
+                                      
                                       Text(
                                       result.data!['getMildContent']
                                           [reverseIndex]['title'],
-                                      style: TextStyle(fontSize: 12),
+                                      style: GoogleFonts.karla(fontSize: 16 , fontWeight: FontWeight.bold),
                                     ),
                                     ],)
                                   )),
@@ -402,14 +397,11 @@ class ContentCard2 extends StatelessWidget {
                                   child: SingleChildScrollView(
                                     scrollDirection: Axis.horizontal,
                                     child:  Row(children: [
-                                      Text(
-                                      "Title: ",
-                                      style: TextStyle(fontSize: 12),
-                                    ),
+                                     
                                       Text(
                                       result.data!['getModerateContent']
                                           [reverseIndex]['title'],
-                                      style: TextStyle(fontSize: 12),
+                                      style: GoogleFonts.karla(fontSize: 16 , fontWeight: FontWeight.bold),
                                     ),
                                     ],)
                                   )),
@@ -548,14 +540,11 @@ class ContentCard3 extends StatelessWidget {
                                   child: SingleChildScrollView(
                                     scrollDirection: Axis.horizontal,
                                     child:  Row(children: [
-                                      Text(
-                                      "Title: ",
-                                      style: TextStyle(fontSize: 12),
-                                    ),
+                                     
                                       Text(
                                       result.data!['getModeratelySeverContent']
                                           [reverseIndex]['title'],
-                                      style: TextStyle(fontSize: 12),
+                                      style: GoogleFonts.karla(fontSize: 16 , fontWeight: FontWeight.bold),
                                     ),
                                     ],)
                                   )),
@@ -691,14 +680,11 @@ class ContentCard4 extends StatelessWidget {
                                   child: SingleChildScrollView(
                                     scrollDirection: Axis.horizontal,
                                     child:  Row(children: [
-                                      Text(
-                                      "Title: ",
-                                      style: TextStyle(fontSize: 12),
-                                    ),
+                                     
                                       Text(
                                       result.data!['getSevereContent']
                                           [reverseIndex]['title'],
-                                      style: TextStyle(fontSize: 12),
+                                      style: GoogleFonts.karla(fontSize: 16 , fontWeight: FontWeight.bold),
                                     ),
                                     ],)
                                   )),
@@ -834,14 +820,11 @@ class ContentCard5 extends StatelessWidget {
                                   child: SingleChildScrollView(
                                     scrollDirection: Axis.horizontal,
                                     child:  Row(children: [
-                                      Text(
-                                      "Title: ",
-                                      style: TextStyle(fontSize: 12),
-                                    ),
+                                     
                                       Text(
                                       result.data!['getSmartContent']
                                           [reverseIndex]['title'],
-                                      style: TextStyle(fontSize: 12),
+                                      style: GoogleFonts.karla(fontSize: 16 , fontWeight: FontWeight.bold),
                                     ),
                                     ],)
                                   )),

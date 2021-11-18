@@ -1,7 +1,7 @@
 import 'package:bumbutpital/ContentPage/content_detail.dart';
 import 'package:flutter/material.dart';
 import 'package:graphql_flutter/graphql_flutter.dart';
-import 'package:intl/date_symbols.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class AllForum extends StatelessWidget {
   const AllForum({Key? key}) : super(key: key);
@@ -91,9 +91,10 @@ class AllForum extends StatelessWidget {
                                               child: Text(
                                               result.data!['getAllForum']
                                                   [reverseIndex]['title'],
-                                              style: TextStyle(
+                                              style: GoogleFonts.karla(
                                                   fontSize: 16,
                                                   color: Colors.white,
+                                                  fontWeight: FontWeight.bold,
                                                   decoration:
                                                       TextDecoration.none),
                                             ),
@@ -110,12 +111,12 @@ class AllForum extends StatelessWidget {
                                       padding: const EdgeInsets.only(
                                           top: 10,
                                           bottom: 10,
-                                          left: 30,
+                                          left: 10,
                                           right: 10),
                                       child: Text(
                                         result.data!['getAllForum']
                                             [reverseIndex]['description'],
-                                        style: TextStyle(
+                                        style: GoogleFonts.karla(
                                             fontSize: 16,
                                             color: Colors.black,
                                             decoration: TextDecoration.none),
@@ -259,8 +260,9 @@ class MyForum extends StatelessWidget {
                                               child: Text(
                                               result.data!['getcurrentForum']
                                                   [reverseIndex]['title'],
-                                              style: TextStyle(
+                                              style: GoogleFonts.karla(
                                                   fontSize: 16,
+                                                  fontWeight: FontWeight.bold,
                                                   color: Colors.white,
                                                   decoration:
                                                       TextDecoration.none),
@@ -278,7 +280,7 @@ class MyForum extends StatelessWidget {
                                       child: Text(
                                         result.data!['getcurrentForum']
                                             [reverseIndex]['description'],
-                                        style: TextStyle(
+                                        style: GoogleFonts.karla(
                                             fontSize: 16,
                                             color: Colors.black,
                                             decoration: TextDecoration.none),

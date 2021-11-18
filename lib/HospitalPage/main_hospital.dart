@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:bumbutpital/widgets/hospital_card.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class MainHospital extends StatefulWidget {
   @override
@@ -44,7 +45,7 @@ class __MainHospitalState extends State<MainHospital> {
                                 padding: EdgeInsets.only(bottom: 10.0),
                                 child: Text(
                                   'Hospital',
-                                  style: TextStyle(
+                                  style: GoogleFonts.righteous(
                                       fontSize: 32,
                                       color: Colors.white,
                                       decoration: TextDecoration.none),
