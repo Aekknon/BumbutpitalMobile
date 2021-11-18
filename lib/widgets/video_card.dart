@@ -1,6 +1,7 @@
 import 'package:bumbutpital/VideoPage/video_detail.dart';
 import 'package:flutter/material.dart';
 import 'package:graphql_flutter/graphql_flutter.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class VideotCard extends StatelessWidget {
   const VideotCard({Key? key}) : super(key: key);
@@ -78,7 +79,7 @@ class VideotCard extends StatelessWidget {
                                         child: Image.network(
                                           result.data!['getMinimalVideo']
                                               [reverseIndex]['pictureUrl'],
-                                              fit: BoxFit.cover,
+                                          fit: BoxFit.cover,
                                           height: 100,
                                           width: 150,
                                         )),
@@ -121,19 +122,19 @@ class VideotCard extends StatelessWidget {
                                                   height: 45,
                                                   width: 150,
                                                   child: SingleChildScrollView(
-                                                    scrollDirection: Axis.vertical,
+                                                    scrollDirection:
+                                                        Axis.vertical,
                                                     child: Text(
-                                                  'Topic:' +
                                                       result.data![
                                                               'getMinimalVideo']
                                                           [
                                                           reverseIndex]['title'],
-                                                  style: TextStyle(
-                                                    fontWeight: FontWeight.bold,
+                                                      style: GoogleFonts.karla(
+                                                        fontWeight: FontWeight.bold
+                                                      ),
+                                                    ),
                                                   ),
-                                                ),),
                                                 ),
-                                                
                                                 Row(
                                                   children: [
                                                     Spacer(),
@@ -293,19 +294,20 @@ class VideotCard1 extends StatelessWidget {
                                                   height: 45,
                                                   width: 150,
                                                   child: SingleChildScrollView(
-                                                    scrollDirection: Axis.vertical,
+                                                    scrollDirection:
+                                                        Axis.vertical,
                                                     child: Text(
-                                                  'Topic:' +
                                                       result.data![
-                                                              'getMildVideo']
-                                                          [
-                                                          reverseIndex]['title'],
-                                                  style: TextStyle(
-                                                    fontWeight: FontWeight.bold,
+                                                                  'getMildVideo']
+                                                              [reverseIndex]
+                                                          ['title'],
+                                                      style: GoogleFonts.karla(
+                                                        fontWeight: FontWeight.bold
+                                                      
+                                                      ),
+                                                    ),
                                                   ),
-                                                ),),
                                                 ),
-                                                
                                                 Row(
                                                   children: [
                                                     Spacer(),
@@ -449,19 +451,19 @@ class VideotCard2 extends StatelessWidget {
                                                   height: 45,
                                                   width: 150,
                                                   child: SingleChildScrollView(
-                                                    scrollDirection: Axis.vertical,
+                                                    scrollDirection:
+                                                        Axis.vertical,
                                                     child: Text(
-                                                  'Topic:' +
                                                       result.data![
                                                               'getModerateVideo']
                                                           [
                                                           reverseIndex]['title'],
-                                                  style: TextStyle(
-                                                    fontWeight: FontWeight.bold,
+                                                      style: GoogleFonts.karla(
+                                                        fontWeight: FontWeight.bold
+                                                      ),
+                                                    ),
                                                   ),
-                                                ),),
                                                 ),
-                                                
                                                 Row(
                                                   children: [
                                                     Spacer(),
@@ -570,10 +572,7 @@ class VideotCard3 extends StatelessWidget {
                                   children: [
                                     Container(
                                         padding: EdgeInsets.only(
-                                            left: 30,
-                                           
-                                            top: 10,
-                                            bottom: 5),
+                                            left: 30, top: 10, bottom: 5),
                                         child: Image.network(
                                           result.data![
                                                   'getModeratelySeverVideo']
@@ -621,19 +620,19 @@ class VideotCard3 extends StatelessWidget {
                                                   height: 45,
                                                   width: 150,
                                                   child: SingleChildScrollView(
-                                                    scrollDirection: Axis.vertical,
+                                                    scrollDirection:
+                                                        Axis.vertical,
                                                     child: Text(
-                                                  'Topic:' +
                                                       result.data![
                                                               'getModeratelySeverVideo']
                                                           [
                                                           reverseIndex]['title'],
-                                                  style: TextStyle(
-                                                    fontWeight: FontWeight.bold,
+                                                      style: GoogleFonts.karla(
+                                                         fontWeight: FontWeight.bold
+                                                      ),
+                                                    ),
                                                   ),
-                                                ),),
                                                 ),
-                                                
                                                 Row(
                                                   children: [
                                                     Spacer(),
@@ -740,89 +739,93 @@ class VideotCard4 extends StatelessWidget {
                                         children: [
                                           Container(
                                               padding: EdgeInsets.only(
-                                                  left: 30,
-                                                
-                                                  top: 10,
-                                                  bottom: 5),
+                                                  left: 30, top: 10, bottom: 5),
                                               child: Image.network(
                                                 result.data!['getSevereVideo']
                                                         [reverseIndex]
                                                     ['pictureUrl'],
                                                 height: 100,
-                                                width:150,
+                                                width: 150,
                                                 fit: BoxFit.cover,
                                               )),
                                           Container(
-                                      height: 94,
-                                      decoration: BoxDecoration(
-                                        color: Colors.white,
-                                        boxShadow: [
-                                          BoxShadow(
-                                            color: Colors.grey.withOpacity(0.5),
-                                            spreadRadius: 2,
-                                            blurRadius: 5,
-                                            offset: Offset(0,
-                                                3), // changes position of shadow
-                                          ),
-                                        ],
-                                        borderRadius: BorderRadius.only(
-                                            topRight: Radius.circular(12),
-                                            bottomRight: Radius.circular(12)),
-                                      ),
-                                      width: MediaQuery.of(context).size.width *
-                                          0.5,
-                                      child: Column(
-                                        children: [
-                                          Container(
+                                            height: 94,
+                                            decoration: BoxDecoration(
+                                              color: Colors.white,
+                                              boxShadow: [
+                                                BoxShadow(
+                                                  color: Colors.grey
+                                                      .withOpacity(0.5),
+                                                  spreadRadius: 2,
+                                                  blurRadius: 5,
+                                                  offset: Offset(0,
+                                                      3), // changes position of shadow
+                                                ),
+                                              ],
+                                              borderRadius: BorderRadius.only(
+                                                  topRight: Radius.circular(12),
+                                                  bottomRight:
+                                                      Radius.circular(12)),
+                                            ),
                                             width: MediaQuery.of(context)
                                                     .size
                                                     .width *
-                                                0.4,
-
-                                            // transform:
-                                            //     Matrix4.translationValues(
-                                            //         -20, -30, 0.0),
+                                                0.5,
                                             child: Column(
                                               children: [
-                                                SizedBox(
-                                                  height: 10,
-                                                ),
                                                 Container(
-                                                  height: 45,
-                                                  width: 150,
-                                                  child: SingleChildScrollView(
-                                                    scrollDirection: Axis.vertical,
-                                                    child: Text(
-                                                  'Topic:' +
-                                                      result.data![
-                                                              'getSevereVideo']
-                                                          [
-                                                          reverseIndex]['title'],
-                                                  style: TextStyle(
-                                                    fontWeight: FontWeight.bold,
+                                                  width: MediaQuery.of(context)
+                                                          .size
+                                                          .width *
+                                                      0.4,
+
+                                                  // transform:
+                                                  //     Matrix4.translationValues(
+                                                  //         -20, -30, 0.0),
+                                                  child: Column(
+                                                    children: [
+                                                      SizedBox(
+                                                        height: 10,
+                                                      ),
+                                                      Container(
+                                                        height: 45,
+                                                        width: 150,
+                                                        child:
+                                                            SingleChildScrollView(
+                                                          scrollDirection:
+                                                              Axis.vertical,
+                                                          child: Text(
+                                                            result.data![
+                                                                        'getSevereVideo']
+                                                                    [
+                                                                    reverseIndex]
+                                                                ['title'],
+                                                            style: GoogleFonts
+                                                                .karla(
+                                                              fontWeight: FontWeight.bold
+                                                            ),
+                                                          ),
+                                                        ),
+                                                      ),
+                                                      Row(
+                                                        children: [
+                                                          Spacer(),
+                                                          Icon(
+                                                            Icons
+                                                                .arrow_forward_ios_rounded,
+                                                            size: 16,
+                                                          )
+                                                        ],
+                                                      )
+                                                    ],
                                                   ),
-                                                ),),
                                                 ),
-                                                
-                                                Row(
-                                                  children: [
-                                                    Spacer(),
-                                                    Icon(
-                                                      Icons
-                                                          .arrow_forward_ios_rounded,
-                                                      size: 16,
-                                                    )
-                                                  ],
-                                                )
+                                                SizedBox(
+                                                  height: 20,
+                                                ),
                                               ],
                                             ),
                                           ),
-                                          SizedBox(
-                                            height: 20,
-                                          ),
-                                        ],
-                                      ),
-                                    ),
                                         ],
                                       ),
                                     ]),
@@ -909,10 +912,7 @@ class VideotCard5 extends StatelessWidget {
                                         children: [
                                           Container(
                                               padding: EdgeInsets.only(
-                                                  left: 30,
-                                                 
-                                                  top: 10,
-                                                  bottom: 5),
+                                                  left: 30, top: 10, bottom: 5),
                                               child: Image.network(
                                                 result.data!['getSmartVideo']
                                                         [reverseIndex]
@@ -922,76 +922,83 @@ class VideotCard5 extends StatelessWidget {
                                                 fit: BoxFit.cover,
                                               )),
                                           Container(
-                                      height: 94,
-                                      decoration: BoxDecoration(
-                                        color: Colors.white,
-                                        boxShadow: [
-                                          BoxShadow(
-                                            color: Colors.grey.withOpacity(0.5),
-                                            spreadRadius: 2,
-                                            blurRadius: 5,
-                                            offset: Offset(0,
-                                                3), // changes position of shadow
-                                          ),
-                                        ],
-                                        borderRadius: BorderRadius.only(
-                                            topRight: Radius.circular(12),
-                                            bottomRight: Radius.circular(12)),
-                                      ),
-                                      width: MediaQuery.of(context).size.width *
-                                          0.5,
-                                      child: Column(
-                                        children: [
-                                          Container(
+                                            height: 94,
+                                            decoration: BoxDecoration(
+                                              color: Colors.white,
+                                              boxShadow: [
+                                                BoxShadow(
+                                                  color: Colors.grey
+                                                      .withOpacity(0.5),
+                                                  spreadRadius: 2,
+                                                  blurRadius: 5,
+                                                  offset: Offset(0,
+                                                      3), // changes position of shadow
+                                                ),
+                                              ],
+                                              borderRadius: BorderRadius.only(
+                                                  topRight: Radius.circular(12),
+                                                  bottomRight:
+                                                      Radius.circular(12)),
+                                            ),
                                             width: MediaQuery.of(context)
                                                     .size
                                                     .width *
-                                                0.4,
-
-                                            // transform:
-                                            //     Matrix4.translationValues(
-                                            //         -20, -30, 0.0),
+                                                0.5,
                                             child: Column(
                                               children: [
-                                                SizedBox(
-                                                  height: 10,
-                                                ),
                                                 Container(
-                                                  height: 45,
-                                                  width: 150,
-                                                  child: SingleChildScrollView(
-                                                    scrollDirection: Axis.vertical,
-                                                    child: Text(
-                                                  'Topic:' +
-                                                      result.data![
-                                                              'getSmartVideo']
-                                                          [
-                                                          reverseIndex]['title'],
-                                                  style: TextStyle(
-                                                    fontWeight: FontWeight.bold,
+                                                  width: MediaQuery.of(context)
+                                                          .size
+                                                          .width *
+                                                      0.4,
+
+                                                  // transform:
+                                                  //     Matrix4.translationValues(
+                                                  //         -20, -30, 0.0),
+                                                  child: Column(
+                                                    children: [
+                                                      SizedBox(
+                                                        height: 10,
+                                                      ),
+                                                      Container(
+                                                        height: 48,
+                                                        width: 150,
+                                                        child:
+                                                            SingleChildScrollView(
+                                                          scrollDirection:
+                                                              Axis.vertical,
+                                                          child: Text(
+                                                            result.data![
+                                                                        'getSmartVideo']
+                                                                    [
+                                                                    reverseIndex]
+                                                                ['title'],
+                                                            style: GoogleFonts
+                                                                .karla(
+                                                                fontWeight: FontWeight.bold
+                                                            ),
+                                                          ),
+                                                        ),
+                                                      ),
+                                                      Row(
+                                                        children: [
+                                                          Spacer(),
+                                                          Icon(
+                                                            Icons
+                                                                .arrow_forward_ios_rounded,
+                                                            size: 16,
+                                                          )
+                                                        ],
+                                                      )
+                                                    ],
                                                   ),
-                                                ),),
                                                 ),
-                                                
-                                                Row(
-                                                  children: [
-                                                    Spacer(),
-                                                    Icon(
-                                                      Icons
-                                                          .arrow_forward_ios_rounded,
-                                                      size: 16,
-                                                    )
-                                                  ],
-                                                )
+                                                SizedBox(
+                                                  height: 20,
+                                                ),
                                               ],
                                             ),
                                           ),
-                                          SizedBox(
-                                            height: 20,
-                                          ),
-                                        ],
-                                      ),
-                                    ),
                                         ],
                                       ),
                                     ]),

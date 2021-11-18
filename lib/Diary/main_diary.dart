@@ -4,6 +4,7 @@ import 'package:bumbutpital/Diary/sql_helper.dart';
 import 'package:flutter/services.dart';
 import 'package:graphql_flutter/graphql_flutter.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class MainDiary extends StatefulWidget {
   MainDiary({Key? key}) : super(key: key);
@@ -101,7 +102,7 @@ class _MainDiaryState extends State<MainDiary> {
                       children: [
                         Text(
                           Day,
-                          style: TextStyle(
+                          style: GoogleFonts.karla(
                               fontSize: 24,
                               color: Colors.black,
                               decoration: TextDecoration.none,
@@ -113,7 +114,7 @@ class _MainDiaryState extends State<MainDiary> {
                             Text(
                               Time,
                               // textAlign: TextAlign.left,
-                              style: TextStyle(
+                              style: GoogleFonts.karla(
                                 fontSize: 16,
                                 color: Colors.black,
                                 decoration: TextDecoration.none,
@@ -124,18 +125,21 @@ class _MainDiaryState extends State<MainDiary> {
                         ),
                         Row(
                           children: [
-                            SizedBox(width: 15,),
+                            SizedBox(
+                              width: 15,
+                            ),
                             SizedBox(
                               width: MediaQuery.of(context).size.width * 0.9,
                               child: TextField(
                                 inputFormatters: [
                                   //only numeric keyboard.
                                   LengthLimitingTextInputFormatter(
-                                      33), //only 6 digit
+                                      66), //only 6 digit
                                 ],
                                 controller: _titleController,
                                 maxLines: 1,
-                                style: TextStyle(color: Color(0xff6367EA)),
+                                style: GoogleFonts.caveat(
+                                    color: Color(0xff6367EA), fontSize: 32),
                                 decoration: InputDecoration(
                                   hintStyle: TextStyle(fontSize: 24),
                                   hintText: 'Enter Title Diary',
@@ -173,7 +177,8 @@ class _MainDiaryState extends State<MainDiary> {
                                   controller: _descriptionController,
                                   maxLines: 15,
                                   // textAlign: TextAlign.start,
-                                  style: TextStyle(color: Color(0xff6367EA)),
+                                  style: GoogleFonts.caveat(
+                                      color: Color(0xff6367EA), fontSize: 24),
                                   decoration: InputDecoration(
                                     // labelStyle: St,
                                     hintText: 'Enter your story here',
@@ -372,7 +377,7 @@ class _MainDiaryState extends State<MainDiary> {
                                 primary: Color((0xff6367EA)),
                                 padding: EdgeInsets.symmetric(
                                     horizontal: 100, vertical: 15),
-                                textStyle: TextStyle(
+                                textStyle: GoogleFonts.karla(
                                     fontSize: 20, fontWeight: FontWeight.bold)),
                             child: Text(
                               'Add Diary',
@@ -527,6 +532,15 @@ class _MainDiaryState extends State<MainDiary> {
                               Column(
                                 children: [
                                   Spacer(),
+                                  // Container(
+                                  //     transform:
+                                  //         Matrix4.translationValues(120, 25, 0),
+                                  //     decoration: BoxDecoration(
+                                  //         image: DecorationImage(
+                                  //             image: AssetImage(emotion))),
+                                  //     width: MediaQuery.of(context).size.width *
+                                  //         0.8,
+                                  //     height: 50),
                                   Container(
                                       decoration: BoxDecoration(
                                         boxShadow: [
@@ -561,7 +575,7 @@ class _MainDiaryState extends State<MainDiary> {
                                                 Text(
                                                     _journals[reverseIndex]
                                                         ['createdAt'],
-                                                    style: TextStyle(
+                                                    style: GoogleFonts.karla(
                                                         color: Colors.white,
                                                         fontSize: 14,
                                                         fontWeight:
@@ -572,7 +586,7 @@ class _MainDiaryState extends State<MainDiary> {
                                                     Container(
                                                       transform: Matrix4
                                                           .translationValues(
-                                                              0, -25, 0.0),
+                                                              0, 0, 0.0),
                                                       child: Container(
                                                         height: 50,
                                                         width: 50,
@@ -582,62 +596,56 @@ class _MainDiaryState extends State<MainDiary> {
                                                                     emotion))),
                                                       ),
                                                     ),
-                                                    //     Row(
-                                                    //       children: [
-                                                    //         Container(
-
-                                                    //   child: IconButton(
-                                                    //   icon: const Icon(
-                                                    //     Icons.edit,
-                                                    //     color: Colors.white,
-                                                    //   ),
-                                                    //   onPressed: () => _showForm(
-                                                    //       _journals[reverseIndex]
-                                                    //           ['id']),
-                                                    // ),),
-                                                    // IconButton(
-                                                    //   icon: const Icon(
-                                                    //     Icons.delete,
-                                                    //     color: Colors.red,
-                                                    //   ),
-                                                    //   onPressed: () => _deleteItem(
-                                                    //       _journals[reverseIndex]
-                                                    //           ['id']),
-                                                    // ),
-                                                    //       ],
-                                                    //     )
+                                                    // Row(
+                                                    //   children: [
+                                                    //     Container(
+                                                    //       child: IconButton(
+                                                    //         icon: const Icon(
+                                                    //           Icons.edit,
+                                                    //           color:
+                                                    //               Colors.white,
+                                                    //         ),
+                                                    //         onPressed: () =>
+                                                    //             _showForm(_journals[
+                                                    //                     reverseIndex]
+                                                    //                 ['id']),
+                                                    //       ),
+                                                    //     ),
+                                                    //     IconButton(
+                                                    //       icon: const Icon(
+                                                    //         Icons.delete,
+                                                    //         color: Colors.red,
+                                                    //       ),
+                                                    //       onPressed: () =>
+                                                    //           _deleteItem(_journals[
+                                                    //                   reverseIndex]
+                                                    //               ['id']),
+                                                    //     ),
+                                                    //   ],
+                                                    // )
                                                   ],
                                                 ),
                                                 SizedBox(
                                                   width: 20,
+                                                ),
+                                                SizedBox(
+                                                  height: 50,
                                                 )
                                               ],
                                             ),
-                                            Row(
-                                              children: [
-                                                SizedBox(
-                                                  width: 10,
-                                                ),
-                                                Spacer(),
-                                                Container(
-                                                  width: MediaQuery.of(context)
-                                                          .size
-                                                          .width *
-                                                      0.7,
-                                                  child: Text(
-                                                      _journals[reverseIndex]
-                                                          ['title'],
-                                                      style: TextStyle(
-                                                          color: Colors.white,
-                                                          fontSize: 16,
-                                                          fontWeight:
-                                                              FontWeight.bold)),
-                                                ),
-                                                Spacer(),
-                                                SizedBox(
-                                                  width: 10,
-                                                ),
-                                              ],
+                                            Container(
+                                              width: MediaQuery.of(context)
+                                                      .size
+                                                      .width *
+                                                  0.7,
+                                              child: Text(
+                                                  _journals[reverseIndex]
+                                                      ['title'],
+                                                  style: GoogleFonts.caveat(
+                                                      color: Colors.white,
+                                                      fontSize: 24,
+                                                      fontWeight:
+                                                          FontWeight.bold)),
                                             ),
                                             SizedBox(
                                               height: 20,
@@ -651,7 +659,7 @@ class _MainDiaryState extends State<MainDiary> {
                                                 height: MediaQuery.of(context)
                                                         .size
                                                         .height *
-                                                    0.52,
+                                                    0.50,
                                                 decoration: BoxDecoration(
                                                   boxShadow: [
                                                     BoxShadow(
@@ -691,15 +699,16 @@ class _MainDiaryState extends State<MainDiary> {
                                                     child: Text(
                                                         _journals[reverseIndex]
                                                             ['description'],
-                                                        style: TextStyle(
-                                                            color: Colors.black,
-                                                            fontSize: 14)),
+                                                        style:
+                                                            GoogleFonts.caveat(
+                                                                color: Colors
+                                                                    .black,
+                                                                fontSize: 24)),
                                                   ),
                                                 )),
                                             SizedBox(
                                               height: 10,
                                             ),
-                                            
                                           ],
                                         ),
                                       )),

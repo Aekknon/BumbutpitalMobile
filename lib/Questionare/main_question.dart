@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:graphql_flutter/graphql_flutter.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter/services.dart' show rootBundle;
+import 'package:google_fonts/google_fonts.dart';
 
 class MainQuestion extends StatefulWidget {
   MainQuestion({Key? key}) : super(key: key);
@@ -156,7 +157,7 @@ class _MainQuestionState extends State<MainQuestion> {
                   bool visibleMainPage = true;
                   bool visibleMoph = false;
                   bool visibleUser = true;
-                  if (result.data!['getCurrentUser'][0]['role'] == 'moph') {
+                  if (result.data!['getCurrentUser'][0]['role'] == 'Ministry of Public Health Staff') {
                     visibleMoph = true;
                     visibleUser = false;
                   }
@@ -210,7 +211,7 @@ class _MainQuestionState extends State<MainQuestion> {
                                                 0.9,
                                             child: Text(
                                               "You accept to give a permission for Bumbutpital application to collect your information",
-                                              style: TextStyle(
+                                              style: GoogleFonts.karla(
                                                   fontSize: 16,
                                                   fontWeight: FontWeight.bold),
                                             ),
@@ -228,7 +229,7 @@ class _MainQuestionState extends State<MainQuestion> {
                                               child: Scrollbar(
                                                 child: SingleChildScrollView(
                                                   child: Text(data,
-                                                      style: TextStyle(
+                                                      style: GoogleFonts.karla(
                                                           fontWeight:
                                                               FontWeight.normal,
                                                           fontSize: 14)),
@@ -294,7 +295,7 @@ class _MainQuestionState extends State<MainQuestion> {
                                                       Spacer(),
                                                       Text(
                                                         "No Accept",
-                                                        style: TextStyle(
+                                                        style: GoogleFonts.karla(
                                                           fontSize: 15.0,
                                                           color: Color(
                                                               (0xff6367EA)),
@@ -335,7 +336,7 @@ class _MainQuestionState extends State<MainQuestion> {
                                                 0.9,
                                             child: Text(
                                               "You are Staff please Login in WebPage",
-                                              style: TextStyle(
+                                              style: GoogleFonts.karla(
                                                   fontSize: 16,
                                                   fontWeight: FontWeight.bold),
                                             ),
@@ -376,7 +377,7 @@ class _MainQuestionState extends State<MainQuestion> {
                                                       Spacer(),
                                                       Text(
                                                         "No Accept",
-                                                        style: TextStyle(
+                                                        style: GoogleFonts.karla(
                                                           fontSize: 15.0,
                                                           color: Color(
                                                               (0xff6367EA)),
@@ -440,7 +441,7 @@ class _MainQuestionState extends State<MainQuestion> {
                                           width: 20,
                                         ),
                                         Text('BUMBUTPITAL',
-                                            style: TextStyle(
+                                            style: GoogleFonts.karla(
                                                 fontWeight: FontWeight.normal)),
                                       ],
                                     ),
@@ -450,7 +451,7 @@ class _MainQuestionState extends State<MainQuestion> {
                                     Container(
                                       child: Text(
                                         'Welcome to BUMBUTPITAL',
-                                        style: TextStyle(
+                                        style: GoogleFonts.karla(
                                             fontWeight: FontWeight.bold,
                                             fontSize: 24),
                                       ),
@@ -461,7 +462,7 @@ class _MainQuestionState extends State<MainQuestion> {
                                     Container(
                                       child: Text(
                                         "Let's check your depression",
-                                        style: TextStyle(
+                                        style: GoogleFonts.karla(
                                             fontWeight: FontWeight.bold,
                                             fontSize: 18),
                                       ),
@@ -523,7 +524,7 @@ class _MainQuestionState extends State<MainQuestion> {
                                             ),
                                             child: Text(
                                               "Skip",
-                                              style: TextStyle(
+                                              style: GoogleFonts.karla(
                                                 fontWeight: FontWeight.bold,
                                                 fontSize: 18,
                                                 color: Color((0xff6367EA)),
@@ -546,7 +547,7 @@ class _MainQuestionState extends State<MainQuestion> {
                                             ),
                                             child: Text(
                                               "Skip",
-                                              style: TextStyle(
+                                              style: GoogleFonts.karla(
                                                 fontWeight: FontWeight.bold,
                                                 fontSize: 18,
                                                 color: Colors.white,

@@ -1,6 +1,7 @@
 import 'package:bumbutpital/HospitalPage/hospital_detail.dart';
 import 'package:flutter/material.dart';
 import 'package:graphql_flutter/graphql_flutter.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class HospitalCard extends StatelessWidget {
   const HospitalCard({Key? key}) : super(key: key);
@@ -110,7 +111,7 @@ class HospitalCard extends StatelessWidget {
                             child: Row(
                               children: [
                                 Text(result.data!['getAllHospital'][reverseIndex]
-                                        ['hospitalName'], style: TextStyle(fontWeight: FontWeight.bold),),
+                                        ['hospitalName'], style: GoogleFonts.karla(fontWeight: FontWeight.bold),),
                                 
                               ],
                             )),

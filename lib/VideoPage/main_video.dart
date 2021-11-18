@@ -1,6 +1,6 @@
 import 'package:bumbutpital/widgets/video_card.dart';
 import 'package:flutter/material.dart';
-
+import 'package:google_fonts/google_fonts.dart';
 class MainVideo extends StatefulWidget {
   @override
   State<MainVideo> createState() => _MainVideoState();
@@ -62,7 +62,7 @@ class _MainVideoState extends State<MainVideo> {
                             padding: EdgeInsets.only(bottom: 30.0),
                             child: Text(
                               'VIDEO',
-                              style: TextStyle(
+                              style: GoogleFonts.righteous(
                                   fontSize: 32,
                                   color: Colors.white,
                                   decoration: TextDecoration.none),
@@ -115,7 +115,7 @@ class _MainVideoState extends State<MainVideo> {
                               transform: Matrix4.translationValues(0, -25, 0.0),
                               child: Text(
                                 'Recommend',
-                                style: TextStyle(
+                                style: GoogleFonts.karla(
                                     color: Colors.black,
                                     fontWeight: FontWeight.bold),
                               ),
@@ -172,7 +172,7 @@ class _MainVideoState extends State<MainVideo> {
                               transform: Matrix4.translationValues(0, -25, 0.0),
                               child: Text(
                                 'See All',
-                                style: TextStyle(
+                                style: GoogleFonts.karla(
                                     color: Colors.black,
                                     fontWeight: FontWeight.bold),
                               ),
@@ -238,7 +238,7 @@ class _MainVideoState extends State<MainVideo> {
                                       SizedBox(width: 5),
                                       Text(
                                         'Minimal Depression',
-                                        style: TextStyle(
+                                        style: GoogleFonts.karla(
                                             fontSize: 14,
                                             color: select1 == '1'
                                                 ? Colors.white
@@ -293,7 +293,7 @@ class _MainVideoState extends State<MainVideo> {
                                       ),SizedBox(width: 5),
                                       Text(
                                         'Mild Depression',
-                                        style: TextStyle(
+                                        style: GoogleFonts.karla(
                                             fontSize: 14,
                                             color: select1 == '2'
                                                 ? Colors.white
@@ -350,7 +350,7 @@ class _MainVideoState extends State<MainVideo> {
                                       ),SizedBox(width: 5),
                                       Text(
                                         'Moderate Depression',
-                                        style: TextStyle(
+                                        style: GoogleFonts.karla(
                                             fontSize: 14,
                                             color: select1 == '3'
                                                 ? Colors.white
@@ -406,7 +406,7 @@ class _MainVideoState extends State<MainVideo> {
                                       ),SizedBox(width: 5),
                                       Text(
                                         'Moderately severe Depression',
-                                        style: TextStyle(
+                                        style: GoogleFonts.karla(
                                             fontSize: 14,
                                             color: select1 == '4'
                                                 ? Colors.white
@@ -462,7 +462,7 @@ class _MainVideoState extends State<MainVideo> {
                                       ),SizedBox(width: 5),
                                       Text(
                                         'Severe Depression',
-                                        style: TextStyle(
+                                        style: GoogleFonts.karla(
                                             fontSize: 14,
                                             color: select1 == '5'
                                                 ? Colors.white

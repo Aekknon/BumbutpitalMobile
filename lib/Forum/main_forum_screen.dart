@@ -1,7 +1,7 @@
 import 'package:bumbutpital/Forum/add_question.dart';
 import 'package:flutter/material.dart';
 import 'forum_page/forum_page.dart';
-import 'package:graphql_flutter/graphql_flutter.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class MainForumPage extends StatefulWidget {
   const MainForumPage({Key? key}) : super(key: key);
@@ -37,8 +37,8 @@ class _MainForumPageState extends State<MainForumPage> {
                   ),
                   child: Center(
                     child: Text(
-                      'FORUM Q&A',
-                      style: TextStyle(
+                      'FORUM',
+                      style:  GoogleFonts.righteous(
                           fontSize: 24,
                           color: Colors.white,
                           decoration: TextDecoration.none),
@@ -64,7 +64,7 @@ class _MainForumPageState extends State<MainForumPage> {
                     },
                     child: Text(
                       'My Forum',
-                      style: TextStyle(
+                      style: GoogleFonts.karla(
                           fontSize: 16,
                           color:
                               selected == '1' ? Color(0xff6367EA) : Colors.grey,
@@ -84,7 +84,7 @@ class _MainForumPageState extends State<MainForumPage> {
                     },
                     child: Text(
                       'All Forum',
-                      style: TextStyle(
+                      style: GoogleFonts.karla(
                           fontSize: 16,
                           color:  selected == '2' ? Color(0xff6367EA) : Colors.grey,
                           decoration: TextDecoration.none,

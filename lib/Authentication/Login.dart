@@ -5,6 +5,7 @@ import 'package:bumbutpital/Questionare/main_question.dart';
 import 'package:bumbutpital/services/graphql_config.dart';
 import 'package:flutter/material.dart';
 import 'package:bumbutpital/ComponentMainScreen/bottom_navbar.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:graphql_flutter/graphql_flutter.dart';
 import 'package:provider/provider.dart';
 
@@ -93,28 +94,29 @@ class _LoginPageState extends State<LoginPage> {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Container(
-                        height: 50,
-                        width: 50,
+                        height: 40,
+                        width: 40,
                         child: Image.asset('asset/image/Bumbutpital Logo.png'),
                       ),
                       SizedBox(
                         width: 20,
                       ),
                       Text('BUMBUTPITAL',
-                          style: TextStyle(fontWeight: FontWeight.normal)),
+                          style: GoogleFonts.karla(fontWeight: FontWeight.normal , fontSize: 12)),
                     ],
                   ),
                   SizedBox(height: 20),
                   Container(
                     child: Text(
                       'Login',
-                      style: TextStyle(
-                        fontSize: 24,
+                      style: GoogleFonts.karla(
+                        
+                        fontSize: 32,
                       ),
                     ),
                     alignment: Alignment.center,
                   ),
-                  SizedBox(height: 15),
+                  
                   SizedBox(height: 30),
                   _textField(
                     _email,
@@ -139,7 +141,7 @@ class _LoginPageState extends State<LoginPage> {
                         padding:
                             EdgeInsets.symmetric(horizontal: 100, vertical: 15),
                       ),
-                      child: Text("Login"),
+                      child: Text("Login", style: GoogleFonts.karla(),),
                     ),
                   ),
                   SizedBox(
@@ -149,7 +151,7 @@ class _LoginPageState extends State<LoginPage> {
                     height: 16,
                   ),
                   SizedBox(height: 16),
-                  Text("Don't have an Account?"),
+                  Text("Don't have an Account?" , style: GoogleFonts.karla(),),
                   SizedBox(height: 16),
                   Container(
                       child: InkWell(
@@ -159,7 +161,7 @@ class _LoginPageState extends State<LoginPage> {
                     },
                     child: Text(
                       'Sign Up',
-                      style: TextStyle(
+                      style: GoogleFonts.karla(
                           color: Color(0xff6367EA),
                           fontWeight: FontWeight.bold),
                     ),
@@ -177,6 +179,7 @@ class _LoginPageState extends State<LoginPage> {
     return TextField(
       controller: cont,
       obscureText: label == "Password" ? isPasswordHidden : false,
+      style:  GoogleFonts.karla(),
       decoration: InputDecoration(
         labelText: label,
         hintText: "Enter your ${label.toLowerCase()}",

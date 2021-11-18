@@ -12,6 +12,7 @@ import 'package:bumbutpital/Forum/main_forum_screen.dart';
 import 'package:bumbutpital/Main_Screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 import '../moph_screen.dart';
 
@@ -31,6 +32,8 @@ class _BottomNavBarState extends State<BottomNavBar> {
       backgroundColor: Color(0XFFECF2FF),
       body: tab[currentTabIndex],
       bottomNavigationBar: BottomNavigationBar(
+        selectedLabelStyle: GoogleFonts.righteous(),
+        unselectedLabelStyle: GoogleFonts.righteous(),
         type: BottomNavigationBarType.fixed,
         unselectedItemColor: Colors.grey,
         selectedItemColor: Color(0xFF7B8CE4),

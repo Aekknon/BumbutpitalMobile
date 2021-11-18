@@ -1,6 +1,6 @@
-import 'package:bumbutpital/HospitalPage/keep_koopong_screen.dart';
+
 import 'package:bumbutpital/HospitalPage/promotion_screen.dart';
-import 'package:bumbutpital/widgets/promotion_in_hospital_detail_card.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:flutter/material.dart';
 import 'package:graphql_flutter/graphql_flutter.dart';
 
@@ -77,7 +77,7 @@ class _HospitalDetailState extends State<HospitalDetail> {
                     children: [
                       Text(
                         promoResult[0],
-                        style: TextStyle(
+                        style: GoogleFonts.rubik(
                             fontSize: 24,
                             color: Colors.black,
                             decoration: TextDecoration.none,
@@ -91,7 +91,7 @@ class _HospitalDetailState extends State<HospitalDetail> {
                         child: Column(
                           children: [
                             Text(promoResult[1],
-                                style: TextStyle(
+                                style: GoogleFonts.karla(
                                   fontSize: 12,
                                   color: Colors.black,
                                   decoration: TextDecoration.none,

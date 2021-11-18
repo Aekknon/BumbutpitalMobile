@@ -109,7 +109,7 @@ class _EditProfileState extends State<EditProfile> {
                       width: 300,
                       child: _textField(
                         _Name,
-                        result.data!['getCurrentUser'][0]['name'],
+                        "Name",
                       ),
                     ),
                     SizedBox(
@@ -119,7 +119,7 @@ class _EditProfileState extends State<EditProfile> {
                       width: 300,
                       child: _textField(
                         _surName,
-                        result.data!['getCurrentUser'][0]['surname'],
+                        "Surname",
                       ),
                     ),
                     SizedBox(
@@ -129,7 +129,7 @@ class _EditProfileState extends State<EditProfile> {
                       width: 300,
                       child: _textField(
                         _email,
-                        result.data!['getCurrentUser'][0]['email'],
+                        "Email",
                       ),
                     ),
                     SizedBox(
@@ -139,7 +139,7 @@ class _EditProfileState extends State<EditProfile> {
                       width: 300,
                       child: _textField(
                         _phoneNumber,
-                        result.data!['getCurrentUser'][0]['phoneNumber'],
+                        "PhoneNumber",
                       ),
                     ),
                     SizedBox(

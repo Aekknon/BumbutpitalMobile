@@ -4,6 +4,7 @@ import 'package:bumbutpital/ComponentMainScreen/bottom_navbar.dart';
 import 'package:flutter/material.dart';
 import 'package:syncfusion_flutter_gauges/gauges.dart';
 import 'package:graphql_flutter/graphql_flutter.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class ShowResult extends StatelessWidget {
   static const routeName = "/question/result";
@@ -77,33 +78,33 @@ class ShowResult extends StatelessWidget {
                 result.data!['getCurrentUser'][0]['phq9permission'];
             Future<void> onSubmit(RunMutation run) async {
               try {
-                  final response = run({
-                    "phq9": getPhq9Type(PHQ9result),
-                    "phq9score": PHQ9result.toString()
-                  });
-                  print((await response.networkResult) as dynamic);
+                final response = run({
+                  "phq9": getPhq9Type(PHQ9result),
+                  "phq9score": PHQ9result.toString()
+                });
+                print((await response.networkResult) as dynamic);
 
-                  Navigator.pushAndRemoveUntil(
-                      context,
-                      MaterialPageRoute(builder: (context) => BottomNavBar()),
-                      (route) => false);
-                } catch (err) {
-                  showDialog<void>(
-                    context: context,
-                    builder: (BuildContext context) {
-                      return AlertDialog(
-                        title: const Text('Error!'),
-                        content: SingleChildScrollView(
-                          child: ListBody(
-                            children: const <Widget>[
-                              Text('Insert your Question'),
-                            ],
-                          ),
+                Navigator.pushAndRemoveUntil(
+                    context,
+                    MaterialPageRoute(builder: (context) => BottomNavBar()),
+                    (route) => false);
+              } catch (err) {
+                showDialog<void>(
+                  context: context,
+                  builder: (BuildContext context) {
+                    return AlertDialog(
+                      title: const Text('Error!'),
+                      content: SingleChildScrollView(
+                        child: ListBody(
+                          children: const <Widget>[
+                            Text('Insert your Question'),
+                          ],
                         ),
-                      );
-                    },
-                  );
-                }
+                      ),
+                    );
+                  },
+                );
+              }
             }
 
             return Center(
@@ -112,7 +113,8 @@ class ShowResult extends StatelessWidget {
                 children: [
                   Text(
                     'YOUR PHQ-9 SCORE',
-                    style: TextStyle(fontWeight: FontWeight.bold, fontSize: 24),
+                    style: GoogleFonts.karla(
+                        fontWeight: FontWeight.bold, fontSize: 24),
                   ),
                   SizedBox(
                     height: 30,
@@ -200,7 +202,7 @@ class ShowResult extends StatelessWidget {
                                 positionFactor: 0,
                                 widget: Text(
                                   '$PHQ9result',
-                                  style: TextStyle(
+                                  style: GoogleFonts.karla(
                                       fontWeight: FontWeight.bold,
                                       fontSize: 40),
                                 ))
@@ -211,7 +213,7 @@ class ShowResult extends StatelessWidget {
                     children: [
                       Text(
                         'You are ${getPhq9Type(PHQ9result)}.',
-                        style: TextStyle(
+                        style: GoogleFonts.karla(
                             fontWeight: FontWeight.bold, fontSize: 24),
                         textAlign: TextAlign.center,
                       ),
@@ -227,11 +229,11 @@ class ShowResult extends StatelessWidget {
                         await onSubmit(run);
                       },
                       style: ElevatedButton.styleFrom(
-                        primary:Color((0xff6367EA)),
+                        primary: Color((0xff6367EA)),
                         padding:
                             EdgeInsets.symmetric(horizontal: 100, vertical: 15),
                       ),
-                      child: Text("SUBMIT QUESTION"),
+                      child: Text("SUBMIT SCORE"),
                     ),
                   )
                 ],

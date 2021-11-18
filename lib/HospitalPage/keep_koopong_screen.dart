@@ -1,7 +1,7 @@
 import 'package:bumbutpital/HospitalPage/qr_code_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:graphql_flutter/graphql_flutter.dart';
-import 'package:bumbutpital/HospitalPage/promotion_screen.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class KeepkoopongPage extends StatefulWidget {
   const KeepkoopongPage({Key? key}) : super(key: key);
@@ -92,7 +92,7 @@ class _KeepkoopongPageState extends State<KeepkoopongPage> {
         });
         print((await response.networkResult) as dynamic);
 
-        Navigator.pushNamed(
+        Navigator.pushReplacementNamed(
           context,
           "/QRCodePage",
           arguments: [QRdata],
@@ -240,8 +240,8 @@ class _KeepkoopongPageState extends State<KeepkoopongPage> {
                               ),
                               child: Center(
                                 child: Text(
-                                  promotiondata[3],
-                                  style: TextStyle(
+                                  promotiondata[4],
+                                  style: GoogleFonts.karla(
                                     fontSize: 12,
                                     color: Colors.white,
                                     decoration: TextDecoration.none,
@@ -253,7 +253,7 @@ class _KeepkoopongPageState extends State<KeepkoopongPage> {
                           ),
                           Text(
                             'เงื่อนไขการใช้งาน',
-                            style: TextStyle(
+                            style: GoogleFonts.karla(
                                 fontSize: 18,
                                 color: Colors.black,
                                 decoration: TextDecoration.none,
@@ -266,7 +266,7 @@ class _KeepkoopongPageState extends State<KeepkoopongPage> {
                             width: MediaQuery.of(context).size.width * 0.8,
                             child: Text(
                               promotiondata[1],
-                              style: TextStyle(
+                              style: GoogleFonts.karla(
                                 fontSize: 12,
                                 color: Colors.black,
                                 decoration: TextDecoration.none,
@@ -293,7 +293,7 @@ class _KeepkoopongPageState extends State<KeepkoopongPage> {
                                       padding: EdgeInsets.symmetric(
                                           horizontal: 40, vertical: 15),
                                     ),
-                                    child: Text("Keep Promorion"),
+                                    child: Text("Keep Promorion", style: GoogleFonts.karla()),
                                   ),
                                 ),
                               ),
@@ -306,7 +306,7 @@ class _KeepkoopongPageState extends State<KeepkoopongPage> {
                                     padding: EdgeInsets.symmetric(
                                         horizontal: 40, vertical: 15),
                                   ),
-                                  child: Text("Keep Promorion"),
+                                  child: Text("Keep Promorion", style: GoogleFonts.karla()),
                                 ),
                               ),
                               SizedBox(
@@ -332,7 +332,7 @@ class _KeepkoopongPageState extends State<KeepkoopongPage> {
                                       padding: EdgeInsets.symmetric(
                                           horizontal: 40, vertical: 15),
                                     ),
-                                    child: Text("Use Promorion"),
+                                    child: Text("Use Promorion", style: GoogleFonts.karla()),
                                   ),
                                 ),
                               ),
@@ -448,7 +448,7 @@ class _KeepCurrentKoopongPageState extends State<KeepCurrentKoopongPage> {
                     ),
                     Text(
                       promotiondata[0],
-                      style: TextStyle(
+                      style: GoogleFonts.karla(
                           fontSize: 18,
                           color: Colors.black,
                           decoration: TextDecoration.none,
@@ -476,7 +476,7 @@ class _KeepCurrentKoopongPageState extends State<KeepCurrentKoopongPage> {
                         child: Center(
                           child: Text(
                             promotiondata[4].toString(),
-                            style: TextStyle(
+                            style: GoogleFonts.karla(
                               fontSize: 12,
                               color: Colors.white,
                               decoration: TextDecoration.none,
@@ -488,7 +488,7 @@ class _KeepCurrentKoopongPageState extends State<KeepCurrentKoopongPage> {
                     ),
                     Text(
                       'เงื่อนไขการใช้งาน',
-                      style: TextStyle(
+                      style: GoogleFonts.karla(
                           fontSize: 18,
                           color: Colors.black,
                           decoration: TextDecoration.none,
@@ -501,7 +501,7 @@ class _KeepCurrentKoopongPageState extends State<KeepCurrentKoopongPage> {
                       width: MediaQuery.of(context).size.width * 0.8,
                       child: Text(
                         promotiondata[1],
-                        style: TextStyle(
+                        style: GoogleFonts.karla(
                           fontSize: 12,
                           color: Colors.black,
                           decoration: TextDecoration.none,
@@ -528,7 +528,7 @@ class _KeepCurrentKoopongPageState extends State<KeepCurrentKoopongPage> {
                                 padding: EdgeInsets.symmetric(
                                     horizontal: 40, vertical: 15),
                               ),
-                              child: Text("Use Promorion"),
+                              child: Text("Use Promorion" , style: GoogleFonts.karla(),),
                             ),
                           ),
                         ),
