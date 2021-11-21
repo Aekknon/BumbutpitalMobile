@@ -1,18 +1,18 @@
 import 'package:bumbutpital/Forum/add_question.dart';
 import 'package:flutter/material.dart';
-import 'forum_page/forum_page.dart';
+import 'package:bumbutpital/Forum/forum_page/sub_my_forum_page.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-class MainForumPage extends StatefulWidget {
-  const MainForumPage({Key? key}) : super(key: key);
+class MyForumPage extends StatefulWidget {
+  const MyForumPage({Key? key}) : super(key: key);
 
   @override
-  _MainForumPageState createState() => _MainForumPageState();
+  _MyForumPageState createState() => _MyForumPageState();
 }
 
-class _MainForumPageState extends State<MainForumPage> {
-  final tabs = [AllForum(), MyForum()];
-  int _currentTabs = 1;
+class _MyForumPageState extends State<MyForumPage> {
+  final tabs = [AlreadyAnswer(), NotAnswer()];
+  int _currentTabs = 0;
   String selected = "1";
 
  
@@ -37,7 +37,7 @@ class _MainForumPageState extends State<MainForumPage> {
                   ),
                   child: Center(
                     child: Text(
-                      'Question and Ask',
+                      'My Question',
                       style:  GoogleFonts.righteous(
                           fontSize: 24,
                           color: Colors.white,
@@ -58,12 +58,12 @@ class _MainForumPageState extends State<MainForumPage> {
                   InkWell(
                     onTap: () {
                       setState(() {
-                        _currentTabs = 1;
+                        _currentTabs = 0;
                         selected = '1';
                       });
                     },
                     child: Text(
-                      'My Question',
+                      'Already Answer',
                       style: GoogleFonts.karla(
                           fontSize: 16,
                           color:
@@ -78,12 +78,12 @@ class _MainForumPageState extends State<MainForumPage> {
                   InkWell(
                     onTap: () {
                       setState(() {
-                        _currentTabs = 0;
+                        _currentTabs = 1;
                         selected = '2';
                       });
                     },
                     child: Text(
-                      'All Question',
+                      'Not Answer',
                       style: GoogleFonts.karla(
                           fontSize: 16,
                           color:  selected == '2' ? Color(0xff6367EA) : Colors.grey,
@@ -106,13 +106,7 @@ class _MainForumPageState extends State<MainForumPage> {
           ],
         ),
       ),
-      floatingActionButton: FloatingActionButton(
-          onPressed: () {
-            Navigator.push(context,
-                MaterialPageRoute(builder: (context) => AddQuestion()));
-          },
-          child: const Icon(Icons.add),
-          backgroundColor: Color(0xff6367EA)),
+      
     );
   }
 }

@@ -1,4 +1,3 @@
-
 import 'package:bumbutpital/HospitalPage/promotion_screen.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:flutter/material.dart';
@@ -192,6 +191,7 @@ class _HospitalDetailState extends State<HospitalDetail> {
                                               return Text(result.toString());
                                             }
                                             bool visible = true;
+
                                             return Column(
                                               children: [
                                                 Expanded(
@@ -200,11 +200,17 @@ class _HospitalDetailState extends State<HospitalDetail> {
                                                         (BuildContext context,
                                                             int index) {
                                                       bool visible = false;
+                                                      int reverseIndex = result
+                                                              .data![
+                                                                  'getAllPromotion']
+                                                              .length -
+                                                          1 -
+                                                          index;
                                                       int x = 0;
 
                                                       if (result.data![
                                                                       'getAllPromotion']
-                                                                  [index]
+                                                                  [reverseIndex]
                                                               ['hospitalId'] ==
                                                           promoResult[3]) {
                                                         for (var i = 0;
@@ -216,7 +222,7 @@ class _HospitalDetailState extends State<HospitalDetail> {
                                                             i++) {
                                                           if (result.data![
                                                                           'getAllPromotion']
-                                                                      [index][
+                                                                      [reverseIndex][
                                                                   'promotionId'] ==
                                                               result1.data![
                                                                       'getPromotionLog'][i]
@@ -228,7 +234,7 @@ class _HospitalDetailState extends State<HospitalDetail> {
                                                       }
                                                       if (x == 0 &&
                                                           result.data!['getAllPromotion']
-                                                                      [index][
+                                                                      [reverseIndex][
                                                                   'hospitalId'] ==
                                                               promoResult[3]) {
                                                         visible = true;
@@ -245,23 +251,28 @@ class _HospitalDetailState extends State<HospitalDetail> {
                                                                   arguments: [
                                                                     result.data!['getAllPromotion']
                                                                             [
-                                                                            index]
+                                                                            reverseIndex]
                                                                         [
                                                                         'title'],
                                                                     result.data!['getAllPromotion']
                                                                             [
-                                                                            index]
+                                                                            reverseIndex]
                                                                         [
                                                                         'hospitalDetail'],
                                                                     result.data!['getAllPromotion']
                                                                             [
-                                                                            index]
+                                                                            reverseIndex]
                                                                         ['Url'],
                                                                     result.data!['getAllPromotion']
                                                                             [
-                                                                            index]
+                                                                            reverseIndex]
                                                                         [
-                                                                        'promotionId']
+                                                                        'promotionId'],
+                                                                    result.data!['getAllPromotion']
+                                                                            [
+                                                                            reverseIndex]
+                                                                        [
+                                                                        'expiredDate']
                                                                   ],
                                                                 );
                                                               },
@@ -295,7 +306,7 @@ class _HospitalDetailState extends State<HospitalDetail> {
                                                                         borderRadius: BorderRadius.all(Radius.circular(10)),
                                                                         image: DecorationImage(
                                                                           image:
-                                                                              NetworkImage(result.data!['getAllPromotion'][index]['Url']),
+                                                                              NetworkImage(result.data!['getAllPromotion'][reverseIndex]['Url']),
                                                                           fit: BoxFit
                                                                               .cover,
                                                                         )),

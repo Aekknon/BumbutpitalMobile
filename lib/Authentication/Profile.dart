@@ -180,162 +180,108 @@ class Profile extends StatelessWidget {
                                   horizontal: 16.0, vertical: 22.0),
                               child: Column(
                                 children: [
-                                  Row(
-                                    children: [
-                                      Container(
-                                        margin: EdgeInsets.all(10),
-                                        child: Icon(
-                                          Icons.help_rounded,
-                                          color: Color(0xff6367EA),
+                                  InkWell(
+                                    onTap: () {
+                                      Navigator.pushNamed(
+                                        context,
+                                        "/MyForum",
+                                        
+                                      );
+                                    },
+                                    child: Row(
+                                      children: [
+                                        Container(
+                                          margin: EdgeInsets.all(10),
+                                          child: Icon(
+                                            Icons.help_rounded,
+                                            color: Color(0xff6367EA),
+                                          ),
                                         ),
-                                      ),
-                                      SizedBox(
-                                        width: 5,
-                                      ),
-                                      Text(
-                                        "My Question",
-                                        style: GoogleFonts.karla(
-                                                color: Colors.black,
-                                                fontSize: 18.0,
-                                                fontWeight: FontWeight.bold
-                                               
-                                              ),
-                                      ),
-                                      Spacer(),
-                                      Query(
-                                        options: QueryOptions(
-                                            document: gql(query1),
-                                            pollInterval: Duration(seconds: 1)),
-                                        builder: (QueryResult result,
-                                            {fetchMore, refetch}) {
-                                          if (result.hasException) {
-                                            return Text(
-                                                result.exception.toString());
-                                          }
-                                          if (result.isLoading) {
-                                            return Center(
-                                              child:
-                                                  CircularProgressIndicator(),
-                                            );
-                                          }
+                                        SizedBox(
+                                          width: 5,
+                                        ),
+                                        Text(
+                                          "My Question",
+                                          style: GoogleFonts.karla(
+                                              color: Colors.black,
+                                              fontSize: 18.0,
+                                              fontWeight: FontWeight.bold),
+                                        ),
+                                        Spacer(),
+                                        Query(
+                                          options: QueryOptions(
+                                              document: gql(query1),
+                                              pollInterval:
+                                                  Duration(seconds: 1)),
+                                          builder: (QueryResult result,
+                                              {fetchMore, refetch}) {
+                                            if (result.hasException) {
+                                              return Text(
+                                                  result.exception.toString());
+                                            }
+                                            if (result.isLoading) {
+                                              return Center(
+                                                child:
+                                                    CircularProgressIndicator(),
+                                              );
+                                            }
 
-                                          if (result.data == null) {
-                                            return Text(result.toString());
-                                          }
+                                            if (result.data == null) {
+                                              return Text(result.toString());
+                                            }
 
-                                          return Container(
-                                              width: 30,
-                                              height: 30,
-                                              decoration: BoxDecoration(
-                                                  color: Color((0xff6367EA)),
-                                                  boxShadow: [
-                                                    BoxShadow(
-                                                      color: Colors.grey
-                                                          .withOpacity(0.5),
-                                                      spreadRadius: 2,
-                                                      blurRadius: 5,
-                                                      offset: Offset(0,
-                                                          3), // changes position of shadow
+                                            return Container(
+                                                width: 30,
+                                                height: 30,
+                                                decoration: BoxDecoration(
+                                                    color: Color((0xff6367EA)),
+                                                    boxShadow: [
+                                                      BoxShadow(
+                                                        color: Colors.grey
+                                                            .withOpacity(0.5),
+                                                        spreadRadius: 2,
+                                                        blurRadius: 5,
+                                                        offset: Offset(0,
+                                                            3), // changes position of shadow
+                                                      ),
+                                                    ],
+                                                    borderRadius:
+                                                        BorderRadius.only(
+                                                      bottomLeft:
+                                                          Radius.circular(8),
+                                                      bottomRight:
+                                                          Radius.circular(8),
+                                                      topLeft:
+                                                          Radius.circular(8),
+                                                      topRight:
+                                                          Radius.circular(8),
+                                                    )),
+                                                child: Row(
+                                                  children: [
+                                                    Spacer(),
+                                                    Text(
+                                                      result
+                                                          .data![
+                                                              'getcurrentForum']
+                                                          .length
+                                                          .toString(),
+                                                      style: TextStyle(
+                                                        fontSize: 18.0,
+                                                        color: Colors.white,
+                                                      ),
                                                     ),
+                                                    Spacer(),
                                                   ],
-                                                  borderRadius:
-                                                      BorderRadius.only(
-                                                    bottomLeft:
-                                                        Radius.circular(8),
-                                                    bottomRight:
-                                                        Radius.circular(8),
-                                                    topLeft: Radius.circular(8),
-                                                    topRight:
-                                                        Radius.circular(8),
-                                                  )),
-                                              child: Row(
-                                                children: [
-                                                  Spacer(),
-                                                  Text(
-                                                    result
-                                                        .data![
-                                                            'getcurrentForum']
-                                                        .length
-                                                        .toString(),
-                                                    style: TextStyle(
-                                                      fontSize: 18.0,
-                                                      color: Colors.white,
-                                                    ),
-                                                  ),
-                                                  Spacer(),
-                                                ],
-                                              ));
-                                        },
-                                      ),
-                                      SizedBox(
-                                        width: 20,
-                                      )
-                                    ],
-                                  ),
-                                  Row(
-                                    children: [
-                                      Container(
-                                        margin: EdgeInsets.all(10),
-                                        child: Icon(
-                                          Icons.auto_stories,
-                                          color: Color(0xff6367EA),
+                                                ));
+                                          },
                                         ),
-                                      ),
-                                      SizedBox(
-                                        width: 5,
-                                      ),
-                                      Text(
-                                        "My Diary",
-                                        style: GoogleFonts.karla(
-                                                color: Colors.black,
-                                                fontSize: 18.0,
-                                                fontWeight: FontWeight.bold
-                                               
-                                              ),
-                                      ),
-                                      Spacer(),
-                                      Container(
-                                          width: 30,
-                                          height: 30,
-                                          decoration: BoxDecoration(
-                                              color: Color((0xff6367EA)),
-                                              boxShadow: [
-                                                BoxShadow(
-                                                  color: Colors.grey
-                                                      .withOpacity(0.5),
-                                                  spreadRadius: 2,
-                                                  blurRadius: 5,
-                                                  offset: Offset(0,
-                                                      3), // changes position of shadow
-                                                ),
-                                              ],
-                                              borderRadius: BorderRadius.only(
-                                                bottomLeft: Radius.circular(8),
-                                                bottomRight: Radius.circular(8),
-                                                topLeft: Radius.circular(8),
-                                                topRight: Radius.circular(8),
-                                              )),
-                                          child: Row(
-                                            children: [
-                                              Spacer(),
-                                              Text(
-                                                '10',
-                                                style: TextStyle(
-                                                  fontSize: 18.0,
-                                                  color: Colors.white,
-                                                ),
-                                              ),
-                                              Spacer(),
-                                            ],
-                                          )),
-                                      SizedBox(
-                                        width: 20.0,
-                                      ),
-                                      SizedBox(
-                                        height: 60.0,
-                                      ),
-                                    ],
+                                        SizedBox(
+                                          width: 20,
+                                        )
+                                      ],
+                                    ),
                                   ),
+                                  
                                   Container(
                                     child: InkWell(
                                         onTap: () {
@@ -360,11 +306,9 @@ class Profile extends StatelessWidget {
                                             Text(
                                               "My Promotion",
                                               style: GoogleFonts.karla(
-                                                color: Colors.black,
-                                                fontSize: 18.0,
-                                                fontWeight: FontWeight.bold
-                                               
-                                              ),
+                                                  color: Colors.black,
+                                                  fontSize: 18.0,
+                                                  fontWeight: FontWeight.bold),
                                             ),
                                             SizedBox(
                                               height: 5.0,
@@ -411,165 +355,186 @@ class Profile extends StatelessWidget {
                           SizedBox(
                             height: 20.0,
                           ),
-                          Card(
-                              margin: EdgeInsets.symmetric(
-                                  horizontal: 40.0, vertical: 1.0),
-                              clipBehavior: Clip.antiAlias,
-                              color: Colors.white,
-                              elevation: 5.0,
-                              child: Padding(
-                                padding: const EdgeInsets.symmetric(
-                                    horizontal: 16.0, vertical: 0.0),
-                                child: Row(
-                                  children: [
-                                    Spacer(),
-                                    Container(
-                                      transform:
-                                          Matrix4.translationValues(0, 25, 0.0),
-                                      height: 130,
-                                      width: 130,
-                                      child: SfRadialGauge(
-                                        axes: <RadialAxis>[
-                                          RadialAxis(
-                                              showLabels: false,
-                                              showAxisLine: false,
-                                              showTicks: false,
-                                              minimum: 0,
-                                              maximum: 27,
-                                              startAngle: 180,
-                                              endAngle: 0,
-                                              ranges: <GaugeRange>[
-                                                GaugeRange(
-                                                  startValue: 0,
-                                                  endValue: 5,
-                                                  color: Color(0xff20CBFE),
-                                                  // label: 'Slow',
-                                                  sizeUnit:
-                                                      GaugeSizeUnit.factor,
-                                                  labelStyle: GaugeTextStyle(
-                                                      fontFamily: 'Times',
-                                                      fontSize: 20),
-                                                  startWidth: 0.15,
-                                                  endWidth: 0.15,
-                                                ),
-                                                GaugeRange(
-                                                  startValue: 5,
-                                                  endValue: 10,
-                                                  color: Color(0xff32D475),
-                                                  // label: 'Moderate',
-                                                  labelStyle: GaugeTextStyle(
-                                                      fontFamily: 'Times',
-                                                      fontSize: 20),
-                                                  startWidth: 0.15,
-                                                  endWidth: 0.15,
-                                                  sizeUnit:
-                                                      GaugeSizeUnit.factor,
-                                                ),
-                                                GaugeRange(
-                                                  startValue: 10,
-                                                  endValue: 15,
-                                                  color: Color(0xffFFBC17),
-                                                  // label: 'Fast',
-                                                  labelStyle: GaugeTextStyle(
-                                                      fontFamily: 'Times',
-                                                      fontSize: 20),
-                                                  sizeUnit:
-                                                      GaugeSizeUnit.factor,
-                                                  startWidth: 0.15,
-                                                  endWidth: 0.15,
-                                                ),
-                                                GaugeRange(
-                                                  startValue: 15,
-                                                  endValue: 20,
-                                                  color: Color(0xffE76849),
-                                                  // label: 'Fast',
-                                                  labelStyle: GaugeTextStyle(
-                                                      fontFamily: 'Times',
-                                                      fontSize: 20),
-                                                  sizeUnit:
-                                                      GaugeSizeUnit.factor,
-                                                  startWidth: 0.15,
-                                                  endWidth: 0.15,
-                                                ),
-                                                GaugeRange(
-                                                  startValue: 20,
-                                                  endValue: 27,
-                                                  color: Color(0xffF14949),
-                                                  // label: 'Fast',
-                                                  labelStyle: GaugeTextStyle(
-                                                      fontFamily: 'Times',
-                                                      fontSize: 20),
-                                                  sizeUnit:
-                                                      GaugeSizeUnit.factor,
-                                                  startWidth: 0.15,
-                                                  endWidth: 0.15,
-                                                ),
-                                              ],
-                                              pointers: <GaugePointer>[
-                                                MarkerPointer(
-                                                    value: double.parse(
-                                                      result.data![
-                                                              'getCurrentUser'][0]
-                                                          [
-                                                          'appropiatePHQSeverityScore'],
-                                                    ),
-                                                    enableDragging: true,
-                                                    markerWidth: 20,
-                                                    markerHeight: 20,
-                                                    markerOffset: 30,
-                                                    overlayColor: Colors.red
-                                                        .withOpacity(0.12),
-                                                    markerType:
-                                                        MarkerType.triangle)
-                                              ],
-                                              annotations: <GaugeAnnotation>[
-                                                GaugeAnnotation(
-                                                    angle: 90,
-                                                    positionFactor: 0,
-                                                    widget: Text(
-                                                      result.data![
-                                                              'getCurrentUser'][0]
-                                                          [
-                                                          'appropiatePHQSeverityScore'],
-                                                      style: GoogleFonts.karla(
-                                                          fontWeight:
-                                                              FontWeight.bold,
-                                                          fontSize: 26),
-                                                    ))
-                                              ])
-                                        ],
+                          InkWell(
+                            onTap: () {
+                              Navigator.pushNamed(
+                                context,
+                                "/AllGraph",
+                              );
+                            },
+                            child: Card(
+                                margin: EdgeInsets.symmetric(
+                                    horizontal: 40.0, vertical: 1.0),
+                                clipBehavior: Clip.antiAlias,
+                                color: Colors.white,
+                                elevation: 5.0,
+                                child: Padding(
+                                  padding: const EdgeInsets.symmetric(
+                                      horizontal: 16.0, vertical: 0.0),
+                                  child: Row(
+                                    children: [
+                                      Spacer(),
+                                      Container(
+                                        transform: Matrix4.translationValues(
+                                            0, 25, 0.0),
+                                        height: 130,
+                                        width: 130,
+                                        child: SfRadialGauge(
+                                          axes: <RadialAxis>[
+                                            RadialAxis(
+                                                showLabels: false,
+                                                showAxisLine: false,
+                                                showTicks: false,
+                                                minimum: 0,
+                                                maximum: 27,
+                                                startAngle: 180,
+                                                endAngle: 0,
+                                                ranges: <GaugeRange>[
+                                                  GaugeRange(
+                                                    startValue: 0,
+                                                    endValue: 5,
+                                                    color: Color(0xff20CBFE),
+                                                    // label: 'Slow',
+                                                    sizeUnit:
+                                                        GaugeSizeUnit.factor,
+                                                    labelStyle: GaugeTextStyle(
+                                                        fontFamily: 'Times',
+                                                        fontSize: 20),
+                                                    startWidth: 0.15,
+                                                    endWidth: 0.15,
+                                                  ),
+                                                  GaugeRange(
+                                                    startValue: 5,
+                                                    endValue: 10,
+                                                    color: Color(0xff32D475),
+                                                    // label: 'Moderate',
+                                                    labelStyle: GaugeTextStyle(
+                                                        fontFamily: 'Times',
+                                                        fontSize: 20),
+                                                    startWidth: 0.15,
+                                                    endWidth: 0.15,
+                                                    sizeUnit:
+                                                        GaugeSizeUnit.factor,
+                                                  ),
+                                                  GaugeRange(
+                                                    startValue: 10,
+                                                    endValue: 15,
+                                                    color: Color(0xffFFBC17),
+                                                    // label: 'Fast',
+                                                    labelStyle: GaugeTextStyle(
+                                                        fontFamily: 'Times',
+                                                        fontSize: 20),
+                                                    sizeUnit:
+                                                        GaugeSizeUnit.factor,
+                                                    startWidth: 0.15,
+                                                    endWidth: 0.15,
+                                                  ),
+                                                  GaugeRange(
+                                                    startValue: 15,
+                                                    endValue: 20,
+                                                    color: Color(0xffE76849),
+                                                    // label: 'Fast',
+                                                    labelStyle: GaugeTextStyle(
+                                                        fontFamily: 'Times',
+                                                        fontSize: 20),
+                                                    sizeUnit:
+                                                        GaugeSizeUnit.factor,
+                                                    startWidth: 0.15,
+                                                    endWidth: 0.15,
+                                                  ),
+                                                  GaugeRange(
+                                                    startValue: 20,
+                                                    endValue: 27,
+                                                    color: Color(0xffF14949),
+                                                    // label: 'Fast',
+                                                    labelStyle: GaugeTextStyle(
+                                                        fontFamily: 'Times',
+                                                        fontSize: 20),
+                                                    sizeUnit:
+                                                        GaugeSizeUnit.factor,
+                                                    startWidth: 0.15,
+                                                    endWidth: 0.15,
+                                                  ),
+                                                ],
+                                                pointers: <GaugePointer>[
+                                                  MarkerPointer(
+                                                      value: double.parse(
+                                                        result.data![
+                                                                'getCurrentUser'][0]
+                                                            [
+                                                            'appropiatePHQSeverityScore'],
+                                                      ),
+                                                      enableDragging: true,
+                                                      markerWidth: 20,
+                                                      markerHeight: 20,
+                                                      markerOffset: 30,
+                                                      overlayColor: Colors.red
+                                                          .withOpacity(0.12),
+                                                      markerType:
+                                                          MarkerType.triangle)
+                                                ],
+                                                annotations: <GaugeAnnotation>[
+                                                  GaugeAnnotation(
+                                                      angle: 90,
+                                                      positionFactor: 0,
+                                                      widget: Text(
+                                                        result.data![
+                                                                'getCurrentUser'][0]
+                                                            [
+                                                            'appropiatePHQSeverityScore'],
+                                                        style:
+                                                            GoogleFonts.karla(
+                                                                fontWeight:
+                                                                    FontWeight
+                                                                        .bold,
+                                                                fontSize: 26),
+                                                      ))
+                                                ])
+                                          ],
+                                        ),
                                       ),
-                                    ),
-                                    SizedBox(
-                                      width: 25,
-                                    ),
-                                    Column(
-                                      children: [
-                                        Text(
-                                          "My PHQ-9 Severity",
-                                          style: GoogleFonts.karla(
-                                            color: Colors.redAccent,
-                                            fontSize: 16.0,
-                                            fontWeight: FontWeight.bold,
-                                          ),
+                                      SizedBox(
+                                        width: 25,
+                                      ),
+                                      Container(
+                                        width:
+                                            MediaQuery.of(context).size.width *
+                                                0.35,
+                                        child: Column(
+                                          children: [
+                                            Text(
+                                              "My PHQ-9 Severity",
+                                              style: GoogleFonts.karla(
+                                                color: Colors.redAccent,
+                                                fontSize: 12.0,
+                                                fontWeight: FontWeight.bold,
+                                              ),
+                                            ),
+                                            SizedBox(
+                                              height: 10,
+                                            ),
+                                            Container(
+                                              width: MediaQuery.of(context)
+                                                  .size
+                                                  .width,
+                                              child: Text(
+                                                result.data!['getCurrentUser']
+                                                        [0]
+                                                    ['appropiatePHQSeverity'],
+                                                style: GoogleFonts.karla(
+                                                  fontSize: 12.0,
+                                                  color: Colors.black,
+                                                ),
+                                              ),
+                                            )
+                                          ],
                                         ),
-                                        SizedBox(
-                                          height: 10,
-                                        ),
-                                        Text(
-                                          result.data!['getCurrentUser'][0]
-                                              ['appropiatePHQSeverity'],
-                                          style: GoogleFonts.karla(
-                                            fontSize: 15.0,
-                                            color: Colors.black,
-                                          ),
-                                        ),
-                                      ],
-                                    ),
-                                    Spacer(),
-                                  ],
-                                ),
-                              )),
+                                      ),
+                                      Spacer(),
+                                    ],
+                                  ),
+                                )),
+                          ),
                           SizedBox(
                             height: 30,
                           ),

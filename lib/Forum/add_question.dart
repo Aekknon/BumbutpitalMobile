@@ -171,8 +171,26 @@ class _AddQuestionState extends State<AddQuestion> {
     );
   }
 
+  Future ErrorDialog1() async {
+    return await showDialog(
+      context: context,
+      builder: (context) => AlertDialog(
+        content: Text("Please fill all of Title and Question field Please"),
+        actions: [
+          TextButton(
+              child: Text("OK", style: TextStyle(color: Colors.blue)),
+              onPressed: () {
+                Navigator.pop(context, true);
+              })
+        ],
+      ),
+    );
+  }
+
   Future<void> onSubmit(RunMutation run) async {
-    if (_title.text.isEmpty && _description.text.isEmpty) return;
+    if (_title.text.isEmpty || _description.text.isEmpty) {
+      return await ErrorDialog1();
+    }
     try {
       final response = run({
         "title": _title.text,

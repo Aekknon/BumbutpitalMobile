@@ -5,6 +5,8 @@ import 'package:flutter/material.dart';
 import 'package:syncfusion_flutter_gauges/gauges.dart';
 import 'package:graphql_flutter/graphql_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:intl/intl.dart';
+import "dart:math";
 
 class ShowResult extends StatelessWidget {
   static const routeName = "/question/result";
@@ -29,10 +31,12 @@ class ShowResult extends StatelessWidget {
 
   static const addPHQ9Score = """
       
-     mutation(\$phq9: String! , \$phq9score: String!){
-  addPHQScore( appropiatePHQSeverity:\$phq9 ,appropiatePHQSeverityScore: \$phq9score){
-    successful
-    message
+     mutation(\$phq9: String! , \$phq9score: String! , \$appropiatePHQSeverityLog: String! ,  \$appropiatePHQSeverityScoreLog: String! ){
+  addPHQScore( appropiatePHQSeverity:\$phq9 ,appropiatePHQSeverityScore: \$phq9score , appropiatePHQSeverityLog: \$appropiatePHQSeverityLog,  appropiatePHQSeverityScoreLog: \$appropiatePHQSeverityScoreLog ){
+    appropiatePHQSeverity
+    appropiatePHQSeverityScore
+    appropiatePHQSeverityLog
+    appropiatePHQSeverityScoreLog
   }
 }
                         """;
@@ -46,6 +50,7 @@ class ShowResult extends StatelessWidget {
     email
     phoneNumber
     appropiatePHQSeverity
+    appropiatePHQSeverityScore
 
 
     }
@@ -59,8 +64,7 @@ class ShowResult extends StatelessWidget {
     return Scaffold(
         backgroundColor: Color(0XFFECF2FF),
         body: Query(
-          options: QueryOptions(
-              document: gql(query), pollInterval: Duration(seconds: 1)),
+          options: QueryOptions(document: gql(query)),
           builder: (QueryResult result, {fetchMore, refetch}) {
             if (result.hasException) {
               return Text(result.exception.toString());
@@ -74,13 +78,31 @@ class ShowResult extends StatelessWidget {
             if (result.data == null) {
               return Text(result.toString());
             }
+            bool visibleFirstTime = true;
+            String LastPHQ9Score = '';
+            if (result.data!['getCurrentUser'][0]
+                        ['appropiatePHQSeverityScore'] ==
+                    null ||
+                result.data!['getCurrentUser'][0]
+                        ['appropiatePHQSeverityScore'] ==
+                    "") {
+              LastPHQ9Score = "0";
+              visibleFirstTime = false;
+              print("======================");
+            } else {
+              LastPHQ9Score = result.data!['getCurrentUser'][0]
+                  ['appropiatePHQSeverityScore'];
+              visibleFirstTime = true;
+            }
             final Phq9Score =
                 result.data!['getCurrentUser'][0]['phq9permission'];
             Future<void> onSubmit(RunMutation run) async {
               try {
                 final response = run({
                   "phq9": getPhq9Type(PHQ9result),
-                  "phq9score": PHQ9result.toString()
+                  "phq9score": PHQ9result.toString(),
+                  "appropiatePHQSeverityLog": getPhq9Type(PHQ9result),
+                  "appropiatePHQSeverityScoreLog": PHQ9result.toString(),
                 });
                 print((await response.networkResult) as dynamic);
 
@@ -105,6 +127,44 @@ class ShowResult extends StatelessWidget {
                   },
                 );
               }
+            }
+
+            var listDecrease = [
+              'You are great. We hope you are in better mental health.',
+              'Are you in a better mood? You will be in a better mood tomorrow.',
+              'Very good. We hope that we are one of the things that make you feel better.',
+              'Today must be a good day. Have a good day',
+              'May every day be a better day than today'
+            ];
+            var listIncrease = [
+              'Are you tired? It is okay. Tomorrow will be better.',
+              'It is okay, even if your symptoms are not getting better. But let \'s try together.',
+              'It is okay if you still do not understand anything. Let \'s find our story and read it.',
+              'Are you tired? It is okay, we will help you. The next round must be better for sure.',
+              'Do not stop trying There is always hope for tomorrow.'
+            ];
+            var listSame = [
+              'Until now the score will be the same. But the next round must be better.',
+              'not getting better But it is not worse.',
+              'good effort do not stop trying',
+            ];
+            
+            final _random = new Random();
+            var LastsocreInt = int.parse(LastPHQ9Score);
+            String TextScore = '';
+            var TextHope = "";
+            if (LastsocreInt < PHQ9result && LastsocreInt != 0) {
+              TextScore = "Your appropiatePHQSeverityScore is increase from";
+              TextHope = listIncrease[_random.nextInt(listIncrease.length)];
+            } else if (LastsocreInt > PHQ9result && LastsocreInt != 0) {
+              TextScore = "Your appropiatePHQSeverityScore is decrease from";
+              TextHope = listDecrease[_random.nextInt(listDecrease.length)];
+            } else if (LastsocreInt == 0 ) {
+              TextScore = "It is your first time, It look Grate";
+              TextHope = "";
+            } else {
+              TextScore = "Your appropiatePHQSeverityScore is the same";
+              TextHope = listSame[_random.nextInt(listSame.length)];
             }
 
             return Center(
@@ -200,11 +260,48 @@ class ShowResult extends StatelessWidget {
                             GaugeAnnotation(
                                 angle: 90,
                                 positionFactor: 0,
-                                widget: Text(
-                                  '$PHQ9result',
-                                  style: GoogleFonts.karla(
-                                      fontWeight: FontWeight.bold,
-                                      fontSize: 40),
+                                widget: Container(
+                                  transform:
+                                      Matrix4.translationValues(0, 200, 0.0),
+                                  child: Column(
+                                    children: [
+                                      Text(TextScore),
+                                      Row(
+                                        children: [
+                                          Spacer(),
+                                          Visibility(
+                                            visible: visibleFirstTime,
+                                            child: Text(
+                                              LastPHQ9Score,
+                                              style: GoogleFonts.karla(
+                                                  fontSize: 40),
+                                            ),
+                                          ),
+                                          Visibility(
+                                            visible: visibleFirstTime,
+                                            child: SizedBox(width: 20),
+                                          ),
+                                          
+                                          Visibility(
+                                            visible: visibleFirstTime,
+                                            child: Icon(
+                                                Icons.arrow_forward_rounded),
+                                          ),
+                                          Visibility(
+                                            visible: visibleFirstTime,
+                                            child: SizedBox(width: 20),
+                                          ),
+                                          
+                                          Text(
+                                            '$PHQ9result',
+                                            style:
+                                                GoogleFonts.karla(fontSize: 40),
+                                          ),
+                                          Spacer(),
+                                        ],
+                                      ),
+                                    ],
+                                  ),
                                 ))
                           ])
                     ],
@@ -213,10 +310,16 @@ class ShowResult extends StatelessWidget {
                     children: [
                       Text(
                         'You are ${getPhq9Type(PHQ9result)}.',
-                        style: GoogleFonts.karla(
-                            fontWeight: FontWeight.bold, fontSize: 24),
+                        style: GoogleFonts.karla(fontSize: 24),
                         textAlign: TextAlign.center,
                       ),
+                      SizedBox(
+                        height: 10,
+                      ),
+                      Container(
+                        width: MediaQuery.of(context).size.width * 0.8,
+                        child: Text(TextHope),
+                      )
                     ],
                   ),
                   SizedBox(
