@@ -210,13 +210,16 @@ class _KeepkoopongPageState extends State<KeepkoopongPage> {
                           SizedBox(
                             height: 15,
                           ),
-                          Text(
-                            promotiondata[0],
-                            style: TextStyle(
-                                fontSize: 18,
-                                color: Colors.black,
-                                decoration: TextDecoration.none,
-                                fontWeight: FontWeight.bold),
+                          Container(
+                            width: MediaQuery.of(context).size.width*0.9,
+                            child: Text(
+                              promotiondata[0],
+                              style: TextStyle(
+                                  fontSize: 18,
+                                  color: Colors.black,
+                                  decoration: TextDecoration.none,
+                                  fontWeight: FontWeight.bold),
+                            ),
                           ),
                           SizedBox(
                             height: 15,
@@ -293,7 +296,8 @@ class _KeepkoopongPageState extends State<KeepkoopongPage> {
                                       padding: EdgeInsets.symmetric(
                                           horizontal: 40, vertical: 15),
                                     ),
-                                    child: Text("Keep Promorion", style: GoogleFonts.karla()),
+                                    child: Text("Keep Promorion",
+                                        style: GoogleFonts.karla()),
                                   ),
                                 ),
                               ),
@@ -306,7 +310,8 @@ class _KeepkoopongPageState extends State<KeepkoopongPage> {
                                     padding: EdgeInsets.symmetric(
                                         horizontal: 40, vertical: 15),
                                   ),
-                                  child: Text("Keep Promorion", style: GoogleFonts.karla()),
+                                  child: Text("Keep Promorion",
+                                      style: GoogleFonts.karla()),
                                 ),
                               ),
                               SizedBox(
@@ -332,7 +337,8 @@ class _KeepkoopongPageState extends State<KeepkoopongPage> {
                                       padding: EdgeInsets.symmetric(
                                           horizontal: 40, vertical: 15),
                                     ),
-                                    child: Text("Use Promorion", style: GoogleFonts.karla()),
+                                    child: Text("Use Promorion",
+                                        style: GoogleFonts.karla()),
                                   ),
                                 ),
                               ),
@@ -528,7 +534,10 @@ class _KeepCurrentKoopongPageState extends State<KeepCurrentKoopongPage> {
                                 padding: EdgeInsets.symmetric(
                                     horizontal: 40, vertical: 15),
                               ),
-                              child: Text("Use Promorion" , style: GoogleFonts.karla(),),
+                              child: Text(
+                                "Use Promorion",
+                                style: GoogleFonts.karla(),
+                              ),
                             ),
                           ),
                         ),

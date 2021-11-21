@@ -9,7 +9,6 @@ class VideotCard extends StatelessWidget {
                     query {
     getMinimalVideo{
       videoID
-      staffID
       appropiatePHQSeverity
       title
       pictureUrl
@@ -76,13 +75,23 @@ class VideotCard extends StatelessWidget {
                                             right: 0,
                                             top: 10,
                                             bottom: 5),
-                                        child: Image.network(
-                                          result.data!['getMinimalVideo']
-                                              [reverseIndex]['pictureUrl'],
-                                          fit: BoxFit.cover,
-                                          height: 100,
-                                          width: 150,
-                                        )),
+                                        child: Container(
+                                            width: 150,
+                                            height: 100,
+                                            decoration: BoxDecoration(
+                                                borderRadius: BorderRadius.only(
+                                                    topLeft:
+                                                        Radius.circular(10),
+                                                    bottomLeft:
+                                                        Radius.circular(10)),
+                                                image: DecorationImage(
+                                                    image: NetworkImage(
+                                                      result.data![
+                                                                  'getMinimalVideo']
+                                                              [reverseIndex]
+                                                          ['pictureUrl'],
+                                                    ),
+                                                    fit: BoxFit.cover)))),
                                     Container(
                                       height: 94,
                                       decoration: BoxDecoration(
@@ -130,8 +139,8 @@ class VideotCard extends StatelessWidget {
                                                           [
                                                           reverseIndex]['title'],
                                                       style: GoogleFonts.karla(
-                                                        fontWeight: FontWeight.bold
-                                                      ),
+                                                          fontWeight:
+                                                              FontWeight.bold),
                                                     ),
                                                   ),
                                                 ),
@@ -181,7 +190,6 @@ class VideotCard1 extends StatelessWidget {
                     query {
     getMildVideo{
       videoID
-      staffID
       appropiatePHQSeverity
       title
       pictureUrl
@@ -244,17 +252,27 @@ class VideotCard1 extends StatelessWidget {
                                   children: [
                                     Container(
                                         padding: EdgeInsets.only(
-                                            left: 30,
+                                            left: 40,
                                             right: 0,
                                             top: 10,
                                             bottom: 5),
-                                        child: Image.network(
-                                          result.data!['getMildVideo']
-                                              [reverseIndex]['pictureUrl'],
-                                          height: 100,
-                                          width: 150,
-                                          fit: BoxFit.cover,
-                                        )),
+                                        child: Container(
+                                            width: 150,
+                                            height: 100,
+                                            decoration: BoxDecoration(
+                                                borderRadius: BorderRadius.only(
+                                                    topLeft:
+                                                        Radius.circular(10),
+                                                    bottomLeft:
+                                                        Radius.circular(10)),
+                                                image: DecorationImage(
+                                                    image: NetworkImage(
+                                                      result.data![
+                                                                  'getMildVideo']
+                                                              [reverseIndex]
+                                                          ['pictureUrl'],
+                                                    ),
+                                                    fit: BoxFit.cover)))),
                                     Container(
                                       height: 94,
                                       decoration: BoxDecoration(
@@ -302,9 +320,8 @@ class VideotCard1 extends StatelessWidget {
                                                               [reverseIndex]
                                                           ['title'],
                                                       style: GoogleFonts.karla(
-                                                        fontWeight: FontWeight.bold
-                                                      
-                                                      ),
+                                                          fontWeight:
+                                                              FontWeight.bold),
                                                     ),
                                                   ),
                                                 ),
@@ -351,7 +368,6 @@ class VideotCard2 extends StatelessWidget {
                     query {
     getModerateVideo{
       videoID
-      staffID
       appropiatePHQSeverity
       title
       pictureUrl
@@ -413,6 +429,29 @@ class VideotCard2 extends StatelessWidget {
                                 Row(
                                   children: [
                                     Container(
+                                        padding: EdgeInsets.only(
+                                            left: 40,
+                                            right: 0,
+                                            top: 10,
+                                            bottom: 5),
+                                        child: Container(
+                                            width: 150,
+                                            height: 100,
+                                            decoration: BoxDecoration(
+                                                borderRadius: BorderRadius.only(
+                                                    topLeft:
+                                                        Radius.circular(10),
+                                                    bottomLeft:
+                                                        Radius.circular(10)),
+                                                image: DecorationImage(
+                                                    image: NetworkImage(
+                                                      result.data![
+                                                                  'getModerateVideo']
+                                                              [reverseIndex]
+                                                          ['pictureUrl'],
+                                                    ),
+                                                    fit: BoxFit.cover)))),
+                                    Container(
                                       height: 94,
                                       decoration: BoxDecoration(
                                         color: Colors.white,
@@ -459,8 +498,8 @@ class VideotCard2 extends StatelessWidget {
                                                           [
                                                           reverseIndex]['title'],
                                                       style: GoogleFonts.karla(
-                                                        fontWeight: FontWeight.bold
-                                                      ),
+                                                          fontWeight:
+                                                              FontWeight.bold),
                                                     ),
                                                   ),
                                                 ),
@@ -507,7 +546,6 @@ class VideotCard3 extends StatelessWidget {
                     query {
     getModeratelySeverVideo{
       videoID
-      staffID
       appropiatePHQSeverity
       title
       pictureUrl
@@ -572,15 +610,27 @@ class VideotCard3 extends StatelessWidget {
                                   children: [
                                     Container(
                                         padding: EdgeInsets.only(
-                                            left: 30, top: 10, bottom: 5),
-                                        child: Image.network(
-                                          result.data![
-                                                  'getModeratelySeverVideo']
-                                              [reverseIndex]['pictureUrl'],
-                                          height: 100,
-                                          width: 150,
-                                          fit: BoxFit.cover,
-                                        )),
+                                            left: 40,
+                                            right: 0,
+                                            top: 10,
+                                            bottom: 5),
+                                        child: Container(
+                                            width: 150,
+                                            height: 100,
+                                            decoration: BoxDecoration(
+                                                borderRadius: BorderRadius.only(
+                                                    topLeft:
+                                                        Radius.circular(10),
+                                                    bottomLeft:
+                                                        Radius.circular(10)),
+                                                image: DecorationImage(
+                                                    image: NetworkImage(
+                                                      result.data![
+                                                                  'getModeratelySeverVideo']
+                                                              [reverseIndex]
+                                                          ['pictureUrl'],
+                                                    ),
+                                                    fit: BoxFit.cover)))),
                                     Container(
                                       height: 94,
                                       decoration: BoxDecoration(
@@ -628,8 +678,8 @@ class VideotCard3 extends StatelessWidget {
                                                           [
                                                           reverseIndex]['title'],
                                                       style: GoogleFonts.karla(
-                                                         fontWeight: FontWeight.bold
-                                                      ),
+                                                          fontWeight:
+                                                              FontWeight.bold),
                                                     ),
                                                   ),
                                                 ),
@@ -676,7 +726,6 @@ class VideotCard4 extends StatelessWidget {
                     query {
     getSevereVideo{
       videoID
-      staffID
       appropiatePHQSeverity
       title
       pictureUrl
@@ -739,15 +788,30 @@ class VideotCard4 extends StatelessWidget {
                                         children: [
                                           Container(
                                               padding: EdgeInsets.only(
-                                                  left: 30, top: 10, bottom: 5),
-                                              child: Image.network(
-                                                result.data!['getSevereVideo']
-                                                        [reverseIndex]
-                                                    ['pictureUrl'],
-                                                height: 100,
-                                                width: 150,
-                                                fit: BoxFit.cover,
-                                              )),
+                                                  left: 40,
+                                                  right: 0,
+                                                  top: 10,
+                                                  bottom: 5),
+                                              child: Container(
+                                                  width: 150,
+                                                  height: 100,
+                                                  decoration: BoxDecoration(
+                                                      borderRadius:
+                                                          BorderRadius.only(
+                                                              topLeft: Radius
+                                                                  .circular(10),
+                                                              bottomLeft: Radius
+                                                                  .circular(
+                                                                      10)),
+                                                      image: DecorationImage(
+                                                          image: NetworkImage(
+                                                            result.data![
+                                                                        'getSevereVideo']
+                                                                    [
+                                                                    reverseIndex]
+                                                                ['pictureUrl'],
+                                                          ),
+                                                          fit: BoxFit.cover)))),
                                           Container(
                                             height: 94,
                                             decoration: BoxDecoration(
@@ -800,10 +864,10 @@ class VideotCard4 extends StatelessWidget {
                                                                     [
                                                                     reverseIndex]
                                                                 ['title'],
-                                                            style: GoogleFonts
-                                                                .karla(
-                                                              fontWeight: FontWeight.bold
-                                                            ),
+                                                            style: GoogleFonts.karla(
+                                                                fontWeight:
+                                                                    FontWeight
+                                                                        .bold),
                                                           ),
                                                         ),
                                                       ),
@@ -849,7 +913,6 @@ class VideotCard5 extends StatelessWidget {
                     query {
     getSmartVideo{
       videoID
-      staffID
       appropiatePHQSeverity
       title
       pictureUrl
@@ -912,15 +975,30 @@ class VideotCard5 extends StatelessWidget {
                                         children: [
                                           Container(
                                               padding: EdgeInsets.only(
-                                                  left: 30, top: 10, bottom: 5),
-                                              child: Image.network(
-                                                result.data!['getSmartVideo']
-                                                        [reverseIndex]
-                                                    ['pictureUrl'],
-                                                height: 100,
-                                                width: 150,
-                                                fit: BoxFit.cover,
-                                              )),
+                                                  left: 40,
+                                                  right: 0,
+                                                  top: 10,
+                                                  bottom: 5),
+                                              child: Container(
+                                                  width: 150,
+                                                  height: 100,
+                                                  decoration: BoxDecoration(
+                                                      borderRadius:
+                                                          BorderRadius.only(
+                                                              topLeft: Radius
+                                                                  .circular(10),
+                                                              bottomLeft: Radius
+                                                                  .circular(
+                                                                      10)),
+                                                      image: DecorationImage(
+                                                          image: NetworkImage(
+                                                            result.data![
+                                                                        'getSmartVideo']
+                                                                    [
+                                                                    reverseIndex]
+                                                                ['pictureUrl'],
+                                                          ),
+                                                          fit: BoxFit.cover)))),
                                           Container(
                                             height: 94,
                                             decoration: BoxDecoration(
@@ -973,10 +1051,10 @@ class VideotCard5 extends StatelessWidget {
                                                                     [
                                                                     reverseIndex]
                                                                 ['title'],
-                                                            style: GoogleFonts
-                                                                .karla(
-                                                                fontWeight: FontWeight.bold
-                                                            ),
+                                                            style: GoogleFonts.karla(
+                                                                fontWeight:
+                                                                    FontWeight
+                                                                        .bold),
                                                           ),
                                                         ),
                                                       ),

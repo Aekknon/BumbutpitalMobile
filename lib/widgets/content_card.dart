@@ -3,9 +3,16 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:graphql_flutter/graphql_flutter.dart';
 
-class ContentCard extends StatelessWidget {
-  const ContentCard({Key? key}) : super(key: key);
+class ContentCard extends StatefulWidget {
+  ContentCard({Key? key}) : super(key: key);
 
+  @override
+  _ContentCardState createState() => _ContentCardState();
+}
+
+class _ContentCardState extends State<ContentCard> {
+  TextEditingController _textController = TextEditingController();
+  bool isSearching = false;
   static const query = """
                    query {
     getMinimalContent {
@@ -39,6 +46,7 @@ class ContentCard extends StatelessWidget {
           return Text(result.toString());
         }
         final content = result.data!['getMinimalContent'];
+
         return Column(
           children: [
             Expanded(
@@ -70,6 +78,7 @@ class ContentCard extends StatelessWidget {
                           },
                           child: Column(
                             children: [
+                              
                               Container(
                                 height: 250,
                                 width: MediaQuery.of(context).size.width * 0.9,
@@ -115,16 +124,18 @@ class ContentCard extends StatelessWidget {
                                         bottomRight: Radius.circular(10)),
                                   ),
                                   child: SingleChildScrollView(
-                                    scrollDirection: Axis.horizontal,
-                                    child: Row(children: [
-                                      
-                                      Text(
-                                      result.data!['getMinimalContent']
-                                          [reverseIndex]['title'],
-                                      style: GoogleFonts.karla(fontSize: 16 , fontWeight: FontWeight.bold),
-                                    ),
-                                    ],)
-                                  )),
+                                      scrollDirection: Axis.horizontal,
+                                      child: Row(
+                                        children: [
+                                          Text(
+                                            result.data!['getMinimalContent']
+                                                [reverseIndex]['title'],
+                                            style: GoogleFonts.karla(
+                                                fontSize: 16,
+                                                fontWeight: FontWeight.bold),
+                                          ),
+                                        ],
+                                      ))),
                             ],
                           )),
                       SizedBox(
@@ -191,23 +202,23 @@ class ContentCard1 extends StatelessWidget {
                   return Column(
                     children: [
                       InkWell(
-                        onTap: () {
-                          Navigator.pushNamed(
-                            context,
-                            "/ContentDetail",
-                            arguments: [
-                              result.data!['getMildContent'][reverseIndex]
-                                  ['pictureUrl'],
-                              result.data!['getMildContent'][reverseIndex]
-                                  ['title'],
-                              result.data!['getMildContent'][reverseIndex]
-                                  ['description'],
-                              result.data!['getMildContent'][reverseIndex]
-                                  ['createAt']
-                            ],
-                          );
-                        },
-                        child: Column(
+                          onTap: () {
+                            Navigator.pushNamed(
+                              context,
+                              "/ContentDetail",
+                              arguments: [
+                                result.data!['getMildContent'][reverseIndex]
+                                    ['pictureUrl'],
+                                result.data!['getMildContent'][reverseIndex]
+                                    ['title'],
+                                result.data!['getMildContent'][reverseIndex]
+                                    ['description'],
+                                result.data!['getMildContent'][reverseIndex]
+                                    ['createAt']
+                              ],
+                            );
+                          },
+                          child: Column(
                             children: [
                               Container(
                                 height: 250,
@@ -254,19 +265,20 @@ class ContentCard1 extends StatelessWidget {
                                         bottomRight: Radius.circular(10)),
                                   ),
                                   child: SingleChildScrollView(
-                                    scrollDirection: Axis.horizontal,
-                                    child:  Row(children: [
-                                      
-                                      Text(
-                                      result.data!['getMildContent']
-                                          [reverseIndex]['title'],
-                                      style: GoogleFonts.karla(fontSize: 16 , fontWeight: FontWeight.bold),
-                                    ),
-                                    ],)
-                                  )),
+                                      scrollDirection: Axis.horizontal,
+                                      child: Row(
+                                        children: [
+                                          Text(
+                                            result.data!['getMildContent']
+                                                [reverseIndex]['title'],
+                                            style: GoogleFonts.karla(
+                                                fontSize: 16,
+                                                fontWeight: FontWeight.bold),
+                                          ),
+                                        ],
+                                      ))),
                             ],
-                          )
-                      ),
+                          )),
                       SizedBox(
                         height: 30,
                       )
@@ -332,23 +344,23 @@ class ContentCard2 extends StatelessWidget {
                   return Column(
                     children: [
                       InkWell(
-                        onTap: () {
-                          Navigator.pushNamed(
-                            context,
-                            "/ContentDetail",
-                            arguments: [
-                              result.data!['getModerateContent'][reverseIndex]
-                                  ['pictureUrl'],
-                              result.data!['getModerateContent'][reverseIndex]
-                                  ['title'],
-                              result.data!['getModerateContent'][reverseIndex]
-                                  ['description'],
-                              result.data!['getModerateContent'][reverseIndex]
-                                  ['createAt']
-                            ],
-                          );
-                        },
-                        child: Column(
+                          onTap: () {
+                            Navigator.pushNamed(
+                              context,
+                              "/ContentDetail",
+                              arguments: [
+                                result.data!['getModerateContent'][reverseIndex]
+                                    ['pictureUrl'],
+                                result.data!['getModerateContent'][reverseIndex]
+                                    ['title'],
+                                result.data!['getModerateContent'][reverseIndex]
+                                    ['description'],
+                                result.data!['getModerateContent'][reverseIndex]
+                                    ['createAt']
+                              ],
+                            );
+                          },
+                          child: Column(
                             children: [
                               Container(
                                 height: 250,
@@ -395,19 +407,20 @@ class ContentCard2 extends StatelessWidget {
                                         bottomRight: Radius.circular(10)),
                                   ),
                                   child: SingleChildScrollView(
-                                    scrollDirection: Axis.horizontal,
-                                    child:  Row(children: [
-                                     
-                                      Text(
-                                      result.data!['getModerateContent']
-                                          [reverseIndex]['title'],
-                                      style: GoogleFonts.karla(fontSize: 16 , fontWeight: FontWeight.bold),
-                                    ),
-                                    ],)
-                                  )),
+                                      scrollDirection: Axis.horizontal,
+                                      child: Row(
+                                        children: [
+                                          Text(
+                                            result.data!['getModerateContent']
+                                                [reverseIndex]['title'],
+                                            style: GoogleFonts.karla(
+                                                fontSize: 16,
+                                                fontWeight: FontWeight.bold),
+                                          ),
+                                        ],
+                                      ))),
                             ],
-                          )
-                      ),
+                          )),
                       SizedBox(
                         height: 30,
                       )
@@ -475,82 +488,89 @@ class ContentCard3 extends StatelessWidget {
                         return Column(
                           children: [
                             InkWell(
-                              onTap: () {
-                                Navigator.pushNamed(
-                                  context,
-                                  "/ContentDetail",
-                                  arguments: [
-                                    result.data!['getModeratelySeverContent']
-                                        [reverseIndex]['pictureUrl'],
-                                    result.data!['getModeratelySeverContent']
-                                        [reverseIndex]['title'],
-                                    result.data!['getModeratelySeverContent']
-                                        [reverseIndex]['description'],
-                                    result.data!['getModeratelySeverContent']
-                                        [reverseIndex]['createAt']
-                                  ],
-                                );
-                              },
-                              child:Column(
-                            children: [
-                              Container(
-                                height: 250,
-                                width: MediaQuery.of(context).size.width * 0.9,
-                                padding: EdgeInsets.all(20),
-                                decoration: BoxDecoration(
-                                    boxShadow: [
-                                      BoxShadow(
-                                        color: Colors.grey.withOpacity(0.5),
-                                        spreadRadius: 2,
-                                        blurRadius: 5,
-                                        offset: Offset(
-                                            0, 3), // changes position of shadow
-                                      ),
-                                    ],
-                                    borderRadius: BorderRadius.only(
-                                        topLeft: Radius.circular(10),
-                                        topRight: Radius.circular(10)),
-                                    image: DecorationImage(
-                                      image: NetworkImage(
-                                          result.data!['getModeratelySeverContent']
-                                              [reverseIndex]['pictureUrl']),
-                                      fit: BoxFit.cover,
-                                    )),
-                              ),
-                              Container(
-                                  height: 40,
-                                  width:
-                                      MediaQuery.of(context).size.width * 0.9,
-                                  padding: EdgeInsets.all(10),
-                                  decoration: BoxDecoration(
-                                    color: Colors.white,
-                                    boxShadow: [
-                                      BoxShadow(
-                                        color: Colors.grey.withOpacity(0.5),
-                                        spreadRadius: 2,
-                                        blurRadius: 5,
-                                        offset: Offset(
-                                            0, 3), // changes position of shadow
-                                      ),
-                                    ],
-                                    borderRadius: BorderRadius.only(
-                                        bottomLeft: Radius.circular(10),
-                                        bottomRight: Radius.circular(10)),
-                                  ),
-                                  child: SingleChildScrollView(
-                                    scrollDirection: Axis.horizontal,
-                                    child:  Row(children: [
-                                     
-                                      Text(
+                                onTap: () {
+                                  Navigator.pushNamed(
+                                    context,
+                                    "/ContentDetail",
+                                    arguments: [
+                                      result.data!['getModeratelySeverContent']
+                                          [reverseIndex]['pictureUrl'],
                                       result.data!['getModeratelySeverContent']
                                           [reverseIndex]['title'],
-                                      style: GoogleFonts.karla(fontSize: 16 , fontWeight: FontWeight.bold),
+                                      result.data!['getModeratelySeverContent']
+                                          [reverseIndex]['description'],
+                                      result.data!['getModeratelySeverContent']
+                                          [reverseIndex]['createAt']
+                                    ],
+                                  );
+                                },
+                                child: Column(
+                                  children: [
+                                    Container(
+                                      height: 250,
+                                      width: MediaQuery.of(context).size.width *
+                                          0.9,
+                                      padding: EdgeInsets.all(20),
+                                      decoration: BoxDecoration(
+                                          boxShadow: [
+                                            BoxShadow(
+                                              color:
+                                                  Colors.grey.withOpacity(0.5),
+                                              spreadRadius: 2,
+                                              blurRadius: 5,
+                                              offset: Offset(0,
+                                                  3), // changes position of shadow
+                                            ),
+                                          ],
+                                          borderRadius: BorderRadius.only(
+                                              topLeft: Radius.circular(10),
+                                              topRight: Radius.circular(10)),
+                                          image: DecorationImage(
+                                            image: NetworkImage(result.data![
+                                                    'getModeratelySeverContent']
+                                                [reverseIndex]['pictureUrl']),
+                                            fit: BoxFit.cover,
+                                          )),
                                     ),
-                                    ],)
-                                  )),
-                            ],
-                          )
-                            ),
+                                    Container(
+                                        height: 40,
+                                        width:
+                                            MediaQuery.of(context).size.width *
+                                                0.9,
+                                        padding: EdgeInsets.all(10),
+                                        decoration: BoxDecoration(
+                                          color: Colors.white,
+                                          boxShadow: [
+                                            BoxShadow(
+                                              color:
+                                                  Colors.grey.withOpacity(0.5),
+                                              spreadRadius: 2,
+                                              blurRadius: 5,
+                                              offset: Offset(0,
+                                                  3), // changes position of shadow
+                                            ),
+                                          ],
+                                          borderRadius: BorderRadius.only(
+                                              bottomLeft: Radius.circular(10),
+                                              bottomRight: Radius.circular(10)),
+                                        ),
+                                        child: SingleChildScrollView(
+                                            scrollDirection: Axis.horizontal,
+                                            child: Row(
+                                              children: [
+                                                Text(
+                                                  result.data![
+                                                          'getModeratelySeverContent']
+                                                      [reverseIndex]['title'],
+                                                  style: GoogleFonts.karla(
+                                                      fontSize: 16,
+                                                      fontWeight:
+                                                          FontWeight.bold),
+                                                ),
+                                              ],
+                                            ))),
+                                  ],
+                                )),
                             SizedBox(
                               height: 30,
                             )
@@ -615,23 +635,23 @@ class ContentCard4 extends StatelessWidget {
                   return Column(
                     children: [
                       InkWell(
-                        onTap: () {
-                          Navigator.pushNamed(
-                            context,
-                            "/ContentDetail",
-                            arguments: [
-                              result.data!['getSevereContent'][reverseIndex]
-                                  ['pictureUrl'],
-                              result.data!['getSevereContent'][reverseIndex]
-                                  ['title'],
-                              result.data!['getSevereContent'][reverseIndex]
-                                  ['description'],
-                              result.data!['getSevereContent'][reverseIndex]
-                                  ['createAt']
-                            ],
-                          );
-                        },
-                        child: Column(
+                          onTap: () {
+                            Navigator.pushNamed(
+                              context,
+                              "/ContentDetail",
+                              arguments: [
+                                result.data!['getSevereContent'][reverseIndex]
+                                    ['pictureUrl'],
+                                result.data!['getSevereContent'][reverseIndex]
+                                    ['title'],
+                                result.data!['getSevereContent'][reverseIndex]
+                                    ['description'],
+                                result.data!['getSevereContent'][reverseIndex]
+                                    ['createAt']
+                              ],
+                            );
+                          },
+                          child: Column(
                             children: [
                               Container(
                                 height: 250,
@@ -678,19 +698,20 @@ class ContentCard4 extends StatelessWidget {
                                         bottomRight: Radius.circular(10)),
                                   ),
                                   child: SingleChildScrollView(
-                                    scrollDirection: Axis.horizontal,
-                                    child:  Row(children: [
-                                     
-                                      Text(
-                                      result.data!['getSevereContent']
-                                          [reverseIndex]['title'],
-                                      style: GoogleFonts.karla(fontSize: 16 , fontWeight: FontWeight.bold),
-                                    ),
-                                    ],)
-                                  )),
+                                      scrollDirection: Axis.horizontal,
+                                      child: Row(
+                                        children: [
+                                          Text(
+                                            result.data!['getSevereContent']
+                                                [reverseIndex]['title'],
+                                            style: GoogleFonts.karla(
+                                                fontSize: 16,
+                                                fontWeight: FontWeight.bold),
+                                          ),
+                                        ],
+                                      ))),
                             ],
-                          )
-                      ),
+                          )),
                       SizedBox(
                         height: 30,
                       )
@@ -755,23 +776,23 @@ class ContentCard5 extends StatelessWidget {
                   return Column(
                     children: [
                       InkWell(
-                        onTap: () {
-                          Navigator.pushNamed(
-                            context,
-                            "/ContentDetail",
-                            arguments: [
-                              result.data!['getSmartContent'][reverseIndex]
-                                  ['pictureUrl'],
-                              result.data!['getSmartContent'][reverseIndex]
-                                  ['title'],
-                              result.data!['getSmartContent'][reverseIndex]
-                                  ['description'],
-                              result.data!['getSmartContent'][reverseIndex]
-                                  ['createAt']
-                            ],
-                          );
-                        },
-                        child: Column(
+                          onTap: () {
+                            Navigator.pushNamed(
+                              context,
+                              "/ContentDetail",
+                              arguments: [
+                                result.data!['getSmartContent'][reverseIndex]
+                                    ['pictureUrl'],
+                                result.data!['getSmartContent'][reverseIndex]
+                                    ['title'],
+                                result.data!['getSmartContent'][reverseIndex]
+                                    ['description'],
+                                result.data!['getSmartContent'][reverseIndex]
+                                    ['createAt']
+                              ],
+                            );
+                          },
+                          child: Column(
                             children: [
                               Container(
                                 height: 250,
@@ -818,19 +839,20 @@ class ContentCard5 extends StatelessWidget {
                                         bottomRight: Radius.circular(10)),
                                   ),
                                   child: SingleChildScrollView(
-                                    scrollDirection: Axis.horizontal,
-                                    child:  Row(children: [
-                                     
-                                      Text(
-                                      result.data!['getSmartContent']
-                                          [reverseIndex]['title'],
-                                      style: GoogleFonts.karla(fontSize: 16 , fontWeight: FontWeight.bold),
-                                    ),
-                                    ],)
-                                  )),
+                                      scrollDirection: Axis.horizontal,
+                                      child: Row(
+                                        children: [
+                                          Text(
+                                            result.data!['getSmartContent']
+                                                [reverseIndex]['title'],
+                                            style: GoogleFonts.karla(
+                                                fontSize: 16,
+                                                fontWeight: FontWeight.bold),
+                                          ),
+                                        ],
+                                      ))),
                             ],
-                          )
-                      ),
+                          )),
                       SizedBox(
                         height: 30,
                       )
