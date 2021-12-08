@@ -297,7 +297,7 @@ class MyForum extends StatelessWidget {
               return Text(result.toString());
             }
             final content = result.data!['getcurrentForum'];
-            
+
             return Column(
               children: [
                 Expanded(
@@ -310,7 +310,18 @@ class MyForum extends StatelessWidget {
                         int reverseIndex =
                             result.data!['getcurrentForum'].length - 1 - index;
                         String StaffName = '';
-
+                        for (var i = 0;
+                            i < result1.data!['getAllUsers'].length;
+                            i++) {
+                          if (result.data!['getcurrentForum'][reverseIndex]
+                                  ['staffID'] ==
+                              result1.data!['getAllUsers'][i]['id']) {
+                            StaffName = result1.data!['getAllUsers'][i]['name']
+                                    .toString() +
+                                result1.data!['getAllUsers'][i]['surname']
+                                    .toString();
+                          }
+                        }
                         return Column(
                           children: [
                             Center(
@@ -338,31 +349,39 @@ class MyForum extends StatelessWidget {
                                     child: Column(
                                       children: [
                                         Container(
-                                          width: MediaQuery.of(context)
-                                                  .size
-                                                  .width *
-                                              0.7,
-                                          decoration: BoxDecoration(
-                                            color: Color(0xff6367EA),
-                                            borderRadius: BorderRadius.only(
-                                              topLeft: Radius.circular(12),
-                                              topRight: Radius.circular(12),
+                                            width: MediaQuery.of(context)
+                                                    .size
+                                                    .width *
+                                                0.7,
+                                            decoration: BoxDecoration(
+                                              color: Color(0xff6367EA),
+                                              borderRadius: BorderRadius.only(
+                                                topLeft: Radius.circular(12),
+                                                topRight: Radius.circular(12),
+                                              ),
                                             ),
-                                          ),
-                                          child: Container(
-                                            padding: EdgeInsets.all(15),
-                                            child: Text(
-                                              result.data!['getcurrentForum']
-                                                  [reverseIndex]['title'],
-                                              style: GoogleFonts.karla(
-                                                  fontSize: 16,
-                                                  fontWeight: FontWeight.bold,
-                                                  color: Colors.white,
-                                                  decoration:
-                                                      TextDecoration.none),
-                                            ),
-                                          ),
-                                        ),
+                                            child: Column(
+                                              children: [
+                                                Container(
+                                                  padding: EdgeInsets.all(15),
+                                                  child: Text(
+                                                    result.data!['getcurrentForum']
+                                                        [reverseIndex]['title'],
+                                                    style: GoogleFonts.karla(
+                                                        fontSize: 16,
+                                                        color: Colors.white,
+                                                        fontWeight:
+                                                            FontWeight.bold,
+                                                        decoration:
+                                                            TextDecoration
+                                                                .none),
+                                                  ),
+                                                ),
+                                                SizedBox(
+                                                  height: 10,
+                                                ),
+                                              ],
+                                            )),
                                         Container(
                                           width: MediaQuery.of(context)
                                                   .size
@@ -396,9 +415,9 @@ class MyForum extends StatelessWidget {
                                               child: Column(
                                                 children: [
                                                   Text(
-                                                    result.data![
-                                                            'getcurrentForum'][
-                                                        reverseIndex]['answer'],
+                                                    result.data!['getcurrentForum']
+                                                            [reverseIndex]
+                                                        ['answer'],
                                                     style: TextStyle(
                                                         fontSize: 16,
                                                         color: Colors.black,
@@ -410,21 +429,7 @@ class MyForum extends StatelessWidget {
                                                     height: 10,
                                                   ),
                                                   Text(
-                                                    result1.data!['getAllUsers']
-                                                                [
-                                                                result.data!['getcurrentForum']
-                                                                        [reverseIndex]
-                                                                    ['staffID'] - 1]
-                                                                ['name']
-                                                            .toString() +
-                                                        result1
-                                                            .data!['getAllUsers']
-                                                                [
-                                                                result.data!['getcurrentForum']
-                                                                        [reverseIndex]
-                                                                    ['staffID'] - 1]
-                                                                ['surname']
-                                                            .toString(),
+                                                    StaffName,
                                                     style: TextStyle(
                                                         fontSize: 8,
                                                         color: Colors.black,

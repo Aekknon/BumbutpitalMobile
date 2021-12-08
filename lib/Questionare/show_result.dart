@@ -148,7 +148,7 @@ class ShowResult extends StatelessWidget {
               'not getting better But it is not worse.',
               'good effort do not stop trying',
             ];
-            
+
             final _random = new Random();
             var LastsocreInt = int.parse(LastPHQ9Score);
             String TextScore = '';
@@ -159,7 +159,7 @@ class ShowResult extends StatelessWidget {
             } else if (LastsocreInt > PHQ9result && LastsocreInt != 0) {
               TextScore = "Your appropiatePHQSeverityScore is decrease from";
               TextHope = listDecrease[_random.nextInt(listDecrease.length)];
-            } else if (LastsocreInt == 0 ) {
+            } else if (LastsocreInt == 0) {
               TextScore = "It is your first time, It look Grate";
               TextHope = "";
             } else {
@@ -281,7 +281,6 @@ class ShowResult extends StatelessWidget {
                                             visible: visibleFirstTime,
                                             child: SizedBox(width: 20),
                                           ),
-                                          
                                           Visibility(
                                             visible: visibleFirstTime,
                                             child: Icon(
@@ -291,7 +290,6 @@ class ShowResult extends StatelessWidget {
                                             visible: visibleFirstTime,
                                             child: SizedBox(width: 20),
                                           ),
-                                          
                                           Text(
                                             '$PHQ9result',
                                             style:

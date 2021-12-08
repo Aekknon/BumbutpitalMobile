@@ -3,8 +3,8 @@ import 'package:bumbutpital/Authentication/Login.dart';
 import 'package:bumbutpital/Questionare/main_question.dart';
 import 'package:bumbutpital/services/graphql_config.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:graphql_flutter/graphql_flutter.dart';
-import 'package:provider/provider.dart';
 
 class SignUp extends StatefulWidget {
   @override
@@ -22,20 +22,22 @@ class _SignUpPageState extends State<SignUp> {
   }
                   """;
   static const registerMutation = """
-      mutation UserRegister(\$username: String!,\$name:String!,\$surname: String!,\$password:String!,\$email: String!,\$phoneNumber: String!) {
-      userRegister(username: \$username,name:\$name,surname:\$surname,password: \$password,email:\$email,phoneNumber:\$phoneNumber){
+      mutation UserRegister(\$username: String!,\$name:String!,\$surname: String!,\$password:String!,\$email: String!,\$phoneNumber: String!, \$role: String!  ) {
+      userRegister(username: \$username,name:\$name,surname:\$surname,password: \$password,email:\$email,phoneNumber:\$phoneNumber, role: \$role ){
         username
         name
         surname
         password
         email
         phoneNumber
+        role
       }
     }
                         """;
   final _username = TextEditingController();
   final _email = TextEditingController();
   final _password = TextEditingController();
+  final _password1 = TextEditingController();
   final _Name = TextEditingController();
   final _surName = TextEditingController();
   final _phoneNumber = TextEditingController();
@@ -97,6 +99,53 @@ class _SignUpPageState extends State<SignUp> {
             );
           }
 
+          Future ErrorDialog2() async {
+            return await showDialog(
+              context: context,
+              builder: (context) => AlertDialog(
+                content: Text("Wrong Email"),
+                actions: [
+                  TextButton(
+                      child: Text("OK", style: TextStyle(color: Colors.blue)),
+                      onPressed: () {
+                        Navigator.pop(context, true);
+                      })
+                ],
+              ),
+            );
+          }
+
+          Future ErrorDialog3() async {
+            return await showDialog(
+              context: context,
+              builder: (context) => AlertDialog(
+                content: Text("Wrong Phone Number"),
+                actions: [
+                  TextButton(
+                      child: Text("OK", style: TextStyle(color: Colors.blue)),
+                      onPressed: () {
+                        Navigator.pop(context, true);
+                      })
+                ],
+              ),
+            );
+          }
+           Future ErrorDialog4() async {
+            return await showDialog(
+              context: context,
+              builder: (context) => AlertDialog(
+                content: Text("Password not same"),
+                actions: [
+                  TextButton(
+                      child: Text("OK", style: TextStyle(color: Colors.blue)),
+                      onPressed: () {
+                        Navigator.pop(context, true);
+                      })
+                ],
+              ),
+            );
+          }
+
           Future<void> onSubmit(RunMutation run) async {
             if (result.data!['onlyusername'][0]['username'] != null) {
               for (var i = 0; i < result.data!['onlyusername'].length; i++) {
@@ -105,6 +154,19 @@ class _SignUpPageState extends State<SignUp> {
                   return await ErrorDialog();
                 }
               }
+            }
+            String pattern =
+                r"^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]"
+                r"{0,253}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]"
+                r"{0,253}[a-zA-Z0-9])?)*$";
+                if (_phoneNumber.text.length != 10  ) {
+              return await ErrorDialog3();
+            }
+            if (!_email.text.contains(RegExp(pattern))) {
+              return await ErrorDialog2();
+            }
+            if(_password.text != _password1.text){
+              return await ErrorDialog4();
             }
             if (_username.text.isEmpty ||
                 _email.text.isEmpty ||
@@ -122,6 +184,8 @@ class _SignUpPageState extends State<SignUp> {
                 "name": _Name.text,
                 "surname": _surName.text,
                 "phoneNumber": _phoneNumber.text,
+                "role": "User"
+                
               });
               print((await response.networkResult) as dynamic);
 
@@ -186,7 +250,7 @@ class _SignUpPageState extends State<SignUp> {
                         "Surname",
                       ),
                       SizedBox(height: 20),
-                      _textField(
+                      _textField2(
                         _email,
                         "Email",
                       ),
@@ -196,7 +260,12 @@ class _SignUpPageState extends State<SignUp> {
                         "Password",
                       ),
                       SizedBox(height: 20),
-                      _textField(
+                      _textField3(
+                        _password1,
+                        "Repassword",
+                      ),
+                      SizedBox(height: 20),
+                      _textField1(
                         _phoneNumber,
                         "Phone Number",
                       ),
@@ -228,7 +297,7 @@ class _SignUpPageState extends State<SignUp> {
   TextField _textField(TextEditingController cont, String label) {
     return TextField(
       controller: cont,
-      obscureText: label == "Password" ? isPasswordHidden : false,
+      obscureText: label == "Password"  ? isPasswordHidden : false,
       decoration: InputDecoration(
         border: OutlineInputBorder(),
         labelText: label,
@@ -236,6 +305,54 @@ class _SignUpPageState extends State<SignUp> {
         contentPadding: EdgeInsets.symmetric(vertical: 0, horizontal: 20),
       ),
       keyboardType: TextInputType.visiblePassword,
+      autocorrect: true,
+    );
+  }
+  TextField _textField3(TextEditingController cont, String label) {
+    return TextField(
+      controller: cont,
+      obscureText: label == "Repassword"  ? isPasswordHidden : false,
+      decoration: InputDecoration(
+        border: OutlineInputBorder(),
+        labelText: label,
+        hintText: "Enter your ${label.toLowerCase()}",
+        contentPadding: EdgeInsets.symmetric(vertical: 0, horizontal: 20),
+      ),
+      keyboardType: TextInputType.visiblePassword,
+      autocorrect: true,
+    );
+  }
+
+  TextField _textField1(TextEditingController cont, String label) {
+    return TextField(
+      inputFormatters: [
+        //only numeric keyboard.
+        LengthLimitingTextInputFormatter(10), //only 6 digit
+      ],
+      keyboardType: TextInputType.number,
+      controller: cont,
+      obscureText: label == "Password" ? isPasswordHidden : false,
+      decoration: InputDecoration(
+        border: OutlineInputBorder(),
+        labelText: label,
+        hintText: "Enter your ${label.toLowerCase()}",
+        contentPadding: EdgeInsets.symmetric(vertical: 0, horizontal: 20),
+      ),
+      autocorrect: true,
+    );
+  }
+
+  TextField _textField2(TextEditingController cont, String label) {
+    return TextField(
+      keyboardType: TextInputType.emailAddress,
+      controller: cont,
+      obscureText: label == "Password" ? isPasswordHidden : false,
+      decoration: InputDecoration(
+        border: OutlineInputBorder(),
+        labelText: label,
+        hintText: "Enter your ${label.toLowerCase()}",
+        contentPadding: EdgeInsets.symmetric(vertical: 0, horizontal: 20),
+      ),
       autocorrect: true,
     );
   }

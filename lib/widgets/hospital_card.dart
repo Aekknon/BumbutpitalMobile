@@ -9,7 +9,6 @@ class HospitalCard extends StatelessWidget {
                     query {
     getAllHospital{
       hospitalID
-      staffID
       hospitalName
       hospitalDescription
       imageUrl
