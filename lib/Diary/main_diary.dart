@@ -706,12 +706,37 @@ class _MainDiaryState extends State<MainDiary> {
                                                                 fontSize: 24)),
                                                   ),
                                                 )),
-                                            SizedBox(
-                                              height: 10,
+                                            Row(
+                                              children: [
+                                                Spacer(),
+                                                Container(
+                                                  child: IconButton(
+                                                    icon: const Icon(
+                                                      Icons.edit,
+                                                      color: Colors.white,
+                                                      
+                                                    ),
+                                                    onPressed: () => _showForm(
+                                                        _journals[reverseIndex]
+                                                            ['id']),
+                                                  ),
+                                                ),
+                                                IconButton(
+                                                  icon: const Icon(
+                                                    Icons.delete,
+                                                    
+                                                    color: Colors.red,
+                                                  ),
+                                                  onPressed: () => _deleteItem(
+                                                      _journals[reverseIndex]
+                                                          ['id']),
+                                                ),
+                                              ],
                                             ),
                                           ],
                                         ),
                                       )),
+
                                   Spacer(),
                                 ],
                               )
@@ -724,7 +749,7 @@ class _MainDiaryState extends State<MainDiary> {
       ),
       floatingActionButton: FloatingActionButton(
         backgroundColor: Color(0xff6367EA),
-        child: const Icon(Icons.add),
+        child: const Icon(Icons.create),
         onPressed: () => _showForm(null),
       ),
     );

@@ -72,11 +72,10 @@ class _LoginPageState extends State<LoginPage> {
       width: MediaQuery.of(context).size.width,
       height: MediaQuery.of(context).size.height,
       decoration: BoxDecoration(
-          gradient:
-              LinearGradient(
-                begin: Alignment.topLeft,
-                end: Alignment.bottomRight,
-                colors: [Color(0XFFECF2FF), Colors.white])),
+          gradient: LinearGradient(
+              begin: Alignment.topLeft,
+              end: Alignment.bottomRight,
+              colors: [Color(0XFFECF2FF), Colors.white])),
       child: Scaffold(
         backgroundColor: Colors.transparent,
         body: SafeArea(
@@ -102,7 +101,8 @@ class _LoginPageState extends State<LoginPage> {
                         width: 20,
                       ),
                       Text('BUMBUTPITAL',
-                          style: GoogleFonts.karla(fontWeight: FontWeight.normal , fontSize: 12)),
+                          style: GoogleFonts.karla(
+                              fontWeight: FontWeight.normal, fontSize: 12)),
                     ],
                   ),
                   SizedBox(height: 20),
@@ -110,13 +110,11 @@ class _LoginPageState extends State<LoginPage> {
                     child: Text(
                       'Login',
                       style: GoogleFonts.karla(
-                        
                         fontSize: 32,
                       ),
                     ),
                     alignment: Alignment.center,
                   ),
-                  
                   SizedBox(height: 30),
                   _textField(
                     _email,
@@ -141,7 +139,10 @@ class _LoginPageState extends State<LoginPage> {
                         padding:
                             EdgeInsets.symmetric(horizontal: 100, vertical: 15),
                       ),
-                      child: Text("Login", style: GoogleFonts.karla(),),
+                      child: Text(
+                        "Login",
+                        style: GoogleFonts.karla(),
+                      ),
                     ),
                   ),
                   SizedBox(
@@ -151,7 +152,10 @@ class _LoginPageState extends State<LoginPage> {
                     height: 16,
                   ),
                   SizedBox(height: 16),
-                  Text("Don't have an Account?" , style: GoogleFonts.karla(),),
+                  Text(
+                    "Don't have an Account?",
+                    style: GoogleFonts.karla(),
+                  ),
                   SizedBox(height: 16),
                   Container(
                       child: InkWell(
@@ -179,7 +183,7 @@ class _LoginPageState extends State<LoginPage> {
     return TextField(
       controller: cont,
       obscureText: label == "Password" ? isPasswordHidden : false,
-      style:  GoogleFonts.karla(),
+      style: GoogleFonts.karla(),
       decoration: InputDecoration(
         labelText: label,
         hintText: "Enter your ${label.toLowerCase()}",

@@ -32,8 +32,8 @@ class _BottomNavBarState extends State<BottomNavBar> {
       backgroundColor: Color(0XFFECF2FF),
       body: tab[currentTabIndex],
       bottomNavigationBar: BottomNavigationBar(
-        selectedLabelStyle: GoogleFonts.righteous(),
-        unselectedLabelStyle: GoogleFonts.righteous(),
+        selectedLabelStyle: GoogleFonts.karla(),
+        unselectedLabelStyle: GoogleFonts.karla(),
         type: BottomNavigationBarType.fixed,
         unselectedItemColor: Colors.grey,
         selectedItemColor: Color(0xFF7B8CE4),
@@ -48,7 +48,7 @@ class _BottomNavBarState extends State<BottomNavBar> {
             icon: Icon(
               Icons.help_rounded,
             ),
-            label: 'Forum',
+            label: 'Q&A',
           ),
           BottomNavigationBarItem(
             icon:Icon(

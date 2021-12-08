@@ -15,8 +15,6 @@ class _MyForumPageState extends State<MyForumPage> {
   int _currentTabs = 0;
   String selected = "1";
 
- 
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -27,24 +25,37 @@ class _MyForumPageState extends State<MyForumPage> {
             Row(
               children: [
                 Container(
-                  height: MediaQuery.of(context).size.height * 0.15,
-                  width: MediaQuery.of(context).size.width * 0.8,
-                  decoration: BoxDecoration(
-                    color: Color(0xff6367EA),
-                    borderRadius: BorderRadius.only(
-                        topRight: Radius.circular(70),
-                        bottomRight: Radius.circular(70)),
-                  ),
-                  child: Center(
-                    child: Text(
-                      'My Question',
-                      style:  GoogleFonts.righteous(
-                          fontSize: 24,
-                          color: Colors.white,
-                          decoration: TextDecoration.none),
+                    height: MediaQuery.of(context).size.height * 0.15,
+                    width: MediaQuery.of(context).size.width * 0.8,
+                    decoration: BoxDecoration(
+                      color: Color(0xff6367EA),
+                      borderRadius: BorderRadius.only(
+                          topRight: Radius.circular(70),
+                          bottomRight: Radius.circular(70)),
                     ),
-                  ),
-                ),
+                    child: Row(
+                      children: [
+                          SizedBox(width: 20,),
+                        InkWell(
+                            onTap: () {
+                              Navigator.of(context).pop();
+                            },
+                            child: Container(
+                                width: 30,
+                                height: 30,
+                                child: Icon(Icons.arrow_back_ios,color: Colors.white,))),
+                        SizedBox(width: 20,),
+                        Center(
+                          child: Text(
+                            'My Question',
+                            style: GoogleFonts.righteous(
+                                fontSize: 24,
+                                color: Colors.white,
+                                decoration: TextDecoration.none),
+                          ),
+                        ),
+                      ],
+                    )),
                 Spacer()
               ],
             ),
@@ -86,7 +97,8 @@ class _MyForumPageState extends State<MyForumPage> {
                       'Not Answer',
                       style: GoogleFonts.karla(
                           fontSize: 16,
-                          color:  selected == '2' ? Color(0xff6367EA) : Colors.grey,
+                          color:
+                              selected == '2' ? Color(0xff6367EA) : Colors.grey,
                           decoration: TextDecoration.none,
                           fontWeight: FontWeight.bold),
                     ),
@@ -106,7 +118,6 @@ class _MyForumPageState extends State<MyForumPage> {
           ],
         ),
       ),
-      
     );
   }
 }

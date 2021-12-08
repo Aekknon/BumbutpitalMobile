@@ -111,7 +111,7 @@ class _MainForumPageState extends State<MainForumPage> {
             Navigator.push(context,
                 MaterialPageRoute(builder: (context) => AddQuestion()));
           },
-          child: const Icon(Icons.add),
+          child: const Icon(Icons.create),
           backgroundColor: Color(0xff6367EA)),
     );
   }
