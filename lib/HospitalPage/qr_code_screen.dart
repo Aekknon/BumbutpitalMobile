@@ -1,6 +1,7 @@
 import 'package:bumbutpital/ComponentMainScreen/bottom_navbar.dart';
 import 'package:flutter/material.dart';
 import 'package:qr_flutter/qr_flutter.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class QRCodePage extends StatefulWidget {
   const QRCodePage({Key? key}) : super(key: key);
@@ -30,7 +31,7 @@ class _QRCodePageState extends State<QRCodePage> {
                   SizedBox(height: MediaQuery.of(context).size.height*0.15,),
                   Text(
                     'QR CODE',
-                    style: TextStyle(
+                    style: GoogleFonts.karla(
                         fontSize: 24,
                         color: Colors.white,
                         decoration: TextDecoration.none,
@@ -53,7 +54,7 @@ class _QRCodePageState extends State<QRCodePage> {
                   
                   Text(
                     'Please Scan',
-                    style: TextStyle(
+                    style: GoogleFonts.karla(
                         fontSize: 24,
                         color: Colors.white,
                         decoration: TextDecoration.none,
@@ -71,13 +72,13 @@ class _QRCodePageState extends State<QRCodePage> {
                             fontSize: 20, fontWeight: FontWeight.bold)),
                     child: Text(
                       'COMPLETE',
-                      style: TextStyle(
+                      style: GoogleFonts.karla(
                           fontSize: 15,
                           color: Color((0xff6367EA)),
                           decoration: TextDecoration.none),
                     ),
                     onPressed: () {
-                      Navigator.push(
+                      Navigator.pushReplacement(
                           context,
                           MaterialPageRoute(
                               builder: (context) => BottomNavBar()));

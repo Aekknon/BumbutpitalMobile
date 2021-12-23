@@ -1,6 +1,7 @@
 import 'package:bumbutpital/VideoPage/video_detail.dart';
 import 'package:flutter/material.dart';
 import 'package:graphql_flutter/graphql_flutter.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class VideotCard extends StatelessWidget {
   const VideotCard({Key? key}) : super(key: key);
@@ -8,7 +9,6 @@ class VideotCard extends StatelessWidget {
                     query {
     getMinimalVideo{
       videoID
-      staffID
       appropiatePHQSeverity
       title
       pictureUrl
@@ -42,91 +42,142 @@ class VideotCard extends StatelessWidget {
           return Column(
             children: [
               Expanded(
-                  child: ListView.builder(
-                itemBuilder: (BuildContext context, int index) {
-                  return Column(
-                    children: [
-                      InkWell(
-                        onTap: () {
-                          Navigator.pushNamed(
-                            context,
-                            "/VideoDetail",
-                            arguments: [
-                              result.data!['getMinimalVideo'][index]['title'],
-                              result.data!['getMinimalVideo'][index]['videoUrl'],
-                            ],
-                          );
-                        },
-                        child: Column(
-                          children: [
-                            Stack(children: [
-                              Row(
-                                children: [
-                                  Container(
-                                      padding: EdgeInsets.only(
-                                          left: 30,
-                                          right: 30,
-                                          top: 10,
-                                          bottom: 5),
-                                      child: Image.network(
-                                        result.data!['getMinimalVideo'][index]
-                                            ['pictureUrl'],
-                                        height: 100,
-                                        width: 150,
-                                      )),
-                                  Container(
-                                    width:
-                                        MediaQuery.of(context).size.width * 0.4,
-                                    child: Column(
-                                      children: [
-                                        Container(
-                                          width: MediaQuery.of(context)
-                                                  .size
-                                                  .width *
-                                              0.4,
+                  child: Scrollbar(
+                isAlwaysShown: true,
+                showTrackOnHover: true,
+                child: ListView.builder(
+                  itemBuilder: (BuildContext context, int index) {
+                    int reverseIndex =
+                        result.data!['getMinimalVideo'].length - 1 - index;
+                    return Column(
+                      children: [
+                        InkWell(
+                          onTap: () {
+                            Navigator.pushNamed(
+                              context,
+                              "/VideoDetail",
+                              arguments: [
+                                result.data!['getMinimalVideo'][reverseIndex]
+                                    ['title'],
+                                result.data!['getMinimalVideo'][reverseIndex]
+                                    ['videoUrl'],
+                              ],
+                            );
+                          },
+                          child: Column(
+                            children: [
+                              Stack(children: [
+                                Row(
+                                  children: [
+                                    Container(
+                                        padding: EdgeInsets.only(
+                                            left: 40,
+                                            right: 0,
+                                            top: 10,
+                                            bottom: 5),
+                                        child: Container(
+                                            width: 150,
+                                            height: 100,
+                                            decoration: BoxDecoration(
+                                                borderRadius: BorderRadius.only(
+                                                    topLeft:
+                                                        Radius.circular(10),
+                                                    bottomLeft:
+                                                        Radius.circular(10)),
+                                                image: DecorationImage(
+                                                    image: NetworkImage(
+                                                      result.data![
+                                                                  'getMinimalVideo']
+                                                              [reverseIndex]
+                                                          ['pictureUrl'],
+                                                    ),
+                                                    fit: BoxFit.cover)))),
+                                    Container(
+                                      height: 94,
+                                      decoration: BoxDecoration(
+                                        color: Colors.white,
+                                        boxShadow: [
+                                          BoxShadow(
+                                            color: Colors.grey.withOpacity(0.5),
+                                            spreadRadius: 2,
+                                            blurRadius: 5,
+                                            offset: Offset(0,
+                                                3), // changes position of shadow
+                                          ),
+                                        ],
+                                        borderRadius: BorderRadius.only(
+                                            topRight: Radius.circular(12),
+                                            bottomRight: Radius.circular(12)),
+                                      ),
+                                      width: MediaQuery.of(context).size.width *
+                                          0.5,
+                                      child: Column(
+                                        children: [
+                                          Container(
+                                            width: MediaQuery.of(context)
+                                                    .size
+                                                    .width *
+                                                0.4,
 
-                                          // transform:
-                                          //     Matrix4.translationValues(
-                                          //         -20, -30, 0.0),
-                                          child: Text(
-                                            'Topic:' +
-                                                result.data!['getMinimalVideo']
-                                                    [index]['title'],
-                                            style: TextStyle(
-                                              fontWeight: FontWeight.bold,
+                                            // transform:
+                                            //     Matrix4.translationValues(
+                                            //         -20, -30, 0.0),
+                                            child: Column(
+                                              children: [
+                                                SizedBox(
+                                                  height: 10,
+                                                ),
+                                                Container(
+                                                  height: 45,
+                                                  width: 150,
+                                                  child: SingleChildScrollView(
+                                                    scrollDirection:
+                                                        Axis.vertical,
+                                                    child: Text(
+                                                      result.data![
+                                                              'getMinimalVideo']
+                                                          [
+                                                          reverseIndex]['title'],
+                                                      style: GoogleFonts.karla(
+                                                          fontWeight:
+                                                              FontWeight.bold),
+                                                    ),
+                                                  ),
+                                                ),
+                                                Row(
+                                                  children: [
+                                                    Spacer(),
+                                                    Icon(
+                                                      Icons
+                                                          .arrow_forward_ios_rounded,
+                                                      size: 16,
+                                                    )
+                                                  ],
+                                                )
+                                              ],
                                             ),
                                           ),
-                                        ),
-                                        SizedBox(
-                                          height: 20,
-                                        ),
-                                        Container(
-                                          width: MediaQuery.of(context)
-                                                  .size
-                                                  .width *
-                                              0.4,
-                                          child: Icon(Icons.schedule_outlined),
-                                          alignment: Alignment.topLeft,
-                                        ),
-                                        Container(
-                                            transform:
-                                                Matrix4.translationValues(
-                                                    -30, -20, 0.0),
-                                            child: Text('20 min')),
-                                      ],
+                                          SizedBox(
+                                            height: 20,
+                                          ),
+                                        ],
+                                      ),
                                     ),
-                                  ),
-                                ],
-                              ),
-                            ]),
-                          ],
+                                  ],
+                                ),
+                              ]),
+                            ],
+                          ),
                         ),
-                      ),
-                    ],
-                  );
-                },
-                itemCount: result.data!['getMinimalVideo'].length,
-              ))
+                      ],
+                    );
+                  },
+                  itemCount: result.data!['getMinimalVideo'].length,
+                ),
+              )),
+              SizedBox(
+                height: 10,
+              )
             ],
           );
         });
@@ -139,7 +190,6 @@ class VideotCard1 extends StatelessWidget {
                     query {
     getMildVideo{
       videoID
-      staffID
       appropiatePHQSeverity
       title
       pictureUrl
@@ -173,90 +223,138 @@ class VideotCard1 extends StatelessWidget {
           return Column(
             children: [
               Expanded(
-                  child: ListView.builder(
-                itemBuilder: (BuildContext context, int index) {
-                  return Column(
-                    children: [
-                      InkWell(
-                        onTap: () {
-                          Navigator.pushNamed(
-                            context,
-                            "/VideoDetail",
-                            arguments: [
-                              result.data!['getMildVideo'][index]['title'],
-                              result.data!['getMildVideo'][index]['videoUrl'],
-                            ],
-                          );
-                        },
-                        child: Column(
-                          children: [
-                            Stack(children: [
-                              Row(
-                                children: [
-                                  Container(
-                                      padding: EdgeInsets.only(
-                                          left: 30,
-                                          right: 30,
-                                          top: 10,
-                                          bottom: 5),
-                                      child: Image.network(
-                                        result.data!['getMildVideo'][index]
-                                            ['pictureUrl'],
-                                        height: 100,
-                                        width: 150,
-                                      )),
-                                  Container(
-                                    width:
-                                        MediaQuery.of(context).size.width * 0.4,
-                                    child: Column(
-                                      children: [
-                                        Container(
-                                          width: MediaQuery.of(context)
-                                                  .size
-                                                  .width *
-                                              0.4,
+                  child: Scrollbar(
+                isAlwaysShown: true,
+                showTrackOnHover: true,
+                child: ListView.builder(
+                  itemBuilder: (BuildContext context, int index) {
+                    int reverseIndex =
+                        result.data!['getMildVideo'].length - 1 - index;
+                    return Column(
+                      children: [
+                        InkWell(
+                          onTap: () {
+                            Navigator.pushNamed(
+                              context,
+                              "/VideoDetail",
+                              arguments: [
+                                result.data!['getMildVideo'][reverseIndex]
+                                    ['title'],
+                                result.data!['getMildVideo'][reverseIndex]
+                                    ['videoUrl'],
+                              ],
+                            );
+                          },
+                          child: Column(
+                            children: [
+                              Stack(children: [
+                                Row(
+                                  children: [
+                                    Container(
+                                        padding: EdgeInsets.only(
+                                            left: 40,
+                                            right: 0,
+                                            top: 10,
+                                            bottom: 5),
+                                        child: Container(
+                                            width: 150,
+                                            height: 100,
+                                            decoration: BoxDecoration(
+                                                borderRadius: BorderRadius.only(
+                                                    topLeft:
+                                                        Radius.circular(10),
+                                                    bottomLeft:
+                                                        Radius.circular(10)),
+                                                image: DecorationImage(
+                                                    image: NetworkImage(
+                                                      result.data![
+                                                                  'getMildVideo']
+                                                              [reverseIndex]
+                                                          ['pictureUrl'],
+                                                    ),
+                                                    fit: BoxFit.cover)))),
+                                    Container(
+                                      height: 94,
+                                      decoration: BoxDecoration(
+                                        color: Colors.white,
+                                        boxShadow: [
+                                          BoxShadow(
+                                            color: Colors.grey.withOpacity(0.5),
+                                            spreadRadius: 2,
+                                            blurRadius: 5,
+                                            offset: Offset(0,
+                                                3), // changes position of shadow
+                                          ),
+                                        ],
+                                        borderRadius: BorderRadius.only(
+                                            topRight: Radius.circular(12),
+                                            bottomRight: Radius.circular(12)),
+                                      ),
+                                      width: MediaQuery.of(context).size.width *
+                                          0.5,
+                                      child: Column(
+                                        children: [
+                                          Container(
+                                            width: MediaQuery.of(context)
+                                                    .size
+                                                    .width *
+                                                0.4,
 
-                                          // transform:
-                                          //     Matrix4.translationValues(
-                                          //         -20, -30, 0.0),
-                                          child: Text(
-                                            'Topic:' +
-                                                result.data!['getMildVideo']
-                                                    [index]['title'],
-                                            style: TextStyle(
-                                              fontWeight: FontWeight.bold,
+                                            // transform:
+                                            //     Matrix4.translationValues(
+                                            //         -20, -30, 0.0),
+                                            child: Column(
+                                              children: [
+                                                SizedBox(
+                                                  height: 10,
+                                                ),
+                                                Container(
+                                                  height: 45,
+                                                  width: 150,
+                                                  child: SingleChildScrollView(
+                                                    scrollDirection:
+                                                        Axis.vertical,
+                                                    child: Text(
+                                                      result.data![
+                                                                  'getMildVideo']
+                                                              [reverseIndex]
+                                                          ['title'],
+                                                      style: GoogleFonts.karla(
+                                                          fontWeight:
+                                                              FontWeight.bold),
+                                                    ),
+                                                  ),
+                                                ),
+                                                Row(
+                                                  children: [
+                                                    Spacer(),
+                                                    Icon(
+                                                      Icons
+                                                          .arrow_forward_ios_rounded,
+                                                      size: 16,
+                                                    )
+                                                  ],
+                                                )
+                                              ],
                                             ),
                                           ),
-                                        ),
-                                        SizedBox(
-                                          height: 20,
-                                        ),
-                                        Container(
-                                          width: MediaQuery.of(context)
-                                                  .size
-                                                  .width *
-                                              0.4,
-                                          child: Icon(Icons.schedule_outlined),
-                                          alignment: Alignment.topLeft,
-                                        ),
-                                        Container(
-                                            transform:
-                                                Matrix4.translationValues(
-                                                    -30, -20, 0.0),
-                                            child: Text('20 min')),
-                                      ],
+                                          SizedBox(
+                                            height: 20,
+                                          ),
+                                        ],
+                                      ),
                                     ),
-                                  ),
-                                ],
-                              ),
-                            ]),
-                          ],
+                                  ],
+                                ),
+                              ]),
+                            ],
+                          ),
                         ),
-                      ),
-                    ],
-                  );
-                },
-                itemCount: result.data!['getMildVideo'].length,
+                      ],
+                    );
+                  },
+                  itemCount: result.data!['getMildVideo'].length,
+                ),
               ))
             ],
           );
@@ -270,7 +368,6 @@ class VideotCard2 extends StatelessWidget {
                     query {
     getModerateVideo{
       videoID
-      staffID
       appropiatePHQSeverity
       title
       pictureUrl
@@ -304,90 +401,138 @@ class VideotCard2 extends StatelessWidget {
           return Column(
             children: [
               Expanded(
-                  child: ListView.builder(
-                itemBuilder: (BuildContext context, int index) {
-                  return Column(
-                    children: [
-                      InkWell(
-                        onTap: () {
-                          Navigator.pushNamed(
-                            context,
-                            "/VideoDetail",
-                            arguments: [
-                              result.data!['getModerateVideo'][index]['title'],
-                              result.data!['getModerateVideo'][index]['videoUrl'],
-                            ],
-                          );
-                        },
-                        child: Column(
-                          children: [
-                            Stack(children: [
-                              Row(
-                                children: [
-                                  Container(
-                                      padding: EdgeInsets.only(
-                                          left: 30,
-                                          right: 30,
-                                          top: 10,
-                                          bottom: 5),
-                                      child: Image.network(
-                                        result.data!['getModerateVideo'][index]
-                                            ['pictureUrl'],
-                                        height: 100,
-                                        width: 150,
-                                      )),
-                                  Container(
-                                    width:
-                                        MediaQuery.of(context).size.width * 0.4,
-                                    child: Column(
-                                      children: [
-                                        Container(
-                                          width: MediaQuery.of(context)
-                                                  .size
-                                                  .width *
-                                              0.4,
+                  child: Scrollbar(
+                isAlwaysShown: true,
+                showTrackOnHover: true,
+                child: ListView.builder(
+                  itemBuilder: (BuildContext context, int index) {
+                    int reverseIndex =
+                        result.data!['getModerateVideo'].length - 1 - index;
+                    return Column(
+                      children: [
+                        InkWell(
+                          onTap: () {
+                            Navigator.pushNamed(
+                              context,
+                              "/VideoDetail",
+                              arguments: [
+                                result.data!['getModerateVideo'][reverseIndex]
+                                    ['title'],
+                                result.data!['getModerateVideo'][reverseIndex]
+                                    ['videoUrl'],
+                              ],
+                            );
+                          },
+                          child: Column(
+                            children: [
+                              Stack(children: [
+                                Row(
+                                  children: [
+                                    Container(
+                                        padding: EdgeInsets.only(
+                                            left: 40,
+                                            right: 0,
+                                            top: 10,
+                                            bottom: 5),
+                                        child: Container(
+                                            width: 150,
+                                            height: 100,
+                                            decoration: BoxDecoration(
+                                                borderRadius: BorderRadius.only(
+                                                    topLeft:
+                                                        Radius.circular(10),
+                                                    bottomLeft:
+                                                        Radius.circular(10)),
+                                                image: DecorationImage(
+                                                    image: NetworkImage(
+                                                      result.data![
+                                                                  'getModerateVideo']
+                                                              [reverseIndex]
+                                                          ['pictureUrl'],
+                                                    ),
+                                                    fit: BoxFit.cover)))),
+                                    Container(
+                                      height: 94,
+                                      decoration: BoxDecoration(
+                                        color: Colors.white,
+                                        boxShadow: [
+                                          BoxShadow(
+                                            color: Colors.grey.withOpacity(0.5),
+                                            spreadRadius: 2,
+                                            blurRadius: 5,
+                                            offset: Offset(0,
+                                                3), // changes position of shadow
+                                          ),
+                                        ],
+                                        borderRadius: BorderRadius.only(
+                                            topRight: Radius.circular(12),
+                                            bottomRight: Radius.circular(12)),
+                                      ),
+                                      width: MediaQuery.of(context).size.width *
+                                          0.5,
+                                      child: Column(
+                                        children: [
+                                          Container(
+                                            width: MediaQuery.of(context)
+                                                    .size
+                                                    .width *
+                                                0.4,
 
-                                          // transform:
-                                          //     Matrix4.translationValues(
-                                          //         -20, -30, 0.0),
-                                          child: Text(
-                                            'Topic:' +
-                                                result.data!['getModerateVideo']
-                                                    [index]['title'],
-                                            style: TextStyle(
-                                              fontWeight: FontWeight.bold,
+                                            // transform:
+                                            //     Matrix4.translationValues(
+                                            //         -20, -30, 0.0),
+                                            child: Column(
+                                              children: [
+                                                SizedBox(
+                                                  height: 10,
+                                                ),
+                                                Container(
+                                                  height: 45,
+                                                  width: 150,
+                                                  child: SingleChildScrollView(
+                                                    scrollDirection:
+                                                        Axis.vertical,
+                                                    child: Text(
+                                                      result.data![
+                                                              'getModerateVideo']
+                                                          [
+                                                          reverseIndex]['title'],
+                                                      style: GoogleFonts.karla(
+                                                          fontWeight:
+                                                              FontWeight.bold),
+                                                    ),
+                                                  ),
+                                                ),
+                                                Row(
+                                                  children: [
+                                                    Spacer(),
+                                                    Icon(
+                                                      Icons
+                                                          .arrow_forward_ios_rounded,
+                                                      size: 16,
+                                                    )
+                                                  ],
+                                                )
+                                              ],
                                             ),
                                           ),
-                                        ),
-                                        SizedBox(
-                                          height: 20,
-                                        ),
-                                        Container(
-                                          width: MediaQuery.of(context)
-                                                  .size
-                                                  .width *
-                                              0.4,
-                                          child: Icon(Icons.schedule_outlined),
-                                          alignment: Alignment.topLeft,
-                                        ),
-                                        Container(
-                                            transform:
-                                                Matrix4.translationValues(
-                                                    -30, -20, 0.0),
-                                            child: Text('20 min')),
-                                      ],
+                                          SizedBox(
+                                            height: 20,
+                                          ),
+                                        ],
+                                      ),
                                     ),
-                                  ),
-                                ],
-                              ),
-                            ]),
-                          ],
+                                  ],
+                                ),
+                              ]),
+                            ],
+                          ),
                         ),
-                      ),
-                    ],
-                  );
-                },
-                itemCount: result.data!['getModerateVideo'].length,
+                      ],
+                    );
+                  },
+                  itemCount: result.data!['getModerateVideo'].length,
+                ),
               ))
             ],
           );
@@ -401,7 +546,6 @@ class VideotCard3 extends StatelessWidget {
                     query {
     getModeratelySeverVideo{
       videoID
-      staffID
       appropiatePHQSeverity
       title
       pictureUrl
@@ -435,90 +579,140 @@ class VideotCard3 extends StatelessWidget {
           return Column(
             children: [
               Expanded(
-                  child: ListView.builder(
-                itemBuilder: (BuildContext context, int index) {
-                  return Column(
-                    children: [
-                      InkWell(
-                        onTap: () {
-                          Navigator.pushNamed(
-                            context,
-                            "/VideoDetail",
-                            arguments: [
-                              result.data!['getModeratelySeverVideo'][index]['title'],
-                              result.data!['getModeratelySeverVideo'][index]['videoUrl'],
-                            ],
-                          );
-                        },
-                        child: Column(
-                          children: [
-                            Stack(children: [
-                              Row(
-                                children: [
-                                  Container(
-                                      padding: EdgeInsets.only(
-                                          left: 30,
-                                          right: 30,
-                                          top: 10,
-                                          bottom: 5),
-                                      child: Image.network(
-                                        result.data!['getModeratelySeverVideo'][index]
-                                            ['pictureUrl'],
-                                        height: 100,
-                                        width: 150,
-                                      )),
-                                  Container(
-                                    width:
-                                        MediaQuery.of(context).size.width * 0.4,
-                                    child: Column(
-                                      children: [
-                                        Container(
-                                          width: MediaQuery.of(context)
-                                                  .size
-                                                  .width *
-                                              0.4,
+                  child: Scrollbar(
+                isAlwaysShown: true,
+                showTrackOnHover: true,
+                child: ListView.builder(
+                  itemBuilder: (BuildContext context, int index) {
+                    int reverseIndex =
+                        result.data!['getModeratelySeverVideo'].length -
+                            1 -
+                            index;
+                    return Column(
+                      children: [
+                        InkWell(
+                          onTap: () {
+                            Navigator.pushNamed(
+                              context,
+                              "/VideoDetail",
+                              arguments: [
+                                result.data!['getModeratelySeverVideo']
+                                    [reverseIndex]['title'],
+                                result.data!['getModeratelySeverVideo']
+                                    [reverseIndex]['videoUrl'],
+                              ],
+                            );
+                          },
+                          child: Column(
+                            children: [
+                              Stack(children: [
+                                Row(
+                                  children: [
+                                    Container(
+                                        padding: EdgeInsets.only(
+                                            left: 40,
+                                            right: 0,
+                                            top: 10,
+                                            bottom: 5),
+                                        child: Container(
+                                            width: 150,
+                                            height: 100,
+                                            decoration: BoxDecoration(
+                                                borderRadius: BorderRadius.only(
+                                                    topLeft:
+                                                        Radius.circular(10),
+                                                    bottomLeft:
+                                                        Radius.circular(10)),
+                                                image: DecorationImage(
+                                                    image: NetworkImage(
+                                                      result.data![
+                                                                  'getModeratelySeverVideo']
+                                                              [reverseIndex]
+                                                          ['pictureUrl'],
+                                                    ),
+                                                    fit: BoxFit.cover)))),
+                                    Container(
+                                      height: 94,
+                                      decoration: BoxDecoration(
+                                        color: Colors.white,
+                                        boxShadow: [
+                                          BoxShadow(
+                                            color: Colors.grey.withOpacity(0.5),
+                                            spreadRadius: 2,
+                                            blurRadius: 5,
+                                            offset: Offset(0,
+                                                3), // changes position of shadow
+                                          ),
+                                        ],
+                                        borderRadius: BorderRadius.only(
+                                            topRight: Radius.circular(12),
+                                            bottomRight: Radius.circular(12)),
+                                      ),
+                                      width: MediaQuery.of(context).size.width *
+                                          0.5,
+                                      child: Column(
+                                        children: [
+                                          Container(
+                                            width: MediaQuery.of(context)
+                                                    .size
+                                                    .width *
+                                                0.4,
 
-                                          // transform:
-                                          //     Matrix4.translationValues(
-                                          //         -20, -30, 0.0),
-                                          child: Text(
-                                            'Topic:' +
-                                                result.data!['getModeratelySeverVideo']
-                                                    [index]['title'],
-                                            style: TextStyle(
-                                              fontWeight: FontWeight.bold,
+                                            // transform:
+                                            //     Matrix4.translationValues(
+                                            //         -20, -30, 0.0),
+                                            child: Column(
+                                              children: [
+                                                SizedBox(
+                                                  height: 10,
+                                                ),
+                                                Container(
+                                                  height: 45,
+                                                  width: 150,
+                                                  child: SingleChildScrollView(
+                                                    scrollDirection:
+                                                        Axis.vertical,
+                                                    child: Text(
+                                                      result.data![
+                                                              'getModeratelySeverVideo']
+                                                          [
+                                                          reverseIndex]['title'],
+                                                      style: GoogleFonts.karla(
+                                                          fontWeight:
+                                                              FontWeight.bold),
+                                                    ),
+                                                  ),
+                                                ),
+                                                Row(
+                                                  children: [
+                                                    Spacer(),
+                                                    Icon(
+                                                      Icons
+                                                          .arrow_forward_ios_rounded,
+                                                      size: 16,
+                                                    )
+                                                  ],
+                                                )
+                                              ],
                                             ),
                                           ),
-                                        ),
-                                        SizedBox(
-                                          height: 20,
-                                        ),
-                                        Container(
-                                          width: MediaQuery.of(context)
-                                                  .size
-                                                  .width *
-                                              0.4,
-                                          child: Icon(Icons.schedule_outlined),
-                                          alignment: Alignment.topLeft,
-                                        ),
-                                        Container(
-                                            transform:
-                                                Matrix4.translationValues(
-                                                    -30, -20, 0.0),
-                                            child: Text('20 min')),
-                                      ],
+                                          SizedBox(
+                                            height: 20,
+                                          ),
+                                        ],
+                                      ),
                                     ),
-                                  ),
-                                ],
-                              ),
-                            ]),
-                          ],
+                                  ],
+                                ),
+                              ]),
+                            ],
+                          ),
                         ),
-                      ),
-                    ],
-                  );
-                },
-                itemCount: result.data!['getModeratelySeverVideo'].length,
+                      ],
+                    );
+                  },
+                  itemCount: result.data!['getModeratelySeverVideo'].length,
+                ),
               ))
             ],
           );
@@ -532,7 +726,6 @@ class VideotCard4 extends StatelessWidget {
                     query {
     getSevereVideo{
       videoID
-      staffID
       appropiatePHQSeverity
       title
       pictureUrl
@@ -566,91 +759,148 @@ class VideotCard4 extends StatelessWidget {
           return Column(
             children: [
               Expanded(
-                  child: ListView.builder(
-                itemBuilder: (BuildContext context, int index) {
-                  return Column(
-                    children: [
-                      InkWell(
-                        onTap: () {
-                          Navigator.pushNamed(
-                            context,
-                            "/VideoDetail",
-                            arguments: [
-                              result.data!['getSevereVideo'][index]['title'],
-                              result.data!['getSevereVideo'][index]['videoUrl'],
+                  child: Scrollbar(
+                      isAlwaysShown: true,
+                      showTrackOnHover: true,
+                      child: ListView.builder(
+                        itemBuilder: (BuildContext context, int index) {
+                          int reverseIndex =
+                              result.data!['getSevereVideo'].length - 1 - index;
+                          return Column(
+                            children: [
+                              InkWell(
+                                onTap: () {
+                                  Navigator.pushNamed(
+                                    context,
+                                    "/VideoDetail",
+                                    arguments: [
+                                      result.data!['getSevereVideo']
+                                          [reverseIndex]['title'],
+                                      result.data!['getSevereVideo']
+                                          [reverseIndex]['videoUrl'],
+                                    ],
+                                  );
+                                },
+                                child: Column(
+                                  children: [
+                                    Stack(children: [
+                                      Row(
+                                        children: [
+                                          Container(
+                                              padding: EdgeInsets.only(
+                                                  left: 40,
+                                                  right: 0,
+                                                  top: 10,
+                                                  bottom: 5),
+                                              child: Container(
+                                                  width: 150,
+                                                  height: 100,
+                                                  decoration: BoxDecoration(
+                                                      borderRadius:
+                                                          BorderRadius.only(
+                                                              topLeft: Radius
+                                                                  .circular(10),
+                                                              bottomLeft: Radius
+                                                                  .circular(
+                                                                      10)),
+                                                      image: DecorationImage(
+                                                          image: NetworkImage(
+                                                            result.data![
+                                                                        'getSevereVideo']
+                                                                    [
+                                                                    reverseIndex]
+                                                                ['pictureUrl'],
+                                                          ),
+                                                          fit: BoxFit.cover)))),
+                                          Container(
+                                            height: 94,
+                                            decoration: BoxDecoration(
+                                              color: Colors.white,
+                                              boxShadow: [
+                                                BoxShadow(
+                                                  color: Colors.grey
+                                                      .withOpacity(0.5),
+                                                  spreadRadius: 2,
+                                                  blurRadius: 5,
+                                                  offset: Offset(0,
+                                                      3), // changes position of shadow
+                                                ),
+                                              ],
+                                              borderRadius: BorderRadius.only(
+                                                  topRight: Radius.circular(12),
+                                                  bottomRight:
+                                                      Radius.circular(12)),
+                                            ),
+                                            width: MediaQuery.of(context)
+                                                    .size
+                                                    .width *
+                                                0.5,
+                                            child: Column(
+                                              children: [
+                                                Container(
+                                                  width: MediaQuery.of(context)
+                                                          .size
+                                                          .width *
+                                                      0.4,
+
+                                                  // transform:
+                                                  //     Matrix4.translationValues(
+                                                  //         -20, -30, 0.0),
+                                                  child: Column(
+                                                    children: [
+                                                      SizedBox(
+                                                        height: 10,
+                                                      ),
+                                                      Container(
+                                                        height: 45,
+                                                        width: 150,
+                                                        child:
+                                                            SingleChildScrollView(
+                                                          scrollDirection:
+                                                              Axis.vertical,
+                                                          child: Text(
+                                                            result.data![
+                                                                        'getSevereVideo']
+                                                                    [
+                                                                    reverseIndex]
+                                                                ['title'],
+                                                            style: GoogleFonts.karla(
+                                                                fontWeight:
+                                                                    FontWeight
+                                                                        .bold),
+                                                          ),
+                                                        ),
+                                                      ),
+                                                      Row(
+                                                        children: [
+                                                          Spacer(),
+                                                          Icon(
+                                                            Icons
+                                                                .arrow_forward_ios_rounded,
+                                                            size: 16,
+                                                          )
+                                                        ],
+                                                      )
+                                                    ],
+                                                  ),
+                                                ),
+                                                SizedBox(
+                                                  height: 20,
+                                                ),
+                                              ],
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                    ]),
+                                  ],
+                                ),
+                              ),
                             ],
                           );
                         },
-                        child: Column(
-                          children: [
-                            Stack(children: [
-                              Row(
-                                children: [
-                                  Container(
-                                      padding: EdgeInsets.only(
-                                          left: 30,
-                                          right: 30,
-                                          top: 10,
-                                          bottom: 5),
-                                      child: Image.network(
-                                        result.data!['getSevereVideo'][index]
-                                            ['pictureUrl'],
-                                        height: 100,
-                                        width: 150,
-                                      )),
-                                  Container(
-                                    width:
-                                        MediaQuery.of(context).size.width * 0.4,
-                                    child: Column(
-                                      children: [
-                                        Container(
-                                          width: MediaQuery.of(context)
-                                                  .size
-                                                  .width *
-                                              0.4,
-
-                                          // transform:
-                                          //     Matrix4.translationValues(
-                                          //         -20, -30, 0.0),
-                                          child: Text(
-                                            'Topic:' +
-                                                result.data!['getSevereVideo']
-                                                    [index]['title'],
-                                            style: TextStyle(
-                                              fontWeight: FontWeight.bold,
-                                            ),
-                                          ),
-                                        ),
-                                        SizedBox(
-                                          height: 20,
-                                        ),
-                                        Container(
-                                          width: MediaQuery.of(context)
-                                                  .size
-                                                  .width *
-                                              0.4,
-                                          child: Icon(Icons.schedule_outlined),
-                                          alignment: Alignment.topLeft,
-                                        ),
-                                        Container(
-                                            transform:
-                                                Matrix4.translationValues(
-                                                    -30, -20, 0.0),
-                                            child: Text('20 min')),
-                                      ],
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            ]),
-                          ],
-                        ),
-                      ),
-                    ],
-                  );
-                },
-                itemCount: result.data!['getSevereVideo'].length,
-              ))
+                        itemCount: result.data!['getSevereVideo'].length,
+                      )))
             ],
           );
         });
@@ -663,7 +913,6 @@ class VideotCard5 extends StatelessWidget {
                     query {
     getSmartVideo{
       videoID
-      staffID
       appropiatePHQSeverity
       title
       pictureUrl
@@ -697,96 +946,150 @@ class VideotCard5 extends StatelessWidget {
           return Column(
             children: [
               Expanded(
-                  child: ListView.builder(
-                itemBuilder: (BuildContext context, int index) {
-                  return Column(
-                    children: [
-                      InkWell(
-                        onTap: () {
-                          Navigator.pushNamed(
-                            context,
-                            "/VideoDetail",
-                            arguments: [
-                              result.data!['getSmartVideo'][index]['title'],
-                              result.data!['getSmartVideo'][index]['videoUrl'],
+                  child: Scrollbar(
+                      isAlwaysShown: true,
+                      showTrackOnHover: true,
+                      child: ListView.builder(
+                        itemBuilder: (BuildContext context, int index) {
+                          int reverseIndex =
+                              result.data!['getSmartVideo'].length - 1 - index;
+                          return Column(
+                            children: [
+                              InkWell(
+                                onTap: () {
+                                  Navigator.pushNamed(
+                                    context,
+                                    "/VideoDetail",
+                                    arguments: [
+                                      result.data!['getSmartVideo']
+                                          [reverseIndex]['title'],
+                                      result.data!['getSmartVideo']
+                                          [reverseIndex]['videoUrl'],
+                                    ],
+                                  );
+                                },
+                                child: Column(
+                                  children: [
+                                    Stack(children: [
+                                      Row(
+                                        children: [
+                                          Container(
+                                              padding: EdgeInsets.only(
+                                                  left: 40,
+                                                  right: 0,
+                                                  top: 10,
+                                                  bottom: 5),
+                                              child: Container(
+                                                  width: 150,
+                                                  height: 100,
+                                                  decoration: BoxDecoration(
+                                                      borderRadius:
+                                                          BorderRadius.only(
+                                                              topLeft: Radius
+                                                                  .circular(10),
+                                                              bottomLeft: Radius
+                                                                  .circular(
+                                                                      10)),
+                                                      image: DecorationImage(
+                                                          image: NetworkImage(
+                                                            result.data![
+                                                                        'getSmartVideo']
+                                                                    [
+                                                                    reverseIndex]
+                                                                ['pictureUrl'],
+                                                          ),
+                                                          fit: BoxFit.cover)))),
+                                          Container(
+                                            height: 94,
+                                            decoration: BoxDecoration(
+                                              color: Colors.white,
+                                              boxShadow: [
+                                                BoxShadow(
+                                                  color: Colors.grey
+                                                      .withOpacity(0.5),
+                                                  spreadRadius: 2,
+                                                  blurRadius: 5,
+                                                  offset: Offset(0,
+                                                      3), // changes position of shadow
+                                                ),
+                                              ],
+                                              borderRadius: BorderRadius.only(
+                                                  topRight: Radius.circular(12),
+                                                  bottomRight:
+                                                      Radius.circular(12)),
+                                            ),
+                                            width: MediaQuery.of(context)
+                                                    .size
+                                                    .width *
+                                                0.5,
+                                            child: Column(
+                                              children: [
+                                                Container(
+                                                  width: MediaQuery.of(context)
+                                                          .size
+                                                          .width *
+                                                      0.4,
+
+                                                  // transform:
+                                                  //     Matrix4.translationValues(
+                                                  //         -20, -30, 0.0),
+                                                  child: Column(
+                                                    children: [
+                                                      SizedBox(
+                                                        height: 10,
+                                                      ),
+                                                      Container(
+                                                        height: 48,
+                                                        width: 150,
+                                                        child:
+                                                            SingleChildScrollView(
+                                                          scrollDirection:
+                                                              Axis.vertical,
+                                                          child: Text(
+                                                            result.data![
+                                                                        'getSmartVideo']
+                                                                    [
+                                                                    reverseIndex]
+                                                                ['title'],
+                                                            style: GoogleFonts.karla(
+                                                                fontWeight:
+                                                                    FontWeight
+                                                                        .bold),
+                                                          ),
+                                                        ),
+                                                      ),
+                                                      Row(
+                                                        children: [
+                                                          Spacer(),
+                                                          Icon(
+                                                            Icons
+                                                                .arrow_forward_ios_rounded,
+                                                            size: 16,
+                                                          )
+                                                        ],
+                                                      )
+                                                    ],
+                                                  ),
+                                                ),
+                                                SizedBox(
+                                                  height: 20,
+                                                ),
+                                              ],
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                    ]),
+                                  ],
+                                ),
+                              ),
                             ],
                           );
                         },
-                        child: Column(
-                          children: [
-                            Stack(children: [
-                              Row(
-                                children: [
-                                  Container(
-                                      padding: EdgeInsets.only(
-                                          left: 30,
-                                          right: 30,
-                                          top: 10,
-                                          bottom: 5),
-                                      child: Image.network(
-                                        result.data!['getSmartVideo'][index]
-                                            ['pictureUrl'],
-                                        height: 100,
-                                        width: 150,
-                                      )),
-                                  Container(
-                                    width:
-                                        MediaQuery.of(context).size.width * 0.4,
-                                    child: Column(
-                                      children: [
-                                        Container(
-                                          width: MediaQuery.of(context)
-                                                  .size
-                                                  .width *
-                                              0.4,
-
-                                          // transform:
-                                          //     Matrix4.translationValues(
-                                          //         -20, -30, 0.0),
-                                          child: Text(
-                                            'Topic:' +
-                                                result.data!['getSmartVideo']
-                                                    [index]['title'],
-                                            style: TextStyle(
-                                              fontWeight: FontWeight.bold,
-                                            ),
-                                          ),
-                                        ),
-                                        SizedBox(
-                                          height: 20,
-                                        ),
-                                        Container(
-                                          width: MediaQuery.of(context)
-                                                  .size
-                                                  .width *
-                                              0.4,
-                                          child: Icon(Icons.schedule_outlined),
-                                          alignment: Alignment.topLeft,
-                                        ),
-                                        Container(
-                                            transform:
-                                                Matrix4.translationValues(
-                                                    -30, -20, 0.0),
-                                            child: Text('20 min')),
-                                      ],
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            ]),
-                          ],
-                        ),
-                      ),
-                    ],
-                  );
-                },
-                itemCount: result.data!['getSmartVideo'].length,
-              ))
+                        itemCount: result.data!['getSmartVideo'].length,
+                      )))
             ],
           );
         });
   }
 }
-
-
-

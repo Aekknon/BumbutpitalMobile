@@ -60,11 +60,97 @@ class _EditProfileState extends State<EditProfile> {
             if (result.data == null) {
               return Text(result.toString());
             }
-            final _email = TextEditingController(text:  result.data!['getCurrentUser'][0]['email']);
-            final _Name = TextEditingController(text:  result.data!['getCurrentUser'][0]['name']);
-            final _surName = TextEditingController(text:  result.data!['getCurrentUser'][0]['surname']);
-            final _phoneNumber = TextEditingController(text:  result.data!['getCurrentUser'][0]['phoneNumber']);
+            final _email = TextEditingController(
+                text: result.data!['getCurrentUser'][0]['email']);
+            final _Name = TextEditingController(
+                text: result.data!['getCurrentUser'][0]['name']);
+            final _surName = TextEditingController(
+                text: result.data!['getCurrentUser'][0]['surname']);
+            final _phoneNumber = TextEditingController(
+                text: result.data!['getCurrentUser'][0]['phoneNumber']);
+            Future ErrorDialog() async {
+              return await showDialog(
+                context: context,
+                builder: (context) => AlertDialog(
+                  content: Text(
+                      "This username already used please use another username"),
+                  actions: [
+                    TextButton(
+                        child: Text("OK", style: TextStyle(color: Colors.blue)),
+                        onPressed: () {
+                          Navigator.pop(context, true);
+                        })
+                  ],
+                ),
+              );
+            }
+
+            Future ErrorDialog1() async {
+              return await showDialog(
+                context: context,
+                builder: (context) => AlertDialog(
+                  content: Text("Please sumbit all of text field Please"),
+                  actions: [
+                    TextButton(
+                        child: Text("OK", style: TextStyle(color: Colors.blue)),
+                        onPressed: () {
+                          Navigator.pop(context, true);
+                        })
+                  ],
+                ),
+              );
+            }
+
+            Future ErrorDialog2() async {
+              return await showDialog(
+                context: context,
+                builder: (context) => AlertDialog(
+                  content: Text("Wrong Email"),
+                  actions: [
+                    TextButton(
+                        child: Text("OK", style: TextStyle(color: Colors.blue)),
+                        onPressed: () {
+                          Navigator.pop(context, true);
+                        })
+                  ],
+                ),
+              );
+            }
+
+            Future ErrorDialog3() async {
+              return await showDialog(
+                context: context,
+                builder: (context) => AlertDialog(
+                  content: Text("Wrong Phone Number"),
+                  actions: [
+                    TextButton(
+                        child: Text("OK", style: TextStyle(color: Colors.blue)),
+                        onPressed: () {
+                          Navigator.pop(context, true);
+                        })
+                  ],
+                ),
+              );
+            }
+
             Future<void> onSubmit(RunMutation run) async {
+              String pattern =
+                  r"^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]"
+                  r"{0,253}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]"
+                  r"{0,253}[a-zA-Z0-9])?)*$";
+              if (_phoneNumber.text.length != 10) {
+                return await ErrorDialog3();
+              }
+              if (!_email.text.contains(RegExp(pattern))) {
+                return await ErrorDialog2();
+              }
+              if (_email.text.isEmpty ||
+                  _Name.text.isEmpty ||
+                  _surName.text.isEmpty ||
+                  _phoneNumber.text.isEmpty) {
+                return await ErrorDialog1();
+              }
+
               try {
                 final response = run({
                   "email": _email.text,
@@ -101,19 +187,6 @@ class _EditProfileState extends State<EditProfile> {
                     SizedBox(
                       height: 20,
                     ),
-                    InkWell(
-                      onTap: () {
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => EditProfile()));
-                      },
-                      child: CircleAvatar(
-                        backgroundImage: NetworkImage(
-                            'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS6yT-obMdemGbSctinso7rd-tJGyxHhnxetinsg4Nwj2Va1nbirK_lT9wy2KEqIiAMjkw&usqp=CAU'),
-                        radius: 60,
-                      ),
-                    ),
                     SizedBox(
                       height: 30,
                     ),
@@ -121,7 +194,7 @@ class _EditProfileState extends State<EditProfile> {
                       width: 300,
                       child: _textField(
                         _Name,
-                        result.data!['getCurrentUser'][0]['name'],
+                        "Name",
                       ),
                     ),
                     SizedBox(
@@ -131,7 +204,7 @@ class _EditProfileState extends State<EditProfile> {
                       width: 300,
                       child: _textField(
                         _surName,
-                        result.data!['getCurrentUser'][0]['surname'],
+                        "Surname",
                       ),
                     ),
                     SizedBox(
@@ -141,7 +214,7 @@ class _EditProfileState extends State<EditProfile> {
                       width: 300,
                       child: _textField(
                         _email,
-                        result.data!['getCurrentUser'][0]['email'],
+                        "Email",
                       ),
                     ),
                     SizedBox(
@@ -151,7 +224,7 @@ class _EditProfileState extends State<EditProfile> {
                       width: 300,
                       child: _textField(
                         _phoneNumber,
-                        result.data!['getCurrentUser'][0]['phoneNumber'],
+                        "PhoneNumber",
                       ),
                     ),
                     SizedBox(
@@ -164,7 +237,7 @@ class _EditProfileState extends State<EditProfile> {
                           await onSubmit(run);
                         },
                         style: ElevatedButton.styleFrom(
-                          primary:   Color((0xff6367EA)),
+                          primary: Color((0xff6367EA)),
                           padding: EdgeInsets.symmetric(
                               horizontal: 100, vertical: 15),
                         ),

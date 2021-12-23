@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:carousel_slider/carousel_slider.dart';
-import 'write_diary.dart';
-import 'diary_detail.dart';
+import 'package:intl/intl.dart';
+import 'package:bumbutpital/Diary/sql_helper.dart';
+import 'package:flutter/services.dart';
+import 'package:graphql_flutter/graphql_flutter.dart';
+import 'package:flutter_rating_bar/flutter_rating_bar.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class MainDiary extends StatefulWidget {
   MainDiary({Key? key}) : super(key: key);
@@ -11,616 +14,744 @@ class MainDiary extends StatefulWidget {
 }
 
 class _MainDiaryState extends State<MainDiary> {
-  final List<String> imageList = [
-    "https://fbi.dek-d.com/27/0833/6340/131125299",
-    "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQOh2gJ9eXdaox-uRpAz3oqWtjDlJ3k0AukWgxlzXg07nH71OpRzx20BZG9JcxkxH3loZc&usqp=CAU",
-    "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTnj7GvtqijGyb2focyFejrmqJk1g_Bcjl2qg&usqp=CAU",
-    "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRV7vJmRomAsYtE3JazzOxK61x63rrsfilphA&usqp=CAU",
-    "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS0YpfIsnCgTkcz39Z_4-EzgbDsDqh9T0wPfA&usqp=CAU",
-  ];
+  static const query = """
+                   query {
+    getCurrentUser {
+     id
+       name
+    surname
+    email
+    phoneNumber
+    appropiatePHQSeverity
+    appropiatePHQSeverityScore
+    }
+  }
+                  """;
+
+  List<Map<String, dynamic>> _journals = [];
+
+  bool _isLoading = true;
+  // This function is used to fetch all data from the database
+  void _refreshJournals() async {
+    final data = await SQLHelper.getItems();
+    setState(() {
+      _journals = data;
+      _isLoading = false;
+    });
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    _refreshJournals(); // Loading the diary when the app starts
+  }
+
+  final TextEditingController _titleController = TextEditingController();
+  final TextEditingController _descriptionController = TextEditingController();
+  final TextEditingController _userID = TextEditingController();
+  final TextEditingController _sensitivePoint = TextEditingController();
+
+  // This function will be triggered when the floating button is pressed
+  // It will also be triggered when you want to update an item
+  void _showForm(int? id) async {
+    if (id != null) {
+      // id == null -> create new item
+      // id != null -> update an existing item
+      final existingJournal =
+          _journals.firstWhere((element) => element['id'] == id);
+      _titleController.text = existingJournal['title'];
+      _descriptionController.text = existingJournal['description'];
+      _userID.text = existingJournal['userID'];
+      _sensitivePoint.text = existingJournal['sensitivePoint'];
+    }
+
+    final now = new DateTime.now();
+    String Day = DateFormat.yMMMMd('en_US').format(now);
+    String Time = new DateFormat.jm().format(now);
+    double _initialRating = 3.0;
+    bool _isVertical = false;
+    late final _ratingController;
+    late double _rating;
+    void initState() {
+      super.initState();
+      _ratingController = TextEditingController(text: '3.0');
+      _rating = _initialRating;
+    }
+
+    int countBadDiary = 0;
+
+    showModalBottomSheet(
+      context: context,
+      elevation: 5,
+      builder: (_) => Container(
+        color: Color(0xffECF2FF),
+        height: MediaQuery.of(context).size.height,
+        child: Expanded(
+          child: SingleChildScrollView(
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              crossAxisAlignment: CrossAxisAlignment.end,
+              children: [
+                SizedBox(
+                  height: 50,
+                ),
+                Container(
+                    color: Color(0xffECF2FF),
+                    height: MediaQuery.of(context).size.height * 0.25,
+                    child: Column(
+                      children: [
+                        Text(
+                          Day,
+                          style: GoogleFonts.karla(
+                              fontSize: 24,
+                              color: Colors.black,
+                              decoration: TextDecoration.none,
+                              fontWeight: FontWeight.bold),
+                        ),
+                        Row(
+                          children: [
+                            Spacer(),
+                            Text(
+                              Time,
+                              // textAlign: TextAlign.left,
+                              style: GoogleFonts.karla(
+                                fontSize: 16,
+                                color: Colors.black,
+                                decoration: TextDecoration.none,
+                              ),
+                            ),
+                            Spacer(),
+                          ],
+                        ),
+                        Row(
+                          children: [
+                            SizedBox(
+                              width: 15,
+                            ),
+                            SizedBox(
+                              width: MediaQuery.of(context).size.width * 0.9,
+                              child: TextField(
+                                inputFormatters: [
+                                  //only numeric keyboard.
+                                  LengthLimitingTextInputFormatter(
+                                      66), //only 6 digit
+                                ],
+                                controller: _titleController,
+                                maxLines: 1,
+                                style: GoogleFonts.caveat(
+                                    color: Color(0xff6367EA), fontSize: 32),
+                                decoration: InputDecoration(
+                                  hintStyle: TextStyle(fontSize: 24),
+                                  hintText: 'Enter Title Diary',
+                                  fillColor: Colors.white,
+                                  // contentPadding: EdgeInsets.symmetric(
+                                  //     vertical: 00, horizontal: 0),
+                                  border: UnderlineInputBorder(),
+                                ),
+                              ),
+                            )
+                          ],
+                        )
+                      ],
+                    )),
+                Container(
+                  height: MediaQuery.of(context).size.height * 0.5,
+                  width: MediaQuery.of(context).size.width,
+                  decoration: BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.only(
+                        topRight: Radius.circular(70),
+                        topLeft: Radius.circular(70)),
+                  ),
+                  child: Expanded(
+                    child: SingleChildScrollView(
+                      child: Container(
+                        padding: const EdgeInsets.only(
+                            top: 10, bottom: 10, left: 30, right: 30),
+                        child: Container(
+                            padding: const EdgeInsets.only(
+                                top: 10, bottom: 10, left: 20, right: 20),
+                            child: Column(
+                              children: [
+                                TextField(
+                                  controller: _descriptionController,
+                                  maxLines: 15,
+                                  // textAlign: TextAlign.start,
+                                  style: GoogleFonts.caveat(
+                                      color: Color(0xff6367EA), fontSize: 24),
+                                  decoration: InputDecoration(
+                                    // labelStyle: St,
+                                    hintText: 'Enter your story here',
+                                    contentPadding: EdgeInsets.symmetric(
+                                        vertical: 24, horizontal: 8),
+                                    border: InputBorder.none,
+                                  ),
+                                ),
+                                SizedBox(
+                                  height: 30,
+                                ),
+                                Query(
+                                  options: QueryOptions(
+                                      document: gql(query),
+                                      pollInterval: Duration(seconds: 1)),
+                                  builder: (QueryResult result,
+                                      {fetchMore, refetch}) {
+                                    if (result.hasException) {
+                                      return Text(result.exception.toString());
+                                    }
+                                    if (result.isLoading) {
+                                      return Center(
+                                        child: CircularProgressIndicator(),
+                                      );
+                                    }
+
+                                    if (result.data == null) {
+                                      return Text(result.toString());
+                                    }
+
+                                    return Container(
+                                      child: Column(
+                                        children: [
+                                          TextField(
+                                            inputFormatters: [
+                                              //only numeric keyboard.
+                                              LengthLimitingTextInputFormatter(
+                                                  33), //only 6 digit
+                                            ],
+                                            controller: _userID,
+                                            enabled: false,
+                                            maxLines: 1,
+                                            style:
+                                                TextStyle(color: Colors.white),
+                                            decoration: InputDecoration(
+                                              hintStyle: TextStyle(fontSize: 1),
+                                              fillColor: Colors.white,
+                                              border: InputBorder.none,
+                                            ),
+                                          ),
+                                          TextField(
+                                            inputFormatters: [
+                                              //only numeric keyboard.
+                                              LengthLimitingTextInputFormatter(
+                                                  33), //only 6 digit
+                                            ],
+                                            controller: _sensitivePoint,
+                                            enabled: false,
+                                            maxLines: 1,
+                                            style:
+                                                TextStyle(color: Colors.white),
+                                            decoration: InputDecoration(
+                                              hintStyle: TextStyle(fontSize: 1),
+                                              fillColor: Colors.white,
+                                              border: InputBorder.none,
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                    );
+                                  },
+                                ),
+                              ],
+                            )),
+                      ),
+                    ),
+                  ),
+                ),
+                Row(
+                  children: [
+                    Spacer(),
+                    Container(
+                      height: MediaQuery.of(context).size.height * 0.1,
+                      width: MediaQuery.of(context).size.width * 0.6,
+                      child: RatingBar.builder(
+                        initialRating: _initialRating,
+                        direction:
+                            _isVertical ? Axis.vertical : Axis.horizontal,
+                        itemCount: 5,
+                        itemPadding: EdgeInsets.symmetric(horizontal: 4.0),
+                        itemBuilder: (context, index) {
+                          switch (index) {
+                            case 0:
+                              return Container(
+                                transform:
+                                    Matrix4.translationValues(0, -25, 0.0),
+                                child: Container(
+                                  height: 70,
+                                  width: 70,
+                                  decoration: BoxDecoration(
+                                      image: DecorationImage(
+                                          image: AssetImage(
+                                              'asset/image/crying.png'))),
+                                ),
+                              );
+                            case 1:
+                              return Container(
+                                transform:
+                                    Matrix4.translationValues(0, -25, 0.0),
+                                child: Container(
+                                  height: 70,
+                                  width: 70,
+                                  decoration: BoxDecoration(
+                                      image: DecorationImage(
+                                          image: AssetImage(
+                                              'asset/image/disappointed.png'))),
+                                ),
+                              );
+                            case 2:
+                              return Container(
+                                transform:
+                                    Matrix4.translationValues(0, -25, 0.0),
+                                child: Container(
+                                  height: 70,
+                                  width: 70,
+                                  decoration: BoxDecoration(
+                                      image: DecorationImage(
+                                          image: AssetImage(
+                                              'asset/image/annoyed.png'))),
+                                ),
+                              );
+                            case 3:
+                              return Container(
+                                transform:
+                                    Matrix4.translationValues(0, -25, 0.0),
+                                child: Container(
+                                  height: 70,
+                                  width: 70,
+                                  decoration: BoxDecoration(
+                                      image: DecorationImage(
+                                          image: AssetImage(
+                                              'asset/image/wink.png'))),
+                                ),
+                              );
+                            case 4:
+                              return Container(
+                                transform:
+                                    Matrix4.translationValues(0, -25, 0.0),
+                                child: Container(
+                                  height: 70,
+                                  width: 70,
+                                  decoration: BoxDecoration(
+                                      image: DecorationImage(
+                                          image: AssetImage(
+                                              'asset/image/smile.png'))),
+                                ),
+                              );
+                            default:
+                              return Container();
+                          }
+                        },
+                        onRatingUpdate: (rating) {
+                          setState(() {
+                            _rating = rating;
+                          });
+                        },
+                        updateOnDrag: true,
+                      ),
+                    ),
+                    Spacer()
+                  ],
+                ),
+                Query(
+                  options: QueryOptions(
+                      document: gql(query), pollInterval: Duration(seconds: 1)),
+                  builder: (QueryResult result, {fetchMore, refetch}) {
+                    if (result.hasException) {
+                      return Text(result.exception.toString());
+                    }
+                    if (result.isLoading) {
+                      return Center(
+                        child: CircularProgressIndicator(),
+                      );
+                    }
+
+                    if (result.data == null) {
+                      return Text(result.toString());
+                    }
+
+                    return Container(
+                      child: Row(
+                        children: [
+                          Spacer(),
+                          ElevatedButton(
+                            style: ElevatedButton.styleFrom(
+                                primary: Color((0xff6367EA)),
+                                padding: EdgeInsets.symmetric(
+                                    horizontal: 100, vertical: 15),
+                                textStyle: GoogleFonts.karla(
+                                    fontSize: 20, fontWeight: FontWeight.bold)),
+                            child: Text(
+                              'Add Diary',
+                              style: TextStyle(
+                                  fontSize: 15,
+                                  color: Colors.white,
+                                  decoration: TextDecoration.none),
+                            ),
+                            onPressed: () async {
+                              // Save new journal
+                              _userID.text =
+                                  result.data!['getCurrentUser'][0]['id'];
+
+                              _sensitivePoint.text = _rating.toString();
+                              print(_sensitivePoint.text);
+
+                              if (id == null) {
+                                await _addItem();
+                              }
+                              if (id != null) {
+                                await _updateItem(id);
+                              }
+
+                              // Clear the text fields
+                              _titleController.text = '';
+                              _descriptionController.text = '';
+
+                              // Close the bottom sheet
+                              Navigator.of(context).pop();
+                            },
+                          ),
+                          Spacer()
+                        ],
+                      ),
+                    );
+                  },
+                ),
+              ],
+            ),
+          ),
+        ),
+      ),
+      isScrollControlled: true,
+    );
+  }
+
+// Insert a new journal to the database
+  Future<void> _addItem() async {
+    final now = new DateTime.now();
+    String Day = DateFormat.yMMMMd('en_US').format(now);
+    String Time = new DateFormat.jm().format(now);
+
+    await SQLHelper.createItem(
+      _titleController.text,
+      _descriptionController.text,
+      Day + " " + Time,
+      _userID.text,
+      _sensitivePoint.text,
+    );
+    _refreshJournals();
+  }
+
+  // Update an existing journal
+  Future<void> _updateItem(int id) async {
+    final now = new DateTime.now();
+    String Day = DateFormat.yMMMMd('en_US').format(now);
+    String Time = new DateFormat.jm().format(now);
+
+    await SQLHelper.updateItem(
+      id,
+      _titleController.text,
+      _descriptionController.text,
+      Day + ' ' + Time,
+      _userID.text,
+      _sensitivePoint.text,
+    );
+    _refreshJournals();
+  }
+
+  // Delete an item
+  void _deleteItem(int id) async {
+    await SQLHelper.deleteItem(id);
+    ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+      content: Text('Successfully deleted a journal!'),
+    ));
+    _refreshJournals();
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: Container(
         color: Color(0xffECF2FF),
-        child: Column(
-          children: [
-            Row(
-              children: [
-                Container(
-                  height: MediaQuery.of(context).size.height * 0.15,
-                  width: MediaQuery.of(context).size.width * 0.8,
-                  decoration: BoxDecoration(
-                    color: Color(0xff6367EA),
-                    borderRadius: BorderRadius.only(
-                        topRight: Radius.circular(70),
-                        bottomRight: Radius.circular(70)),
-                  ),
-                  child: Center(
-                    child: Text(
-                      'Diary',
-                      style: TextStyle(
-                          fontSize: 24,
-                          color: Colors.white,
-                          decoration: TextDecoration.none),
-                    ),
-                  ),
-                ),
-                Spacer()
-              ],
-            ),
-            SizedBox(
-              height: 60,
-            ),
-            Expanded(
-              child: Container(
-                padding: const EdgeInsets.only(
-                    top: 34, bottom: 10, left: 5, right: 5),
-                color: Color(0xffECF2FF),
-                width: MediaQuery.of(context).size.width,
-                height: MediaQuery.of(context).size.height * 0.6,
-                child: Padding(
-                  padding:
-                      EdgeInsets.only(top: 5, bottom: 10, left: 10, right: 10),
-                  child: GridView.count(
-                    scrollDirection: Axis.horizontal,
-                    crossAxisCount: 1,
-                    crossAxisSpacing: 20.0,
-                    mainAxisSpacing: 20.0,
-                    shrinkWrap: true,
-                    childAspectRatio: 1.5,
-                    children: [
-                      InkWell(
-                        onTap: () {
-                          Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => DiaryDetail()));
-                        },
-                        child: Container(
-                          height: 200,
-                          width: 150,
-                          padding: const EdgeInsets.only(
-                              top: 0, bottom: 10, left: 5, right: 5),
-                          decoration: BoxDecoration(
-                              boxShadow: [
-                                BoxShadow(
-                                  color: Colors.grey.withOpacity(0.5),
-                                  spreadRadius: 2,
-                                  blurRadius: 5,
-                                  offset: Offset(
-                                      0, 3), // changes position of shadow
-                                ),
-                              ],
-                              borderRadius:
-                                  BorderRadius.all(Radius.circular(10)),
-                              image: DecorationImage(
-                                image: NetworkImage(
-                                    "https://storage.thaipost.net/main/uploads/photos/big/20200127/image_big_5e2e947024c9f.jpg"),
-                                fit: BoxFit.cover,
-                              )),
-                              child: Center(
-                                child: Column(children: [
+        child: _isLoading
+            ? const Center(
+                child: CircularProgressIndicator(),
+              )
+            : Query(
+                options: QueryOptions(
+                    document: gql(query), pollInterval: Duration(seconds: 1)),
+                builder: (QueryResult result, {fetchMore, refetch}) {
+                  if (result.hasException) {
+                    return Text(result.exception.toString());
+                  }
+                  if (result.isLoading) {
+                    return Center(
+                      child: CircularProgressIndicator(),
+                    );
+                  }
+
+                  if (result.data == null) {
+                    return Text(result.toString());
+                  }
+
+                  return ListView.builder(
+                      scrollDirection: Axis.horizontal,
+                      itemCount: _journals.length,
+                      itemBuilder: (BuildContext context, int index) {
+                        int reverseIndex = _journals.length - 1 - index;
+
+                        bool visible = false;
+                        if (_journals[reverseIndex]['userID'] ==
+                            result.data!['getCurrentUser'][0]['id']) {
+                          visible = true;
+                        }
+                        String emotion = '';
+
+                        // 2.0
+                        if (_journals[reverseIndex]['sensitivePoint'] ==
+                            '5.0') {
+                          emotion = 'asset/image/smile.png';
+                        } else if (_journals[reverseIndex]['sensitivePoint'] ==
+                            '4.0') {
+                          emotion = 'asset/image/wink.png';
+                        } else if (_journals[reverseIndex]['sensitivePoint'] ==
+                            '3.0') {
+                          emotion = 'asset/image/annoyed.png';
+                        } else if (_journals[reverseIndex]['sensitivePoint'] ==
+                            '2.0') {
+                          emotion = 'asset/image/disappointed.png';
+                        } else if (_journals[reverseIndex]['sensitivePoint'] ==
+                            '1.0') {
+                          emotion = 'asset/image/crying.png';
+                        }
+                        return Visibility(
+                          visible: visible,
+                          child: Row(
+                            children: [
+                              SizedBox(
+                                width: 50,
+                              ),
+                              Column(
+                                children: [
                                   Spacer(),
-                                  Row(
-                                    children: [
-                                     
-                                      Container(
-                                  height: 120,
-                                  width: 120,
-                                  
-                                   decoration: BoxDecoration(
-                                     color: Colors.white,
-                              boxShadow: [
-                                BoxShadow(
-                                  color: Colors.grey.withOpacity(0.5),
-                                  spreadRadius: 2,
-                                  blurRadius: 5,
-                                  offset: Offset(
-                                      0, 3), // changes position of shadow
-                                ),
-                              ],
-                              borderRadius:
-                                  BorderRadius.all(Radius.circular(10)),
-                              
-                              ),
-                              child: Column(children: [
-                                SizedBox(height: 25,),
-                                Text('Topic:',
-          style: TextStyle(
-              fontSize: 16,
-              color: Colors.black,
-              fontWeight: FontWeight.bold,
-              decoration: TextDecoration.none),),
-               Text('Market',
-          style: TextStyle(
-              fontSize: 16,
-              color: Colors.black,
-              
-              decoration: TextDecoration.none),),
-                              ],)
-                                ), Spacer()
-                                    ],
-                                  )
-                                ],)
-                              ),
-                        ),
-                      ),
-                      InkWell(
-                        onTap: () {
-                          Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => DiaryDetail()));
-                        },
-                        child: Container(
-                          height: 200,
-                          width: 150,
-                          padding: const EdgeInsets.only(
-                              top: 0, bottom: 10, left: 5, right: 5),
-                          decoration: BoxDecoration(
-                              boxShadow: [
-                                BoxShadow(
-                                  color: Colors.grey.withOpacity(0.5),
-                                  spreadRadius: 2,
-                                  blurRadius: 5,
-                                  offset: Offset(
-                                      0, 3), // changes position of shadow
-                                ),
-                              ],
-                              borderRadius:
-                                  BorderRadius.all(Radius.circular(10)),
-                              image: DecorationImage(
-                                image: NetworkImage(
-                                    "https://www.greatstarsdigital.com/wp-content/uploads/2018/04/%E0%B8%84%E0%B8%A3%E0%B8%AD%E0%B8%9A%E0%B8%84%E0%B8%A3%E0%B8%B1%E0%B8%A7%E0%B8%AD%E0%B8%9A%E0%B8%AD%E0%B8%B8%E0%B9%88%E0%B8%99_180413_0013.jpg"),
-                                fit: BoxFit.cover,
-                              )),
-                              child: Center(
-                                child: Column(children: [
+                                  // Container(
+                                  //     transform:
+                                  //         Matrix4.translationValues(120, 25, 0),
+                                  //     decoration: BoxDecoration(
+                                  //         image: DecorationImage(
+                                  //             image: AssetImage(emotion))),
+                                  //     width: MediaQuery.of(context).size.width *
+                                  //         0.8,
+                                  //     height: 50),
+                                  Container(
+                                      decoration: BoxDecoration(
+                                        boxShadow: [
+                                          BoxShadow(
+                                            color: Colors.grey.withOpacity(0.5),
+                                            spreadRadius: 2,
+                                            blurRadius: 5,
+                                            offset: Offset(0,
+                                                3), // changes position of shadow
+                                          ),
+                                        ],
+                                        color: Color(0xff6367EA),
+                                        borderRadius: BorderRadius.only(
+                                            topRight: Radius.circular(10),
+                                            bottomRight: Radius.circular(10),
+                                            bottomLeft: Radius.circular(10),
+                                            topLeft: Radius.circular(10)),
+                                      ),
+                                      width: MediaQuery.of(context).size.width *
+                                          0.8,
+                                      height:
+                                          MediaQuery.of(context).size.height *
+                                              0.7,
+                                      child: SingleChildScrollView(
+                                        child: Column(
+                                          children: [
+                                            Row(
+                                              children: [
+                                                SizedBox(
+                                                  width: 10,
+                                                ),
+                                                Text(
+                                                    _journals[reverseIndex]
+                                                        ['createdAt'],
+                                                    style: GoogleFonts.karla(
+                                                        color: Colors.white,
+                                                        fontSize: 14,
+                                                        fontWeight:
+                                                            FontWeight.bold)),
+                                                Spacer(),
+                                                Column(
+                                                  children: [
+                                                    Container(
+                                                      transform: Matrix4
+                                                          .translationValues(
+                                                              0, 0, 0.0),
+                                                      child: Container(
+                                                        height: 50,
+                                                        width: 50,
+                                                        decoration: BoxDecoration(
+                                                            image: DecorationImage(
+                                                                image: AssetImage(
+                                                                    emotion))),
+                                                      ),
+                                                    ),
+                                                    // Row(
+                                                    //   children: [
+                                                    //     Container(
+                                                    //       child: IconButton(
+                                                    //         icon: const Icon(
+                                                    //           Icons.edit,
+                                                    //           color:
+                                                    //               Colors.white,
+                                                    //         ),
+                                                    //         onPressed: () =>
+                                                    //             _showForm(_journals[
+                                                    //                     reverseIndex]
+                                                    //                 ['id']),
+                                                    //       ),
+                                                    //     ),
+                                                    //     IconButton(
+                                                    //       icon: const Icon(
+                                                    //         Icons.delete,
+                                                    //         color: Colors.red,
+                                                    //       ),
+                                                    //       onPressed: () =>
+                                                    //           _deleteItem(_journals[
+                                                    //                   reverseIndex]
+                                                    //               ['id']),
+                                                    //     ),
+                                                    //   ],
+                                                    // )
+                                                  ],
+                                                ),
+                                                SizedBox(
+                                                  width: 20,
+                                                ),
+                                                SizedBox(
+                                                  height: 50,
+                                                )
+                                              ],
+                                            ),
+                                            Container(
+                                              width: MediaQuery.of(context)
+                                                      .size
+                                                      .width *
+                                                  0.7,
+                                              child: Text(
+                                                  _journals[reverseIndex]
+                                                      ['title'],
+                                                  style: GoogleFonts.caveat(
+                                                      color: Colors.white,
+                                                      fontSize: 24,
+                                                      fontWeight:
+                                                          FontWeight.bold)),
+                                            ),
+                                            SizedBox(
+                                              height: 20,
+                                            ),
+                                            Container(
+                                                padding: EdgeInsets.all(10),
+                                                width: MediaQuery.of(context)
+                                                        .size
+                                                        .width *
+                                                    0.72,
+                                                height: MediaQuery.of(context)
+                                                        .size
+                                                        .height *
+                                                    0.50,
+                                                decoration: BoxDecoration(
+                                                  boxShadow: [
+                                                    BoxShadow(
+                                                      color: Colors.grey
+                                                          .withOpacity(0.5),
+                                                      spreadRadius: 2,
+                                                      blurRadius: 5,
+                                                      offset: Offset(0,
+                                                          3), // changes position of shadow
+                                                    ),
+                                                  ],
+                                                  color: Colors.white,
+                                                  borderRadius:
+                                                      BorderRadius.only(
+                                                          topRight: Radius
+                                                              .circular(10),
+                                                          bottomRight:
+                                                              Radius.circular(
+                                                                  10),
+                                                          bottomLeft:
+                                                              Radius.circular(
+                                                                  10),
+                                                          topLeft:
+                                                              Radius.circular(
+                                                                  10)),
+                                                ),
+                                                child: Container(
+                                                  width: MediaQuery.of(context)
+                                                          .size
+                                                          .width *
+                                                      0.5,
+                                                  height: MediaQuery.of(context)
+                                                          .size
+                                                          .height *
+                                                      0.4,
+                                                  child: SingleChildScrollView(
+                                                    child: Text(
+                                                        _journals[reverseIndex]
+                                                            ['description'],
+                                                        style:
+                                                            GoogleFonts.caveat(
+                                                                color: Colors
+                                                                    .black,
+                                                                fontSize: 24)),
+                                                  ),
+                                                )),
+                                            Row(
+                                              children: [
+                                                Spacer(),
+                                                Container(
+                                                  child: IconButton(
+                                                    icon: const Icon(
+                                                      Icons.edit,
+                                                      color: Colors.white,
+                                                      
+                                                    ),
+                                                    onPressed: () => _showForm(
+                                                        _journals[reverseIndex]
+                                                            ['id']),
+                                                  ),
+                                                ),
+                                                IconButton(
+                                                  icon: const Icon(
+                                                    Icons.delete,
+                                                    
+                                                    color: Colors.red,
+                                                  ),
+                                                  onPressed: () => _deleteItem(
+                                                      _journals[reverseIndex]
+                                                          ['id']),
+                                                ),
+                                              ],
+                                            ),
+                                          ],
+                                        ),
+                                      )),
+
                                   Spacer(),
-                                  Row(
-                                    children: [
-                                     
-                                      Container(
-                                  height: 120,
-                                  width: 120,
-                                  
-                                   decoration: BoxDecoration(
-                                     color: Colors.white,
-                              boxShadow: [
-                                BoxShadow(
-                                  color: Colors.grey.withOpacity(0.5),
-                                  spreadRadius: 2,
-                                  blurRadius: 5,
-                                  offset: Offset(
-                                      0, 3), // changes position of shadow
-                                ),
-                              ],
-                              borderRadius:
-                                  BorderRadius.all(Radius.circular(10)),
-                              
-                              ),
-                              child: Column(children: [
-                                SizedBox(height: 25,),
-                                Text('Topic:',
-          style: TextStyle(
-              fontSize: 16,
-              color: Colors.black,
-              fontWeight: FontWeight.bold,
-              decoration: TextDecoration.none),),
-               Text('Market',
-          style: TextStyle(
-              fontSize: 16,
-              color: Colors.black,
-              
-              decoration: TextDecoration.none),),
-                              ],)
-                                ), Spacer()
-                                    ],
-                                  )
-                                ],)
-                              ),
-                        ),
-                      ),
-                      InkWell(
-                        onTap: () {
-                          Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => DiaryDetail()));
-                        },
-                        child: Container(
-                          height: 200,
-                          width: 150,
-                          padding: const EdgeInsets.only(
-                              top: 0, bottom: 10, left: 5, right: 5),
-                          decoration: BoxDecoration(
-                              boxShadow: [
-                                BoxShadow(
-                                  color: Colors.grey.withOpacity(0.5),
-                                  spreadRadius: 2,
-                                  blurRadius: 5,
-                                  offset: Offset(
-                                      0, 3), // changes position of shadow
-                                ),
-                              ],
-                              borderRadius:
-                                  BorderRadius.all(Radius.circular(10)),
-                              image: DecorationImage(
-                                image: NetworkImage(
-                                    "https://entertain.teenee.com/gossip/img3/1852425.jpg"),
-                                fit: BoxFit.cover,
-                              )),
-                              child: Center(
-                                child: Column(children: [
-                                  Spacer(),
-                                  Row(
-                                    children: [
-                                     
-                                      Container(
-                                  height: 120,
-                                  width: 120,
-                                  
-                                   decoration: BoxDecoration(
-                                     color: Colors.white,
-                              boxShadow: [
-                                BoxShadow(
-                                  color: Colors.grey.withOpacity(0.5),
-                                  spreadRadius: 2,
-                                  blurRadius: 5,
-                                  offset: Offset(
-                                      0, 3), // changes position of shadow
-                                ),
-                              ],
-                              borderRadius:
-                                  BorderRadius.all(Radius.circular(10)),
-                              
-                              ),
-                              child: Column(children: [
-                                SizedBox(height: 25,),
-                                Text('Topic:',
-          style: TextStyle(
-              fontSize: 16,
-              color: Colors.black,
-              fontWeight: FontWeight.bold,
-              decoration: TextDecoration.none),),
-               Text('Market',
-          style: TextStyle(
-              fontSize: 16,
-              color: Colors.black,
-              
-              decoration: TextDecoration.none),),
-                              ],)
-                                ), Spacer()
-                                    ],
-                                  )
-                                ],)
-                              ),
-                        ),
-                      ),
-                      InkWell(
-                        onTap: () {
-                          Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => DiaryDetail()));
-                        },
-                        child: Container(
-                          height: 200,
-                          width: 150,
-                          padding: const EdgeInsets.only(
-                              top: 0, bottom: 10, left: 5, right: 5),
-                          decoration: BoxDecoration(
-                              boxShadow: [
-                                BoxShadow(
-                                  color: Colors.grey.withOpacity(0.5),
-                                  spreadRadius: 2,
-                                  blurRadius: 5,
-                                  offset: Offset(
-                                      0, 3), // changes position of shadow
-                                ),
-                              ],
-                              borderRadius:
-                                  BorderRadius.all(Radius.circular(10)),
-                              image: DecorationImage(
-                                image: NetworkImage(
-                                    "https://news.kaazip.com/wp-content/uploads/2021/04/%E0%B8%81%E0%B8%B8%E0%B8%A5%E0%B9%81%E0%B8%88%E0%B8%8B%E0%B8%AD%E0%B8%A5-2.jpg"),
-                                fit: BoxFit.cover,
-                              )),
-                              child: Center(
-                                child: Column(children: [
-                                  Spacer(),
-                                  Row(
-                                    children: [
-                                     
-                                      Container(
-                                  height: 120,
-                                  width: 120,
-                                  
-                                   decoration: BoxDecoration(
-                                     color: Colors.white,
-                              boxShadow: [
-                                BoxShadow(
-                                  color: Colors.grey.withOpacity(0.5),
-                                  spreadRadius: 2,
-                                  blurRadius: 5,
-                                  offset: Offset(
-                                      0, 3), // changes position of shadow
-                                ),
-                              ],
-                              borderRadius:
-                                  BorderRadius.all(Radius.circular(10)),
-                              
-                              ),
-                              child: Column(children: [
-                                SizedBox(height: 25,),
-                                Text('Topic:',
-          style: TextStyle(
-              fontSize: 16,
-              color: Colors.black,
-              fontWeight: FontWeight.bold,
-              decoration: TextDecoration.none),),
-               Text('Market',
-          style: TextStyle(
-              fontSize: 16,
-              color: Colors.black,
-              
-              decoration: TextDecoration.none),),
-                              ],)
-                                ), Spacer()
-                                    ],
-                                  )
-                                ],)
-                              ),
-                        ),
-                      ),
-                      InkWell(
-                        onTap: () {
-                          Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => DiaryDetail()));
-                        },
-                        child: Container(
-                          height: 200,
-                          width: 150,
-                          padding: const EdgeInsets.only(
-                              top: 0, bottom: 10, left: 5, right: 5),
-                          decoration: BoxDecoration(
-                              boxShadow: [
-                                BoxShadow(
-                                  color: Colors.grey.withOpacity(0.5),
-                                  spreadRadius: 2,
-                                  blurRadius: 5,
-                                  offset: Offset(
-                                      0, 3), // changes position of shadow
-                                ),
-                              ],
-                              borderRadius:
-                                  BorderRadius.all(Radius.circular(10)),
-                              image: DecorationImage(
-                                image: NetworkImage(
-                                    "https://www.princubon.com/wp-content/uploads/2021/01/%E0%B8%84%E0%B8%99%E0%B8%A5%E0%B8%B0%E0%B8%84%E0%B8%A3%E0%B8%B6%E0%B9%88%E0%B8%87_1040x1040px-768x768.png"),
-                                fit: BoxFit.cover,
-                              )),
-                              child: Center(
-                                child: Column(children: [
-                                  Spacer(),
-                                  Row(
-                                    children: [
-                                     
-                                      Container(
-                                  height: 120,
-                                  width: 120,
-                                  
-                                   decoration: BoxDecoration(
-                                     color: Colors.white,
-                              boxShadow: [
-                                BoxShadow(
-                                  color: Colors.grey.withOpacity(0.5),
-                                  spreadRadius: 2,
-                                  blurRadius: 5,
-                                  offset: Offset(
-                                      0, 3), // changes position of shadow
-                                ),
-                              ],
-                              borderRadius:
-                                  BorderRadius.all(Radius.circular(10)),
-                              
-                              ),
-                              child: Column(children: [
-                                SizedBox(height: 25,),
-                                Text('Topic:',
-          style: TextStyle(
-              fontSize: 16,
-              color: Colors.black,
-              fontWeight: FontWeight.bold,
-              decoration: TextDecoration.none),),
-               Text('Market',
-          style: TextStyle(
-              fontSize: 16,
-              color: Colors.black,
-              
-              decoration: TextDecoration.none),),
-                              ],)
-                                ), Spacer()
-                                    ],
-                                  )
-                                ],)
-                              ),
-                        ),
-                      ),
-                      InkWell(
-                        onTap: () {
-                          Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => DiaryDetail()));
-                        },
-                        child: Container(
-                          height: 200,
-                          width: 150,
-                          padding: const EdgeInsets.only(
-                              top: 0, bottom: 10, left: 5, right: 5),
-                          decoration: BoxDecoration(
-                              boxShadow: [
-                                BoxShadow(
-                                  color: Colors.grey.withOpacity(0.5),
-                                  spreadRadius: 2,
-                                  blurRadius: 5,
-                                  offset: Offset(
-                                      0, 3), // changes position of shadow
-                                ),
-                              ],
-                              borderRadius:
-                                  BorderRadius.all(Radius.circular(10)),
-                              image: DecorationImage(
-                                image: NetworkImage(
-                                    "https://i0.wp.com/www.amarinbabyandkids.com/app/uploads/2017/01/shutterstock_124904711-e1483514453518.jpg"),
-                                fit: BoxFit.cover,
-                              )),
-                              child: Center(
-                                child: Column(children: [
-                                  Spacer(),
-                                  Row(
-                                    children: [
-                                     
-                                      Container(
-                                  height: 120,
-                                  width: 120,
-                                  
-                                   decoration: BoxDecoration(
-                                     color: Colors.white,
-                              boxShadow: [
-                                BoxShadow(
-                                  color: Colors.grey.withOpacity(0.5),
-                                  spreadRadius: 2,
-                                  blurRadius: 5,
-                                  offset: Offset(
-                                      0, 3), // changes position of shadow
-                                ),
-                              ],
-                              borderRadius:
-                                  BorderRadius.all(Radius.circular(10)),
-                              
-                              ),
-                              child: Column(children: [
-                                SizedBox(height: 25,),
-                                Text('Topic:',
-          style: TextStyle(
-              fontSize: 16,
-              color: Colors.black,
-              fontWeight: FontWeight.bold,
-              decoration: TextDecoration.none),),
-               Text('Market',
-          style: TextStyle(
-              fontSize: 16,
-              color: Colors.black,
-              
-              decoration: TextDecoration.none),),
-                              ],)
-                                ), Spacer()
-                                    ],
-                                  )
-                                ],)
-                              ),
-                        ),
-                      ),
-                      InkWell(
-                        onTap: () {
-                          Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => DiaryDetail()));
-                        },
-                        child: Container(
-                          height: 200,
-                          width: 150,
-                          padding: const EdgeInsets.only(
-                              top: 0, bottom: 10, left: 5, right: 5),
-                          decoration: BoxDecoration(
-                              boxShadow: [
-                                BoxShadow(
-                                  color: Colors.grey.withOpacity(0.5),
-                                  spreadRadius: 2,
-                                  blurRadius: 5,
-                                  offset: Offset(
-                                      0, 3), // changes position of shadow
-                                ),
-                              ],
-                              borderRadius:
-                                  BorderRadius.all(Radius.circular(10)),
-                              image: DecorationImage(
-                                image: NetworkImage(
-                                    "https://line-mag.com/wp-content/uploads/2021/05/%E0%B8%95%E0%B8%B1%E0%B9%8A%E0%B8%81-%E0%B8%99%E0%B8%B8%E0%B9%89%E0%B8%A2.jpg"),
-                                fit: BoxFit.cover,
-                              )),
-                              child: Center(
-                                child: Column(children: [
-                                  Spacer(),
-                                  Row(
-                                    children: [
-                                     
-                                      Container(
-                                  height: 120,
-                                  width: 120,
-                                  
-                                   decoration: BoxDecoration(
-                                     color: Colors.white,
-                              boxShadow: [
-                                BoxShadow(
-                                  color: Colors.grey.withOpacity(0.5),
-                                  spreadRadius: 2,
-                                  blurRadius: 5,
-                                  offset: Offset(
-                                      0, 3), // changes position of shadow
-                                ),
-                              ],
-                              borderRadius:
-                                  BorderRadius.all(Radius.circular(10)),
-                              
-                              ),
-                              child: Column(children: [
-                                SizedBox(height: 25,),
-                                Text('Topic:',
-          style: TextStyle(
-              fontSize: 16,
-              color: Colors.black,
-              fontWeight: FontWeight.bold,
-              decoration: TextDecoration.none),),
-               Text('Market',
-          style: TextStyle(
-              fontSize: 16,
-              color: Colors.black,
-              
-              decoration: TextDecoration.none),),
-                              ],)
-                                ), Spacer()
-                                    ],
-                                  )
-                                ],)
-                              ),
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
+                                ],
+                              )
+                            ],
+                          ),
+                        );
+                      });
+                },
               ),
-            ),
-            SizedBox(
-              height: 120,
-            )
-          ],
-        ),
       ),
       floatingActionButton: FloatingActionButton(
-          onPressed: () {
-            Navigator.push(
-                context, MaterialPageRoute(builder: (context) => WriteDiary()));
-          },
-          child: const Icon(Icons.add),
-          backgroundColor: Color(0xFFA9B0FF),),
+        backgroundColor: Color(0xff6367EA),
+        child: const Icon(Icons.create),
+        onPressed: () => _showForm(null),
+      ),
     );
   }
 }

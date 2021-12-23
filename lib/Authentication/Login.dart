@@ -5,6 +5,7 @@ import 'package:bumbutpital/Questionare/main_question.dart';
 import 'package:bumbutpital/services/graphql_config.dart';
 import 'package:flutter/material.dart';
 import 'package:bumbutpital/ComponentMainScreen/bottom_navbar.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:graphql_flutter/graphql_flutter.dart';
 import 'package:provider/provider.dart';
 
@@ -67,116 +68,110 @@ class _LoginPageState extends State<LoginPage> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: Color(0XFFECF2FF),
-      body: SafeArea(
-        child: SingleChildScrollView(
-          child: Container(
-            height: MediaQuery.of(context).size.height,
-            padding: EdgeInsets.symmetric(
-              horizontal: 20,
-            ),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.start,
-              children: [
-                SizedBox(height: 50),
-                Container(
-                  child: Text(
-                    'Sign In',
-                    style: TextStyle(
-                      fontSize: 24,
-                    ),
-                  ),
-                  alignment: Alignment.center,
-                ),
-                SizedBox(height: 44),
-                _textField(
-                  _email,
-                  "Email",
-                  Icon(Icons.email),
-                ),
-                SizedBox(height: 44),
-                _textField(
-                  _password,
-                  "Password",
-                  Icon(Icons.lock),
-                ),
-                Container(
-                  child: Text(
-                    'Forget Password?',
-                    style: TextStyle(height: 2),
-                  ),
-                  alignment: Alignment.bottomRight,
-                ),
-                Container(
-                  alignment: Alignment.topLeft,
-                  child: Row(
+    return Container(
+      width: MediaQuery.of(context).size.width,
+      height: MediaQuery.of(context).size.height,
+      decoration: BoxDecoration(
+          gradient: LinearGradient(
+              begin: Alignment.topLeft,
+              end: Alignment.bottomRight,
+              colors: [Color(0XFFECF2FF), Colors.white])),
+      child: Scaffold(
+        backgroundColor: Colors.transparent,
+        body: SafeArea(
+          child: SingleChildScrollView(
+            child: Container(
+              height: MediaQuery.of(context).size.height,
+              padding: EdgeInsets.symmetric(
+                horizontal: 20,
+              ),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: [
+                  SizedBox(height: 40),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      Checkbox(
-                        value: isRemember,
-                        onChanged: (bool? value) {
-                          if (value != null) {
-                            setState(() {
-                              isRemember = value;
-                            });
-                          }
-                        },
+                      Container(
+                        height: 40,
+                        width: 40,
+                        child: Image.asset('asset/image/Bumbutpital Logo.png'),
                       ),
-                      Text('Remember Me'),
+                      SizedBox(
+                        width: 20,
+                      ),
+                      Text('BUMBUTPITAL',
+                          style: GoogleFonts.karla(
+                              fontWeight: FontWeight.normal, fontSize: 12)),
                     ],
                   ),
-                ),
-                SizedBox(height: 16),
-                Mutation(
-                  options: MutationOptions(document: gql(loginQuery)),
-                  builder: (run, _) => ElevatedButton(
-                    onPressed: () async {
-                      await onSubmit(run);
-                    },
-                    style: ElevatedButton.styleFrom(
-                      primary: Color(0XFFFE7940),
-                      padding:
-                          EdgeInsets.symmetric(horizontal: 100, vertical: 15),
+                  SizedBox(height: 20),
+                  Container(
+                    child: Text(
+                      'Login',
+                      style: GoogleFonts.karla(
+                        fontSize: 32,
+                      ),
                     ),
-                    child: Text("Login"),
+                    alignment: Alignment.center,
                   ),
-                ),
-                SizedBox(
-                  height: 16,
-                ),
-                Container(
-                  child: Text("-OR-"),
-                ),
-                SizedBox(
-                  height: 16,
-                ),
-                Text('Sign in with'),
-                SizedBox(height: 24),
-               
-                SizedBox(height: 16),
-                Container(
-                    child: InkWell(
-                  onTap: () {
-                    Navigator.push(context,
-                        MaterialPageRoute(builder: (context) => SignUp()));
-                  },
-                  child: Text(
-                    'Sign Up',
+                  SizedBox(height: 30),
+                  _textField(
+                    _email,
+                    "Username",
+                    Icon(Icons.account_box),
                   ),
-                )),
-                SizedBox(height: 16),
-                Text("Don't have an Account?"),
-                // ElevatedButton(
-                //   onPressed: onSubmit,
-                //   style: ElevatedButton.styleFrom(
-                //       primary: Color(0XFFFFFFFF),
-                //       fixedSize: Size(350, 50)),
-                //   child: Text(
-                //     "Sign in with Google account",
-                //     style: TextStyle(color: Colors.black.withOpacity(0.8)),
-                //   ),
-                // ),
-              ],
+                  SizedBox(height: 44),
+                  _textField(
+                    _password,
+                    "Password",
+                    Icon(Icons.lock),
+                  ),
+                  SizedBox(height: 32),
+                  Mutation(
+                    options: MutationOptions(document: gql(loginQuery)),
+                    builder: (run, _) => ElevatedButton(
+                      onPressed: () async {
+                        await onSubmit(run);
+                      },
+                      style: ElevatedButton.styleFrom(
+                        primary: Color(0xff6367EA),
+                        padding:
+                            EdgeInsets.symmetric(horizontal: 100, vertical: 15),
+                      ),
+                      child: Text(
+                        "Login",
+                        style: GoogleFonts.karla(),
+                      ),
+                    ),
+                  ),
+                  SizedBox(
+                    height: 16,
+                  ),
+                  SizedBox(
+                    height: 16,
+                  ),
+                  SizedBox(height: 16),
+                  Text(
+                    "Don't have an Account?",
+                    style: GoogleFonts.karla(),
+                  ),
+                  SizedBox(height: 16),
+                  Container(
+                      child: InkWell(
+                    onTap: () {
+                      Navigator.push(context,
+                          MaterialPageRoute(builder: (context) => SignUp()));
+                    },
+                    child: Text(
+                      'Sign Up',
+                      style: GoogleFonts.karla(
+                          color: Color(0xff6367EA),
+                          fontWeight: FontWeight.bold),
+                    ),
+                  )),
+                ],
+              ),
             ),
           ),
         ),
@@ -188,8 +183,8 @@ class _LoginPageState extends State<LoginPage> {
     return TextField(
       controller: cont,
       obscureText: label == "Password" ? isPasswordHidden : false,
+      style: GoogleFonts.karla(),
       decoration: InputDecoration(
-        border: OutlineInputBorder(),
         labelText: label,
         hintText: "Enter your ${label.toLowerCase()}",
         prefixIcon: icon,

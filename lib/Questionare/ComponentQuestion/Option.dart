@@ -1,6 +1,7 @@
 // ignore_for_file: file_names
 
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class Option extends StatelessWidget {
   final Map<String, dynamic> option;
@@ -48,7 +49,7 @@ class Option extends StatelessWidget {
             ),
             Text(
               option["text"],
-              style: TextStyle(
+              style: GoogleFonts.karla(
                 color: isSelected ? Colors.white : Color(0xFF979797),
               ),
             ),

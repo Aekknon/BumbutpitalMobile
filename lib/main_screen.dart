@@ -5,6 +5,7 @@
 import 'package:bumbutpital/Authentication/Profile.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 import 'ContentPage/main_content.dart';
 import 'HospitalPage/main_hospital.dart';
@@ -33,6 +34,19 @@ class Mainpage extends StatelessWidget {
         body: Query(
           options: QueryOptions(document: gql(query)),
           builder: (QueryResult result, {fetchMore, refetch}) {
+            if (result.hasException) {
+              return Text(result.exception.toString());
+            }
+            if (result.isLoading) {
+              return Center(
+                child: CircularProgressIndicator(),
+              );
+            }
+
+            if (result.data == null) {
+              return Text(result.toString());
+            }
+
             // ignore: non_constant_identifier_names
             final user = result.data!['getCurrentUser'];
             return SafeArea(
@@ -41,24 +55,8 @@ class Mainpage extends StatelessWidget {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.end,
                     children: [
-                      Container(
-                        margin: EdgeInsets.fromLTRB(0, 20, 20, 0),
-                        child: IconButton(
-                          icon: Icon(
-                            Icons.account_circle_rounded,
-                            color: Color(0xFF6367EA),
-                            size: 60,
-                          ),
-                          onPressed: () {
-                            Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => Profile()));
-                          },
-                        ),
-                      ),
                       SizedBox(
-                        width: 20,
+                        height: 60,
                       )
                     ],
                   ),
@@ -69,7 +67,7 @@ class Mainpage extends StatelessWidget {
                     children: [
                       Container(padding: EdgeInsets.all(16)),
                       Text('Hello,',
-                          style: TextStyle(
+                          style: GoogleFonts.karla(
                               fontWeight: FontWeight.bold, fontSize: 24)),
                     ],
                   ),
@@ -77,8 +75,8 @@ class Mainpage extends StatelessWidget {
                     children: [
                       Container(padding: EdgeInsets.all(16)),
                       Text(user[0]["name"],
-                          style: TextStyle(
-                              fontWeight: FontWeight.bold, fontSize: 24)),
+                          style: GoogleFonts.karla(
+                               fontSize: 24)),
                       SizedBox(
                         width: 8,
                       ),
@@ -114,7 +112,7 @@ class Mainpage extends StatelessWidget {
                             alignment: Alignment.bottomLeft,
                             child: Text(
                               'Content',
-                              style: TextStyle(
+                              style: GoogleFonts.righteous(
                                   fontSize: 24,
                                   color: Colors.white,
                                   fontWeight: FontWeight.bold),
@@ -158,7 +156,7 @@ class Mainpage extends StatelessWidget {
                             alignment: Alignment.center,
                             child: Text(
                               'Hospital ads.',
-                              style: TextStyle(
+                              style: GoogleFonts.righteous(
                                   fontSize: 12,
                                   color: Colors.white,
                                   fontWeight: FontWeight.bold),
@@ -209,7 +207,7 @@ class Mainpage extends StatelessWidget {
                                       alignment: Alignment.center,
                                       child: Text(
                                         'PHQ-9',
-                                        style: TextStyle(
+                                        style: GoogleFonts.righteous(
                                             fontSize: 14,
                                             color: Colors.white,
                                             fontWeight: FontWeight.bold),
@@ -256,7 +254,7 @@ class Mainpage extends StatelessWidget {
                                       alignment: Alignment.center,
                                       child: Text(
                                         'Promotion',
-                                        style: TextStyle(
+                                        style: GoogleFonts.righteous(
                                             fontSize: 14,
                                             color: Colors.white,
                                             fontWeight: FontWeight.bold),
@@ -301,7 +299,7 @@ class Mainpage extends StatelessWidget {
                                     alignment: Alignment.centerLeft,
                                     child: Text(
                                       'VIDEO',
-                                      style: TextStyle(
+                                      style: GoogleFonts.righteous(
                                           fontSize: 18,
                                           color: Colors.white,
                                           fontWeight: FontWeight.bold),

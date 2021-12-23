@@ -1,6 +1,6 @@
 import 'package:bumbutpital/ComponentMainScreen/bottom_navbar.dart';
 import 'package:flutter/material.dart';
-import 'main_forum_screen.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:graphql_flutter/graphql_flutter.dart';
 
 class AddQuestion extends StatefulWidget {
@@ -23,37 +23,6 @@ class _AddQuestionState extends State<AddQuestion> {
 
   final _title = TextEditingController();
   final _description = TextEditingController();
-  Future<void> onSubmit(RunMutation run) async {
-    if (_title.text.isEmpty && _description.text.isEmpty) return;
-    try {
-      final response = run({
-        "title": _title.text,
-        "description": _description.text,
-      });
-      print((await response.networkResult) as dynamic);
-
-      Navigator.pushAndRemoveUntil(
-          context,
-          MaterialPageRoute(builder: (context) => BottomNavBar()),
-          (route) => false);
-    } catch (err) {
-      showDialog<void>(
-        context: context,
-        builder: (BuildContext context) {
-          return AlertDialog(
-            title: const Text('Error!'),
-            content: SingleChildScrollView(
-              child: ListBody(
-                children: const <Widget>[
-                  Text('Insert your Question'),
-                ],
-              ),
-            ),
-          );
-        },
-      );
-    }
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -96,7 +65,7 @@ class _AddQuestionState extends State<AddQuestion> {
                                 child: _textField1(_title, "title"),
                               )
                             ],
-                          )
+                          ),
                         ],
                       )),
                 ),
@@ -153,7 +122,7 @@ class _AddQuestionState extends State<AddQuestion> {
                                           ],
                                         ),
                                       )),
-                                )
+                                ),
                               ],
                             )),
                       ),
@@ -173,10 +142,10 @@ class _AddQuestionState extends State<AddQuestion> {
       controller: cont,
       maxLines: 15,
       // textAlign: TextAlign.start,
-      style: TextStyle(color: Color(0xff6367EA)),
+      style: GoogleFonts.karla(color: Color(0xff6367EA)),
       decoration: InputDecoration(
         // labelStyle: St,
-        hintText: "Enter your ${label.toLowerCase()}",
+        hintText: "Enter your Question",
         contentPadding: EdgeInsets.symmetric(vertical: 24, horizontal: 8),
         border: InputBorder.none,
       ),
@@ -188,7 +157,7 @@ class _AddQuestionState extends State<AddQuestion> {
   TextField _textField1(TextEditingController cont, String label) {
     return TextField(
       controller: cont,
-      style: TextStyle(color: Color(0xff6367EA)),
+      style: GoogleFonts.karla(color: Color(0xff6367EA)),
       decoration: InputDecoration(
         hintStyle: TextStyle(fontSize: 24),
         hintText: "Enter your ${label.toLowerCase()}",
@@ -200,5 +169,67 @@ class _AddQuestionState extends State<AddQuestion> {
       keyboardType: TextInputType.visiblePassword,
       autocorrect: true,
     );
+  }
+
+  Future ErrorDialog1() async {
+    return await showDialog(
+      context: context,
+      builder: (context) => AlertDialog(
+        content: Text("Please fill all of Title and Question field Please"),
+        actions: [
+          TextButton(
+              child: Text("OK", style: TextStyle(color: Colors.blue)),
+              onPressed: () {
+                Navigator.pop(context, true);
+              })
+        ],
+      ),
+    );
+  }
+
+  Future<void> onSubmit(RunMutation run) async {
+    if (_title.text.isEmpty || _description.text.isEmpty) {
+      return await ErrorDialog1();
+    }
+    try {
+      final response = run({
+        "title": _title.text,
+        "description": _description.text,
+      });
+      print((await response.networkResult) as dynamic);
+
+      Navigator.of(context).pop();
+    } catch (err) {
+      showDialog<void>(
+        context: context,
+        builder: (BuildContext context) {
+          return AlertDialog(
+            title: const Text('Error!'),
+            content: SingleChildScrollView(
+              child: ListBody(
+                children: const <Widget>[
+                  Text('Insert your Question'),
+                ],
+              ),
+            ),
+          );
+        },
+      );
+    }
+  }
+
+  String search = 'dead';
+
+  @override
+  void initState() {
+    super.initState();
+    caseSensitive:
+    false;
+    RegExp exp = RegExp(
+      "\\b" + search + "\\b",
+      caseSensitive: false,
+    );
+    bool containe = exp.hasMatch(_title.text);
+    print(containe);
   }
 }
